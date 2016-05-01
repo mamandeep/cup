@@ -1,0 +1,667 @@
+<div>
+    <span class="generalinfoheader">General Information</span>
+    <table width="100%" style="table-layout: fixed; border: 1px solid black">
+        <tr>
+            <td style="width: 20%; border: 1px solid black">Last Date to Apply: </td>
+        </tr>
+        <tr>
+            <td style="width: 20%; border: 1px solid black">The fee for General Category applicants is Rs. 600 and for SC/ST is Rs. 300. </td>
+        </tr>
+        <tr>
+            <td style="width: 20%; border: 1px solid black">If selected you have to provide Aadhar Card within 1 month.</td>
+        </tr>
+    </table>
+    <div>
+        <span style="font-weight: bold; font-size: 20px; color:#0a0;">Post Applied For: </span>
+        <select id="post_applied_for" name="post_applied_for" style="width: auto;">
+            <option value="none" selected="selected">None</option>
+            <option value="registrar">Registrar</option>
+            <option value="financeofficer">Finance Officer</option>
+            <option value="controllerofexam">Controller of Examinations</option>
+            <option value="librarian">Librarian</option>
+            <option value="deputylibrarian">Deputy Librarian</option>
+            <option value="deputyregistrar">Deputy Registrar</option>
+            <option value="internalauditofficer">Internal Audit Officer (On Deputation)</option>
+            <option value="executiveengineer">Executive Engineer</option>
+            <option value="assistantlibrarian">Assistant Librarian</option>
+            <option value="assistantregistrar">Assistant Registrar</option>
+            <option value="hindiofficer">Hindi Officer</option>
+            <option value="medicalofficer">Medical Officer</option>
+            <option value="informationscientist">Information Scientist</option>
+            <option value="publicrelationsofficer">Public Relations Officer</option>
+            <option value="systemanalyst">System Analyst</option>
+            <option value="technicalofficerlaboratory">Technical Officer (Laboratory)</option>
+            <option value="securityofficer">Security Officer</option>
+            <option value="sectionofficer">Section Officer</option>
+            <option value="nurse">Nurse</option>
+            <option value="assistantengineer">Assistant Engineer</option>
+            <option value="privatesecretary">Private Secretary</option>
+            <option value="professionalassistant">Professional Assistant</option>
+            <option value="personalassistant">Personal Assistant</option>
+            <option value="assistant">Assistant</option>
+            <option value="juniorengineer">Junior Engineer (Civil on Deputation, and Electrical on Direct Rec.)</option>
+            <option value="estateofficer">Estate Officer</option>
+            <option value="hinditranslator">Hindi Translator</option>
+            <option value="seniortechnicalassistantcomputer">Senior Technical Assistant (Computer)</option>
+            <option value="seniortechnicalassistantlaboratory">Senior Technical Assistant (Laboratory)</option>
+            <option value="semiprofessionalassistant">Semi Professional Assistant</option>
+            <option value="pharmacist">Pharmacist</option>
+            <option value="technicalassistant">Technical Assistant</option>
+            <option value="securityinspector">Security Inspector</option>
+            <option value="upperdivisionclerk">Upper Division Clerk</option>
+            <option value="libraryassistant">Library Assistant</option>
+            <option value="laboratoryassistant">Laboratory Assistant</option>
+            <option value="lowerdivisionclerk">Lower Division Clerk</option>
+            <option value="hinditypist">Hindi Typist</option>
+            <option value="driver">Driver</option>
+            <option value="cook">Cook</option>
+            <option value="libraryattendant">Library Attendant</option>
+            <option value="laboratoryattendant">Laboratory Attendant</option>
+            <option value="officeattendant">Office Attendant</option>
+            <option value="hostelattendant">Hostel Attendant</option>
+            <option value="medicalattendant">Medical Attendant or Dresser</option>
+            <option value="multitaskingstaff">Multi Tasking Staff</option>
+            <option value="kitchenattendant">Kitchen Attendant</option>
+        </select>
+    </div>
+    <table>
+        <tr>
+            <td style="width: 15%"></td>
+            <td><div id="post_selected_elig" style="display:none;" class="min_qualification"></div></td>
+            <td style="width: 15%"></td>
+        </tr>
+    </table>
+    <div style="text-align: center; font-size: 30px;">
+        <a href="<?php echo $this->webroot; ?>multi_step_form/wizard/first" class="button" id="continue_bt">Continue</a>
+    </div>
+    <div id="elig_content">
+        <div id="registrar" style="display:none;">
+            <ol type="i">Minimum Qualifications:
+<li>Master's Degree with at least 55% of the marks or its equivalent grade of "B" in UGC seven point scale. </li>
+<li>At least 15 years of experience as Assistant Professor in the AGP of Rs. 7000 and above or with 08 years of service in the AGP of Rs. 8000 and above including as Associate Professor along with experience in educational administration.
+<br />Or
+Comparable experience in research establishment and / or other institutions of higher education. 
+<br />Or
+15 years of administrative experience, of which 08 years should be as Deputy Registrar or an equivalent post.</li>
+ </ol>
+        </div>
+        <div id="financeofficer" style="display:none;">
+        <ol type="i">Minimum Qualifications:
+<li>Master's Degree with at least 55% of the marks or its equivalent grade of "B" in UGC seven point scale. </li>
+
+<li>At least 15 years of experience as Assistant Professor in the AGP of Rs. 7000 and above or with 08 years of service in the AGP of Rs. 8000 and above including as Associate Professor along with experience in educational administration.
+<br/>Or
+Comparable experience in research establishment and / or other institutions of higher education. 
+<br/>Or
+<br/>15 years of administrative experience, of which 08 years should be as Deputy Registrar or an equivalent post.
+</li>
+</ol>
+</div>
+        <div id="controllerofexam" style="display:none;">
+        <ol type="i">Minimum Qualifications:
+<li>Master's Degree with at least 55% of the marks or its equivalent grade of "B" in UGC seven point scale. </li>
+<li>At least 15 years of experience as Assistant Professor in the AGP of Rs. 7000 and above or with 08 years of service in the AGP of Rs. 8000 and above including as Associate Professor along with experience in educational administration. 
+<br>Or
+Comparable experience in research establishment and / or other institutions of higher education. 
+<br>Or
+15 years of administrative experience, of which 08 years should be as Deputy Registrar or an equivalent post.</li>
+</ol>
+</div>
+        <div id="librarian" style="display:none;">        
+        <ol type="i">Minimum Qualifications:
+<li>A  Master’s Degree in Library Science/Information Science/Documentation with at least 55% marks or its equivalent grade of B in the UGC seven point scale and a consistently good academic record.</li>
+<li>At least thirteen years as a Deputy Librarian in a University library or eighteen years’ experience as a College Librarian.</li>
+<li>Evidence of innovative library service and organization of published work. </li>
+</ol>
+<br />
+<br />
+<ul>Desirable: 
+<li>M.Phil./ Ph.D. degree in Library Science/ Information Science/ Documentation/ Archives and  Manuscript – Keeping</li>
+</ul>
+</div>
+        <div id="deputylibrarian" style="display:none;">
+        <ol type="i">Minimum qualifications:  
+<li>    A Master's Degree in Library Science/Information Science/Documentation Science with at least 55% marks or its equivalent grade of B in the UGC seven-point scale and consistently good academic record.</li>
+<li>    Five years experience as an Assistant University Librarian/College Librarian.</li>
+<li>	Evidence of Innovative Library Services, organization of published work and professional commitment, computerization of Library.</li>
+</ol>
+<br/>
+<br/>
+<ul>Desirable qualification:
+<li>	M.Phil./Ph.D. degree in Library Science/Information Science/Documentation/ Archives and Manuscript - Keeping / Computerization of Library.</li>
+</ul>
+</div>
+        <div id="deputyregistrar" style="display:none;">
+        <ol type="i">Minimum qualifications :
+<li>	Master’s Degree with at least 55% marks or its equivalent grade of B in the UGC seven point scale.</li>
+<li>	Nine years of experience as a Assistant Professor in the AGP of Rs. 6,000/- and above with experience in educational administration.
+<br/>OR
+Comparable Experience in research establishment and/or other institution of higher education
+<br/>OR
+Five years of administrative experience as Assistant Registrar or in an equivalent post.
+</li>
+</ol>
+</div>
+        <div id="internalauditofficer" style="display:none;">
+        <ol type="i">Minimum qualification :
+
+<li>	Master’s Degree from a recognized University.</li>
+<li>	Qualified in SAS/its equivalent Accounts Service examination of Central/State Government; Holding analogous position in any University or a Govt./PSU/Corporate Sector organization.
+<br/>Or
+Five years service in the next lower cadre in Audit/Accounts and Works Dept. of any University or a Govt./ PSU/Corporate Sector organization.</li>
+
+<li>	Good working knowledge of Computer applications.</li>
+<br/>
+<ul>Desirable: 
+<li>Preference will be given to the candidates with M.Com/MBA Finance/ICWA/CA/ SAS.</li>
+</ul>
+</div>
+        <div id="executiveengineer" style="display:none;">
+        <ol type="i">Minimum qualifications 
+<li>	A Bachelors Degree in Civil Engineering with at least 55% marks or its equivalent grade of B in the UGC seven-point scale, with 10 years of experience in design and systems and construction of buildings, roads, sanitary and water supply systems including maintenance of the same</li>
+<br/>
+<ul>Desirable:
+<li>	Post-Graduate Degree in structural engineering.</li>
+<li>	Experience of working in Universities/Educational Institutions / similar organization.</li>
+</div>
+        <div id="assistantlibrarian" style="display:none;">
+        <ol type="i">Minimum Qualifications 
+
+<li>	A  Master’s Degree in Library Science/Information Science/Documentation  Science  or an equivalent professional degree with at least 55% marks (or its equivalent grade in a point scale wherever grading system is followed) and a consistently good academic record with knowledge of computerization of library. </li>
+<li>	Qualified in the National Level Test conducted for the purpose by the UGC or any other agency approved by the UGC. </li>
+<li>	However, candidates, who are, or have been awarded Ph.D. degree in accordance with the “University Grants Commission (Minimum Standards and Procedure for Award of Ph.D. Degree), Regulations 2009, shall be exempted from the requirement of the minimum eligibility condition of NET/SLET/SET for recruitment. </li>
+</div>
+        <div id="assistantregistrar" style="display:none;">
+        <ol type="i">Minimum Qualifications:
+
+<li>    Good academic record plus Master’s Degree with at least 55% marks or its equivalent grade of B in the UGC seven-point scale from a recognized University.</li>
+</ol>
+</div>
+        <div id="hindiofficer" style="display:none;">
+        <ol type="i">Minimum Qualification:
+<li>	Master’s degree of a recognized University in Hindi with English as a compulsory or elective subject or as the medium of examination at the degree level.
+<br/>Or
+Master’s degree of a recognized University in English with Hindi as a compulsory or elective subject or as the medium of examination at the degree level.
+<br/>Or
+Master’s degree of a recognized University in any subject other than Hindi or English, with Hindi medium and English as a compulsory or elective subject or as the medium of examination at the degree level.
+<br/>Or
+Master’s degree of a recognized University in any subject other than Hindi or English, with English medium and Hindi as a compulsory or elective subject or as the medium of examination at the degree level.
+<br/>Or
+Master’s degree of a recognized University in any subject other than Hindi or English, with Hindi and English as Compulsory or elective subject or either of the two as a medium of examination and the other as a compulsory or elective subject at the degree level.</li>
+<li>	Three years experience of using/applying terminology (terminological work) in Hindi and translation work from English to Hindi or Vice-versa, preferably of technical or scientific literature under Central / State Governments / Autonomous Body / Statutory Organizations / PSUs / Universities or recognized research or educational institutions.
+<br/>Or
+Three years experience of teaching in Hindi and English or research in Hindi or English under Central/State Governments/Autonomous Body/Statutory Organizations/ PSUs/Universities or recognized research or educational institutions.
+</li>
+<br/>
+<ol>Note:
+<li>	Qualifications are relaxable at the discretion of the Competent Authority in the case of candidates otherwise well qualified.</li>
+<li>	The Qualification(s) regarding experience is relaxable at the discretion of the Competent Authority in the case of candidates belonging to Scheduled Castes or Scheduled Tribes if at any stage of, Competent Authority is of the Opinion that sufficient number of candidates from these communities possessing the requisite experience are not likely to be available to fill up the vacancy reserved for them </li>
+</ol>
+<br/>
+<ul>Desirable:
+<li>Studied one of the language other than Hindi included in the 8th schedule of the constitution at 10th level from a recognized Board</li>
+</ul>
+</div>
+        <div id="medicalofficer" style="display:none;">
+        <ol type="i">Minimum qualifications:
+
+<li>M.B.B.S. with at least 55% marks from a recognized university and 05 years experience as Medical Officer in a residential teaching institution or a hospital of repute.
+<br/>Or
+M.D./ M.S.  in any medical Specialty. </li>
+</ol>
+<br/>
+<ul>Desirable:
+<li>Candidate with Post-graduate qualifications will be preferred.</li>
+</ul>
+</div>
+        <div id="informationscientist" style="display:none;">
+        <ol type="i">Minimum qualifications:
+<li>	First class B.E./B.Tech. (Computer Science / Information Technology) or equivalent
+				<br/>Or 
+First Class Master’s Degree in Computer Applications (MCA) or equivalent. 
+				<br/>Or 
+Master’s Degree in Library & Information Science</li>
+<li>	At least five years experience, out of which three years in Library Automation, preferably in University/Institute/College/PSU etc.</li>
+</ol>
+</div>
+        <div id="publicrelationsofficer" style="display:none;">
+        <ol type="i">Minimum qualifications:
+<li>	Master’s Degree in Public Relations/Mass Communication and Journalism with at least 55% marks or its equivalent grade of B in the UGC seven-point scale.
+<br/>Or
+Master’s degree in any discipline with at least 55% marks or its equivalent and P.G. Diploma in Public Relations/Mass Communication and Journalism.</li>
+<li>	Five years of experience as PRO/APRO in any University or a Govt./PSU/Corporate Sector organization or 5 years experience  in the editorial Department/Centre of any established newspaper, National News Agency, Radio or Television or Film media. </li>
+<li>	Good working knowledge of computer applications. </li>
+</ol>
+</div>
+        <div id="systemanalyst" style="display:none;">
+        <ol type="i">Minimum qualifications:
+<li>BE/B.Tech. in Electronics Engineering or/Computer Engineering with 05 years experience in computing
+<br/>OR
+MCA with 05 years experience with computing
+OR
+M.Sc. (IT/Computer Science) with 07 years experience in computing
+OR
+M.Tech. with 03 years experience with computing</li>
+</ol>
+<br/>
+<ol>Note: 
+<li>All Degrees/Diplomas should be from a recognised University/Institution with minimum of 55% marks or its equivalent</li>
+</ol>
+</br/>
+<ul>Desirable Qualification: 
+<li>    Adequate experience in Computer Software and other comparable experience in Office Automation/E-Governance/ERP/Networking </li>
+</ul>
+</div>
+        <div id="technicalofficerlaboratory" style="display:none;">
+        <ol type="i">Minimum qualifications:
+<li>	Bachelor’s Degree with Science in one of the subjects related from a recognized university and 10 years experience in the related laboratory of any Central/ State organization/University institute funded by the Govt./PSU/Educational Organization recognised by the State/Central Govt..
+<br/>Or
+Master’s Degree in relevant science subjects with 7 years experience in the related laboratory of any Central/ State organization/University institute funded by the Govt./PSU/Educational Organization recognised by the State/Central Govt..</li>
+</ol>
+<br/>
+<ul>Desirable:
+<li>Experience of handling/operating/maintaining sophisticated instruments.</li>
+</ul>
+</div>
+        <div id="securityofficer" style="display:none;">
+        <ol type="i">Minimum Qualifications: 
+<li>	Bachelor’s Degree or equivalent qualification from a recognized University </li>
+<li>	At least 15 years experience in Police / Para – Military forces / Armed Forces of the Union and should have held a post not below the rank of Subedar / Sub-inspector (Executive) or an equivalent position with exemplary service. </li>
+<li>	Holding a valid Driving License (LMV / Motor cycle). </li>
+</ol>
+<br/>
+<ul>Desirable: 
+<li>Completion of a course in fire fighting or unarmed combat course in Army or Para-military force. </li>
+</ul>
+</div>
+        <div id="sectionofficer" style="display:none;">
+        <ol type="i">Minimum qualifications:
+<li>	Bachelor’s degree with minimum 50% marks.</li>
+<li>	Experience as Superintendent in any University or a Govt./PSU/Corporate Sector organization/Educational Institution.
+<br/>Or
+05 years as Assistant in the scale of 9300-34800 + GP 4200 in University or in an equivalent grade in any Govt./ PSU/Corporate Sector organization.</li>
+<li>	Good working knowledge of computer applications. </li>
+<ol>
+</div>
+        <div id="nurse" style="display:none;">
+        <ol type="i">Minimum Qualifications: 
+<li>	10+2 in Science Stream from a recognised Board </li>
+<li>	Bachelor's Degree in Nursing and 02 years of Experience in Nursing in a reputed Hospital or Clinic 
+<br/>Or
+Three-year Diploma in Nursing/GNM from a recognized Institution/ Authority with a minimum of 04 years experience in Nursing in a reputed Hospital or Clinic. </li>
+<li>	Registration with Nursing Council of India/State</li>
+</ol>
+</div>
+        <div id="assistantengineer" style="display:none;">
+        <ol type="i">Minimum qualifications:
+<li>	Bachelor’s degree in Civil/Electrical Engineering with at least 55% marks.</li>
+<li>	Five years experience of supervising civil/ electrical works in any University or a Govt./PSU/Corporate Sector organization/Govt. approved contractor and conversant with Government Tendering procedures.</li>
+<li>	Good working knowledge of computer application.</li>
+</ol>
+</div>
+        <div id="privatesecretary" style="display:none;">
+        <ol type="i">Minimum qualifications 
+<li>	Graduate in any discipline with at least 50% marks from a recognized University.</li>
+<li>	Seven years experience as PA in any Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognised by the State/Central Govt..
+<br/>Or
+Five years experience for Masters Degree holders  as PA in any Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognised by the State/Central Govt..</li>
+<li>	English typing speed of at least 40 wpm.</li>
+<li>	Good working knowledge of computer applications.</li>
+</ol>
+<br/>
+<ul>Desirable:  
+<li>	Stenography speed of at least 100 wpm.</li>
+<li>	Qualified in the examination in secretarial practice by State/Central Government or any registered institution.</li>
+<li>	Good communication skills in English, Hindi & Punjabi.</li>
+<li>	Good drafting skills. </li>
+</ul>
+</div>
+        <div id="professionalassistant" style="display:none;">
+        <ol type="i">Minimum qualifications: 
+<li>	M.Lib. Sc./MLIS or equivalent with 50% marks 
+<br/>Or
+Master’s Degree in Arts/Science/Commerce or any other discipline with 50% and B.Lib.Sc./BLIS with 50% marks. </li>
+<li>	At least 04 years of experience as Junior Professional Assistant or equivalent grade in a College/ University/ Research Library with adequate knowledge in Library automation. </li>
+<li>	Post Graduate Diploma/Certificate Course in Computer Application/Computer Science/Library Automation from a recognized institute of minimum 6 months duration. </li>
+</ol>
+</div>
+
+        <div id="personalassistant" style="display:none;">
+        <ol type="i">Minimum qualifications:
+<li>	Graduate in any discipline with at least 50% marks from a recognized University.</li>
+<li>	Five years after Graduation or two years experience after Masters Degree as Stenographer in any Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognised by the State/Central Govt..</li>
+<li>	English typing speed of at least 40 wpm.</li>
+<li>	Good working knowledge of computer applications.</li>
+</ol>
+<br/>
+<ul>Desirable:   
+<li>	Stenography speed of at least 100 wpm.</li>
+<li>	Experience as PA in a university or educational institution. </li>
+<li>	Good communication skills in English, Hindi and Punjabi along with good drafting skills.</li>
+<li>	Degree or Diploma in Computer Applications.   </li>
+<li>	Post Graduate Degree.</li>
+</ul>
+</div>
+        <div id="assistant" style="display:none;">
+        <ol type="i">Minimum qualifications:
+<li>	Graduate in any discipline with at least 50% marks from a recognized University. </li>
+
+<li>	Three years as UDC in the scale of 5200 – 20200 + GP 2400  or equivalent in any Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognised by the State/Central Govt..</li>
+
+<li>	Good working knowledge of computer applications.</li>
+<li>	Typing speed of at least 40 wpm.</li>
+</ol>
+<br/>
+<ul>Desirable:  
+<li>	Diploma in Office Management & Secretarial Practice.</li>
+</ul>
+</div>
+        <div id="juniorengineer" style="display:none;">
+        <ol type="i">Minimum qualifications for Junior Engineer (Civil):
+<li>	Bachelor’s degree in Civil Engineering with at least 50% marks and three years experience of supervising civil works in any Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognised by the State/Central Govt./Govt/ approved contractor.
+<br/>OR
+03 years diploma in Civil Engineering with at least 55% marks and five years experience of supervising civil works in any Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognised by the State/Central Govt./Govt/ approved contractor.</li>
+<li>	Good working knowledge of computer applications. </li>
+<ol>
+<br/>
+<ol type="i">
+Minimum qualifications for Junior Engineer (Electrical):
+<li>	Bachelor’s degree in Electrical Engineering with at least 50% marks and three years experience of supervising Electrical works in any Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognized by the State/Central Govt../Govt approved contractor.
+<br/>OR
+03 years diploma in Electrical Engineering with at least 55% marks and five years experience of supervising Electrical works in any Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognized by the State/Central Govt../Govt approved contractor.</li>
+<li>	Good working knowledge of computer applications.</li>
+</ol>
+</div>
+        <div id="estateofficer" style="display:none;">
+        <ol type="i">Minimum qualifications:
+<li>	Bachelor’s degree with at least 50% marks.</li>
+<li>	Five years of experience as Assistant Estate Officer/Superintendent or equivalent in the grade pay of Rs. 2800 in any Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognized by the State/Central Govt.</li>
+<li>	Good working knowledge of computer applications.</li>
+</ol>
+<br/>
+<ul>Desirable:
+<li>	Master’s degree from recognized university.</li>
+<li>	Experience in handling of labour w.r.t. landscaping, laboratories, repairs, security etc.</li>
+<li>	Multitasking experience in organizing academic, cultural, sports and other activities.</li>
+<li>	Proficiency in local language (speaking, reading and writing)</li>
+</ul>
+</div>
+        <div id="hinditranslator" style="display:none;">
+        <ol type="i">Minimum Qualification:
+
+<li>	Master’s degree of a recognized University in Hindi with English as a compulsory or elective subject or as the medium of examination at the degree level.
+<br/>Or
+Master’s degree of a recognized University in English with Hindi as a compulsory or elective subject or as the medium of examination at the degree level.
+<br/>Or
+Master’s degree of a recognized University in any subject other than Hindi or English, with Hindi medium and English as a compulsory or elective subject or as the medium of examination at the degree level.
+<br/>Or
+Master’s degree of a recognized University in any subject other than Hindi or English, with English medium and Hindi as a compulsory or elective subject or as the medium of examination at the degree level.
+<br/>Or
+Master’s degree of a recognized University in any subject other than Hindi or English, with Hindi and English as Compulsory or elective subject or either of the two as a medium of examination and the other as a compulsory or elective subject at the degree level.</li>
+
+<li>	Recognized Diploma or Certificate Course in Translation from Hindi to English & Vice-versa or Two years experience of translation work from Hindi to English and Vice Versa in Central or State Government Office, including Government of India Undertaking.</li>
+</ol>
+<br/>
+<ol>Note:
+<li>	Qualifications are relaxable at the discretion of the Competent Authority in the case of candidates otherwise well qualified.</li>
+<li>	The Qualification(s) regarding experience is relaxable at the discretion of the Competent Authority in the case of candidates belonging to Scheduled Castes or Scheduled Tribes if at any stage of selection the Competent Authority is of the opinion that sufficient number of candidates from these communities possessing the requisite experience are not likely to be available to fill up the vacancy reserved for them </li>
+</ol>
+</div>
+
+        <div id="seniortechnicalassistantcomputer" style="display:none;">
+        <ol type="i">Minimum qualifications:
+<li>	B.E / B.Tech Computer Science / Electronics & Communication Engineering / Information Technology or M.Sc. Computer Science or MCA </li>
+<li>	Two years of experience in relevant field in Government / PSU or Reputed Private Organization. </li>
+</ol>
+<br/>
+<ul>Desirable: 
+<li>CCNA / CCNP or equivalent certification</li>
+</ul>
+</div>
+        <div id="seniortechnicalassistantlaboratory" style="display:none;">
+        <ol type="i">Minimum qualifications:
+<li>	M.Sc. in the relevant Science subjects with 55% or equivalent marks with two years of experience 
+<br/>Or
+B.Sc. With relevant Science subject combination with 55% or equivalent marks with five years of experience in relevant Science Laboratory </li>
+<br/>
+</ol>
+<ul>
+Desirable: 
+<li> 	Experience in handling laboratory equipments and computers </li>
+<li>	Good Command over English and Hindi or Punjabi </li>
+</ul>
+</div>
+        <div id="semiprofessionalassistant" style="display:none;">
+        <ol type="i">Minimum Qualifications: 
+<li>	Bachelor’s Degree in Library Science / Information science with two years relevant experience in a University / College Library. 
+<br/>Or
+Any Master’s Degree with a Diploma in Library Science / Master’s Degree in Library Science with one year of relevant experience in a University/ College library</li>
+</ol>
+</div>
+        <div id="pharmacist" style="display:none;">
+        <ol type="i">Minimum qualifications:
+<li>	A Bachelor’s Degree in Pharmacy from recognized University </li>
+<li>	Two years of experience in relevant field in Government / University / PSU / Autonomous Bodies / Hospitals / Clinics. </li>
+<li>	Proficiency in Computer Operations </li>
+<li>	Registered with the State Pharmacy Council</li>
+</ol>
+</div>
+        <div id="technicalassistant" style="display:none;">
+        <ol type="i">Minimum qualifications:
+
+<li>	Bachelor’s Degree in relevant subjects related to the laboratory from a recognized university and 03 years experience in the related laboratory of any Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognized by the State/Central Govt..
+<br/>Or
+Master’s Degree in relevant subject with 01 years experience in the related laboratory of any Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognized by the State/Central Govt..</li>
+</ol>
+<br/>
+<ul>Desirable:
+<li>Experience of handling/ operating/ maintaining sophisticated instruments.</li>
+</ul>
+</div>
+        <div id="securityinspector" style="display:none;">
+        <ol type="i">Minimum qualifications:
+<li>	Bachelor’s Degree or equivalent qualification from a recognized University </li>
+<li>	At least 10 years of experience in Police / Para – Military forces / Armed Forces of the Union and should have held post not below the rank of Subedar / Sub-inspector (Executive) or an equivalent position with exemplary service. </li>
+<li>	Holding a valid Driving License (LMV / Motor cycle). </li>
+</ol>
+<br/>
+<ul>Desirable: 
+<li>Completion of a course in fire fighting or unarmed combat course in Army or Para-military force. </li>
+</ul>
+</div>
+        <div id="upperdivisionclerk" style="display:none;">
+        <ol type="i">Minimum qualifications:
+<li>	Graduate in any discipline with 50% marks from a recognized University.</li>
+
+<li>	Three years experience as Jr. Office Assistant/Jr. Assistant/LDC/Computer Operator/Data Entry Operator in the Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognized by the State/Central Govt.</li>
+
+<li>	Good working knowledge of computer applications.</li>
+</ol>
+</div>
+        <div id="libraryassistant" style="display:none;">
+        <ol type="i">Minimum qualifications:
+
+<li>	A Bachelor’s degree in Library /Information Science. </li>
+<li>	One year relevant experience in University /College Library in Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognized by the State/Central Govt..</li>
+</ol>
+<br/>
+<ul>Desirable:  
+<li>Proficiency in local language (speaking, reading and writing)</li>
+</ul>
+</div>
+        <div id="laboratoryassistant" style="display:none;">
+        <ol type="i">Minimum qualifications:
+
+<li>	A Bachelor’s degree in relevant subject with atleast 50% marks. </li>
+Or
+<li>	A three year diploma in the relevant field with atleast 50% marks. </li>
+
+<li>	At least 02 years experience as Laboratory Assistant /Junior Technical Assistant/Laboratory Attendant in Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognized by the State/Central Govt..</li>
+</ol>
+<br/>
+<ul>
+Desirable:  <li>Proficiency in local language (speaking, reading and writing)</li></ul>
+</div>
+        <div id="lowerdivisionclerk" style="display:none;">
+        <ol type="i">Minimum qualifications:
+
+<li>	Bachelor’s Degree in any discipline with 50% marks.</li>
+<li>	English typing speed of 30 wpm. </li>
+<li>	Good working knowledge of computer applications. </li>
+</ol>
+<br/>
+<ul>Desirable: 
+<li>	Experience as Computer Operator/Data Entry Operator in Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognized by the State/Central Govt..</li>
+<li>	Proficiency in local language (speaking, reading and writing)</li>
+</ul>
+<br/>
+<ol>Note: 
+<li>In case of LDCs for Hostels/Guest House, at least two years of experience of guest house maintenance, including sanitation, upkeep and security would be required. </li>
+</ol>
+</div>
+        <div id="hinditypist" style="display:none;">
+        <ol type="i">Minimum qualifications:
+<li>10+2 or equivalent qualification from a recognized Board or University in 2nd Division</li>
+
+<li>Candidate should have proficiency in Hindi Type Writing with a minimum speed of 25 words per minute.</li>
+</ol>
+</div>
+        <div id="driver" style="display:none;">
+        <ol type="i">Minimum qualifications:
+
+<li>	Matriculation from a recognized Board of School Education.</li>
+<li>	Valid Driving License for Light/Medium Vehicles/Heavy Vehicle.</li>
+<li>	At least 12 years experience as executive’s driver or as driver of a bus in a Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognized by the State/Central Govt..</li>
+</ol>
+<br/>
+<ul>
+Desirable:  
+<li>	Proficiency in local language (speaking, reading and writing)</li>
+<li>	Experience of working in other areas like as office attendant/ library attendant/typing/ office cleaning and dusting/computer knowledge/photocopying/binding etc.</li>
+<li>	Certificate of Mechanic Motor Vehicle or equivalent from recognized ITI.</li>
+</ul>
+</div>
+        <div id="cook" style="display:none;">
+        <ol type="i">Minimum Qualifications: 
+<li>	10th class pass. </li>
+<li>	At least 05 years experience in the kitchen of Hostel/Guest House of Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognized by the State/Central Govt.</li>
+<li>	Proficiency in local language (ability to communicate) </li>
+</ol>
+</div>
+        <div id="libraryattendant" style="display:none;">
+        <ol type="i">Minimum qualifications:
+
+<li>	10+2 or its equivalent with at least one year duration certificate course in Library Science from a recognized Institute in 2nd Division.</li>
+<li>	Minimum two to three years experience of working preferably in Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognized by the State/Central Govt.</li>
+</ol>
+<br/>
+<ul>Desirable:  
+<li>	B. Lib./B.Sc./B.A.</li>
+<li>	Proficiency in local language (speaking, reading and writing)</li>
+</div>
+        <div id="laboratoryattendant" style="display:none;">
+        <ol type="i">Minimum qualifications: 
+
+<li>	10+2 in 2nd division from a recognized Board/ University or equivalent preferably in Science subject. </li>
+<li>	Two to three years experience of working in research laboratory preferably in Central / State organization / University institute funded by the Govt./ PSU/ Educational Organization recognized by the State/Central Govt.</li>
+</ol>
+<br/>
+<ul>
+Desirable: 
+<li>	B.Sc.</li>
+<li>	Diploma in laboratory technology.</li>
+<li>	Proficiency in local language (speaking, reading and writing)</li>
+</ul>
+</div>
+        <div id="officeattendant" style="display:none;">
+        <ol type="i">Minimum qualifications:
+
+<li>	Matriculation or equivalent.</li>
+<li>	At least two to three years of experience of Photocopying/File handling in a Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognized by the State/Central Govt.</li>
+<li>	Handling of Office duties/Pantry preferably in a university/college.</li>
+</ol>
+<br/>
+<ul>
+Desirable:  <li>Proficiency in local language (speaking, reading and writing)</li></ul>
+</div>
+        <div id="hostelattendant" style="display:none;">
+        <ol type="i">Minimum qualifications:
+
+<li>	HSC (10+2)/ Equivalent examination</li>
+<li>	Two to three years experience of working in the Hostel/ Guest House in a Central/State organization/University institute funded by the Govt./PSU/Educational Organization recognized by the State/Central Govt.</li>
+</ol>
+<br/>
+<ul>
+Desirable:  
+<li>	A Bachelor’s degree</li>
+<li>	Ability to read & write in English and Punjabi</li>
+</ul>
+</div>
+        <div id="medicalattendant" style="display:none;">
+        <ol type="i">Minimum qualifications:
+<li>	Matriculation or equivalent. </li>
+<li>	Qualified Multipurpose Health Worker Diploma of at least 02 years duration from a recognized institute. </li>
+<li>	At least two years of experience in a university health centre or a recognized hospital. </li>
+</ol>
+<br/>
+<ul>
+Desirable: <li>Proficiency in local language (speaking, reading and writing)</li>
+</ul>
+</div>
+        <div id="multitaskingstaff" style="display:none;">
+        <ol type="i">Minimum qualifications:
+
+<li>	Matriculation from a recognised Board of School Education.</li>
+<li>	Should be multi-tasking with working experience in areas like driving/typing/operating computers / photocopying / binding / plumbing / cleaning / gardening / masonry / carpentering and dusting of offices / library / guest house / pantry management / etc.</li>
+</ol>
+</div>
+        <div id="kitchenattendant" style="display:none;">
+        <ol type="i">Minimum qualifications:
+
+<li>	10th pass</li>
+<li>	At least 02 to 03 years experience in the kitchen of Hostel- Mess/ Canteen / Guest House in a Central/State organization / University institute funded by the Govt./PSU/Educational Organization recognized by the State/Central Govt</li>
+</ol>
+<br/>
+<ul>Desirable:  <li>Proficiency in local language (speaking, reading and writing)</li></ul>
+</div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#post_applied_for').val('none');
+        
+        $('#post_applied_for').on('change', function() {
+            if($(this).val() === 'none') {
+                $('#post_selected_elig').css("display","none");
+            }
+            else {
+                $('#post_selected_elig').empty();
+                $('#post_selected_elig').append($('#' + $(this).val()).clone().css('display','block'));
+                $('#post_selected_elig').css("display","block");
+            }
+        });
+
+        $('#continue_bt').on('click', function(e){
+            if($('#post_applied_for').find(":selected").val() === 'none') {
+                e.preventDefault();
+            }
+            else {
+                $(this).attr('href',$(this).attr('href') + '?post=' + $('#post_applied_for').find(":selected").text());
+            }
+        });
+        
+        
+        <?php 
+            if(!empty($this->Session->read('disabled_posts'))) {
+                foreach ($this->Session->read('disabled_posts') as $value) {
+                    echo "$(\"#post_applied_for option[text='" . $value .  "']\").remove();";
+                    echo "$('#post_applied_for option').each(function() {\n
+                        if ( $(this).text() == '" . $value . "' ) {\n
+                            $(this).remove();\n
+                        }\n
+                    });\n";
+                }
+            }
+         ?>
+    });
+</script>

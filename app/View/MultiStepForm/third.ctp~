@@ -1,0 +1,116 @@
+<?php
+
+echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url' => Router::url( null, true ))); ?>
+<h2>Step 3: Chronological list of Experience (starting from Current Employment)</h2>
+<div id="contentContainer">
+    <table id="exp_table" border="2px solid black" style="border-right: 2px solid black !important;">
+        <tr>
+            <td rowspan="2" width="10%"><?php echo $this->Form->label('DesignationHeader', 'Designation'); ?></td>
+            <td rowspan="2" width="10%"><?php echo $this->Form->label('ScaleOfPay', 'Scale of Pay'); ?></td>
+            <td rowspan="2" width="10%"><?php echo $this->Form->label('BoardHeader', 'Name & address of Employer'); ?></td>
+            <td colspan="3"><div style="text-align: center"><?php echo $this->Form->label('PeriodOfExperience', 'Period of Experience'); ?></div></td>
+            <td rowspan="2" width="20%"><?php echo $this->Form->label('NatureOfWork', 'Nature Of Work'); ?></td>
+            <!--<td rowspan="2" width="10%"><?php echo $this->Form->label('SrNoOfProof', 'Sr. No. of Proof Enclosed'); ?></td>-->
+        </tr>
+        <tr>
+            <td width="10%"><?php echo $this->Form->label('FromDate', 'From Date'); ?></td>
+            <td width="10%"><?php echo $this->Form->label('Todate', 'To Date'); ?></td>
+            <td width="10%"><?php echo $this->Form->label('NoOfYrsMonths', 'No. of Years/Months(as on date of advertisement)'); ?></td>
+        </tr>
+        <tr>
+            <td><?php echo $this->Form->input('Experience.0.id', array('type' => 'hidden'));
+                      echo $this->Form->input('Experience.0.user_id', array('type' => 'hidden', 'value' => $this->Session->read('Auth.User.id'))); 
+                      echo $this->Form->input('Experience.0.sr_no', array('type' => 'hidden', 'value' => '0')); 
+                      echo $this->Form->input('Experience.0.designation', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.0.scale_of_pay', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.0.name_add', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.0.from_date', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.0.to_date', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.0.no_of_yrs_mnths', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.0.nature_of_work', array('label' => false, 'maxlength' => '500')); ?></td>
+            <!--<td><?php echo $this->Form->input('Experience.0.sr_of_proof', array('label' => false, 'maxlength' => '500')); ?></td>-->
+        </tr>
+        <tr>
+            <td><?php   echo $this->Form->input('Experience.1.id', array('type' => 'hidden'));
+                        echo $this->Form->input('Experience.1.user_id', array('type' => 'hidden', 'value' => $this->Session->read('Auth.User.id')));
+                        echo $this->Form->input('Experience.1.sr_no', array('type' => 'hidden', 'value' => '1'));
+                        echo $this->Form->input('Experience.1.designation', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.1.scale_of_pay', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.1.name_add', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.1.from_date', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.1.to_date', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.1.no_of_yrs_mnths', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.1.nature_of_work', array('label' => false, 'maxlength' => '500')); ?></td>
+            <!--<td><?php echo $this->Form->input('Experience.1.sr_of_proof', array('label' => false, 'maxlength' => '500')); ?></td>-->
+        </tr>
+        <tr>
+            <td><?php echo $this->Form->input('Experience.2.id', array('type' => 'hidden'));
+                      echo $this->Form->input('Experience.2.user_id', array('type' => 'hidden', 'value' => $this->Session->read('Auth.User.id')));
+                      echo $this->Form->input('Experience.2.sr_no', array('type' => 'hidden', 'value' => '2'));  
+                      echo $this->Form->input('Experience.2.designation', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.2.scale_of_pay', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.2.name_add', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.2.from_date', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.2.to_date', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.2.no_of_yrs_mnths', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.2.nature_of_work', array('label' => false, 'maxlength' => '500')); ?></td>
+            <!--<td><?php echo $this->Form->input('Experience.2.sr_of_proof', array('label' => false, 'maxlength' => '500')); ?></td>-->
+        </tr>
+        <tr>
+            <td><?php echo $this->Form->input('Experience.3.id', array('type' => 'hidden'));
+                      echo $this->Form->input('Experience.3.user_id', array('type' => 'hidden', 'value' => $this->Session->read('Auth.User.id')));
+                      echo $this->Form->input('Experience.3.sr_no', array('type' => 'hidden', 'value' => '3'));  
+                      echo $this->Form->input('Experience.3.designation', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.3.scale_of_pay', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.3.name_add', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.3.from_date', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.3.to_date', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.3.no_of_yrs_mnths', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.3.nature_of_work', array('label' => false, 'maxlength' => '500')); ?></td>
+            <!--<td><?php echo $this->Form->input('Experience.3.sr_of_proof', array('label' => false, 'maxlength' => '500')); ?></td>-->
+        </tr>
+        <tr>
+            <td><?php echo $this->Form->input('Experience.4.id', array('type' => 'hidden'));
+                      echo $this->Form->input('Experience.4.user_id', array('type' => 'hidden', 'value' => $this->Session->read('Auth.User.id')));
+                      echo $this->Form->input('Experience.4.sr_no', array('type' => 'hidden', 'value' => '4'));  
+                      echo $this->Form->input('Experience.4.designation', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.4.scale_of_pay', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.4.name_add', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.4.from_date', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.4.to_date', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.4.no_of_yrs_mnths', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.4.nature_of_work', array('label' => false, 'maxlength' => '500')); ?></td>
+            <!--<td><?php echo $this->Form->input('Experience.4.sr_of_proof', array('label' => false, 'maxlength' => '500')); ?></td>->
+        </tr>
+        <tr>
+            <td><?php echo $this->Form->input('Experience.5.id', array('type' => 'hidden'));
+                      echo $this->Form->input('Experience.5.user_id', array('type' => 'hidden', 'value' => $this->Session->read('Auth.User.id')));
+                      echo $this->Form->input('Experience.5.sr_no', array('type' => 'hidden', 'value' => '5'));  
+                      echo $this->Form->input('Experience.5.designation', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.5.scale_of_pay', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.5.name_add', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.5.from_date', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.5.to_date', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.5.no_of_yrs_mnths', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Experience.5.nature_of_work', array('label' => false, 'maxlength' => '500')); ?></td>
+            <!--<td><?php echo $this->Form->input('Experience.5.sr_of_proof', array('label' => false, 'maxlength' => '500')); ?></td>-->
+        </tr>
+        <tr>
+            <td>Total period of experience
+            <?php echo $this->Form->input('Misc.id', array('type' => 'hidden'));
+                  echo $this->Form->input('Misc.user_id', array('type' => 'hidden', 'value' => $this->Session->read('Auth.User.id'))); ?></td>
+            <td>Years</td>
+            <td><?php echo $this->Form->input('Misc.tot_exp_years', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td>Months</td>
+            <td><?php echo $this->Form->input('Misc.tot_exp_mnths', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td>Days</td>
+            <td><?php echo $this->Form->input('Misc.tot_exp_days', array('label' => false, 'maxlength' => '500')); ?></td>
+        </tr>
+    </table>
+</div>
+<div class="submit">
+    <?php echo $this->Form->submit('Previous', array('name' => 'Previous', 'div' => false, 'formnovalidate' => true)); ?>
+    <?php echo $this->Form->submit('Save & Continue', array('div' => false)); ?>
+    <?php echo $this->Form->submit('Cancel', array('name' => 'Cancel', 'div' => false)); ?>
+</div>
+<?php echo $this->Form->end(); ?>
