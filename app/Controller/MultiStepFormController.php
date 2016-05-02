@@ -63,80 +63,16 @@ class MultiStepFormController extends AppController {
         if (!empty($this->Session->read('registration_id')) && !empty($this->Session->read('applicant_id'))) {
             $registration_data = $this->Registereduser->find('all', array(
                 'conditions' => array('Registereduser.id' => $this->Session->read('registration_id'))));
-            //$posts_applied = $this->Post->find('all', array(
-            //      'conditions' => array('Post.registration_id' => $this->Session->read('registration_id'))));
-            //print_r($this->request->query['post']);
             $this->set(Configure::read('GENERALINFO.post'), $this->getPostAppliedFor());
-            //$continue = true;
-            //$user_id = '';
-            //if(count($posts_applied) != 0) {
-            /* $newRec = true;
-              foreach($posts_applied as $key => $value) {
-              if($posts_applied[$key]['Post']['post_name'] == $this->getPostAppliedFor()) {
-              $newRec = false;
-              $user_id = $posts_applied[$key]['Post']['user_id'];
-              }
-              if($posts_applied[$key]['Post']['post_name'] == $this->getPostAppliedFor()
-              && $posts_applied[$key]['Post']['final_submit'] == "1") {
-              $continue = false;
-              }
-              } */
             $existing_applicant_id = $this->getApplicantIdAsPerPostAreaCentre($this->Session->read('registration_id'));
             if ($existing_applicant_id != null && $existing_applicant_id != $this->Session->read('applicant_id')) {
                 $this->Session->setFlash('Mismatch of Application Id. Please contact IT Cell');
                 //this case should not occur
                 $this->redirect(array('controller' => 'users', 'action' => 'logout'));
             }
-            /*if (empty($this->Session->read('applicant_id'))) {
-                $this->Applicant->create();
-                $this->Applicant->set(array('registration_id' => $this->Session->read('registration_id'),
-                    'post_applied_for' => $this->getPostAppliedFor(),
-                    'centre' => $this->getCentreAppliedFor(),
-                    'area' => $this->getAreaAppliedFor(),
-                    'advertisement_no' => 'T-01 (2016)'));
-                $this->Applicant->save();
-                $user_id = $this->Applicant->getLastInsertID();
-                $this->Post->create();
-                $this->Post->set(array(
-                    'applicant_id' => $user_id,
-                    'post_name' => $this->getPostAppliedFor(),
-                    'area' => $this->getAreaAppliedFor(),
-                    'centre' => $this->getCentreAppliedFor(),
-                    'reg_id' => $this->Session->read('registration_id')
-                ));
-                $this->Post->save();
-                $this->Session->write('applicant_id', $user_id);
-            } else {*/
-            //$user_id = $this->Session->read('applicant_id');
-            //}
-
-            //$all_applicants = $this->Applicant->find('all', array(
-            //        'conditions' => array('Applicant.registration_id' => $registration_data['0']['Registereduser']['id'])));
             $applicants = $this->Applicant->find('all', array(
                 'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
             if (count($applicants) == 1) {
-                /* $singleRecord = !empty($all_applicants['0']) ? $all_applicants['0'] : array();
-                  $singleRecord['Applicant']['id'] = NULL;
-                  if(!empty($singleRecord['Applicant']['email']) && trim($singleRecord['Applicant']['email']) != "" && trim($applicants['0']['Applicant']['email']) == "") {
-                  $singleRecord['Applicant']['id'] = $applicants['0']['Applicant']['id'];
-                  $this->request->data = $singleRecord;
-                  $this->Session->write('MultiStepForm.applicantId', $singleRecord['Applicant']['id']);
-                  $maritalStatusSelected = $singleRecord['Applicant']['marital_status'];
-                  //$postAppliedFor = $applicants['0']['Applicant']['post_applied_for'];
-                  $category = $singleRecord['Applicant']['category'];
-                  $centreSelected = $singleRecord['Applicant']['name_of_centre'];
-                  $gender = $singleRecord['Applicant']['gender'];
-                  $physically_disabled = $singleRecord['Applicant']['physical_disable'];
-                  $departmental_cand = $singleRecord['Applicant']['departmental_cand'];
-                  $internal_cand = $singleRecord['Applicant']['internal_cand'];
-                  $this->set('maritalStatusSelected', $maritalStatusSelected);
-                  $this->set('category', $category);
-                  $this->set('gender', $gender);
-                  $this->set('physically_disabled', $physically_disabled);
-                  $this->set('departmental_cand', $departmental_cand);
-                  $this->set('internal_cand', $internal_cand);
-                  }
-                  else { */
                 $applicants['0']['Applicant']['post_applied_for'] = $this->getPostAppliedFor();
                 $applicants['0']['Applicant']['centre'] = $this->getCentreAppliedFor();
                 $applicants['0']['Applicant']['area'] = $this->getAreaAppliedFor();
@@ -145,19 +81,13 @@ class MultiStepFormController extends AppController {
                 $maritalStatusSelected = $applicants['0']['Applicant']['marital_status'];
                 $postAppliedFor = $applicants['0']['Applicant']['post_applied_for'];
                 $category = $applicants['0']['Applicant']['category'];
-                //$centreSelected = $applicants['0']['Applicant']['name_of_centre'];
                 $gender = $applicants['0']['Applicant']['gender'];
                 $physically_disabled = $applicants['0']['Applicant']['physically_disabled'];
-                //$departmental_cand = $applicants['0']['Applicant']['departmental_cand'];
-                //$internal_cand = $applicants['0']['Applicant']['internal_cand'];
                 $this->set('maritalStatusSelected', $maritalStatusSelected);
                 $this->set('category', $category);
                 $this->set('gender', $gender);
                 $this->set('physically_disabled', $physically_disabled);
                 $this->set('postAppliedFor', $postAppliedFor);
-                //$this->set('departmental_cand', $departmental_cand);
-                //$this->set('internal_cand', $internal_cand);
-                //}
             } else if ($continue == false) {
                 $this->Session->setFlash('The form has been submitted and cannot be modified.');
                 $this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
@@ -168,12 +98,6 @@ class MultiStepFormController extends AppController {
     }
 
     function _processFirst() {
-            /*$age_limit = $this->checkAgeAsPerPost($this->data['Applicant']['age_on_adv_yrs'], $this->getPostAppliedFor() ,$this->data['Applicant']['category'], $this->data['Applicant']['physical_disable'], $this->data['Applicant']['departmental_cand'], $this->data['Applicant']['internal_cand']);
-            if($age_limit != 0 && $this->data['Applicant']['age_on_adv_yrs'] >= $age_limit ) {
-                $this->Session->setFlash('The general conditions for selected post are not met.');
-                $this->Session->delete('applicant_id');
-                $this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
-            }*/
             $this->Applicant->create();    
             $this->Applicant->set($this->data);
             if($this->Applicant->validates()) { //&& $this->User->validates()) {

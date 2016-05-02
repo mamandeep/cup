@@ -86,6 +86,20 @@ class FormController extends AppController {
         //$this->Session->destroy();
         if (!empty($this->data['Applicant']['id']) && !empty($this->data['Applicant']['email']) 
                 && !empty($this->data['Applicant']['date_of_birth'])) { 
+            $segments = explode('/', $this->data['Applicant']['date_of_birth']);
+            if (count($segments) !== 3) {
+                $this->Session->setFlash('Date of Birth is not in correct format.');
+                return false;
+            }
+            list($dd,$mm,$yyyy) = $segments;
+            if (!checkdate((int)$mm,(int)$dd,(int)$yyyy)) {
+                $this->Session->setFlash('Date of Birth is not in correct format.');
+                return false;
+            }
+            if(!filter_var($this->data['Applicant']['email'], FILTER_VALIDATE_EMAIL)) {
+                $this->Session->setFlash('Email Id is not in correct format.');
+                return false;
+            }
             $applicant_id = trim($this->data['Applicant']['id']);
             $registered_user = $this->Registereduser->find('all', array(
                 'conditions' => array('Registereduser.applicant_id' => $applicant_id,
@@ -105,6 +119,10 @@ class FormController extends AppController {
                 $this->Session->setFlash('Details entered are not valid.');
                 return false;
             }
+        }
+        else {
+            $this->Session->setFlash('Details entered are not complete.');
+            return false;
         }
     }
 

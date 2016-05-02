@@ -37,6 +37,20 @@ class UsersController extends AppController {
         
         public function dashboard() {
             if(!empty($this->data['User'])){
+                $segments = explode('/', $this->data['User']['dob']);
+                if (count($segments) !== 3) {
+                    $this->Session->setFlash('Date of Birth is not in correct format.');
+                    return false;
+                }
+                list($dd,$mm,$yyyy) = $segments;
+                if (!checkdate((int)$mm,(int)$dd,(int)$yyyy)) {
+                    $this->Session->setFlash('Date of Birth is not in correct format.');
+                    return false;
+                }
+                if(!filter_var($this->data['User']['email'], FILTER_VALIDATE_EMAIL)) {
+                    $this->Session->setFlash('Email Id is not in correct format.');
+                    return false;
+                }
                 $db = ConnectionManager::getDataSource('default');
                 $sql = "SELECT * FROM `registered_users` WHERE email = '" . 
                         $this->data['User']['email'] . "' and dob = '" . 
@@ -58,7 +72,7 @@ class UsersController extends AppController {
                     $this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
                 }
                 else {
-                    $this->Session->setFlash('Please enter correct Email / Date Of Birth / Applicant Id.');
+                    $this->Session->setFlash('Please contact Support.');
                 }
             }
         }
