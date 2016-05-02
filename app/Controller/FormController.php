@@ -37,30 +37,46 @@ class FormController extends AppController {
         
         public function register() {
             if(!empty($this->data['Registereduser'])) {
-                $segments = explode('/', $this->data['Registereduser']['dob']);
-                if (count($segments) !== 3) {
-                    $this->Session->setFlash('Date of Birth is not in correct.');
-                }
-                list($dd,$mm,$yyyy) = $segments;
-                if (!checkdate((int)$mm,(int)$dd,(int)$yyyy)) {
-                    $this->Session->setFlash('Date of Birth is not in correct.');
-                }
-                $registered_user = $this->Registereduser->find('all', array(
-                            'conditions' => array('Registereduser.email' => trim($this->data['Registereduser']['email']),
-                                                  'Registereduser.dob' => trim($this->data['Registereduser']['dob']))
-                                                ));
-                if(count($registered_user) != 0) {
-                    $this->Session->setFlash('Email / Date of Birth is already registered.');
-                    return false;
-                }
-                if($this->Registereduser->save($this->data['Registereduser'])) {
-                    $this->Applicant->id = $this->Session->write('applicant_id');
-                    $this->Applicant->saveField('registration_id', $this->Registereduser->getLastInsertID());
-                    $this->Session->setFlash('You have successfully registered.');
-                    $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+                $this->Signup->setCaptcha('security_code', $this->Captcha->getCode('Signup.security_code')); //getting from component and passing to model to make proper validation check
+                $this->Signup->set($this->request->data);
+                if ($this->Signup->validates()) {
+                    $segments = explode('/', $this->data['Registereduser']['dob']);
+                    if (count($segments) !== 3) {
+                        $this->Session->setFlash('Date of Birth is not in correct.');
+                    }
+                    list($dd,$mm,$yyyy) = $segments;
+                    if (!checkdate((int)$mm,(int)$dd,(int)$yyyy)) {
+                        $this->Session->setFlash('Date of Birth is not in correct.');
+                    }
+                    $registered_user = $this->Registereduser->find('all', array(
+                                'conditions' => array('Registereduser.email' => trim($this->data['Registereduser']['email']),
+                                                      'Registereduser.dob' => trim($this->data['Registereduser']['dob']))
+                                                    ));
+                    if(count($registered_user) != 0) {
+                        $this->Session->setFlash('Email / Date of Birth is already registered.');
+                        return false;
+                    }
+                    $this->Applicant->create();
+                    $this->Applicant->set(array(
+                        'advertisement_no' => 'T-01 (2016)'));
+                    
+                    if($this->Registereduser->save($this->data['Registereduser']) && $this->Applicant->save()) {
+                        $this->Session->write('applicant_id', $this->Applicant->getLastInsertID());
+                        $this->Session->write('registration_id', $this->Registereduser->getLastInsertID());
+                        $this->Applicant->id = $this->Session->read('applicant_id');
+                        $this->Applicant->saveField('registration_id', $this->Session->read('registration_id'));
+                        $this->Registereduser->id = $this->Session->read('registration_id');
+                        $this->Registereduser->saveField('applicant_id', $this->Session->read('applicant_id'));
+                        $this->Session->setFlash('You have successfully registered.');
+                        $this->redirect(array('controller' => 'form', 'action' => 'pay'));
+                    }
+                    else {
+                        $this->Session->setFlash('There was an error in Registration.');
+                    }
                 }
                 else {
-                    $this->Session->setFlash('There was an error in Registration.');
+                    $this->Session->setFlash('Data Validation Failure', 'default', array('class' =>
+                        'cake-error'));
                 }
             }
         }
@@ -69,13 +85,18 @@ class FormController extends AppController {
         //print_r($this->data); return false;
         //$this->Session->destroy();
         if (!empty($this->data['Applicant']['id'])) { // id has been entered
+            // confirm if user has registerd, check if applicant id is valid and payment is not made, but don't mesg that payment is made
             $applicant_id = trim($this->data['Applicant']['id']);
+            $registered_user = $this->Registereduser->find('all', array(
+                                'conditions' => array('Registereduser.applicant_id' => trim($this->data['Registereduser']['email']),
+                                                      'Registereduser.dob' => trim($this->data['Registereduser']['dob']))
+                                                    ));
             $this->Session->write('applicant_id', $applicant_id);
             $applicants = $this->Applicant->find('all', array(
                 'conditions' => array('Applicant.id' => $applicant_id)));
-            $this->Signup->setCaptcha('security_code', $this->Captcha->getCode('Signup.security_code')); //getting from component and passing to model to make proper validation check
-            $this->Signup->set($this->request->data);
-            if ($this->Signup->validates()) { //as usual data save call   
+            //$this->Signup->setCaptcha('security_code', $this->Captcha->getCode('Signup.security_code')); //getting from component and passing to model to make proper validation check
+            //$this->Signup->set($this->request->data);
+            //if ($this->Signup->validates()) { //as usual data save call   
                 if (count($applicants) == 1) {
                     //check if payment made
                     if ($applicants['0']['Applicant']['response_code'] == "0") {
@@ -94,10 +115,10 @@ class FormController extends AppController {
                 } else {
                     $this->Session->setFlash('No record found for Applicant Id: ' . $applicant_id);
                 }
-            } else {
-                $this->Session->setFlash('Data Validation Failure', 'default', array('class' =>
-                    'cake-error'));
-            }
+            //} else {
+            //    $this->Session->setFlash('Data Validation Failure', 'default', array('class' =>
+            //        'cake-error'));
+            //}
         } else if (!empty($this->data['Applicant']['applicant_id_given']) &&
                 $this->data['Applicant']['applicant_id_given'] == "no") {
             if(!empty($this->Session->read('applicant_id'))) {

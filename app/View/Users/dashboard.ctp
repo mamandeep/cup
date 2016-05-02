@@ -11,7 +11,11 @@
             <td><?php echo $this->Form->input('email'); ?></td>
         </tr>
         <tr>
-            <td><?php echo $this->Form->input('dob', array('label' => 'Date of Birth')); ?>&nbsp;(DD/MM/YYYY)</td>
+            <td>&nbsp;(DD/MM/YYYY)<?php echo $this->Form->input('dob', array('label' => 'Date of Birth')); ?></td>
+        </tr>
+        <tr>
+            <td><?php echo $this->Form->input('applicant_id', array('label' => 'Applicant Id.', 
+                                                                    'type' => 'text')); ?></td>
         </tr>
     </table>
         

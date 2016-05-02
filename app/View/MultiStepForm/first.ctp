@@ -98,7 +98,7 @@
                     echo $this->Form->input('Applicant.email', array('label'=>'Email:', 'maxlength' => '500'));
 		?></td>
                 <td><?php echo $this->Form->input('Applicant.mobile_no', array('label' => 'Mobile Number:', 'maxlength' => '500')); ?></td>
-                <td><?php echo $this->Form->input('Applicant.aadhar_no', array('label' => 'Aadhar Number:', 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.aadhar_no', array('label' => 'Aadhar Number: (xxxx xxxx xxxx)', 'maxlength' => '500')); ?></td>
             </tr>
             <tr>
                 <td><?php 

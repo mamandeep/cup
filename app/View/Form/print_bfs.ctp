@@ -38,6 +38,11 @@
 $this->Html->css('cake.generic.css');
 echo $this->Html->script('jquery-1.11.1-min');
 ?>
+<span style="padding: 1px 10px; float: right;">
+<?php
+    echo $this->Html->link(('Logout'), array('controller'=>'users', 'action'=>'logout'));
+?>
+</span>
 <div id="contentContainer" style="width: 650px; max-width: 650px; margin-left: 100px;">
     <p style="font-size: 28px; font-weight: bold; text-align: center">CENTRAL UNIVERSITY OF PUNJAB</p>
     <p style="font-size: 12px; font-weight: bold; text-align: center">(Established vide Act no 25(2009) of Parliament)</p>
@@ -51,6 +56,7 @@ echo $this->Html->script('jquery-1.11.1-min');
         <tr>
             <td width="40%" class="print_headers">Applicant Number</td>
             <td width="40%" class="print_value"><?php echo $applicant['Applicant']['id'] ?></td>
+            <td width="20%"><img src="<?php if(!empty($image['Document']['filename4'])) { echo $this->webroot . '/' . $image['Document']['filename4']; } else { echo ""; } ?>" alt="Signature" height="50px" width="132px"></td>
         </tr>
         <tr>
             <td class="print_headers">Details of application fee</td>

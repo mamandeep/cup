@@ -28,11 +28,11 @@
 	   <tr>
             <td class="fieldName" width="50%"><span class="error">*</span> Applicant Id</td>
 
-            <td  align="left" width="50%"> <input name="reference_no" type="text" value="<?php echo $Applicant['id']?>" /></td>
+            <td  align="left" width="50%"> <input name="reference_no" type="text" value="<?php echo $Applicant['id']?>" readonly="readonly" /></td>
         </tr>
         <tr>
             <td class="fieldName" width="50%"><span class="error">*</span> Application Fee</td>
-            <td  align="left" width="50%"> <input name="amount" type="text" value="<?php echo $app_fee; ?>"/> <select name="currency" >
+            <td  align="left" width="50%"> <input name="amount" type="text" value="<?php echo $app_fee; ?>" readonly="readonly"/> <select name="currency" >
 				<option value="INR">INR</option>
 
 			</select></td>

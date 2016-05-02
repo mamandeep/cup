@@ -40,7 +40,7 @@
 			<?php if($paymentStatus == "0") { ?>
 			<td>
 				<div style="text-align: center; font-size: 30px;">
-        			<?php echo $this->Form->create('Temp', array('id' => 'Continue_Form', 'url' => Router::url( '/form/print_bfs', true ))); ?>
+        			<?php echo $this->Form->create('Temp', array('id' => 'Continue_Form', 'url' => Router::url( '/users/dashboard', true ))); ?>
         			<?php echo $this->Form->submit('Continue', array('div' => false, 'id' => 'continue_bt' )); ?>
         			<?php echo $this->Form->end(); ?>
         			<!--<a href="<?php echo $this->webroot; ?>multi_step_form/wizard/first" class="button" id="continue_bt">Continue</a>-->

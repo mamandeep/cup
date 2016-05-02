@@ -2,12 +2,14 @@
 <table width="900" cellpadding="2" cellspacing="2" border="0" align="center">
 <tr>
 <th colspan="2">
-<div id="tabs">
+    <!--
+    <div id="tabs">
     <div>Is Applicant ID. alloted to you?</div>
     <select id="applicant_id_given" name="data[Applicant][applicant_id_given]" required>
         <option value="yes">Yes</option>
         <option value="no" selected="selected">No</option>
     </select>
+-->
 <div id="tabs-1">
 	<table id="applicant_id_input">
 		<tr> <!--check if applicant has been alloted applicant_id-->
@@ -25,15 +27,6 @@
 </th>
 </tr>
 </table>
-<?php
-    //echo $this->Form->create("Signups");
-    $custom1['width']=150;
-    $custom1['height']=50;
-    $custom1['theme']='default';
-    $this->Captcha->render($custom1);
-    //echo $this->Form->submit(__(' Submit ',true));
-    //echo $this->Form->end();
-?>
 
 <div class="submit">
     <?php echo $this->Form->submit('Submit', array('div' => false)); ?>
@@ -41,7 +34,7 @@
 
 <script>
 $(document).ready(function () {
-        if($("#applicant_id_given option:selected").text() === "Yes") {
+        /*if($("#applicant_id_given option:selected").text() === "Yes") {
             $('#applicant_id_input').css('display', 'table');
         }
         else {
@@ -59,17 +52,8 @@ $(document).ready(function () {
                     $(this).css('display','table');
                 });
             }
-        });
+        });*/
         
-        $('.creload').on('click', function() {
-            var mySrc = $(this).prev().attr('src');
-            var glue = '?';
-            if(mySrc.indexOf('?')!=-1)  {
-                glue = '&';
-            }
-            $(this).prev().attr('src', mySrc + glue + new Date().getTime());
-            return false;
-        });
     });
     
 </script>

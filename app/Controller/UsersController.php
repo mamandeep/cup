@@ -38,7 +38,10 @@ class UsersController extends AppController {
         public function dashboard() {
             if(!empty($this->data['User'])){
                 $db = ConnectionManager::getDataSource('default');
-                $sql = "SELECT * FROM `registered_users` WHERE email = '" . $this->data['User']['email'] . "' and dob = '" . $this->data['User']['dob'] . "'";
+                $sql = "SELECT * FROM `registered_users` WHERE email = '" . 
+                        $this->data['User']['email'] . "' and dob = '" . 
+                        $this->data['User']['dob'] . "' and applicant_id = '" .
+                        trim($this->data['User']['applicant_id']) . "'";
                 $result = $db->rawQuery($sql);
                 $count = 0;
                 while ($row = $db->fetchRow()) { 
@@ -55,7 +58,7 @@ class UsersController extends AppController {
                     $this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
                 }
                 else {
-                    $this->Session->setFlash('Please enter correct Email / Date Of Birth');
+                    $this->Session->setFlash('Please enter correct Email / Date Of Birth / Applicant Id.');
                 }
             }
         }

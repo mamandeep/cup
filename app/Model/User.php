@@ -97,6 +97,13 @@ class User extends AppModel {
                 'message' => 'A birthdate in given format is required',
                 'allowEmpty' => false
             )
+        ),
+        'applicant_id' => array(
+            'nonEmpty' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'Applicant Id is mandatory',
+                'allowEmpty' => false
+            )
         )
     );
 
