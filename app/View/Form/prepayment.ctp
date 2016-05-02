@@ -13,8 +13,19 @@
 <div id="tabs-1">
 	<table id="applicant_id_input">
 		<tr> <!--check if applicant has been alloted applicant_id-->
-                    <td>Enter Applicant ID.  </td>
+                    <td width="20%"></td>
+                    <td>Enter Applicant Id.  </td>
                     <td><?php echo $this->Form->input('Applicant.id', array('label' => false, 'type' => 'text')); ?></td>
+		</tr>
+                <tr> <!--check if applicant has been alloted applicant_id-->
+                    <td width="20%"></td>
+                    <td>Enter Registered Email Id.  </td>
+                    <td><?php echo $this->Form->input('Applicant.email', array('label' => false, 'type' => 'text')); ?></td>
+		</tr>
+                <tr> <!--check if applicant has been alloted applicant_id-->
+                    <td width="20%"></td>
+                    <td>Enter Registered Date of Birth: (DD/MM/YYYY)  </td>
+                    <td><?php echo $this->Form->input('Applicant.date_of_birth', array('label' => false, 'type' => 'text')); ?></td>
 		</tr>
 	</table>
 	<!--<form  method="post" action="validate_api.php" name="frmTransaction" id="frmTransaction" onSubmit="return validate()">-->

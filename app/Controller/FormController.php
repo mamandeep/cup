@@ -84,64 +84,26 @@ class FormController extends AppController {
         public function prepayment() {
         //print_r($this->data); return false;
         //$this->Session->destroy();
-        if (!empty($this->data['Applicant']['id'])) { // id has been entered
-            // confirm if user has registerd, check if applicant id is valid and payment is not made, but don't mesg that payment is made
+        if (!empty($this->data['Applicant']['id']) && !empty($this->data['Applicant']['email']) 
+                && !empty($this->data['Applicant']['date_of_birth'])) { 
             $applicant_id = trim($this->data['Applicant']['id']);
             $registered_user = $this->Registereduser->find('all', array(
-                                'conditions' => array('Registereduser.applicant_id' => trim($this->data['Registereduser']['email']),
-                                                      'Registereduser.dob' => trim($this->data['Registereduser']['dob']))
-                                                    ));
-            $this->Session->write('applicant_id', $applicant_id);
+                'conditions' => array('Registereduser.applicant_id' => $applicant_id,
+                    'Registereduser.email' => trim($this->data['Applicant']['email']),
+                    'Registereduser.dob' => trim($this->data['Applicant']['date_of_birth']))));
             $applicants = $this->Applicant->find('all', array(
                 'conditions' => array('Applicant.id' => $applicant_id)));
-            //$this->Signup->setCaptcha('security_code', $this->Captcha->getCode('Signup.security_code')); //getting from component and passing to model to make proper validation check
-            //$this->Signup->set($this->request->data);
-            //if ($this->Signup->validates()) { //as usual data save call   
-                if (count($applicants) == 1) {
-                    //check if payment made
-                    if ($applicants['0']['Applicant']['response_code'] == "0") {
-                        $this->set('payment_status', $applicants['0']['Applicant']['response_code']);
-                        $this->redirect(array('controller' => 'form',
-                            'action' => 'register',
-                            '?' => array(
-                                'payment_status' => base64_encode($applicants['0']['Applicant']['response_code'])
-                        )));
-                    } else {
-                        // go to payment page
-                        $this->redirect(array('controller' => 'form',
-                            'action' => 'pay'
-                        ));
-                    }
-                } else {
-                    $this->Session->setFlash('No record found for Applicant Id: ' . $applicant_id);
-                }
-            //} else {
-            //    $this->Session->setFlash('Data Validation Failure', 'default', array('class' =>
-            //        'cake-error'));
-            //}
-        } else if (!empty($this->data['Applicant']['applicant_id_given']) &&
-                $this->data['Applicant']['applicant_id_given'] == "no") {
-            if(!empty($this->Session->read('applicant_id'))) {
-                $this->redirect(array('controller' => 'form',
-                    'action' => 'pay'
-                ));
+            if (count($registered_user) == 1 && count($applicants) == 1 
+                    && $applicants['0']['Applicant']['response_code'] != "0") {
+                $this->Session->write('applicant_id', $applicant_id);
+                $this->redirect(array('controller' => 'form', 'action' => 'pay'));
+            } else if(count($registered_user) == 1 && count($applicants) == 1 
+                    && $applicants['0']['Applicant']['response_code'] == "0") {
+                $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
             }
-            $this->Signup->setCaptcha('security_code', $this->Captcha->getCode('Signup.security_code')); //getting from component and passing to model to make proper validation check
-            $this->Signup->set($this->request->data);
-            if ($this->Signup->validates()) { //as usual data save call
-                // create applicant id and send to make payment for further processing
-                $this->Applicant->create();
-                $this->Applicant->set(array(
-                    'advertisement_no' => 'T-01 (2016)'));
-                $this->Applicant->save();
-                //$this->applicant_id = $this->Applicant->getLastInsertID();
-                $this->Session->write('applicant_id', $this->Applicant->getLastInsertID());
-                $this->redirect(array('controller' => 'form',
-                    'action' => 'pay'
-                ));
-            } else {
-                $this->Session->setFlash('Data Validation Failure', 'default', array('class' =>
-                    'cake-error'));
+            else {
+                $this->Session->setFlash('Details entered are not valid.');
+                return false;
             }
         }
     }
