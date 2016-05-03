@@ -57,18 +57,32 @@ class UsersController extends AppController {
                         $this->data['User']['dob'] . "' and applicant_id = '" .
                         trim($this->data['User']['applicant_id']) . "'";
                 $result = $db->rawQuery($sql);
-                $count = 0;
+                $count_r = 0;
                 while ($row = $db->fetchRow()) { 
                     $this->Session->write('registration_id', $row['registered_users']['id']);
                     $this->Session->write('applicant_id', $row['registered_users']['applicant_id']);
-                    $count++;
-                } 
+                    $count_r++;
+                }
+                
+                $sql = "SELECT * FROM `applicant` WHERE id = '" . 
+                        trim($this->data['User']['applicant_id']) . "'";
+                $result = $db->rawQuery($sql);
+                $fee_paid = array();
+                while ($row = $db->fetchRow()) {
+                    $fee_paid[$row['applicant']['id']] = $row['applicant']['response_code'];
+                }
+                reset($fee_paid);
+                $first_key = key($fee_paid);
+                if(!(count($fee_paid) === 1 && $fee_paid[$first_key] == "0")) {
+                    $this->Session->setFlash(__('Pay fees before login.'));
+                    return false;
+                }
                 //print_r($result);
                 /*$result = $this->Registereduser->find('all', array(
                         'conditions' => array('Registereduser.email' => $this->data['User']['email'],
                                               'Registereduser.email' => $this->data['User']['dob'])));
                 */
-                if($count == 1) {
+                if($count_r == 1) {
                     $this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
                 }
                 else {
