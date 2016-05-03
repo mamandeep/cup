@@ -41,7 +41,7 @@ class FormController extends AppController {
                 $this->Signup->set($this->request->data);
                 if ($this->Signup->validates()) {
                     $segments = explode('/', $this->data['Registereduser']['dob']);
-                    if (count($segments) !== 3) {
+                    if (count($segments) !== 3 || !preg_match("/^[0-3][0-9]\/[0-1][0-9]\/[0-9]{4}$/", $this->data['Registereduser']['dob'])) {
                         $this->Session->setFlash('Date of Birth is not in correct format.');
                         return false;
                     }
@@ -95,7 +95,7 @@ class FormController extends AppController {
         if (!empty($this->data['Applicant']['id']) && !empty($this->data['Applicant']['email']) 
                 && !empty($this->data['Applicant']['date_of_birth'])) { 
             $segments = explode('/', $this->data['Applicant']['date_of_birth']);
-            if (count($segments) !== 3) {
+            if (count($segments) !== 3 || !preg_match("/^[0-3][0-9]\/[0-1][0-9]\/[0-9]{4}$/", $this->data['Applicant']['date_of_birth'])) {
                 $this->Session->setFlash('Date of Birth is not in correct format.');
                 return false;
             }
@@ -121,6 +121,8 @@ class FormController extends AppController {
                 $this->redirect(array('controller' => 'form', 'action' => 'pay'));
             } else if(count($registered_user) == 1 && count($applicants) == 1 
                     && $applicants['0']['Applicant']['response_code'] == "0") {
+                // Is the below message fine for showing to applicants
+                $this->Session->setFlash('Payment has been done. Enter credentials to login.');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
             }
             else {
@@ -182,25 +184,25 @@ class FormController extends AppController {
                 //print_r($this->Session->read('applicant_id')); return false;
                 $applicants = $this->Applicant->find('all', array(
                             'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
-                if(count($applicants) == 1) {
-                    if($applicants['0']['Applicant']['category'] == "SC" || $applicants['0']['Applicant']['category'] == "ST" 
-                            || $applicants['0']['Applicant']['physically_disabled'] == "yes") {
-                            $this->set('app_fee', '300');
+                //if(count($applicants) == 1) {
+                    //if($applicants['0']['Applicant']['category'] == "SC" || $applicants['0']['Applicant']['category'] == "ST" 
+                     //       || $applicants['0']['Applicant']['physically_disabled'] == "yes") {
+                     //       $this->set('app_fee', '300');
                             //$_SESSION['payment_amount'] = 600;
-                            $this->Session->write('payment_amount','300');
-                    }
-                    else {
-                            $this->set('app_fee', '600');
+                            //$this->Session->write('payment_amount','300');
+                    //}
+                    //else {
+                            //$this->set('app_fee', '600');
                             //$_SESSION['payment_amount'] = 300;
-                            $this->Session->write('payment_amount','600');
-                    }
-                    $this->set('Applicant', $applicants['0']['Applicant']);
-                }
-                else {
-                    $this->Session->setFlash('Invalid Applicant ID.');
-                    $this->redirect(array('controller' => 'form', 
-                                              'action' => 'register'));
-                }
+                            //$this->Session->write('payment_amount','600');
+                    //}
+                $this->set('Applicant', $applicants['0']['Applicant']);
+                //}
+                //else {
+                    //$this->Session->setFlash('Invalid Applicant ID.');
+                    //$this->redirect(array('controller' => 'form', 
+                                              //'action' => 'register'));
+                //}
 	}
 
 	public function post() {
@@ -220,10 +222,10 @@ class FormController extends AppController {
 		unset($_POST['submitted']);
 
 		ksort($_POST);
-		foreach ($_POST as $key => $value){
+		foreach ($_POST as $key => $value) {
 			if (strlen($value) > 0) {
 				if($key == "amount") {
-					$hashData .= '|'.$this->Session->read('payment_amount'); //$_SESSION['payment_amount'];
+					$hashData .= '|'. $this->validate_amount($_POST['amount']);
 				}
 				else {
 					$hashData .= '|'.$value;
@@ -235,7 +237,15 @@ class FormController extends AppController {
 			$this->set('secureHash', $secureHash);
 		}
 	}
-
+        
+        function validate_amount($amount) {
+            if(isset($amount) && ($amount === "600" || $amount === "300" || $amount === "150")) {
+                return $amount;
+            }
+            else 
+                return "600";
+        }
+        
 	public function returnpg() {
 		$HASHING_METHOD = 'sha512'; // md5,sha1
 

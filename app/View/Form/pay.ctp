@@ -32,10 +32,14 @@
         </tr>
         <tr>
             <td class="fieldName" width="50%"><span class="error">*</span> Application Fee</td>
-            <td  align="left" width="50%"> <input name="amount" type="text" value="<?php echo $app_fee; ?>" readonly="readonly"/> <select name="currency" >
+            <td  align="left" width="50%"> <select name="amount" id="amount">
+                                <option selected="selected">600</option>
+                                <option>300</option>
+                                <option>150</option>
+                            </select>
+                            <select name="currency" >
 				<option value="INR">INR</option>
-
-			</select></td>
+                            </select></td>
         </tr>
 		<tr>
 		  <!--<td class="fieldName"><span class="error">*</span> Description</td>-->

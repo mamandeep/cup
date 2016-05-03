@@ -38,6 +38,14 @@
 </tr>
 <tr>
     <td width="20%"></td>
+    <td width="30%">
+        <span>For detailed qualifications, please <a href="javascript: void(0);" target="_blank">click here</a></span>.
+    </td>
+    <td width="30%"></td>
+    <td width="20%"></td>
+</tr>
+<tr>
+    <td width="20%"></td>
     <td width="30%"><label>I have read the General Conditions to Apply: (Tick the box to continue)</label>
     </td>
     <td width="30%"><input type="checkbox" id="declaration" name="declaration"></input></td>
@@ -87,137 +95,6 @@
         <?php echo $this->Form->submit('Continue', array('div' => false, 'id' => 'continue_bt' )); ?>
         <?php echo $this->Form->end(); ?>
         <!--<a href="<?php echo $this->webroot; ?>multi_step_form/wizard/first" class="button" id="continue_bt">Continue</a>-->
-    </div>
-    </td>
-    <td width="30%"></td>
-    <td width="20%"></td>
-</tr>
-<tr>
-    <td width="20%"></td>
-    <td width="30%">
-        <div id="elig_content">
-        <div id="professor_science" style="display:none;">
-            <ol type="i">Minimum Qualifications:
-                <li>An eminent scholar with Ph.D. qualification(s) in the concerned/allied/relevant discipline
-                and published work of high quality actively engaged in research with evidence of
-                published work with a minimum of 10 publications as books and/or research/policy
-                papers.</li>
-                <li>A minimum of ten years of teaching experience in university/college, and/or experience
-                in research at the University/National level institutions/industries, including experience
-                of guiding candidates for research at doctoral level.</li>
-                <li>Contribution to educational innovation, design of new curricula and courses, and
-                technology –mediated teaching learning process.</li>
-                <li>A minimum score as stipulated in the Academic Performance Indicator (API) based
-                Performance Based Appraisal System (PBAS).</li>
-            </ol>
-            <br />Or
-            <br />
-            <ol>
-                <li>
-                An outstanding professional, with an exceptional accomplishment established reputation
-                in the relevant field, who has made significant contributions to the knowledge in the
-                concerned/allied/relevant discipline, to be substantiated by credentials
-                </li>
-            </ol>
-        </div>
-        <div id="professor_humanities" style="display:none;">
-        <ol type="i">Minimum Qualifications:
-                <li>An eminent scholar with Ph.D. qualification(s) in the concerned/allied/relevant discipline
-                and published work of high quality actively engaged in research with evidence of
-                published work with a minimum of 10 publications as books and/or research/policy
-                papers.</li>
-                <li>A minimum of ten years of teaching experience in university/college, and/or experience
-                in research at the University/National level institutions/industries, including experience
-                of guiding candidates for research at doctoral level.</li>
-                <li>Contribution to educational innovation, design of new curricula and courses, and
-                technology –mediated teaching learning process.</li>
-                <li>A minimum score as stipulated in the Academic Performance Indicator (API) based
-                Performance Based Appraisal System (PBAS).</li>
-            </ol>
-            <br />Or
-            <br />
-            <ol>
-                <li>
-                An outstanding professional, with an exceptional accomplishment established reputation
-                in the relevant field, who has made significant contributions to the knowledge in the
-                concerned/allied/relevant discipline, to be substantiated by credentials
-                </li>
-            </ol>
-        </div>
-        <div id="associateprofessor_science" style="display:none;">
-            <ol type="i">Minimum Qualifications:
-                <li>Good academic record with a Ph.D. Degree in the concerned/allied/relevant
-				disciplines.</li>
-                <li>A Master’s Degree with at least 55% marks (or an equivalent grade in a point scale wherever grading system
-				is followed).</li>
-                <li>A minimum of eight years of experience of teaching and/or research in an academic/research position
-				equivalent to that of Assistant Professor in a University, College or Accredited Research Institution/industry
-				excluding the period of Ph.D. research with evidence of published work and a minimum of 5 publications as
-				books and/or research/policy papers.</li>
-                <li>Contribution to educational innovation, design of new curricula and courses, and technology – mediated
-				teaching learning process with evidence of having guided doctoral candidates and research students. </li>
-				<li>A minimum score as stipulated in the Academic Performance Indicator (API) based Performance Based
-				Appraisal System (PBAS), set out in UGC Regulations for appointment of teachers and other academic staff in
-				universities and colleges and measures for the maintenance of standards in higher education, 2010
-				(Appendix B).</li>
-            </ol>
-        </div>
-        <div id="associateprofessor_humanities" style="display:none;">        
-        <ol type="i">Minimum Qualifications:
-                <li>Good academic record with a Ph.D. Degree in the concerned/allied/relevant
-				disciplines.</li>
-                <li>A Master’s Degree with at least 55% marks (or an equivalent grade in a point scale wherever grading system
-				is followed).</li>
-                <li>A minimum of eight years of experience of teaching and/or research in an academic/research position
-				equivalent to that of Assistant Professor in a University, College or Accredited Research Institution/industry
-				excluding the period of Ph.D. research with evidence of published work and a minimum of 5 publications as
-				books and/or research/policy papers.</li>
-                <li>Contribution to educational innovation, design of new curricula and courses, and technology – mediated
-				teaching learning process with evidence of having guided doctoral candidates and research students. </li>
-				<li>A minimum score as stipulated in the Academic Performance Indicator (API) based Performance Based
-				Appraisal System (PBAS), set out in UGC Regulations for appointment of teachers and other academic staff in
-				universities and colleges and measures for the maintenance of standards in higher education, 2010
-				(Appendix B).</li>
-            </ol>
-        </div>
-        <div id="assistantprofessor_science" style="display:none;">
-            <ol type="i">Minimum Qualifications:
-                <li>Good academic record as defined by the concerned university with at least 55%
-				marks (or an equivalent grade in a point scale wherever grading system is followed)
-				at the Master’s Degree level in a relevant subject from an Indian University, or an
-				equivalent degree from an accredited foreign university.</li>
-                <li>Besides fulfilling the above qualifications, the candidate must have cleared the
-				National Eligibility Test (NET) conducted by the UGC, CSIR or similar test accredited
-				by the UGC like SLET/SET. </li>
-                <li>Notwithstanding anything contained in sub-clauses (i) and (ii) to this Clause 4.4.1,
-				candidates, who are, or have been awarded a Ph. D. Degree in accordance with the
-				University Grants Commission (Minimum Standards and Procedure for Award of
-				Ph.D. Degree) Regulations, 2009, shall be exempted from the requirement of the
-				minimum eligibility condition of NET/SLET/SET for recruitment and appointment of
-				Assistant Professor or equivalent positions in Universities/Colleges/Institutions.</li>
-                <li>NET/SLET/SET shall also not be required for such Masters Programmes in
-				disciplines for which NET/SLET/SET is not conducted.</li>
-            </ol>
-        </div>
-        <div id="assistantprofessor_humanities" style="display:none;">
-        <ol type="i">Minimum Qualifications:
-                <li>Good academic record as defined by the concerned university with at least 55%
-				marks (or an equivalent grade in a point scale wherever grading system is followed)
-				at the Master’s Degree level in a relevant subject from an Indian University, or an
-				equivalent degree from an accredited foreign university.</li>
-                <li>Besides fulfilling the above qualifications, the candidate must have cleared the
-				National Eligibility Test (NET) conducted by the UGC, CSIR or similar test accredited
-				by the UGC like SLET/SET. </li>
-                <li>Notwithstanding anything contained in sub-clauses (i) and (ii) to this Clause 4.4.1,
-				candidates, who are, or have been awarded a Ph. D. Degree in accordance with the
-				University Grants Commission (Minimum Standards and Procedure for Award of
-				Ph.D. Degree) Regulations, 2009, shall be exempted from the requirement of the
-				minimum eligibility condition of NET/SLET/SET for recruitment and appointment of
-				Assistant Professor or equivalent positions in Universities/Colleges/Institutions.</li>
-                <li>NET/SLET/SET shall also not be required for such Masters Programmes in
-				disciplines for which NET/SLET/SET is not conducted.</li>
-            </ol>
-        </div>
     </div>
     </td>
     <td width="30%"></td>
@@ -368,3 +245,130 @@
         }());
     });
 </script>
+
+<!--
+<div id="elig_content">
+        <div id="professor_science" style="display:none;">
+            <ol type="i">Minimum Qualifications:
+                <li>An eminent scholar with Ph.D. qualification(s) in the concerned/allied/relevant discipline
+                and published work of high quality actively engaged in research with evidence of
+                published work with a minimum of 10 publications as books and/or research/policy
+                papers.</li>
+                <li>A minimum of ten years of teaching experience in university/college, and/or experience
+                in research at the University/National level institutions/industries, including experience
+                of guiding candidates for research at doctoral level.</li>
+                <li>Contribution to educational innovation, design of new curricula and courses, and
+                technology –mediated teaching learning process.</li>
+                <li>A minimum score as stipulated in the Academic Performance Indicator (API) based
+                Performance Based Appraisal System (PBAS).</li>
+            </ol>
+            <br />Or
+            <br />
+            <ol>
+                <li>
+                An outstanding professional, with an exceptional accomplishment established reputation
+                in the relevant field, who has made significant contributions to the knowledge in the
+                concerned/allied/relevant discipline, to be substantiated by credentials
+                </li>
+            </ol>
+        </div>
+        <div id="professor_humanities" style="display:none;">
+        <ol type="i">Minimum Qualifications:
+                <li>An eminent scholar with Ph.D. qualification(s) in the concerned/allied/relevant discipline
+                and published work of high quality actively engaged in research with evidence of
+                published work with a minimum of 10 publications as books and/or research/policy
+                papers.</li>
+                <li>A minimum of ten years of teaching experience in university/college, and/or experience
+                in research at the University/National level institutions/industries, including experience
+                of guiding candidates for research at doctoral level.</li>
+                <li>Contribution to educational innovation, design of new curricula and courses, and
+                technology –mediated teaching learning process.</li>
+                <li>A minimum score as stipulated in the Academic Performance Indicator (API) based
+                Performance Based Appraisal System (PBAS).</li>
+            </ol>
+            <br />Or
+            <br />
+            <ol>
+                <li>
+                An outstanding professional, with an exceptional accomplishment established reputation
+                in the relevant field, who has made significant contributions to the knowledge in the
+                concerned/allied/relevant discipline, to be substantiated by credentials
+                </li>
+            </ol>
+        </div>
+        <div id="associateprofessor_science" style="display:none;">
+            <ol type="i">Minimum Qualifications:
+                <li>Good academic record with a Ph.D. Degree in the concerned/allied/relevant
+				disciplines.</li>
+                <li>A Master’s Degree with at least 55% marks (or an equivalent grade in a point scale wherever grading system
+				is followed).</li>
+                <li>A minimum of eight years of experience of teaching and/or research in an academic/research position
+				equivalent to that of Assistant Professor in a University, College or Accredited Research Institution/industry
+				excluding the period of Ph.D. research with evidence of published work and a minimum of 5 publications as
+				books and/or research/policy papers.</li>
+                <li>Contribution to educational innovation, design of new curricula and courses, and technology – mediated
+				teaching learning process with evidence of having guided doctoral candidates and research students. </li>
+				<li>A minimum score as stipulated in the Academic Performance Indicator (API) based Performance Based
+				Appraisal System (PBAS), set out in UGC Regulations for appointment of teachers and other academic staff in
+				universities and colleges and measures for the maintenance of standards in higher education, 2010
+				(Appendix B).</li>
+            </ol>
+        </div>
+        <div id="associateprofessor_humanities" style="display:none;">        
+        <ol type="i">Minimum Qualifications:
+                <li>Good academic record with a Ph.D. Degree in the concerned/allied/relevant
+				disciplines.</li>
+                <li>A Master’s Degree with at least 55% marks (or an equivalent grade in a point scale wherever grading system
+				is followed).</li>
+                <li>A minimum of eight years of experience of teaching and/or research in an academic/research position
+				equivalent to that of Assistant Professor in a University, College or Accredited Research Institution/industry
+				excluding the period of Ph.D. research with evidence of published work and a minimum of 5 publications as
+				books and/or research/policy papers.</li>
+                <li>Contribution to educational innovation, design of new curricula and courses, and technology – mediated
+				teaching learning process with evidence of having guided doctoral candidates and research students. </li>
+				<li>A minimum score as stipulated in the Academic Performance Indicator (API) based Performance Based
+				Appraisal System (PBAS), set out in UGC Regulations for appointment of teachers and other academic staff in
+				universities and colleges and measures for the maintenance of standards in higher education, 2010
+				(Appendix B).</li>
+            </ol>
+        </div>
+        <div id="assistantprofessor_science" style="display:none;">
+            <ol type="i">Minimum Qualifications:
+                <li>Good academic record as defined by the concerned university with at least 55%
+				marks (or an equivalent grade in a point scale wherever grading system is followed)
+				at the Master’s Degree level in a relevant subject from an Indian University, or an
+				equivalent degree from an accredited foreign university.</li>
+                <li>Besides fulfilling the above qualifications, the candidate must have cleared the
+				National Eligibility Test (NET) conducted by the UGC, CSIR or similar test accredited
+				by the UGC like SLET/SET. </li>
+                <li>Notwithstanding anything contained in sub-clauses (i) and (ii) to this Clause 4.4.1,
+				candidates, who are, or have been awarded a Ph. D. Degree in accordance with the
+				University Grants Commission (Minimum Standards and Procedure for Award of
+				Ph.D. Degree) Regulations, 2009, shall be exempted from the requirement of the
+				minimum eligibility condition of NET/SLET/SET for recruitment and appointment of
+				Assistant Professor or equivalent positions in Universities/Colleges/Institutions.</li>
+                <li>NET/SLET/SET shall also not be required for such Masters Programmes in
+				disciplines for which NET/SLET/SET is not conducted.</li>
+            </ol>
+        </div>
+        <div id="assistantprofessor_humanities" style="display:none;">
+        <ol type="i">Minimum Qualifications:
+                <li>Good academic record as defined by the concerned university with at least 55%
+				marks (or an equivalent grade in a point scale wherever grading system is followed)
+				at the Master’s Degree level in a relevant subject from an Indian University, or an
+				equivalent degree from an accredited foreign university.</li>
+                <li>Besides fulfilling the above qualifications, the candidate must have cleared the
+				National Eligibility Test (NET) conducted by the UGC, CSIR or similar test accredited
+				by the UGC like SLET/SET. </li>
+                <li>Notwithstanding anything contained in sub-clauses (i) and (ii) to this Clause 4.4.1,
+				candidates, who are, or have been awarded a Ph. D. Degree in accordance with the
+				University Grants Commission (Minimum Standards and Procedure for Award of
+				Ph.D. Degree) Regulations, 2009, shall be exempted from the requirement of the
+				minimum eligibility condition of NET/SLET/SET for recruitment and appointment of
+				Assistant Professor or equivalent positions in Universities/Colleges/Institutions.</li>
+                <li>NET/SLET/SET shall also not be required for such Masters Programmes in
+				disciplines for which NET/SLET/SET is not conducted.</li>
+            </ol>
+        </div>
+    </div>
+-->
