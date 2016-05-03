@@ -14,7 +14,7 @@ echo $this->Form->create('ResearchPaper', array('id' => 'Researchpaper_Details',
     <table id="paper-table">
         <thead>
             <tr>
-                <th>Authors</th>
+                <th>Name of Author(s)</th>
                 <th>Title of the Paper</th>
                 <th>Journal's Name & Place of Publication</th>
                 <th>Publication & ISSN</th>
@@ -53,7 +53,7 @@ echo $this->Form->create('ResearchPaper', array('id' => 'Researchpaper_Details',
     <table id="article-table">
         <thead>
             <tr>
-                <th>Authors</th>
+                <th>Name of Author(s)</th>
                 <th>Title of the Book</th>
                 <th>Title of the Article</th>
                 <th>Place of Publication</th>
@@ -127,7 +127,7 @@ echo $this->Form->create('ResearchPaper', array('id' => 'Researchpaper_Details',
 </script>
 
 <br/><br/>
-<table width="100%" id="seminars_attended">
+<table border="1px solid black" width="100%" id="seminars_attended" style="border-collapse: collapse; border-right: 1px solid black; " >
     <tr>
         <td width="30%" class="table_headertxt">Seminars / Conferences / Workshops / Training programmes, attended.</td>
         <td class="table_headertxt">National (No.)</td>
@@ -141,7 +141,9 @@ echo $this->Form->create('ResearchPaper', array('id' => 'Researchpaper_Details',
         <td><?php echo $this->Form->input('Applicant.sem_att_total', array('label' => false, 'maxlength' => '500')); ?></td>
     </tr>
 </table>
-<table width="100%" id="seminars_org">
+<br/>
+<br/>
+<table border="1px solid black" width="100%" id="seminars_org" style="border-collapse: collapse; border-right: 1px solid black; ">
     <tr>
         <td width="30%" class="table_headertxt">Seminars / Conferences / Workshops / Training programmes, organized.</td>
         <td class="table_headertxt">National (No.)</td>
@@ -155,7 +157,9 @@ echo $this->Form->create('ResearchPaper', array('id' => 'Researchpaper_Details',
         <td><?php echo $this->Form->input('Applicant.sem_org_total', array('label' => false, 'maxlength' => '500')); ?></td>
     </tr>
 </table>
-<table width="100%" id="research_guidance">
+<br/>
+<br/>
+<table border="1px solid black" width="100%" id="research_guidance" style="border-collapse: collapse; border-right: 1px solid black;  ">
     <tr>
         <td width="30%" class="table_headertxt">Research Guidance (No. of students guided)</td>
         <td class="table_headertxt">M.Phil. / Equivalent (No.)</td>
@@ -172,36 +176,114 @@ echo $this->Form->create('ResearchPaper', array('id' => 'Researchpaper_Details',
         <td><?php echo $this->Form->input('Applicant.rg_phd_undersup', array('label' => false, 'maxlength' => '500')); ?></td>
     </tr>
 </table>
-
+<br/>
 <table width="100%" id="factors_disable">
     <tr>
-        <td width="30%" class="table_headertxt"></td>
-        <td class="table_headertxt">Total Impact Factor as per SCI/SCOPUS</td>
+        <td width="30%" class="table_headertxt" style="padding-top: 20px;">Total Impact Factor as per SCI/SCOPUS</td>
         <td class="table_headertxt"><?php echo $this->Form->input('Applicant.id', array('type', 'hidden'));
                                         echo $this->Form->input('Applicant.tot_impact_sci', array('label' => false, 'maxlength' => '500')); ?></td>
+        <td width="40%" class="table_headertxt"></td>
     </tr>
     <tr>
-        <td class="table_headertxt"></td>
-        <td class="table_headertxt">Total Impact Factor as per Google search</td>
+        <td class="table_headertxt" style="padding-top: 20px;">Total Impact Factor as per Google search</td>
         <td class="table_headertxt"><?php echo $this->Form->input('Applicant.tot_impact_google', array('label' => false, 'maxlength' => '500')); ?></td>
+        <td class="table_headertxt"></td>
     </tr>
     <tr>
-        <td class="table_headertxt"></td>
-        <td class="table_headertxt">h-Index Factor as per SCOPUS</td>
+        <td class="table_headertxt" style="padding-top: 20px;">h-Index Factor as per SCOPUS</td>
         <td class="table_headertxt"><?php echo $this->Form->input('Applicant.h_index_scopus', array('label' => false, 'maxlength' => '500')); ?></td>
+        <td class="table_headertxt"></td>
     </tr>
     <tr>
-        <td class="table_headertxt"></td>
-        <td class="table_headertxt">h-Index Factor as per Google search</td>
+        <td class="table_headertxt" style="padding-top: 20px;">h-Index Factor as per Google search</td>
         <td class="table_headertxt"><?php echo $this->Form->input('Applicant.h_index_google', array('label' => false, 'maxlength' => '500')); ?></td>
+        <td class="table_headertxt"></td>
     </tr>
     <tr>
-        <td class="table_headertxt"></td>
-        <td class="table_headertxt">i-10 Index Factor as per Google search</td>
+        <td class="table_headertxt" style="padding-top: 20px;">i-10 Index Factor as per Google search</td>
         <td class="table_headertxt"><?php echo $this->Form->input('Applicant.i10_index_google', array('label' => false, 'maxlength' => '500')); ?></td>
+        <td class="table_headertxt"></td>
     </tr>
 </table>
-
+<br>
+<br/>
+<style>
+table#api_score tr td {border: 1px solid black;}
+</style>
+<div class="main_content_header">API Score</div>
+<table border="1px solid black" width="100%" id="api_score" style="border-collapse: collapse; border-right: 1px solid black; ">
+    <tr>
+        <td width="10%" class="table_headertxt"></td>
+        <td class="table_headertxt">Category</td>
+        <td width="15%" class="table_headertxt">API Score Claimed by Applicant in each Category</td>
+        <td width="15%" class="table_headertxt">Total</td>
+    </tr>
+    <tr>
+        <td rowspan="3" width="10%" class="table_headertxt">III (A)</td>
+        <td class="table_headertxt">Referred Journals</td>
+        <td width="15%" class="table_headertxt"></td>
+        <td rowspan="3" width="15%" class="table_headertxt"></td>
+    </tr>
+    <tr>
+        <td class="table_headertxt">Non-referred but recognized and reputable journals and periodicals, having ISBN/ISSN numbers.</td>
+        <td class="table_headertxt"></td>
+    </tr>
+    <tr>
+        <td class="table_headertxt">Conference proceedings as full papers, etc. (Abstracts not to be included).</td>
+        <td class="table_headertxt"></td>
+    </tr>
+    <tr>
+        <td rowspan="5" width="10%" class="table_headertxt">III (B)</td>
+        <td class="table_headertxt">Text or  Reference Books Published by International Publishers with an established peer review system</td>
+        <td width="15%" class="table_headertxt"></td>
+        <td rowspan="5" width="15%" class="table_headertxt"></td>
+    </tr>
+    <tr>
+        <td class="table_headertxt">Subjects Books by National level publishers/State and Central Govt. Publications with ISBN/ISSN numbers.</td>
+        <td class="table_headertxt"></td>
+    </tr>
+    <tr>
+        <td class="table_headertxt">Subject Books by Other local publishers with ISBN/ISSN numbers.</td>
+        <td class="table_headertxt"></td>
+    </tr>
+    <tr>
+        <td class="table_headertxt">Chapters contributed to edited knowledge based volumes published by International Publishers.</td>
+        <td class="table_headertxt"></td>
+    </tr>
+    <tr>
+        <td class="table_headertxt">Chapters in knowledge based volumes by Indian/National level publishers with ISBN/ISSN numbers and with numbers of national and international directories.</td>
+        <td class="table_headertxt"></td>
+    </tr>
+    <tr>
+        <td rowspan="3" width="10%" class="table_headertxt">III (C)(i) Sponsored Projects carried out/ongoing</td>
+        <td class="table_headertxt">Major Projects amount mobilized with grants above 30.0 lakhs</td>
+        <td width="15%" class="table_headertxt"></td>
+        <td rowspan="6" width="15%" class="table_headertxt"></td>
+    </tr>
+    <tr>
+        <td class="table_headertxt">Major Projects amount mobilized with grants above 5.0 lakhs upto 30.0 lakhs.</td>
+        <td class="table_headertxt"></td>
+    </tr>
+    <tr>
+        <td class="table_headertxt">Minor Projects (Amount mobilized with grants above Rs. 50,000 up to Rs. 5.0 lakhs.</td>
+        <td class="table_headertxt"></td>
+    </tr>
+    <tr>
+        <td width="10%" class="table_headertxt">III (C)(ii) Consultancy Projects carried out/ongoing</td>
+        <td class="table_headertxt">Amount mobilized with minimum of Rs. 10.00 lakh</td>
+        <td width="15%" class="table_headertxt"></td>
+    </tr>
+    <tr>
+        <td width="10%" class="table_headertxt">III (C)(iii) Completed Projects: Quality Evaluation</td>
+        <td class="table_headertxt">Completed project Report (Acceptance from funding agency)</td>
+        <td width="15%" class="table_headertxt"></td>
+    </tr>
+    <tr>
+        <td width="10%" class="table_headertxt">III (C)(iv) Projects Outcome / Outputs </td>
+        <td class="table_headertxt">Patent/Technology transfer/Product/Process</td>
+        <td width="15%" class="table_headertxt"></td>
+    </tr>
+</table>
 <div class="submit">
     <?php echo $this->Form->submit('Save & Continue', array('id' => 'formSubmit' , 'div' => false)); ?>
     <?php echo $this->Form->submit('Cancel', array('name' => 'Cancel', 'div' => false)); ?>
