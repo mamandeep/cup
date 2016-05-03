@@ -42,11 +42,21 @@ class FormController extends AppController {
                 if ($this->Signup->validates()) {
                     $segments = explode('/', $this->data['Registereduser']['dob']);
                     if (count($segments) !== 3) {
-                        $this->Session->setFlash('Date of Birth is not in correct.');
+                        $this->Session->setFlash('Date of Birth is not in correct format.');
+                        return false;
                     }
                     list($dd,$mm,$yyyy) = $segments;
                     if (!checkdate((int)$mm,(int)$dd,(int)$yyyy)) {
-                        $this->Session->setFlash('Date of Birth is not in correct.');
+                        $this->Session->setFlash('Date of Birth is not in correct format.');
+                        return false;
+                    }
+                    if(!filter_var($this->data['Registereduser']['email'], FILTER_VALIDATE_EMAIL)) {
+                        $this->Session->setFlash('Email Id is not in correct format.');
+                        return false;
+                    }
+                    if (!preg_match("/^[789]\d{9}$/",$this->data['Registereduser']['mobile_no'])) {
+                        $this->Session->setFlash('Mobile number is not correct. Please enter 10 digit mobile number.');
+                        return false; 
                     }
                     $registered_user = $this->Registereduser->find('all', array(
                                 'conditions' => array('Registereduser.email' => trim($this->data['Registereduser']['email']),
