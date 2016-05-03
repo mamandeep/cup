@@ -51,7 +51,7 @@ class AppController extends Controller {
 	public function beforeFilter() {
             $current_datetime = new DateTime();
             $current_datetime->setTimezone(new DateTimeZone('Asia/Calcutta'));
-            $close_datetime = new DateTime("2016-05-03 00:00:00", new DateTimeZone('Asia/Calcutta'));
+            $close_datetime = new DateTime("2016-05-05 00:00:00", new DateTimeZone('Asia/Calcutta'));
             //print_r($current_datetime->format('Y-m-d-H-i-s'));
             //print_r($close_datetime->format('Y-m-d-H-i-s'));
             if ($current_datetime > $close_datetime) {

@@ -92,8 +92,6 @@ class FormController extends AppController {
         }
         
         public function prepayment() {
-        //print_r($this->data); return false;
-        //$this->Session->destroy();
         if (!empty($this->data['Applicant']['id']) && !empty($this->data['Applicant']['email']) 
                 && !empty($this->data['Applicant']['date_of_birth'])) { 
             $segments = explode('/', $this->data['Applicant']['date_of_birth']);
@@ -130,7 +128,7 @@ class FormController extends AppController {
                 return false;
             }
         }
-        else {
+        else if(strcmp(Router::url(array('controller' => 'Form','action' => 'register'), true), $this->referer()) !== 0) {
             $this->Session->setFlash('Details entered are not complete.');
             return false;
         }

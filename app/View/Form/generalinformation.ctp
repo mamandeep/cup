@@ -1,166 +1,229 @@
 <div>
-    <span class="generalinfoheader">General Information</span>
-    <table width="100%" style="table-layout: fixed;">
-        <!--<tr>
-            <td colspan="3" style="width: 20%;">Last Date to Apply: 28<sup>th</sup> Decemeber, 2015</td>
-        </tr>-->
-        <tr>
-            <td colspan="3" style="width: 20%;">The fee for SC/ST/PWD applicants is Rs. 150 and for others fee is Rs. 600. </td>
-        </tr>
-        <tr>
-            <td colspan="3" style="width: 20%;">If the candidate is selected, he/she will be required to submit Aadhar within one month of joining.</td>
-        </tr>
-	<tr>
-            <td colspan="3" style="width: 20%; font-weight: bold;">In case of payment failure, the final submission of application will not take place. The candiate will not be able to print the form.</td>
-        </tr>
-	<tr>
-            <td colspan="3" style="width: 20%; font-weight: bold;">If payment fails, it will be automatically refunded to the same account.</td>
-        </tr>
-	<tr>
-            <td colspan="3" style="width: 20%; font-weight: bold;">Billing Address is the address of Credit/Debit card holder.</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td style="width: 20%;"><div class="print_required">
-                        <label>I have read the General Conditions to Apply: (Tick the box below to continue)</label>
-                        <input type="checkbox" id="declaration" name="declaration"></input>
-                    </div>
-            </td>
-            <td></td>
-        </tr>
-    </table>
-    <table width="100%" style="table-layout: fixed;">
-    <tr>
-        <td>
-            <span style="font-weight: bold; font-size: 20px; color:#0a0;">Post Applied For: *</span>
-        </td>
-        <td>
-            <select id="post_applied_for" name="post_applied_for" style="width: auto;">
+<table width="650px" style="table-layout: fixed; margin: 0 auto;">
+<tr>
+    <td width="20%"></td>
+    <td width="30%"><span class="generalinfoheader">General Information</span></td>
+    <td width="30%"></td>
+    <td width="20%"></td>
+</tr>
+<tr>
+    <td width="20%"></td>
+    <td width="30%">The fee for SC/ST/PWD applicants is Rs. 150 and for others fee is Rs. 600. </td>
+    <td width="30%"></td>
+    <td width="20%"></td>
+</tr>
+<tr>
+    <td width="20%"></td>
+    <td width="30%">If the candidate is selected, he/she will be required to submit Aadhar within one month of joining.</td>
+    <td width="30%"></td>
+    <td width="20%"></td>
+</tr>
+<tr>
+    <td width="20%"></td>
+    <td width="30%">In case of payment failure, the final submission of application will not take place. The candiate will not be able to print the form.</td>
+    <td width="30%"></td>
+    <td width="20%"></td>
+</tr>
+<tr>
+    <td width="20%"></td>
+    <td width="30%">If payment fails, it will be automatically refunded to the same account.</td>
+    <td width="30%"></td>
+    <td width="20%"></td>
+</tr>
+<tr>
+    <td width="20%"></td>
+    <td width="30%">Billing Address is the address of Credit/Debit card holder.</td>
+    <td width="30%"></td>
+    <td width="20%"></td>
+</tr>
+<tr>
+    <td width="20%"></td>
+    <td width="30%"><label>I have read the General Conditions to Apply: (Tick the box to continue)</label>
+    </td>
+    <td width="30%"><input type="checkbox" id="declaration" name="declaration"></input></td>
+    <td width="20%"></td>
+</tr>
+<tr>
+    <td width="20%"></td>
+    <td width="30%"><span style="font-weight: bold; font-size: 20px; color:#0a0;">Post Applied For: *</span>
+    </td>
+    <td width="30%"><select id="post_applied_for" name="post_applied_for" style="width: auto;">
                 <option value="none" selected="selected">None</option>
                 <option value="professor">Professor</option>
                 <option value="associateprofessor">Associate Professor</option>
                 <option value="assistantprofessor">Assistant Professor</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <span style="font-weight: bold; font-size: 20px; color:#0a0;">Area: *</span>
-        </td>
-        <td>
-            <select id="area" name="area" style="width: auto;">
+            </select></td>
+    <td width="20%"></td>
+</tr>
+<tr>
+    <td width="20%"></td>
+    <td width="30%"><span style="font-weight: bold; font-size: 20px; color:#0a0;">Area: *</span></td>
+    <td width="30%"><select id="area" name="area" style="width: auto;">
                 <option value="none" selected="selected">None</option>
                 <option value="science">Science</option>
                 <option value="humanities">Humanities</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <span style="font-weight: bold; font-size: 20px; color:#0a0;">Centre: *</span>
-        </td>
-        <td>
-            <select id="centre" name="centre" style="width: auto;">
-            </select>
-        </td>
-    </tr>
-    </table>
-    <table>
-        <tr>
-            <td style="width: 15%"></td>
-            <td><div id="post_selected_elig" style="display:none;" class="min_qualification"></div></td>
-            <td style="width: 15%"></td>
-        </tr>
-    </table>
-    <div style="text-align: center; font-size: 30px;">
+            </select></td>
+    <td width="20%"></td>
+</tr>
+<tr>
+    <td width="20%"></td>
+    <td width="30%"><span style="font-weight: bold; font-size: 20px; color:#0a0;">Centre: *</span>
+    </td>
+    <td width="30%"><select id="centre" name="centre" style="width: auto;">
+            </select></td>
+    <td width="20%"></td>
+</tr>
+<tr>
+    <td width="20%"></td>
+    <td width="30%"><div id="post_selected_elig" style="display:none;" class="min_qualification"></div>
+    </td>
+    <td width="30%"></td>
+    <td width="20%"></td>
+</tr>
+<tr>
+    <td width="20%"></td>
+    <td width="30%"><div style="text-align: center; font-size: 30px;">
         <?php echo $this->Form->create('Temp', array('id' => 'Continue_Form', 'url' => Router::url( '/multi_step_form/wizard/first', true ))); ?>
         <?php echo $this->Form->submit('Continue', array('div' => false, 'id' => 'continue_bt' )); ?>
         <?php echo $this->Form->end(); ?>
         <!--<a href="<?php echo $this->webroot; ?>multi_step_form/wizard/first" class="button" id="continue_bt">Continue</a>-->
     </div>
-    <div id="elig_content">
+    </td>
+    <td width="30%"></td>
+    <td width="20%"></td>
+</tr>
+<tr>
+    <td width="20%"></td>
+    <td width="30%">
+        <div id="elig_content">
         <div id="professor_science" style="display:none;">
             <ol type="i">Minimum Qualifications:
-<li>Master's Degree with at least 55% of the marks or its equivalent grade of "B" in UGC seven point scale. </li>
-<li>At least 15 years of experience as Assistant Professor in the AGP of Rs. 7000 and above or with 08 years of service in the AGP of Rs. 8000 and above including as Associate Professor along with experience in educational administration.
-<br />Or
-Comparable experience in research establishment and / or other institutions of higher education. 
-<br />Or
-15 years of administrative experience, of which 08 years should be as Deputy Registrar or an equivalent post.</li>
- </ol>
+                <li>An eminent scholar with Ph.D. qualification(s) in the concerned/allied/relevant discipline
+                and published work of high quality actively engaged in research with evidence of
+                published work with a minimum of 10 publications as books and/or research/policy
+                papers.</li>
+                <li>A minimum of ten years of teaching experience in university/college, and/or experience
+                in research at the University/National level institutions/industries, including experience
+                of guiding candidates for research at doctoral level.</li>
+                <li>Contribution to educational innovation, design of new curricula and courses, and
+                technology –mediated teaching learning process.</li>
+                <li>A minimum score as stipulated in the Academic Performance Indicator (API) based
+                Performance Based Appraisal System (PBAS).</li>
+            </ol>
+            <br />Or
+            <br />
+            <ol>
+                <li>
+                An outstanding professional, with an exceptional accomplishment established reputation
+                in the relevant field, who has made significant contributions to the knowledge in the
+                concerned/allied/relevant discipline, to be substantiated by credentials
+                </li>
+            </ol>
         </div>
         <div id="professor_humanities" style="display:none;">
         <ol type="i">Minimum Qualifications:
-<li>Master's Degree with at least 55% of the marks or its equivalent grade of "B" in UGC seven point scale. </li>
-
-<li>At least 15 years of experience as Assistant Professor in the AGP of Rs. 7000 and above or with 08 years of service in the AGP of Rs. 8000 and above including as Associate Professor along with experience in educational administration.
-<br/>Or
-Comparable experience in research establishment and / or other institutions of higher education. 
-<br/>Or
-<br/>15 years of administrative experience, of which 08 years should be as Deputy Registrar or an equivalent post.
-</li>
-</ol>
-</div>
+                <li>An eminent scholar with Ph.D. qualification(s) in the concerned/allied/relevant discipline
+                and published work of high quality actively engaged in research with evidence of
+                published work with a minimum of 10 publications as books and/or research/policy
+                papers.</li>
+                <li>A minimum of ten years of teaching experience in university/college, and/or experience
+                in research at the University/National level institutions/industries, including experience
+                of guiding candidates for research at doctoral level.</li>
+                <li>Contribution to educational innovation, design of new curricula and courses, and
+                technology –mediated teaching learning process.</li>
+                <li>A minimum score as stipulated in the Academic Performance Indicator (API) based
+                Performance Based Appraisal System (PBAS).</li>
+            </ol>
+            <br />Or
+            <br />
+            <ol>
+                <li>
+                An outstanding professional, with an exceptional accomplishment established reputation
+                in the relevant field, who has made significant contributions to the knowledge in the
+                concerned/allied/relevant discipline, to be substantiated by credentials
+                </li>
+            </ol>
+        </div>
         <div id="associateprofessor_science" style="display:none;">
-        <ol type="i">Minimum Qualifications:
-<li>Master's Degree with at least 55% of the marks or its equivalent grade of "B" in UGC seven point scale. </li>
-<li>At least 15 years of experience as Assistant Professor in the AGP of Rs. 7000 and above or with 08 years of service in the AGP of Rs. 8000 and above including as Associate Professor along with experience in educational administration. 
-<br>Or
-Comparable experience in research establishment and / or other institutions of higher education. 
-<br>Or
-15 years of administrative experience, of which 08 years should be as Deputy Registrar or an equivalent post.</li>
-</ol>
-</div>
+            <ol type="i">Minimum Qualifications:
+                <li>Good academic record with a Ph.D. Degree in the concerned/allied/relevant
+				disciplines.</li>
+                <li>A Master’s Degree with at least 55% marks (or an equivalent grade in a point scale wherever grading system
+				is followed).</li>
+                <li>A minimum of eight years of experience of teaching and/or research in an academic/research position
+				equivalent to that of Assistant Professor in a University, College or Accredited Research Institution/industry
+				excluding the period of Ph.D. research with evidence of published work and a minimum of 5 publications as
+				books and/or research/policy papers.</li>
+                <li>Contribution to educational innovation, design of new curricula and courses, and technology – mediated
+				teaching learning process with evidence of having guided doctoral candidates and research students. </li>
+				<li>A minimum score as stipulated in the Academic Performance Indicator (API) based Performance Based
+				Appraisal System (PBAS), set out in UGC Regulations for appointment of teachers and other academic staff in
+				universities and colleges and measures for the maintenance of standards in higher education, 2010
+				(Appendix B).</li>
+            </ol>
+        </div>
         <div id="associateprofessor_humanities" style="display:none;">        
         <ol type="i">Minimum Qualifications:
-<li>A  Master’s Degree in Library Science/Information Science/Documentation with at least 55% marks or its equivalent grade of B in the UGC seven point scale and a consistently good academic record.</li>
-<li>At least thirteen years as a Deputy Librarian in a University library or eighteen years’ experience as a College Librarian.</li>
-<li>Evidence of innovative library service and organization of published work. </li>
-</ol>
-<br />
-<br />
-<ul>Desirable: 
-<li>M.Phil./ Ph.D. degree in Library Science/ Information Science/ Documentation/ Archives and  Manuscript – Keeping</li>
-</ul>
-<br/><br/>
-<ol type="i">Minimum Qualifications for Deputation:
-<li>	A  Master’s Degree in Library Science/Information Science/Documentation with at least 55% marks or its equivalent grade of B in the UGC seven point scale and a consistently good academic record.</li>
-<li>	At least thirteen years as a Deputy Librarian in the Pay Scale:Rs.15600-39100 (AGP Rs.8000/-) in a University library or eighteen years’ experience as a College Librarian.</li>
-<li>	Evidence of innovative library service and organization of published work. </li>
-</ol>
-<br/>
-<ul>Desirable: 
-<li>M.Phil./ Ph.D. degree in Library Science/ Information Science/ Documentation/ Archives and  Manuscript – Keeping</li>
-</ul>
-</div>
+                <li>Good academic record with a Ph.D. Degree in the concerned/allied/relevant
+				disciplines.</li>
+                <li>A Master’s Degree with at least 55% marks (or an equivalent grade in a point scale wherever grading system
+				is followed).</li>
+                <li>A minimum of eight years of experience of teaching and/or research in an academic/research position
+				equivalent to that of Assistant Professor in a University, College or Accredited Research Institution/industry
+				excluding the period of Ph.D. research with evidence of published work and a minimum of 5 publications as
+				books and/or research/policy papers.</li>
+                <li>Contribution to educational innovation, design of new curricula and courses, and technology – mediated
+				teaching learning process with evidence of having guided doctoral candidates and research students. </li>
+				<li>A minimum score as stipulated in the Academic Performance Indicator (API) based Performance Based
+				Appraisal System (PBAS), set out in UGC Regulations for appointment of teachers and other academic staff in
+				universities and colleges and measures for the maintenance of standards in higher education, 2010
+				(Appendix B).</li>
+            </ol>
+        </div>
         <div id="assistantprofessor_science" style="display:none;">
-        <ol type="i">Minimum qualifications:  
-<li>    A Master's Degree in Library Science/Information Science/Documentation Science with at least 55% marks or its equivalent grade of B in the UGC seven-point scale and consistently good academic record.</li>
-<li>    Five years experience as an Assistant University Librarian/College Librarian.</li>
-<li>	Evidence of Innovative Library Services, organization of published work and professional commitment, computerization of Library.</li>
-</ol>
-<br/>
-<br/>
-<ul>Desirable qualification:
-<li>	M.Phil./Ph.D. degree in Library Science/Information Science/Documentation/ Archives and Manuscript - Keeping / Computerization of Library.</li>
-</ul>
-</div>
+            <ol type="i">Minimum Qualifications:
+                <li>Good academic record as defined by the concerned university with at least 55%
+				marks (or an equivalent grade in a point scale wherever grading system is followed)
+				at the Master’s Degree level in a relevant subject from an Indian University, or an
+				equivalent degree from an accredited foreign university.</li>
+                <li>Besides fulfilling the above qualifications, the candidate must have cleared the
+				National Eligibility Test (NET) conducted by the UGC, CSIR or similar test accredited
+				by the UGC like SLET/SET. </li>
+                <li>Notwithstanding anything contained in sub-clauses (i) and (ii) to this Clause 4.4.1,
+				candidates, who are, or have been awarded a Ph. D. Degree in accordance with the
+				University Grants Commission (Minimum Standards and Procedure for Award of
+				Ph.D. Degree) Regulations, 2009, shall be exempted from the requirement of the
+				minimum eligibility condition of NET/SLET/SET for recruitment and appointment of
+				Assistant Professor or equivalent positions in Universities/Colleges/Institutions.</li>
+                <li>NET/SLET/SET shall also not be required for such Masters Programmes in
+				disciplines for which NET/SLET/SET is not conducted.</li>
+            </ol>
+        </div>
         <div id="assistantprofessor_humanities" style="display:none;">
-        <ol type="i">Minimum qualifications :
-<li>	Master’s Degree with at least 55% marks or its equivalent grade of B in the UGC seven point scale.</li>
-<li>	Nine years of experience as a Assistant Professor in the AGP of Rs. 6,000/- and above with experience in educational administration.
-<br/>OR
-Comparable Experience in research establishment and/or other institution of higher education
-<br/>OR
-Five years of administrative experience as Assistant Registrar or in an equivalent post.
-</li>
-</ol>
-<br/><br/>
-<ul>Deputation: 
-<li>Officers holding analogous posts on regular basis or with five years regular service in PB-3 (Rs. 15600-39100) + Grade Pay Rs. 6600 in the Central/ State Government, Universities and other autonomous organizations.</li>
-</ul>
-</div>
+        <ol type="i">Minimum Qualifications:
+                <li>Good academic record as defined by the concerned university with at least 55%
+				marks (or an equivalent grade in a point scale wherever grading system is followed)
+				at the Master’s Degree level in a relevant subject from an Indian University, or an
+				equivalent degree from an accredited foreign university.</li>
+                <li>Besides fulfilling the above qualifications, the candidate must have cleared the
+				National Eligibility Test (NET) conducted by the UGC, CSIR or similar test accredited
+				by the UGC like SLET/SET. </li>
+                <li>Notwithstanding anything contained in sub-clauses (i) and (ii) to this Clause 4.4.1,
+				candidates, who are, or have been awarded a Ph. D. Degree in accordance with the
+				University Grants Commission (Minimum Standards and Procedure for Award of
+				Ph.D. Degree) Regulations, 2009, shall be exempted from the requirement of the
+				minimum eligibility condition of NET/SLET/SET for recruitment and appointment of
+				Assistant Professor or equivalent positions in Universities/Colleges/Institutions.</li>
+                <li>NET/SLET/SET shall also not be required for such Masters Programmes in
+				disciplines for which NET/SLET/SET is not conducted.</li>
+            </ol>
+        </div>
     </div>
+    </td>
+    <td width="30%"></td>
+    <td width="20%"></td>
+</tr>
+</table>
 </div>
 <script>
     $(document).ready(function() {
