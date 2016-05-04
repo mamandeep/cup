@@ -5,7 +5,7 @@ class FormController extends AppController {
     var $components = array('Captcha.Captcha'=>array('Model'=>'Signup', 
                         'field'=>'security_code'));//'Captcha.Captcha'
 
-    var $uses = array('Signup', 'Registereduser','Post','Applicant','Education','Experience','Image', 'Misc', 'Researchpaper','Researcharticle', 'Researchproject', 'Document');                
+    var $uses = array('Signup', 'Registereduser','Post','Applicant','Education','Experience','Image', 'Misc', 'Researchpaper','Researcharticle', 'Researchproject', 'Document', 'ApiScore');                
     
     public $helpers = array('Captcha.Captcha');
     
@@ -343,6 +343,8 @@ class FormController extends AppController {
                     'conditions' => array('Researchproject.applicant_id' => $this->Session->read('applicant_id'))));
             $image = $this->Document->find('all', array(
                     'conditions' => array('Document.applicant_id' => $this->Session->read('applicant_id'))));
+            $apiscore = $this->ApiScore->find('all', array(
+                    'conditions' => array('ApiScore.applicant_id' => $this->Session->read('applicant_id'))));
 
             //$misc = $this->Applicant->find('all', array(
             //        'conditions' => array('Misc.user_id' => $this->Session->read('applicant_id'))));                
@@ -351,13 +353,14 @@ class FormController extends AppController {
                 return false;
             }		
             if(count($applicants) == 1) {
-                $this->set('postAppliedFor', $this->getPostAppliedFor());
+                //$this->set('postAppliedFor', $this->getPostAppliedFor());
                 $this->set('applicant', $applicants['0']);
                 $this->set('education_arr', $education_arr);
                 $this->set('exp_arr', $exp_arr);
                 $this->set('rpaper_arr', $rpaper_arr);
                 $this->set('rarticle_arr', $rarticle_arr);
                 $this->set('rproject_arr', $rproject_arr);
+                $this->set('apiscore', $apiscore['0']);
                 //$this->set('miscexp', $miscexp['0']);
                 //$this->set('academic_dist', $adacdemic_dist);
                 $this->set('image', !empty($image['0']) ? $image['0'] : array());

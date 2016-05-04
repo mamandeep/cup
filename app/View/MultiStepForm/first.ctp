@@ -142,11 +142,11 @@
         </table>
         <br/>
         <?php
-        echo $this->Form->input('Applicant.physical_disable', array(
+        echo $this->Form->input('Applicant.physically_disabled', array(
                         'options' => array('yes' => 'Yes',
                                            'no' => 'No'),
                         'selected' => (!empty($physically_disabled) ? $physically_disabled : 'no'),
-                        'label' => 'If physically disabled',
+                        'label' => 'If differently abled',
                         'id' => 'physical_disable_select'
                     )); ?>
         <table id="physical_disable">
@@ -157,18 +157,18 @@
             </tr>
             <tr>
                 <td>a. Blindness or low vision</td>
-                <td><?php echo $this->Form->input('Applicant.blindness_applicable', array('label' => false, 'maxlength' => '500')); ?></td>
-                <td><?php echo $this->Form->input('Applicant.blindness_percentage', array('label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.blindness', array('label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.blindness_pertge', array('label' => false, 'maxlength' => '500')); ?></td>
             </tr>
             <tr>
                 <td>b. Hearing impairment</td>
-                <td><?php echo $this->Form->input('Applicant.hearing_applicable', array('label' => false, 'maxlength' => '500')); ?></td>
-                <td><?php echo $this->Form->input('Applicant.hearing_percentage', array('label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.hearing', array('label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.hearing_pertge', array('label' => false, 'maxlength' => '500')); ?></td>
             </tr>
             <tr>
                 <td>c. Locomotor disability or cerebral palsy</td>
-                <td><?php echo $this->Form->input('Applicant.locomotor_applicable', array('label' => false, 'maxlength' => '500')); ?></td>
-                <td><?php echo $this->Form->input('Applicant.locomotor_percentage', array('label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.locomotor', array('label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.locomotor_pertge', array('label' => false, 'maxlength' => '500')); ?></td>
             </tr>
         </table>
         <br/>
@@ -337,7 +337,7 @@
             aadharFormatCheck();
         });
         
-        $("select[name='data[Applicant][physical_disable]']").change(function(){
+        $("select[name='data[Applicant][physically_disabled]']").change(function(){
             if($(this).val() === 'no') {
                 $('#physical_disable').each(function(){
                     $(this).css('display','none');

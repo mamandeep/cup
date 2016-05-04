@@ -46,7 +46,8 @@ echo $this->Html->script('jquery-1.11.1-min');
 <div id="contentContainer" style="width: 650px; max-width: 650px; margin-left: 100px;">
     <p style="font-size: 28px; font-weight: bold; text-align: center">CENTRAL UNIVERSITY OF PUNJAB</p>
     <p style="font-size: 12px; font-weight: bold; text-align: center">(Established vide Act no 25(2009) of Parliament)</p>
-    <p style="font-size: 28px; font-weight: bold; text-align: center">Online Application Form for Teaching</p>
+    <p style="font-size: 28px; font-weight: bold; text-align: center">Online Application Form for Teaching Positions</p>
+    <p style="font-size: 24px; font-weight: bold; text-align: center">Position: <?php echo $applicant['Applicant']['post_applied_for']?></p>
     <table id="onlineformdata"  class="print_table" style="table-layout:fixed;">
         <tr>
             <td width="40%" class="print_headers">Advertisement No.</td>
@@ -54,7 +55,7 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td width="20%"><img src="<?php if(!empty($image['Document']['filename'])) { echo $this->webroot . '/' . $image['Document']['filename']; } else { echo ""; } ?>" alt="Passport Size Photograph" height="132px" width="132px"></td>
         </tr>
         <tr>
-            <td width="40%" class="print_headers">Applicant Number</td>
+            <td width="40%" class="print_headers">Application Number</td>
             <td width="40%" class="print_value"><?php echo $applicant['Applicant']['id'] ?></td>
             <td width="20%"><img src="<?php if(!empty($image['Document']['filename4'])) { echo $this->webroot . '/' . $image['Document']['filename4']; } else { echo ""; } ?>" alt="Signature" height="50px" width="132px"></td>
         </tr>
@@ -63,19 +64,6 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td style="word-wrap: normal;" class="print_value">Transaction ID:<?php echo $applicant['Applicant']['payment_transaction_id']?> Date:<?php echo $applicant['Applicant']['payment_date_created']?> Amount:<?php echo $applicant['Applicant']['payment_amount']?>
             </td>
         </tr>
-        <br />
-        <tr>
-            <td class="print_headers">Name of the post applied for</td>
-            <td class="print_value"><?php echo isset($postAppliedFor) ? $postAppliedFor : '' ;?></td>
-        </tr>
-        <!--<tr>
-            <td>Name of the Centre / Non-Teaching Post</td>
-            <td><?php echo $applicant['Applicant']['name_of_centre']?></td>
-        </tr>
-        <tr>
-            <td>Area of specialization</td>
-            <td><?php echo $applicant['Applicant']['specialization']?></td>
-        </tr>-->
         <br />
         <tr>
             <td class="print_headers">Name of the Applicant</td>
@@ -96,6 +84,27 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td class="print_headers">Category</td>
             <td class="print_value"><?php echo $applicant['Applicant']['category']?></td>
         </tr>
+        <tr>
+            <td class="print_headers">Differently Abled</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['physically_disabled']?></td>
+        </tr>
+        <?php if(!empty($applicant['Applicant']['physically_disabled']) && $applicant['Applicant']['physically_disabled'] == "yes") { ?>
+            <tr>
+                <td class="print_headers" style="padding-left: 20px;">a. Blindness or low vision</td>
+                <td class="print_value"><?php echo $applicant['Applicant']['blindness']?></td>
+                <td class="print_value"><?php echo $applicant['Applicant']['blindness_pertge']?></td>
+            </tr>
+            <tr>
+                <td class="print_headers" style="padding-left: 20px;">b. Hearing impairment</td>
+                <td class="print_value"><?php echo $applicant['Applicant']['hearing']?></td>
+                <td class="print_value"><?php echo $applicant['Applicant']['hearing_pertge']?></td>
+            </tr>
+            <tr>
+                <td class="print_headers" style="padding-left: 20px;">c. Locomotor disability or cerebral palsy</td>
+                <td class="print_value"><?php echo $applicant['Applicant']['locomotor']?></td>
+                <td class="print_value"><?php echo $applicant['Applicant']['locomotor_pertge']?></td>
+            </tr>
+        <?php } ?>
         <tr>
             <td class="print_headers">Email: </td>
             <td class="print_value"><?php echo $applicant['Applicant']['email']?>
@@ -130,6 +139,24 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td class="print_value"><?php echo $applicant['Applicant']['nationality']?>
             </td>
         </tr>
+        <tr>
+            <td class="print_headers">Area</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['area']?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Centre</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['centre']?></td>
+        </tr>
+        <?php if(!empty($applicant['Applicant']['post_applied_for']) && ($applicant['Applicant']['post_applied_for'] == "Professor" || $applicant['Applicant']['post_applied_for'] == "Associate Professor")) { ?>
+            <tr>
+                <td class="print_headers">Api Score Total</td>
+                <td class="print_value"><?php echo $apiscore['ApiScore']['total_api']?></td>
+            </tr>
+            <tr>
+                <td class="print_headers">Api Score (Capped)</td>
+                <td class="print_value"><?php echo $apiscore['ApiScore']['total_api_capped']?></td>
+            </tr>
+        <?php } ?>
     </table>
     <br />
     <div class="print_headers">Education Qualifications</div>
@@ -494,7 +521,7 @@ echo $this->Html->script('jquery-1.11.1-min');
     <div>
         <table>
             <tr>
-                <td colspan="3">The hard copy of the completed form with the required enclosures is sent by post.</td>
+                <td colspan="3">The hard copy of the completed form with the required enclosures is to be sent by post.</td>
             </tr>
             <tr>
                 <td style="width: 40%;"><input type="button" onclick="window.print()" value="Print" style="width: 100px;"/></td>

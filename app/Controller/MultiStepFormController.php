@@ -2,7 +2,7 @@
 class MultiStepFormController extends AppController {
 	var $components = array('Wizard.Wizard');
         public $uses = array('Registereduser', 'Post' , 'MultiStepForm','Applicant','Education','Experience',
-                            'Miscexp','Academic_dist','Image','Document', 'Researchpaper', 'Researcharticle','Researchproject', 'Misc');
+                            'Academic_dist','Image','Document', 'Researchpaper', 'Researcharticle','Researchproject', 'ApiScore');
         
         function beforeFilter() {
             $this->Wizard->steps = array('first','second','third','fourth','fifth','sixth', 'seventh');
@@ -222,10 +222,26 @@ class MultiStepFormController extends AppController {
                 $this->Session->setFlash('An error has occured. Please contact Support.');
                 return false;
             }
+            $api = $this->ApiScore->find('all', array(
+                        'conditions' => array('ApiScore.applicant_id' => $this->Session->read('applicant_id'))));
+            if(count($api) > 1) {
+                $this->Session->setFlash('An error has occured. Please contact Support.');
+                return false;
+            }
+            else if(count($api) == 0) {
+                $this->ApiScore->create();
+                $this->ApiScore->set(array(
+                    'applicant_id' => $this->Session->read('applicant_id')));
+                $this->ApiScore->save();
+                $this->ApiScore->id = $this->ApiScore->getLastInsertId();
+                $api = $this->ApiScore->find('all', array(
+                        'conditions' => array('ApiScore.applicant_id' => $this->Session->read('applicant_id'))));
+            }
             $this->request->data = array('Researchpaper' => $researchpaper_data,
                                          'Researcharticle' => $researcharticle_data,
                                          'Researchproject' => $researchproject_data,
-                                         'Applicant' => $misc['0']['Applicant']);
+                                         'Applicant' => $misc['0']['Applicant'],
+                                         'ApiScore' => $api['0']['ApiScore']);
         }
         
         private function getJsonObject($misc = array()) {
@@ -251,7 +267,8 @@ class MultiStepFormController extends AppController {
             }
             
             if($this->Researchpaper->saveMany($this->data['Researchpaper']) && $this->Researcharticle->saveMany($this->data['Researcharticle'])
-                    && $this->Applicant->save($this->data['Applicant']) && $this->Researchproject->saveMany($this->data['Researchproject'])) { 
+                    && $this->Applicant->save($this->data['Applicant']) && $this->Researchproject->saveMany($this->data['Researchproject'])
+                    && $this->ApiScore->save($this->data['ApiScore'])) { 
                 return true;
             }
             return false;

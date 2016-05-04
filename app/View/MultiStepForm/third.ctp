@@ -21,7 +21,7 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
             <tr>
                 <th>From Date <span style="font-size: 12px;">(DD/MM/YYYY)</span></th>
                 <th>To Date <span style="font-size: 12px;">(DD/MM/YYYY)</span></th>
-                <th>No. of Years / Months (as on date of advertisement)</th>
+                <th>No. of Years / Months (as on last date of filling online form)</th>
             </tr>
         </thead>
         <tbody>
