@@ -159,7 +159,7 @@ echo $this->Html->script('jquery-1.11.1-min');
         <?php } ?>
     </table>
     <br />
-    <div class="print_headers">Education Qualifications</div>
+    <div class="print_headers">Educational Qualifications</div>
     <table border="1px solid black" style="border: 1px solid black; border-collapse: collapse;">
         <tr>
             <td width="5%" class="print_headers">Name of Degree / Diploma / Certificate / Class</td>
@@ -205,7 +205,7 @@ echo $this->Html->script('jquery-1.11.1-min');
         <tr>
             <td width="10%" class="print_headers">From Date</td>
             <td width="10%" class="print_headers">To Date</td>
-            <td width="10%" class="print_headers">No. of Years/Months(as on date of advertisement)</td>
+            <td width="10%" class="print_headers">No. of Years/Months(as on last date of online form)</td>
         </tr>
         <?php
         foreach($exp_arr as $key => $value){
@@ -528,10 +528,10 @@ echo $this->Html->script('jquery-1.11.1-min');
                 <td></td>
                 <td style="width: 40%;">
                     <!--<a href="<?php echo $this->webroot; ?>/multi_step_form/wizard/finalsubmit" class="button" id="finalsubmit" style="font-size: 20px;">Final Submit</a>-->
-                    <?php echo $this->Form->create('Temp', array('id' => 'Temp_Details', 'url' => Router::url( '/form/final_submit', true ))); ?>
+                    <?php /* echo $this->Form->create('Temp', array('id' => 'Temp_Details', 'url' => Router::url( '/form/final_submit', true ))); ?>
                     <?php echo $this->Form->input('Document.id', array('type' => 'hidden','name' => 'temp', 'value' => 'temp')); ?>
                     <?php echo $this->Form->submit('Final Submit', array('div' => false, 'id' => 'finalsubmit' )); ?>
-                    <?php echo $this->Form->end(); ?>
+                    <?php echo $this->Form->end(); */ ?>
                     <!--<input id="finalsubmit" type="button" value="Final Submit" style="width: 200px;"/>-->
                 </td>
             </tr>
