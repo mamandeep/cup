@@ -5,16 +5,28 @@ class MultiStepFormController extends AppController {
                             'Academic_dist','Image','Document', 'Researchpaper', 'Researcharticle','Researchproject', 'ApiScore');
         
         function beforeFilter() {
+            if(!$this->Session->check('registration_id')) {
+                $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+            }
             $current_datetime = new DateTime();
             $current_datetime->setTimezone(new DateTimeZone('Asia/Calcutta'));
             $close_datetime = new DateTime("2016-05-07 00:00:00", new DateTimeZone('Asia/Calcutta'));
             //print_r($current_datetime->format('Y-m-d-H-i-s'));
             //print_r($close_datetime->format('Y-m-d-H-i-s'));
             $applicant = $this->Applicant->find('all', array(
-                        'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
-            if ($current_datetime > $close_datetime || (count($applicant) == 1 && $applicant['0']['Applicant']['final_submit'] == "1")) {
+                        'conditions' => array('Applicant.registration_id' => $this->Session->read('registration_id'))));
+            if ($current_datetime > $close_datetime || (count($applicant) == 1 && $applicant['0']['Applicant']['final_submit'] == "1")
+                        || count($applicant) > 1) {
                 //exit("The Application Form is closed at this time.");
-                $this->Session->setFlash('Application Form is disabled.');
+                if($current_datetime > $close_datetime) { 
+                    $this->Session->setFlash('Application Form is disabled.');
+                }
+                if(count($applicant) == 1 && $applicant['0']['Applicant']['final_submit'] == "1") {
+                    $this->Session->setFlash('Application Form has been final submitted.');
+                }
+                if(count($applicant) > 1) {
+                    $this->Session->setFlash('A MRF error has occured. Please contact Support.');
+                }
                 $this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
             }
             $this->Wizard->steps = array('first','second','third','fourth','fifth','sixth', 'seventh');

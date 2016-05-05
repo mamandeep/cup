@@ -156,7 +156,7 @@ echo $this->Html->script('jquery-1.11.1-min');
             </td>
         </tr>
         <tr>
-            <td class="print_headers">Area</td>
+            <td class="print_headers">School</td>
             <td class="print_value"><?php echo $applicant['Applicant']['area']?></td>
         </tr>
         <tr>
@@ -701,15 +701,29 @@ echo $this->Html->script('jquery-1.11.1-min');
             </tr>
             <tr>
                 <td style="width: 40%;"><input type="button" onclick="window.print()" value="Print" style="width: 100px;"/></td>
-                <td></td>
+                <td style="padding-top: 30px">.....................<br/>Signature
+                </td>
                 <td style="width: 40%;">
                     <!--<a href="<?php echo $this->webroot; ?>/multi_step_form/wizard/finalsubmit" class="button" id="finalsubmit" style="font-size: 20px;">Final Submit</a>-->
-                    <?php /* echo $this->Form->create('Temp', array('id' => 'Temp_Details', 'url' => Router::url( '/form/final_submit', true ))); ?>
-                    <?php echo $this->Form->input('Document.id', array('type' => 'hidden','name' => 'temp', 'value' => 'temp')); ?>
-                    <?php echo $this->Form->submit('Final Submit', array('div' => false, 'id' => 'finalsubmit' )); ?>
-                    <?php echo $this->Form->end(); */ ?>
+                    <?php if(isset($applicant) && $applicant['Applicant']['final_submit'] != "1" ) {
+                            echo $this->Form->create('Temp', array('id' => 'Temp_Details', 'url' => Router::url( '/form/final_submit', true )));
+                            echo $this->Form->input('Document.id', array('type' => 'hidden','name' => 'temp', 'value' => 'temp'));
+                            echo $this->Form->submit('Final Submit', array('div' => false, 'id' => 'finalsubmit' )); 
+                            echo $this->Form->end(); 
+                            } 
+                            ?>
                     <!--<input id="finalsubmit" type="button" value="Final Submit" style="width: 200px;"/>-->
                 </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Date: ..............</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="padding-top: 20px; ">Place: .............</td>
+                <td></td>
             </tr>
         </table>
     </div>
