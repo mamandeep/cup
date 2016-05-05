@@ -22,11 +22,13 @@
         font-size: 12px;
         font-weight: bold;
         color: #0a0;
+        padding: 5px;
     }
 
     .print_value {
         font-size: 12px;
         color: black;
+        padding: 5px;
     }
 
     .misc_col1 {
@@ -34,7 +36,21 @@
     }
 
 </style>
-<?php if($data_set === 'true') {
+<?php 
+
+function bcmin() {
+  $args = func_get_args();
+  if (count($args)==0) return false;
+  $min = $args[0];
+  foreach($args as $value) {
+    if (bccomp($min, $value)==1) {
+      $min = $value;
+    }
+  }
+  return $min;
+}
+
+if($data_set === 'true') {
 $this->Html->css('cake.generic.css');
 echo $this->Html->script('jquery-1.11.1-min');
 ?>
@@ -378,6 +394,166 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td class="print_value"><?php echo $applicant['Applicant']['rg_phd_undersup']; ?></td>
         </tr>
     </table>
+    <?php if(!empty($applicant['Applicant']['post_applied_for']) && ($applicant['Applicant']['post_applied_for'] == "Professor" || $applicant['Applicant']['post_applied_for'] == "Associate Professor")) { ?>
+    <br/>
+    <div class="print_headers">API Score</div>
+    <table border="1px solid black" width="100%" id="api_score" style="border-collapse: collapse;">
+        <tr>
+            <td width="20%" class="print_headers"></td>
+            <td width="40%" class="print_headers">Category</td>
+            <td width="15%" class="print_headers">API Score Claimed by Applicant in each Category</td>
+            <td width="10%" class="print_headers">Total</td>
+            <td width="15%" class="print_headers">Min(Total(Section), % of GrandTotal)</td>
+        </tr>
+        <tr>
+            <td rowspan="3" class="print_headers">III (A)</td>
+            <td class="print_headers">Referred Journals</td>
+            <td class="print_value">
+                <?php echo $apiscore['ApiScore']['rp_refered_jour']; ?>
+            </td>
+            <td rowspan="3" class="print_value">
+                <?php echo $apiscore['ApiScore']['total_IIIA']; ?>
+            </td>
+            <td rowspan="3" class="print_value">
+                <div id="total_IIIA_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIIA'], round(0.3 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="print_headers">Non-referred but recognized and reputable journals and periodicals, having ISBN/ISSN numbers.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rp_nonref_reco']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Conference proceedings as full papers, etc. (Abstracts not to be included).</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rp_conf_full_paper']; ?></td>
+        </tr>
+        <tr>
+            <td rowspan="5" class="print_headers">III (B)</td>
+            <td class="print_headers">Text or  Reference Books Published by International Publishers with an established peer review system</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rpu_int_pub']; ?></td>
+            <td rowspan="5" class="print_value"><?php echo $apiscore['ApiScore']['total_IIIB']; ?></td>
+            <td rowspan="5" class="print_value">
+                <div id="total_IIIB_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIIB'], round(0.25 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="print_headers">Subjects Books by National level publishers/State and Central Govt. Publications with ISBN/ISSN numbers.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rpu_national_pub']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Subject Books by Other local publishers with ISBN/ISSN numbers.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rpu_local_pub']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Chapters contributed to edited knowledge based volumes published by International Publishers.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rpu_chap_int_pub']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Chapters in knowledge based volumes by Indian/National level publishers with ISBN/ISSN numbers and with numbers of national and international directories.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rpu_chap_nat_pub']; ?></td>
+        </tr>
+        <tr>
+            <td rowspan="3" class="print_headers">III (C)(i) Sponsored Projects carried out/ongoing</td>
+            <td class="print_headers">Major Projects amount mobilized with grants above 30.0 lakhs</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['sponp_gabov_30']; ?></td>
+            <td rowspan="6" class="print_value"><?php echo $apiscore['ApiScore']['total_IIIC']; ?></td>
+            <td rowspan="6" class="print_value">
+                <div id="total_IIIC_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIIC'], round(0.2 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="print_headers">Major Projects amount mobilized with grants above 5.0 lakhs upto 30.0 lakhs.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['sponp_gabov_5']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Minor Projects (Amount mobilized with grants above Rs. 50,000 up to Rs. 5.0 lakhs.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['sponp_gabov_50k']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">III (C)(ii) Consultancy Projects carried out/ongoing</td>
+            <td class="print_headers">Amount mobilized with minimum of Rs. 10.00 lakh</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['consp_gabove_10']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">III (C)(iii) Completed Projects: Quality Evaluation</td>
+            <td class="print_headers">Completed project Report (Acceptance from funding agency)</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['comp_projects_qe']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">III (C)(iv) Projects Outcome / Outputs </td>
+            <td class="print_headers">Patent/Technology transfer/Product/Process</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['proj_patent']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">III (D)(i) M.Phil.</td>
+            <td class="print_headers">Degree awarded only</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rg_mphil']; ?></td>
+            <td rowspan="3" class="print_value"><?php echo $apiscore['ApiScore']['total_IIID']; ?></td>
+            <td rowspan="3" class="print_value">
+                <div id="total_IIID_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIID'], round(0.1 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="print_headers">III (D)(ii) Ph.D</td>
+            <td class="print_headers">Degree awarded</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rg_phd']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Thesis submitted</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rg_thesis_sub']; ?></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="print_headers">III (E)(i) Refresher courses, Methodology workshops, Training, Teaching-Learning-Evaluation Technology Programmes, Soft Skills development.</td>
+            <td class="print_headers">Not less than two weeks duration</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['refreshc_train_2week']; ?></td>
+            <td rowspan="8" class="print_value"><?php echo $apiscore['ApiScore']['total_IIIE']; ?></td>
+            <td rowspan="8" class="print_value">
+                <div id="total_IIIE_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIIE'], round(0.15 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="print_headers">One week duration</td>
+            <td width="15%" class="print_value"><?php echo $apiscore['ApiScore']['refreshc_one_week']; ?></td>
+        </tr>
+        <tr>
+            <td rowspan="4" class="print_headers">III (E)(ii) Papers in Conferences/Seminars/workshops etc. **</td>
+            <td class="print_headers">Participation and Presentation of research papers (oral/poster) in International conference</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['pap_pp_int']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Participation and Presentation of research papers (oral/poster) in National</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['pap_pp_nat']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Participation and Presentation of research papers (oral/poster) in Regional/State level</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['pap_pp_reg']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Participation and Presentation of research papers (oral/poster) in Local - University/College level</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['pap_pp_local']; ?></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="print_headers">III (E)(iii) Invited lectures or presentations for conferences/symposia.</td>
+            <td class="print_headers">International</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['invited_lec_int']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">National level</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['invited_lec_nat']; ?></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="print_headers"></td>
+            <td class="print_headers">Grand Total</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['total_api']; ?></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="print_headers"></td>
+            <td class="print_headers">Grand Total (Capped)</td>
+            <td class="print_value"></td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['total_api_capped']; ?></td>
+        </tr>
+    </table>
+    <?php } ?>
     <br/>
     <div class="print_headers">Referees</div>
     <table width="100%" border="1px solid black" style="border-collapse: collapse;">

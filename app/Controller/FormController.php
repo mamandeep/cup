@@ -32,8 +32,12 @@ class FormController extends AppController {
     }
     
     public function generalinformation() {
-            
-	}
+           $applicants = $this->Applicant->find('all', array(
+                'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
+            if (count($applicants) == 1 ) {
+                $this->set('applicant', $applicants['0']);
+            }
+    }
         
         public function register() {
             if(!empty($this->data['Registereduser'])) {
@@ -239,11 +243,11 @@ class FormController extends AppController {
 	}
         
         function validate_amount($amount) {
-            if(isset($amount) && ($amount === "600" || $amount === "300" || $amount === "150")) {
+            if(isset($amount) && ($amount === "750" || $amount === "250")) {
                 return $amount;
             }
             else 
-                return "600";
+                return "750";
         }
         
 	public function returnpg() {
@@ -322,7 +326,7 @@ class FormController extends AppController {
 	}
 
 	public function print_bfs() {
-		$this->layout = false;
+            $this->layout = false;
             $this->set('data_set', 'false');
             $applicants = $this->Applicant->find('all', array(
                     'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));

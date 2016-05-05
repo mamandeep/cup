@@ -33,9 +33,8 @@
         <tr>
             <td class="fieldName" width="50%"><span class="error">*</span> Application Fee</td>
             <td  align="left" width="50%"> <select name="amount" id="amount">
-                                <option selected="selected">600</option>
-                                <option>300</option>
-                                <option>150</option>
+                                <option selected="selected">750</option>
+                                <option>250</option>
                             </select>
                             <select name="currency" >
 				<option value="INR">INR</option>

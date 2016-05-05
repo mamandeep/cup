@@ -7,98 +7,123 @@
     <td width="20%"></td>
 </tr>
 <tr>
-    <td width="20%"></td>
-    <td width="30%">The fee for SC/ST/PWD applicants is Rs. 150 and for others fee is Rs. 600. </td>
-    <td width="30%"></td>
-    <td width="20%"></td>
+    <td></td>
+    <td>The fee for SC/ST/PWD applicants is Rs. 250 and for others fee is Rs. 750. </td>
+    <td>Essential Qualifications   for Professors, Associate Professors, and Assistant Professors: <br/>
+        As per “UGC REGULATIONS ON MINIMUM QUALIFICATIONS FOR APPOINTMENT OF TEACHERS AND OTHER ACADEMIC STAFF IN UNIVERSITIES AND COLLEGES AND MEASURES FOR THE MAINTENANCE OF STANDARDS IN HIGHER EDUCATION 2010“ and the 2nd Amendments to the regulation issued in June 2013. 
+        <br/>
+        For details: <a href="http://www.ugc.ac.in/oldpdf/regulations/revised_finalugcregulationfinal10.pdf" target="_blank">(i)</a>
+        <br/>
+        <a href="http://www.ugc.ac.in/pdfnews/8539300_English.pdf" target="_blank">(ii)</a> and University rules.   
+        <br/>
+        NCTE Regulation 2009: <a href="http://www.ncte-india.org/regulation/RegulationsE-2009.pdf" target="_blank">(iii)</a>
+    </td>
+    <td>Advertisement</td>
 </tr>
 <tr>
-    <td width="20%"></td>
-    <td width="30%">If the candidate is selected, he/she will be required to submit Aadhar within one month of joining.</td>
-    <td width="30%"></td>
-    <td width="20%"></td>
+    <td></td>
+    <td>If the candidate is selected, he/she will be required to submit Aadhar within one month of joining.</td>
+    <td></td>
+    <td></td>
 </tr>
 <tr>
-    <td width="20%"></td>
-    <td width="30%">In case of payment failure, the final submission of application will not take place. The candiate will not be able to print the form.</td>
-    <td width="30%"></td>
-    <td width="20%"></td>
+    <td></td>
+    <td>In case of payment failure, the final submission of application will not take place. The candiate will not be able to print the form.</td>
+    <td></td>
+    <td></td>
 </tr>
 <tr>
-    <td width="20%"></td>
-    <td width="30%">If payment fails, it will be automatically refunded to the same account.</td>
-    <td width="30%"></td>
-    <td width="20%"></td>
+    <td></td>
+    <td>If payment fails, it will be automatically refunded to the same account.</td>
+    <td></td>
+    <td></td>
 </tr>
 <tr>
-    <td width="20%"></td>
-    <td width="30%">Billing Address is the address of Credit/Debit card holder.</td>
-    <td width="30%"></td>
-    <td width="20%"></td>
+    <td></td>
+    <td>Billing Address is the address of Credit/Debit card holder.</td>
+    <td></td>
+    <td></td>
 </tr>
+<!--
 <tr>
-    <td width="20%"></td>
-    <td width="30%">
+    <td></td>
+    <td>
         <span>For detailed qualifications, please <a href="javascript: void(0);" target="_blank">click here</a></span>.
     </td>
-    <td width="30%"></td>
-    <td width="20%"></td>
+    <td></td>
+    <td></td>
+</tr>-->
+<tr>
+    <td></td>
+    <td><label>I have read the General Conditions to Apply: (Tick the box to continue)</label>
+    </td>
+    <td><input type="checkbox" id="declaration" name="declaration"></input></td>
+    <td></td>
 </tr>
 <tr>
-    <td width="20%"></td>
-    <td width="30%"><label>I have read the General Conditions to Apply: (Tick the box to continue)</label>
+    <td></td>
+    <td><span style="font-weight: bold; font-size: 20px; color:#0a0;">Post Applied For: *</span>
     </td>
-    <td width="30%"><input type="checkbox" id="declaration" name="declaration"></input></td>
-    <td width="20%"></td>
-</tr>
-<tr>
-    <td width="20%"></td>
-    <td width="30%"><span style="font-weight: bold; font-size: 20px; color:#0a0;">Post Applied For: *</span>
-    </td>
-    <td width="30%"><select id="post_applied_for" name="post_applied_for" style="width: auto;">
+    <td><select id="post_applied_for" name="post_applied_for" style="width: auto;">
                 <option value="none" selected="selected">None</option>
                 <option value="professor">Professor</option>
                 <option value="associateprofessor">Associate Professor</option>
                 <option value="assistantprofessor">Assistant Professor</option>
             </select></td>
-    <td width="20%"></td>
+    <td></td>
 </tr>
 <tr>
-    <td width="20%"></td>
-    <td width="30%"><span style="font-weight: bold; font-size: 20px; color:#0a0;">Area: *</span></td>
-    <td width="30%"><select id="area" name="area" style="width: auto;">
+    <td></td>
+    <td><span style="font-weight: bold; font-size: 20px; color:#0a0;">School: *</span></td>
+    <td><select id="area" name="area" style="width: auto;">
                 <option value="none" selected="selected">None</option>
-                <option value="science">Science</option>
-                <option value="humanities">Humanities</option>
+                <option value="bas">Basic and Applied Sciences</option>
+                <option value="edu">Education</option>
+                <option value="et">Engineering and Technology</option>
+                <option value="ees">Environment and Earth Sciences</option>
+                <option value="gr">Global Relations</option>
+                <option value="hs">Health Sciences</option>
+                <option value="llc">Languages, Literature and Culture</option>
+                <option value="lsg">Legal Studies and Governance</option>
+                <option value="sps">Sports Sciences</option>
+                <option value="ss">Social Sciences</option>
             </select></td>
-    <td width="20%"></td>
+    <td></td>
 </tr>
 <tr>
-    <td width="20%"></td>
-    <td width="30%"><span style="font-weight: bold; font-size: 20px; color:#0a0;">Centre: *</span>
+    <td></td>
+    <td><span style="font-weight: bold; font-size: 20px; color:#0a0;">Centre: *</span>
     </td>
-    <td width="30%"><select id="centre" name="centre" style="width: auto;">
+    <td><select id="centre" name="centre" style="width: auto;">
             </select></td>
-    <td width="20%"></td>
+    <td></td>
 </tr>
 <tr>
-    <td width="20%"></td>
-    <td width="30%"><div id="post_selected_elig" style="display:none;" class="min_qualification"></div>
+    <td></td>
+    <td><div id="post_selected_elig" style="display:none;" class="min_qualification"></div>
     </td>
-    <td width="30%"></td>
-    <td width="20%"></td>
+    <td></td>
+    <td></td>
 </tr>
 <tr>
-    <td width="20%"></td>
-    <td width="30%"><div style="text-align: center; font-size: 30px;">
-        <?php echo $this->Form->create('Temp', array('id' => 'Continue_Form', 'url' => Router::url( '/multi_step_form/wizard/first', true ))); ?>
-        <?php echo $this->Form->submit('Continue', array('div' => false, 'id' => 'continue_bt' )); ?>
-        <?php echo $this->Form->end(); ?>
+    <td></td>
+    <td><div style="text-align: center; font-size: 30px;">
+        <?php if(isset($applicant) && $applicant['Applicant']['final_submit'] != "1" ) {
+              echo $this->Form->create('Temp', array('id' => 'Continue_Form', 'url' => Router::url( '/multi_step_form/wizard/first', true ))); 
+              echo $this->Form->submit('Continue', array('div' => false, 'id' => 'continue_bt' ));
+              echo $this->Form->end(); 
+            } ?>
         <!--<a href="<?php echo $this->webroot; ?>multi_step_form/wizard/first" class="button" id="continue_bt">Continue</a>-->
     </div>
     </td>
-    <td width="30%"></td>
-    <td width="20%"></td>
+    <td><div style="text-align: center; font-size: 30px;"><?php if(isset($applicant) && $applicant['Applicant']['final_submit'] == "1" ) {
+              echo $this->Form->create('Temp2', array('id' => 'Print_Form', 'url' => Router::url( '/form/print_bfs', true ))); 
+              echo $this->Form->submit('Print', array('div' => false, 'id' => 'print_bt' ));
+              echo $this->Form->end(); 
+              } ?>
+        </div>
+    </td>
+    <td></td>
 </tr>
 </table>
 </div>
@@ -165,13 +190,87 @@
             'centre': { // name of associated select box
                 // names match option values in controlling select box
 
-                science: {
-                    text: ['Science 1', 'Science 2', 'Science 3', 'Science 4', 'Science 5'],
-                    value: ['science1', 'science2', 'science3', 'science4', 'science5']
+                bas: {
+                    text: ['Animal Sciences', 
+                           'Biochemistry and Microbial Sciences', 
+                           'Chemical Sciences', 
+                           'Computational Sciences',
+                           'Mathematics & Statistics',
+                           'Pharmaceutical Sciences and Natural Products',
+                           'Physical Sciences',
+                           'Plant Sciences'
+                          ],
+                    value: ['Animal Sciences', 
+                            'Biochemistry and Microbial Sciences', 
+                            'Chemical Sciences', 
+                            'Computational Sciences',
+                            'Mathematics and Statistics',
+                            'Pharmaceutical Sciences and Natural Products',
+                            'Physical Sciences',
+                            'Plant Sciences'
+                           ]
                 },
-                humanities: {
-                    text: ['Humanities 1', 'Humanities 2', 'Humanities 3', 'Humanities 4'],
-                    value: ['humanities1', 'humanities2', 'humanities3', 'humanities4']
+                edu: {
+                    text: ['Education'
+                          ],
+                    value: ['Education'
+                           ]
+                },
+                et: {
+                    text: ['Agribusiness/Food Processing Technology', 
+                           'Computer Science & Technology'
+                          ],
+                    value: ['Agribusiness or Food Processing Technology', 
+                            'Computer Science and Technology'
+                           ]
+                },
+                ees: {
+                    text: ['Environmental Sciences & Technology', 
+                           'Geography & Geology'
+                          ],
+                    value: ['Environmental Sciences and Technology', 
+                            'Geography & Geology'
+                           ]
+                },
+                gr: {
+                    text: ['South & Central Asian Studies (Including Historical Studies)'
+                          ],
+                    value: ['South and Central Asian Studies (Including Historical Studies)'
+                           ]
+                },
+                hs: {
+                    text: ['Human Genetics and Molecular Medicine'
+                          ],
+                    value: ['Human Genetics and Molecular Medicine'
+                           ]
+                },
+                llc: {
+                    text: ['Classical and Modern Languages (Punjabi Languages, Literature and Culture, English)', 
+                           'Comparative Literature'
+                          ],
+                    value: ['Classical and Modern Languages (Punjabi Languages, Literature and Culture, English)', 
+                            'Comparative Literature'
+                           ]
+                },
+                lsg: {
+                    text: ['Law'
+                          ],
+                    value: ['Law'
+                           ]
+                },
+                ss: {
+                    text: ['Economic Studies', 
+                           'Sociology'
+                          ],
+                    value: ['Economic Studies',
+                            'Sociology'
+                           ]
+                },
+                sps: {
+                    text: ['Sports Sciences'
+                          ],
+                    value: ['Sports Sciences'
+                           ]
                 },
                 none: {
                     text: ['None'],

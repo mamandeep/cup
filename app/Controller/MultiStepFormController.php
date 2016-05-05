@@ -5,6 +5,18 @@ class MultiStepFormController extends AppController {
                             'Academic_dist','Image','Document', 'Researchpaper', 'Researcharticle','Researchproject', 'ApiScore');
         
         function beforeFilter() {
+            $current_datetime = new DateTime();
+            $current_datetime->setTimezone(new DateTimeZone('Asia/Calcutta'));
+            $close_datetime = new DateTime("2016-05-07 00:00:00", new DateTimeZone('Asia/Calcutta'));
+            //print_r($current_datetime->format('Y-m-d-H-i-s'));
+            //print_r($close_datetime->format('Y-m-d-H-i-s'));
+            $applicant = $this->Applicant->find('all', array(
+                        'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
+            if ($current_datetime > $close_datetime || (count($applicant) == 1 && $applicant['0']['Applicant']['final_submit'] == "1")) {
+                //exit("The Application Form is closed at this time.");
+                $this->Session->setFlash('Application Form is disabled.');
+                $this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
+            }
             $this->Wizard->steps = array('first','second','third','fourth','fifth','sixth', 'seventh');
         }
         
