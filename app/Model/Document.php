@@ -131,14 +131,14 @@ class Document extends AppModel {
             ),
             // http://book.cakephp.org/2.0/en/models/data-validation.html#Validation::mimeType
             'mimeType' => array(
-                'rule' => array('mimeType', array('application/vnd.ms-office', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')),
+                'rule' => array('mimeType', array('application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')),
                 'message' => 'Invalid file, only Word document allowed',
                 'required' => FALSE,
                 'allowEmpty' => TRUE,
             ),
             'fileSize'=> array(
-                'rule' => array('fileSize', '<=', '200KB'),
-                'message' => 'Document must be less than 200 KB.',
+                'rule' => array('fileSize', '<=', '500KB'),
+                'message' => 'Document must be less than 500 KB.',
                 'allowEmpty' => true
             ),
             // custom callback to deal with the file upload
