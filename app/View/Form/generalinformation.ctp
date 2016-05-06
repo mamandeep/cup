@@ -18,7 +18,7 @@
         <br/>
         NCTE Regulation 2009: <a href="http://www.ncte-india.org/regulation/RegulationsE-2009.pdf" target="_blank">(iii)</a>
     </td>
-    <td></td>
+    <td><a href="<?php echo $this->webroot . '/files/Teaching Positions.docx'; ?>" target="_blank">Teaching Positions</a></td>
 </tr>
 <tr>
     <td></td>
@@ -26,18 +26,20 @@
     <td></td>
     <td></td>
 </tr>
+<!--
 <tr>
     <td></td>
-    <td>In case of payment failure, the final submission of application will not take place. The candiate will not be able to print the form.</td>
+    <td>In case of payment failure, the final submission of application will not take place. The candidate will not be able to print the form.</td>
     <td></td>
     <td></td>
-</tr>
+</tr>-->
+<!--
 <tr>
     <td></td>
     <td>If payment fails, it will be automatically refunded to the same account.</td>
     <td></td>
     <td></td>
-</tr>
+</tr>-->
 <tr>
     <td></td>
     <td>Billing Address is the address of Credit/Debit card holder.</td>

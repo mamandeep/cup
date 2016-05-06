@@ -324,9 +324,16 @@ class MultiStepFormController extends AppController {
         function _prepareSixth() {
             $images = $this->Document->find('all', array(
                     'conditions' => array('Document.applicant_id' => $this->Session->read('applicant_id'))));
+            $applicant = $this->Applicant->find('all', array(
+                    'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
+            
+            if(count($applicant) == 1) {
+                $this->set('applicant', $applicant['0']);
+            }
             
             if(count($images) == 1) {
                 $this->request->data = $images['0'];
+                
                 //$this->Session->write('MultiStepForm.imageId', $images['0']['Image']['id']);
             }
             else if(count($images) > 1) {

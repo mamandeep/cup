@@ -29,7 +29,7 @@ echo $this->Form->create('Applicant', array('id' => 'Misc_Details', 'url' => Rou
 <br/>
 <div class="main_content_header">6. Referees </div>
 <div id="contentContainer">
-    <div class="table_headertxt">Names and complete postal addresses of 3 referees: For Class A Posts only (The referee should be the last employers of the candidate or any other person having know-how of candidates experience/knowledge and should not be related to the applicant)</div>
+    <div class="table_headertxt">Names and complete postal addresses of 3 referees: </div>
     <table id="referee_table" border="2px solid black" style="border-collapse: collapse; border-right: 2px solid black !important;">
         <tr>
             <td width="25%"></td>

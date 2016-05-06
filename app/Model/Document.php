@@ -131,8 +131,8 @@ class Document extends AppModel {
             ),
             // http://book.cakephp.org/2.0/en/models/data-validation.html#Validation::mimeType
             'mimeType' => array(
-                'rule' => array('mimeType', array('application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')),
-                'message' => 'Invalid file, only Excel document allowed',
+                'rule' => array('mimeType', array('application/vnd.ms-office', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')),
+                'message' => 'Invalid file, only Word document allowed',
                 'required' => FALSE,
                 'allowEmpty' => TRUE,
             ),
