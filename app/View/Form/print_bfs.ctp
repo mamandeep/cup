@@ -403,7 +403,7 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td width="40%" class="print_headers">Category</td>
             <td width="15%" class="print_headers">API Score Claimed by Applicant in each Category</td>
             <td width="10%" class="print_headers">Total</td>
-            <td width="15%" class="print_headers">Min(Total(Section), % of GrandTotal)</td>
+            <td width="15%" class="print_headers">API Score after capping</td>
         </tr>
         <tr>
             <td rowspan="3" class="print_headers">III (A)</td>

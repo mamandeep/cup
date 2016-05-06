@@ -346,7 +346,7 @@ table#api_score tr td {border: 1px solid black;}
     </tr>
     <tr>
         <td colspan="3" class="table_headertxt"></td>
-        <td class="table_headertxt">Total (Capped)</td>
+        <td class="table_headertxt">API Score after Capping</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.total_api_capped', array('id' => 'total_api_capped', 'label' => false, 'maxlength' => '50', 'readonly' => 'readonly', 'step' => '0.01'));?></td>
     </tr>
 </table>
