@@ -1,4 +1,4 @@
-<div class="main_content_header">Download API Proforma: <a href="<?php echo $this->webroot . '/files/CAS-API-Score Sheet.xls'; ?>">Click Here</a></div>
+<!--<div class="main_content_header">Download API Proforma: <a href="<?php echo $this->webroot . '/files/CAS-API-Score Sheet.xls'; ?>">Click Here</a></div> -->
 <?php
 /*echo $this->Html->script('jquery.ui.widget.js');
 echo $this->Html->script('jquery.iframe-transport.js');
@@ -9,16 +9,20 @@ echo $this->Form->create('Document', array('id' => 'Image_Details', 'url' => Rou
     <table>
         <tr>
             <td class="table_headertxt misc_col1" style="padding-top: 17px;">Upload passport size photograph (.jpg format, min size 10 kb, max size 200 kb)<?php echo $this->Form->input('Document.id', array('type' => 'hidden'));
-                                                                                                                                                                 echo $this->Form->input('Document.applicant_id', array('type' => 'hidden', 'value' => $this->Session->read('applicant_id')));   ?>
+                                                                                                                                                                             echo $this->Form->input('Document.applicant_id', array('type' => 'hidden', 'value' => $this->Session->read('applicant_id')));   ?>
+            <span style="color: red;">MANDATORY</span>    
             </td>
-            <td><?php echo $this->Form->input('filename', array('label' => false, 'type' => 'file')); ?></td>
+            <td><?php echo $this->Form->input('filename', array('label' => false, 'type' => 'file')); ?>
+            </td>
         </tr>
         <!--<tr>
             <td class="table_headertxt misc_col1" style="padding-top: 17px;">Upload NOC, if you are working in a Government Organization. If not, upload Form 16 (.jpg format, min size 10 kb, max size 200 kb)</td>
             <td><?php echo $this->Form->input('filename2', array('label' => false, 'type' => 'file')); ?></td>
         </tr>-->
         <tr>
-            <td class="table_headertxt misc_col1" style="padding-top: 17px;">Date of Birth Certificate - 10<sup>th</sup> / 11<sup>th</sup> / 10+2 Certificate - where DOB is mentioned (.jpg format, min size 10 kb, max size 200 kb)</td>
+            <td class="table_headertxt misc_col1" style="padding-top: 17px;">Date of Birth Certificate - 10<sup>th</sup> / 11<sup>th</sup> / 10+2 Certificate - where DOB is mentioned (.jpg format, min size 10 kb, max size 200 kb)
+            <span style="color: red;">MANDATORY</span> 
+            </td>
             <td><?php echo $this->Form->input('filename2', array('label' => false, 'type' => 'file')); ?></td>
         </tr>
         <tr>
@@ -26,13 +30,17 @@ echo $this->Form->create('Document', array('id' => 'Image_Details', 'url' => Rou
             <td><?php echo $this->Form->input('filename3', array('label' => false, 'type' => 'file')); ?></td>
         </tr>
         <tr>
-            <td class="table_headertxt misc_col1" style="padding-top: 17px;">Signature of the candidate (.jpg format, min size 10 kb, max size 200 kb)</td>
+            <td class="table_headertxt misc_col1" style="padding-top: 17px;">Signature of the candidate (.jpg format, min size 10 kb, max size 200 kb)
+            <span style="color: red;">MANDATORY</span> 
+            </td>
             <td><?php echo $this->Form->input('filename4', array('label' => false, 'type' => 'file')); ?></td>
         </tr>
+        <?php if(!empty($applicant['Applicant']['post_applied_for']) && ($applicant['Applicant']['post_applied_for'] == "Professor" || $applicant['Applicant']['post_applied_for'] == "Associate Professor")) { ?>
         <tr>
-            <td class="table_headertxt misc_col1" style="padding-top: 17px;">API Proforma (Excel format - Download from above, min size 10 kb, max size 200 kb)</td>
+            <td class="table_headertxt misc_col1" style="padding-top: 17px;">API Proforma (MS Word format - <a href="<?php echo $this->webroot . '/files/API Form.doc'; ?>">Download</a>, Fill and Upload here, min size 10 kb, max size 500 kb)</td>
             <td><?php echo $this->Form->input('filename5', array('label' => false, 'type' => 'file')); ?></td>
         </tr>
+        <?php } ?>
         <tr>
             <td class="table_headertxt misc_col1" style="padding-top: 17px;">Note: Images can be uploaded using the mobile phone also.</td>
             <td></td>

@@ -216,136 +216,137 @@ table#api_score tr td {border: 1px solid black;}
 <table border="1px solid black" width="100%" id="api_score" style="border-collapse: collapse; border-right: 1px solid black; ">
     <tr>
         <td width="10%" class="table_headertxt"></td>
-        <td class="table_headertxt">Category</td>
+        <td colspan="2" class="table_headertxt">Category</td>
         <td width="15%" class="table_headertxt">API Score Claimed by Applicant in each Category</td>
-        <td width="15%" class="table_headertxt">Total</td>
+        <td width="15%" class="table_headertxt">Sub Total</td>
     </tr>
     <tr>
         <td rowspan="3" width="10%" class="table_headertxt">III (A)</td>
-        <td class="table_headertxt">Referred Journals *</td>
+        <td colspan="2" class="table_headertxt">Referred Journals *</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.id', array('label' => false, 'type' => 'hidden'));
                                                       echo $this->Form->input('ApiScore.applicant_id', array('label' => false, 'type' => 'hidden'));
                                                       echo $this->Form->input('ApiScore.rp_refered_jour', array('label' => false, 'maxlength' => '50')); ?></td>
         <td rowspan="3" width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.total_IIIA', array('id' => 'total_IIIA', 'label' => false, 'maxlength' => '50', 'readonly' => 'readonly'));?></td>
     </tr>
     <tr>
-        <td class="table_headertxt">Non-referred but recognized and reputable journals and periodicals, having ISBN/ISSN numbers.</td>
+        <td colspan="2" class="table_headertxt">Non-referred but recognized and reputable journals and periodicals, having ISBN/ISSN numbers.</td>
         <td class="table_headertxt"><?php echo $this->Form->input('ApiScore.rp_nonref_reco', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
-        <td class="table_headertxt">Conference proceedings as full papers, etc. (Abstracts not to be included).</td>
+        <td colspan="2" class="table_headertxt">Conference proceedings as full papers, etc. (Abstracts not to be included).</td>
         <td class="table_headertxt"><?php echo $this->Form->input('ApiScore.rp_conf_full_paper', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
         <td rowspan="5" width="10%" class="table_headertxt">III (B)</td>
-        <td class="table_headertxt">Text or  Reference Books Published by International Publishers with an established peer review system</td>
+        <td colspan="2" class="table_headertxt">Text or  Reference Books Published by International Publishers with an established peer review system</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.rpu_int_pub', array('label' => false, 'maxlength' => '50')); ?></td>
         <td rowspan="5" width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.total_IIIB', array('id' => 'total_IIIB', 'label' => false, 'maxlength' => '50', 'readonly' => 'readonly'));?></td>
     </tr>
     <tr>
-        <td class="table_headertxt">Subjects Books by National level publishers/State and Central Govt. Publications with ISBN/ISSN numbers.</td>
+        <td colspan="2" class="table_headertxt">Subjects Books by National level publishers/State and Central Govt. Publications with ISBN/ISSN numbers.</td>
         <td class="table_headertxt"><?php echo $this->Form->input('ApiScore.rpu_national_pub', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
-        <td class="table_headertxt">Subject Books by Other local publishers with ISBN/ISSN numbers.</td>
+        <td colspan="2" class="table_headertxt">Subject Books by Other local publishers with ISBN/ISSN numbers.</td>
         <td class="table_headertxt"><?php echo $this->Form->input('ApiScore.rpu_local_pub', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
-        <td class="table_headertxt">Chapters contributed to edited knowledge based volumes published by International Publishers.</td>
+        <td colspan="2" class="table_headertxt">Chapters contributed to edited knowledge based volumes published by International Publishers.</td>
         <td class="table_headertxt"><?php echo $this->Form->input('ApiScore.rpu_chap_int_pub', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
-        <td class="table_headertxt">Chapters in knowledge based volumes by Indian/National level publishers with ISBN/ISSN numbers and with numbers of national and international directories.</td>
+        <td colspan="2" class="table_headertxt">Chapters in knowledge based volumes by Indian/National level publishers with ISBN/ISSN numbers and with numbers of national and international directories.</td>
         <td class="table_headertxt"><?php echo $this->Form->input('ApiScore.rpu_chap_nat_pub', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
         <td rowspan="3" width="10%" class="table_headertxt">III (C)(i) Sponsored Projects carried out/ongoing</td>
         <td class="table_headertxt">Major Projects amount mobilized with grants above 30.0 lakhs</td>
+        <td class="table_headertxt">Major Projects amount mobilized with grants above 5.0 lakhs</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.sponp_gabov_30', array('label' => false, 'maxlength' => '50')); ?></td>
         <td rowspan="6" width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.total_IIIC', array('id' => 'total_IIIC', 'label' => false, 'maxlength' => '50', 'readonly' => 'readonly'));?></td>
     </tr>
     <tr>
-        <td class="table_headertxt">Major Projects amount mobilized with grants above 5.0 lakhs upto 30.0 lakhs.</td>
+        <td colspan="2" class="table_headertxt">Major Projects amount mobilized with grants above 5.0 lakhs upto 30.0 lakhs.</td>
         <td class="table_headertxt"><?php echo $this->Form->input('ApiScore.sponp_gabov_5', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
-        <td class="table_headertxt">Minor Projects (Amount mobilized with grants above Rs. 50,000 up to Rs. 5.0 lakhs.</td>
+        <td colspan="2" class="table_headertxt">Minor Projects (Amount mobilized with grants above Rs. 50,000 up to Rs. 5.0 lakhs.</td>
         <td class="table_headertxt"><?php echo $this->Form->input('ApiScore.sponp_gabov_50k', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
         <td width="10%" class="table_headertxt">III (C)(ii) Consultancy Projects carried out/ongoing</td>
-        <td class="table_headertxt">Amount mobilized with minimum of Rs. 10.00 lakh</td>
+        <td colspan="2" class="table_headertxt">Amount mobilized with minimum of Rs. 10.00 lakh</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.consp_gabove_10', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
         <td width="10%" class="table_headertxt">III (C)(iii) Completed Projects: Quality Evaluation</td>
-        <td class="table_headertxt">Completed project Report (Acceptance from funding agency)</td>
+        <td colspan="2" class="table_headertxt">Completed project Report (Acceptance from funding agency)</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.comp_projects_qe', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
         <td width="10%" class="table_headertxt">III (C)(iv) Projects Outcome / Outputs </td>
-        <td class="table_headertxt">Patent/Technology transfer/Product/Process</td>
+        <td colspan="2" class="table_headertxt">Patent/Technology transfer/Product/Process</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.proj_patent', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
         <td width="10%" class="table_headertxt">III (D)(i) M.Phil.</td>
-        <td class="table_headertxt">Degree awarded only</td>
+        <td colspan="2" class="table_headertxt">Degree awarded only</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.rg_mphil', array('label' => false, 'maxlength' => '50')); ?></td>
         <td rowspan="3" width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.total_IIID', array('id' => 'total_IIID', 'label' => false, 'maxlength' => '50', 'readonly' => 'readonly'));?></td>
     </tr>
     <tr>
         <td rowspan="2" width="10%" class="table_headertxt">III (D)(ii) Ph.D</td>
-        <td class="table_headertxt">Degree awarded</td>
+        <td colspan="2" class="table_headertxt">Degree awarded</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.rg_phd', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
-        <td class="table_headertxt">Thesis submitted</td>
+        <td colspan="2" class="table_headertxt">Thesis submitted</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.rg_thesis_sub', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
         <td rowspan="2" width="10%" class="table_headertxt">III (E)(i) Refresher courses, Methodology workshops, Training, Teaching-Learning-Evaluation Technology Programmes, Soft Skills development.</td>
-        <td class="table_headertxt">Not less than two weeks duration</td>
+        <td colspan="2" class="table_headertxt">Not less than two weeks duration</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.refreshc_train_2week', array('label' => false, 'maxlength' => '50')); ?></td>
         <td rowspan="8" width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.total_IIIE', array('id' => 'total_IIIE', 'label' => false, 'maxlength' => '50', 'readonly' => 'readonly'));?></td>
     </tr>
     <tr>
-        <td class="table_headertxt">One week duration</td>
+        <td colspan="2" class="table_headertxt">One week duration</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.refreshc_one_week', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
         <td rowspan="4" width="10%" class="table_headertxt">III (E)(ii) Papers in Conferences/Seminars/workshops etc. **</td>
-        <td class="table_headertxt">Participation and Presentation of research papers (oral/poster) in International conference</td>
+        <td colspan="2" class="table_headertxt">Participation and Presentation of research papers (oral/poster) in International conference</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.pap_pp_int', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
-        <td class="table_headertxt">Participation and Presentation of research papers (oral/poster) in National</td>
+        <td colspan="2" class="table_headertxt">Participation and Presentation of research papers (oral/poster) in National</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.pap_pp_nat', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
-        <td class="table_headertxt">Participation and Presentation of research papers (oral/poster) in Regional/State level</td>
+        <td colspan="2" class="table_headertxt">Participation and Presentation of research papers (oral/poster) in Regional/State level</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.pap_pp_reg', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
-        <td class="table_headertxt">Participation and Presentation of research papers (oral/poster) in Local - University/College level</td>
+        <td colspan="2" class="table_headertxt">Participation and Presentation of research papers (oral/poster) in Local - University/College level</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.pap_pp_local', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
         <td rowspan="2" width="10%" class="table_headertxt">III (E)(iii) Invited lectures or presentations for conferences/symposia.</td>
-        <td class="table_headertxt">International</td>
+        <td colspan="2" class="table_headertxt">International</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.invited_lec_int', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
-        <td class="table_headertxt">National level</td>
+        <td colspan="2" class="table_headertxt">National level</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.invited_lec_nat', array('label' => false, 'maxlength' => '50')); ?></td>
     </tr>
     <tr>
-        <td colspan="2" class="table_headertxt"></td>
+        <td colspan="3" class="table_headertxt"></td>
         <td class="table_headertxt">Total</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.total_api', array('id' => 'total_api', 'label' => false, 'maxlength' => '50', 'readonly' => 'readonly'));?></td>
     </tr>
     <tr>
-        <td colspan="2" class="table_headertxt"></td>
-        <td class="table_headertxt">Total (Capped)</td>
+        <td colspan="3" class="table_headertxt"></td>
+        <td class="table_headertxt">API Score after Capping</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.total_api_capped', array('id' => 'total_api_capped', 'label' => false, 'maxlength' => '50', 'readonly' => 'readonly', 'step' => '0.01'));?></td>
     </tr>
 </table>
@@ -359,6 +360,7 @@ table#api_score tr td {border: 1px solid black;}
 </div>
 <div class="table_headertxt">** If a paper presented in Conference/Seminar is published in the form of Proceedings, the points would accrue for the publication (III(a)) and not under presentaion (III (e)(ii)).  <ol>
 </div>
+<div class="table_headertxt"><a href="<?php echo $this->webroot . '/files/API Result.docx'; ?>" target="_blank">For details on API Calculations, click here.</a></div>
 <?php } ?>
 <div class="submit">
     <?php echo $this->Form->submit('Save & Continue', array('id' => 'formSubmit' , 'div' => false)); ?>

@@ -18,6 +18,9 @@ class FormController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         //$this->Auth->allow('login','add','logout'); 
+        if(!$this->Session->check('registration_id')) {
+            $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+        }
     }
 	
 
@@ -380,13 +383,12 @@ class FormController extends AppController {
 	}
 
 	public function final_submit() {
-		$this->Post->create();
-            	$this->Post->id = $this->Post->field('id', array('user_id' => $this->Session->read('applicant_id')));
-            	if ($this->Post->id) {
-                	$this->Post->saveField('final_submit', "1");
+		$this->Applicant->id = $this->Session->read('applicant_id');
+                if (!empty($this->Applicant->id)) {
+                	$this->Applicant->saveField('final_submit', "1");
             	}
 		//$this->Session->delete('applicant_id');
-            	$this->redirect(array('controller' => 'form', 'action' => 'appliedposts'));
+            	$this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
 		//$this->redirect(array('controller' => 'users', 'action' => 'logout'));
 	}
 

@@ -3,8 +3,8 @@
 <tr>
     <td width="20%"></td>
     <td width="30%"><span class="generalinfoheader">General Information</span></td>
-    <td width="30%"></td>
-    <td width="20%"></td>
+    <td width="30%"><span class="generalinfoheader">Educational Qualifications</span></td>
+    <td width="20%"><span class="generalinfoheader">Advertisement</span></td>
 </tr>
 <tr>
     <td></td>
@@ -18,7 +18,7 @@
         <br/>
         NCTE Regulation 2009: <a href="http://www.ncte-india.org/regulation/RegulationsE-2009.pdf" target="_blank">(iii)</a>
     </td>
-    <td>Advertisement</td>
+    <td><a href="<?php echo $this->webroot . '/files/Teaching Positions.docx'; ?>" target="_blank">Teaching Positions</a></td>
 </tr>
 <tr>
     <td></td>
@@ -26,18 +26,20 @@
     <td></td>
     <td></td>
 </tr>
+<!--
 <tr>
     <td></td>
-    <td>In case of payment failure, the final submission of application will not take place. The candiate will not be able to print the form.</td>
+    <td>In case of payment failure, the final submission of application will not take place. The candidate will not be able to print the form.</td>
     <td></td>
     <td></td>
-</tr>
+</tr>-->
+<!--
 <tr>
     <td></td>
     <td>If payment fails, it will be automatically refunded to the same account.</td>
     <td></td>
     <td></td>
-</tr>
+</tr>-->
 <tr>
     <td></td>
     <td>Billing Address is the address of Credit/Debit card holder.</td>
@@ -55,7 +57,7 @@
 </tr>-->
 <tr>
     <td></td>
-    <td><label>I have read the General Conditions to Apply: (Tick the box to continue)</label>
+    <td><label>I have read the General Conditions to Apply and <a href="<?php echo $this->webroot . '/files/Payment and Refund Policy.docx'; ?>">Payment & Refund Policy</a>: (Tick the box to continue)</label>
     </td>
     <td><input type="checkbox" id="declaration" name="declaration"></input></td>
     <td></td>
@@ -95,6 +97,7 @@
     <td><span style="font-weight: bold; font-size: 20px; color:#0a0;">Centre: *</span>
     </td>
     <td><select id="centre" name="centre" style="width: auto;">
+            <option value="none" selected="selected">None</option>
             </select></td>
     <td></td>
 </tr>
@@ -107,18 +110,18 @@
 </tr>
 <tr>
     <td></td>
-    <td><div style="text-align: center; font-size: 30px;">
+    <td><div style="text-align: center; font-size: 20px;">
         <?php if(isset($applicant) && $applicant['Applicant']['final_submit'] != "1" ) {
               echo $this->Form->create('Temp', array('id' => 'Continue_Form', 'url' => Router::url( '/multi_step_form/wizard/first', true ))); 
-              echo $this->Form->submit('Continue', array('div' => false, 'id' => 'continue_bt' ));
+              echo $this->Form->submit('Continue to Application Form', array('div' => false, 'id' => 'continue_bt' ));
               echo $this->Form->end(); 
             } ?>
         <!--<a href="<?php echo $this->webroot; ?>multi_step_form/wizard/first" class="button" id="continue_bt">Continue</a>-->
     </div>
     </td>
-    <td><div style="text-align: center; font-size: 30px;"><?php if(isset($applicant) && $applicant['Applicant']['final_submit'] == "1" ) {
+    <td><div style="text-align: center; font-size: 20px;"><?php if(isset($applicant) && $applicant['Applicant']['final_submit'] == "1" ) {
               echo $this->Form->create('Temp2', array('id' => 'Print_Form', 'url' => Router::url( '/form/print_bfs', true ))); 
-              echo $this->Form->submit('Print', array('div' => false, 'id' => 'print_bt' ));
+              echo $this->Form->submit('Print Application Form', array('div' => false, 'id' => 'print_bt' ));
               echo $this->Form->end(); 
               } ?>
         </div>
@@ -130,14 +133,16 @@
 <script>
     $(document).ready(function() {
         $('#post_applied_for').val('none');
-        $('#continue_bt').prop('disabled', true);
+        $('#area').val('none');
+        $('#centre').val('none');
+        //$('#continue_bt').prop('disabled', true);
         $('#declaration').prop('checked', false);
 
         $('#area, #post_applied_for, #declaration, #centre').on('change', function() {
             if($('#post_applied_for').val() === 'none' || $('#area').val() === 'none' || 
-                $('#declaration').is(':checked') == false) {
+                $('#declaration').is(':checked') == false || $('#centre').val() === 'none') {
                     $('#post_selected_elig').css("display","none");
-                    $('#continue_bt').prop('disabled',true);
+                    //$('#continue_bt').prop('disabled',true);
             }
             else {
                 $('#post_selected_elig').empty();
@@ -150,8 +155,9 @@
 
         $('#continue_bt').on('click', function(e){
             if($('#post_applied_for').find(":selected").val() === 'none' || 
-                $('#area').find(":selected").val() === 'none') {
+                $('#area').find(":selected").val() === 'none' || $('#centre').find(":selected").val() === 'none') {
                 e.preventDefault();
+                alert('Please select General Conditions to Apply (Tick Box), Post Applied For, School and Centre to continue.');
             }
             else {
                 e.preventDefault();
@@ -191,7 +197,8 @@
                 // names match option values in controlling select box
 
                 bas: {
-                    text: ['Animal Sciences', 
+                    text: ['None',
+                           'Animal Sciences', 
                            'Biochemistry and Microbial Sciences', 
                            'Chemical Sciences', 
                            'Computational Sciences',
@@ -200,7 +207,8 @@
                            'Physical Sciences',
                            'Plant Sciences'
                           ],
-                    value: ['Animal Sciences', 
+                    value: ['none',
+                            'Animal Sciences', 
                             'Biochemistry and Microbial Sciences', 
                             'Chemical Sciences', 
                             'Computational Sciences',
@@ -211,65 +219,83 @@
                            ]
                 },
                 edu: {
-                    text: ['Education'
+                    text: [ 'None',
+                            'Education'
                           ],
-                    value: ['Education'
+                    value: ['none',
+                            'Education'
                            ]
                 },
                 et: {
-                    text: ['Agribusiness/Food Processing Technology', 
+                    text: ['None',
+                           'Agribusiness/Food Processing Technology', 
                            'Computer Science & Technology'
                           ],
-                    value: ['Agribusiness or Food Processing Technology', 
+                    value: ['none',
+                            'Agribusiness or Food Processing Technology', 
                             'Computer Science and Technology'
                            ]
                 },
                 ees: {
-                    text: ['Environmental Sciences & Technology', 
+                    text: ['None',
+                           'Environmental Sciences & Technology', 
                            'Geography & Geology'
                           ],
-                    value: ['Environmental Sciences and Technology', 
+                    value: ['none',
+                            'Environmental Sciences and Technology', 
                             'Geography & Geology'
                            ]
                 },
                 gr: {
-                    text: ['South & Central Asian Studies (Including Historical Studies)'
+                    text: ['None',
+                           'South & Central Asian Studies (Including Historical Studies)'
                           ],
-                    value: ['South and Central Asian Studies (Including Historical Studies)'
+                    value: ['none',
+                            'South and Central Asian Studies (Including Historical Studies)'
                            ]
                 },
                 hs: {
-                    text: ['Human Genetics and Molecular Medicine'
+                    text: ['None',
+                           'Human Genetics and Molecular Medicine'
                           ],
-                    value: ['Human Genetics and Molecular Medicine'
+                    value: ['none',
+                            'Human Genetics and Molecular Medicine'
                            ]
                 },
                 llc: {
-                    text: ['Classical and Modern Languages (Punjabi Languages, Literature and Culture, English)', 
+                    text: ['None',
+                           'Classical and Modern Languages (Punjabi Languages, Literature and Culture, English)', 
                            'Comparative Literature'
                           ],
-                    value: ['Classical and Modern Languages (Punjabi Languages, Literature and Culture, English)', 
+                    value: ['none',
+                            'Classical and Modern Languages (Punjabi Languages, Literature and Culture, English)', 
                             'Comparative Literature'
                            ]
                 },
                 lsg: {
-                    text: ['Law'
+                    text: ['None',
+                           'Law'
                           ],
-                    value: ['Law'
+                    value: ['none',
+                            'Law'
                            ]
                 },
                 ss: {
-                    text: ['Economic Studies', 
+                    text: ['None',
+                           'Economic Studies', 
                            'Sociology'
                           ],
-                    value: ['Economic Studies',
+                    value: ['none',
+                            'Economic Studies',
                             'Sociology'
                            ]
                 },
                 sps: {
-                    text: ['Sports Sciences'
+                    text: ['None',
+                           'Sports Sciences'
                           ],
-                    value: ['Sports Sciences'
+                    value: ['none',
+                            'Sports Sciences'
                            ]
                 },
                 none: {

@@ -217,9 +217,12 @@
  */
 	Configure::write('Session', array(
 		'defaults' => 'php',
-                'timeout' => 60,  // 1 hours
+                'timeout' => 1440,  // 24 hours
+                'cookieTimeout' => 1440, // 24 hours
+                'autoRegenerate' => true,
+                'checkAgent' => false,
                 'ini' => array(
-                    'session.gc_maxlifetime' => 3600 // 1 hours
+                    'session.gc_maxlifetime' => 86400 // 24 hours
                 )
 	));
 

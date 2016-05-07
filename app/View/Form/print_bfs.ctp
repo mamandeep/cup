@@ -156,7 +156,7 @@ echo $this->Html->script('jquery-1.11.1-min');
             </td>
         </tr>
         <tr>
-            <td class="print_headers">Area</td>
+            <td class="print_headers">School</td>
             <td class="print_value"><?php echo $applicant['Applicant']['area']?></td>
         </tr>
         <tr>
@@ -403,7 +403,7 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td width="40%" class="print_headers">Category</td>
             <td width="15%" class="print_headers">API Score Claimed by Applicant in each Category</td>
             <td width="10%" class="print_headers">Total</td>
-            <td width="15%" class="print_headers">Min(Total(Section), % of GrandTotal)</td>
+            <td width="15%" class="print_headers">API Score after capping</td>
         </tr>
         <tr>
             <td rowspan="3" class="print_headers">III (A)</td>
@@ -700,16 +700,37 @@ echo $this->Html->script('jquery-1.11.1-min');
                 <td colspan="3">The hard copy of the completed form with the required enclosures is to be sent by post.</td>
             </tr>
             <tr>
-                <td style="width: 40%;"><input type="button" onclick="window.print()" value="Print" style="width: 100px;"/></td>
-                <td></td>
+                <td style="width: 40%;">
+                    <?php if(isset($applicant) && $applicant['Applicant']['final_submit'] == "1" ) { ?>
+                        <input type="button" onclick="window.print()" value="Print" style="width: 100px;"/>
+                    <?php }
+                        else { ?>
+                         <input id="back_button" type="button" onclick="" value="Go Back" style="width: 100px;"/>
+                      <?php } ?>
+                </td>
+                <td style="padding-top: 30px">.....................<br/>Signature
+                </td>
                 <td style="width: 40%;">
                     <!--<a href="<?php echo $this->webroot; ?>/multi_step_form/wizard/finalsubmit" class="button" id="finalsubmit" style="font-size: 20px;">Final Submit</a>-->
-                    <?php /* echo $this->Form->create('Temp', array('id' => 'Temp_Details', 'url' => Router::url( '/form/final_submit', true ))); ?>
-                    <?php echo $this->Form->input('Document.id', array('type' => 'hidden','name' => 'temp', 'value' => 'temp')); ?>
-                    <?php echo $this->Form->submit('Final Submit', array('div' => false, 'id' => 'finalsubmit' )); ?>
-                    <?php echo $this->Form->end(); */ ?>
+                    <?php if(isset($applicant) && $applicant['Applicant']['final_submit'] != "1" ) {
+                            echo $this->Form->create('Temp', array('id' => 'Temp_Details', 'url' => Router::url( '/form/final_submit', true )));
+                            echo $this->Form->input('Document.id', array('type' => 'hidden','name' => 'temp', 'value' => 'temp'));
+                            echo $this->Form->submit('Final Submission', array('div' => false, 'id' => 'finalsubmit' )); 
+                            echo $this->Form->end(); 
+                         } 
+                        ?>
                     <!--<input id="finalsubmit" type="button" value="Final Submit" style="width: 200px;"/>-->
                 </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Date: ..............</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="padding-top: 20px; ">Place: .............</td>
+                <td></td>
             </tr>
         </table>
     </div>
@@ -717,6 +738,29 @@ echo $this->Html->script('jquery-1.11.1-min');
 <?php } ?>
 
 <script>
+    function ConfirmDialog(message){
+    $('<div></div>').appendTo('body')
+                    .html('<div><h6>'+message+'?</h6></div>')
+                    .dialog({
+                        modal: true, title: 'Delete message', zIndex: 10000, autoOpen: true,
+                        width: 'auto', resizable: false,
+                        buttons: {
+                            Yes: function () {
+                                // $(obj).removeAttr('onclick');                                
+                                // $(obj).parents('.Parent').remove();
+
+                                $(this).dialog("close");
+                            },
+                            No: function () {
+                                $(this).dialog("close");
+                            }
+                        },
+                        close: function (event, ui) {
+                            $(this).remove();
+                        }
+                     });
+    };
+      
     $('document').ready(function () {
         $('#finalsubmit').prop('disabled', true);
 
@@ -726,6 +770,26 @@ echo $this->Html->script('jquery-1.11.1-min');
             }
             else {
                 $('#finalsubmit').prop('disabled', true);
+            }
+        });
+
+        $("#finalsubmit").click(function(e) {
+            if(!confirm("Are you sure to finaliz the submission process? After final submission you will not be able to modify your Application Form!")) {
+                e.preventDefault();
+            }
+            else {
+                e.preventDefault();
+                window.location.href = '<?php echo $this->webroot; ?>form/final_submit';
+            }
+        });
+        
+        $("#back_button").click(function(e) {
+            if(!confirm("To make the changes to Online Application Form, please Logout and then Login again.")) {
+                e.preventDefault();
+            }
+            else {
+                e.preventDefault();
+                window.location.href = '<?php echo $this->webroot; ?>users/logout';
             }
         });
     });
