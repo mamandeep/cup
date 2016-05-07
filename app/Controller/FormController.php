@@ -18,9 +18,9 @@ class FormController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         //$this->Auth->allow('login','add','logout'); 
-        if(!$this->Session->check('registration_id')) {
+        /*if(!$this->Session->check('registration_id')) {
             $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
-        }
+        }*/
     }
 	
 
@@ -189,20 +189,19 @@ class FormController extends AppController {
 
 	public function pay() {
                 //print_r($this->Session->read('applicant_id')); return false;
+                $registered_user = $this->Registereduser->find('all', array(
+                    'conditions' => array('Registereduser.applicant_id' => $this->Session->read('applicant_id'))));
                 $applicants = $this->Applicant->find('all', array(
                             'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
-                //if(count($applicants) == 1) {
-                    //if($applicants['0']['Applicant']['category'] == "SC" || $applicants['0']['Applicant']['category'] == "ST" 
-                     //       || $applicants['0']['Applicant']['physically_disabled'] == "yes") {
-                     //       $this->set('app_fee', '300');
-                            //$_SESSION['payment_amount'] = 600;
-                            //$this->Session->write('payment_amount','300');
-                    //}
-                    //else {
-                            //$this->set('app_fee', '600');
-                            //$_SESSION['payment_amount'] = 300;
-                            //$this->Session->write('payment_amount','600');
-                    //}
+                if($registered_user['0']['Registereduser']['category'] == "SC" || $registered_user['0']['Registereduser']['category'] == "ST" 
+                        || $registered_user['0']['Registereduser']['physically_disabled'] == "yes") {
+                        $this->set('app_fee', '250');
+                        $this->Session->write('payment_amount','250');
+                }
+                else {
+                        $this->set('app_fee', '750');
+                        $this->Session->write('payment_amount','750');
+                }
                 $this->set('Applicant', $applicants['0']['Applicant']);
                 //}
                 //else {
@@ -232,7 +231,7 @@ class FormController extends AppController {
 		foreach ($_POST as $key => $value) {
 			if (strlen($value) > 0) {
 				if($key == "amount") {
-					$hashData .= '|'. $this->validate_amount($_POST['amount']);
+					$hashData .= '|'. $this->Session->read('payment_amount');
 				}
 				else {
 					$hashData .= '|'.$value;

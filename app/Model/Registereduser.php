@@ -16,6 +16,14 @@ class Registereduser extends AppModel {
         'dob' => array(
             'rule' => 'notEmpty',
             'message' => 'required field'
+        ),
+        'category' => array(
+            'rule' => 'notEmpty',
+            'message' => 'required field'
+        ),
+        'physically_disabled' => array(
+            'rule' => 'notEmpty',
+            'message' => 'required field'
         )
     );
 

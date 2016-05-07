@@ -86,7 +86,7 @@ class UsersController extends AppController {
                     $this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
                 }
                 else {
-                    $this->Session->setFlash('Please contact Support.');
+                    $this->Session->setFlash('Please check the credentials entererd below.');
                 }
             }
         }

@@ -21,7 +21,7 @@
     .print_headers {
         font-size: 12px;
         font-weight: bold;
-        color: #0a0;
+        color: #010101;
         padding: 5px;
     }
 

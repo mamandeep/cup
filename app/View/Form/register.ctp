@@ -31,6 +31,43 @@
         <tr>
             <td style="width: 20%"></td>
             <td class="table_headertxt" style="padding-top: 17px; width: 20%;">
+                Category
+            </td>
+            <td width="20%">
+                <?php echo $this->Form->input('Registereduser.category', array(
+                    'options' => array(
+                        'General' => 'General',
+                        'SC' => 'SC',
+                        'ST' => 'ST',
+                        'OBC' => 'OBC'),
+                    'empty' => 'Select',
+                    'selected' => 'General',
+                    'style' => 'width: 100%;',
+                    'label' => false
+                )); ?></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="width: 20%"></td>
+            <td class="table_headertxt" style="padding-top: 17px; width: 20%;">
+                Differently Abled
+            </td>
+            <td width="20%">
+                <?php
+                    echo $this->Form->input('Registereduser.physically_disabled', array(
+                        'options' => array('yes' => 'Yes',
+                                           'no' => 'No'),
+                        'selected' => 'no',
+                        'label' => false,
+                        'id' => 'physical_disable_select'
+                    )); ?>
+            </td>
+            <td></td>
+        </tr>
+        
+        <tr>
+            <td style="width: 20%"></td>
+            <td class="table_headertxt" style="padding-top: 17px; width: 20%;">
                 Date of Birth (DD/MM/YYYY)
             </td>
             <td width="20%"><?php echo $this->Form->input('Registereduser.dob', array('label' => false)); ?></td>

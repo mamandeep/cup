@@ -8,15 +8,19 @@
 </tr>
 <tr>
     <td></td>
-    <td>The fee for SC/ST/PWD applicants is Rs. 250 and for others fee is Rs. 750. </td>
+    <td>The fee for SC/ST/PWD applicants is Rs. 250 and for others fee is Rs. 750. 
+        <br/>
+        The last date of online application form is 30<sup>th</sup> May, 2016
+        <br/>
+        The last date for hard copy submission 06<sup>th</sup> June, 2016
+    </td>
     <td>Essential Qualifications   for Professors, Associate Professors, and Assistant Professors: <br/>
-        As per “UGC REGULATIONS ON MINIMUM QUALIFICATIONS FOR APPOINTMENT OF TEACHERS AND OTHER ACADEMIC STAFF IN UNIVERSITIES AND COLLEGES AND MEASURES FOR THE MAINTENANCE OF STANDARDS IN HIGHER EDUCATION 2010“ and the 2nd Amendments to the regulation issued in June 2013. 
+         As per <a href="http://www.ugc.ac.in/oldpdf/regulations/revised_finalugcregulationfinal10.pdf" target="_blank">“UGC REGULATIONS ON MINIMUM QUALIFICATIONS FOR APPOINTMENT OF TEACHERS AND OTHER ACADEMIC STAFF IN UNIVERSITIES AND COLLEGES AND MEASURES FOR THE MAINTENANCE OF STANDARDS IN HIGHER EDUCATION 2010“</a> 
+        <br/>and 
+        <br/><a href="http://www.ugc.ac.in/pdfnews/8539300_English.pdf" target="_blank">the 2nd Amendments to the regulation issued in June 2013</a> 
+        <br />and University rules.
         <br/>
-        For details: <a href="http://www.ugc.ac.in/oldpdf/regulations/revised_finalugcregulationfinal10.pdf" target="_blank">(i)</a>
-        <br/>
-        <a href="http://www.ugc.ac.in/pdfnews/8539300_English.pdf" target="_blank">(ii)</a> and University rules.   
-        <br/>
-        NCTE Regulation 2009: <a href="http://www.ncte-india.org/regulation/RegulationsE-2009.pdf" target="_blank">(iii)</a>
+        <a href="http://www.ncte-india.org/regulation/RegulationsE-2009.pdf" target="_blank">NCTE Regulation 2009</a>
     </td>
     <td><a href="<?php echo $this->webroot . '/files/Teaching Positions.docx'; ?>" target="_blank">Teaching Positions</a></td>
 </tr>
@@ -76,7 +80,9 @@
 </tr>
 <tr>
     <td></td>
-    <td><span style="font-weight: bold; font-size: 20px; color:#0a0;">School: *</span></td>
+    <td><span style="font-weight: bold; font-size: 20px; color:#0a0;">School: *</span>
+        (<a href="http://cup.ac.in/schools_centres.php" target="_blank">Details of Schools and Centres</a>)
+    </td>
     <td><select id="area" name="area" style="width: auto;">
                 <option value="none" selected="selected">None</option>
                 <option value="bas">Basic and Applied Sciences</option>
@@ -89,6 +95,7 @@
                 <option value="lsg">Legal Studies and Governance</option>
                 <option value="sps">Sports Sciences</option>
                 <option value="ss">Social Sciences</option>
+                <option value="bsr">Baba Satguru Ram Singh Chair</option>
             </select></td>
     <td></td>
 </tr>
@@ -149,13 +156,14 @@
                 $('#post_selected_elig').append($('#' + $('#post_applied_for').val() + 
                                                 '_' + $('#area').val()).clone().css('display','block'));
                 $('#post_selected_elig').css("display","block");
-                $('#continue_bt').prop('disabled', false);
+                //$('#continue_bt').prop('disabled', false);
             }
         });
 
         $('#continue_bt').on('click', function(e){
             if($('#post_applied_for').find(":selected").val() === 'none' || 
-                $('#area').find(":selected").val() === 'none' || $('#centre').find(":selected").val() === 'none') {
+                $('#area').find(":selected").val() === 'none' || $('#centre').find(":selected").val() === 'none'
+                || $('#declaration').is(':checked') == false) {
                 e.preventDefault();
                 alert('Please select General Conditions to Apply (Tick Box), Post Applied For, School and Centre to continue.');
             }
@@ -296,6 +304,14 @@
                           ],
                     value: ['none',
                             'Sports Sciences'
+                           ]
+                },
+                bsr: {
+                    text: ['None',
+                           'Baba Satguru Ram Singh Chair'
+                          ],
+                    value: ['none',
+                            'Baba Satguru Ram Singh Chair'
                            ]
                 },
                 none: {
