@@ -64,7 +64,7 @@ class UsersController extends AppController {
                     $count_r++;
                 }
                 
-                /*$sql = "SELECT * FROM `applicant` WHERE id = '" . 
+                $sql = "SELECT * FROM `applicant` WHERE id = '" . 
                         trim($this->data['User']['applicant_id']) . "'";
                 $result = $db->rawQuery($sql);
                 $fee_paid = array();
@@ -76,7 +76,7 @@ class UsersController extends AppController {
                 if(!(count($fee_paid) === 1 && $fee_paid[$first_key] == "0")) {
                     $this->Session->setFlash(__('Pay fees before login.'));
                     return false;
-                }*/
+                }
                 //print_r($result);
                 /*$result = $this->Registereduser->find('all', array(
                         'conditions' => array('Registereduser.email' => $this->data['User']['email'],
@@ -86,7 +86,7 @@ class UsersController extends AppController {
                     $this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
                 }
                 else {
-                    $this->Session->setFlash('Please check the credentials entered below.');
+                    $this->Session->setFlash('Please check the credentials entererd below.');
                 }
             }
         }

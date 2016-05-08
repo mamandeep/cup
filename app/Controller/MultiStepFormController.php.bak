@@ -363,21 +363,7 @@ class MultiStepFormController extends AppController {
 		//$applicants = $this->Applicant->find('all', array(
                 //            'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
 		//$this->set('payment_status', $applicants['0']['Applicant']['response_code']);
-                //$this->redirect(array('controller'=>'form', 'action' => 'print_bfs'));
-		/*$registered_user = $this->Registereduser->find('all', array(
-                    'conditions' => array('Registereduser.applicant_id' => $this->Session->read('applicant_id'))));
-
-                if($registered_user['0']['Registereduser']['category'] == "SC" || $registered_user['0']['Registereduser']['category'] == "ST" 
-                        || $registered_user['0']['Registereduser']['physically_disabled'] == "yes") {
-                    //$this->set('payment_status', "0");
-                    $this->set('exempted', '0');
-                }
-                else {*/
-                
-                    $applicants = $this->Applicant->find('all', array(
-                            'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
-                    $this->set('payment_status', $applicants['0']['Applicant']['response_code']);
-                //}
+                $this->redirect(array('controller'=>'form', 'action' => 'print_bfs'));
                 //$this->set('payment_status', "0");
 	}
 

@@ -85,8 +85,7 @@ class FormController extends AppController {
                         $this->Registereduser->id = $this->Session->read('registration_id');
                         $this->Registereduser->saveField('applicant_id', $this->Session->read('applicant_id'));
                         $this->Session->setFlash('You have successfully registered.');
-                        //$this->redirect(array('controller' => 'form', 'action' => 'pay'));
-			$this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+                        $this->redirect(array('controller' => 'form', 'action' => 'pay'));
                     }
                     else {
                         $this->Session->setFlash('There was an error in Registration.');

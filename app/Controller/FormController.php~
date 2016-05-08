@@ -2,12 +2,7 @@
 
 class FormController extends AppController {
 
-    var $components = array('Captcha.Captcha'=>array('Model'=>'Signup', 
-                       'field'=>'security_code'));//'Captcha.Captcha'
-
-    var $uses = array('Signup', 'Registereduser','Post','Applicant','Education','Experience','Image', 'Misc', 'Researchpaper','Researcharticle', 'Researchproject', 'Document', 'ApiScore');                
-    
-    public $helpers = array('Captcha.Captcha');
+    var $uses = array('Registereduser','Post','Applicant','Education','Experience','Image', 'Misc', 'Researchpaper');                
     
     public $paginate = array(
         'limit' => 25,
@@ -18,136 +13,39 @@ class FormController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         //$this->Auth->allow('login','add','logout'); 
-        /*if(!$this->Session->check('registration_id')) {
-            $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
-        }*/
     }
 	
 
 
-    function captcha()  {
-        $this->autoRender = false;
-        $this->layout='ajax';
-        if(!isset($this->Captcha))	{ //if you didn't load in the header
-            $this->Captcha = $this->Components->load('Captcha.Captcha'); //load it
-        }
-        $this->Captcha->create();
-    }
-    
-    public function generalinformation() {
-           $applicants = $this->Applicant->find('all', array(
-                'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
-            if (count($applicants) == 1 ) {
-                $this->set('applicant', $applicants['0']);
-            }
-    }
+	public function generalinformation() {
+            
+	}
         
         public function register() {
             if(!empty($this->data['Registereduser'])) {
-                //$this->Signup->setCaptcha('security_code', $this->Captcha->getCode('Signup.security_code')); //getting from component and passing to model to make proper validation check
-                //$this->Signup->set($this->request->data);
-                //if ($this->Signup->validates()) {
-                    $segments = explode('/', $this->data['Registereduser']['dob']);
-                    if (count($segments) !== 3 || !preg_match("/^[0-3][0-9]\/[0-1][0-9]\/[0-9]{4}$/", $this->data['Registereduser']['dob'])) {
-                        $this->Session->setFlash('Date of Birth is not in correct format.');
-                        return false;
-                    }
-                    list($dd,$mm,$yyyy) = $segments;
-                    if (!checkdate((int)$mm,(int)$dd,(int)$yyyy)) {
-                        $this->Session->setFlash('Date of Birth is not in correct format.');
-                        return false;
-                    }
-                    if(!filter_var($this->data['Registereduser']['email'], FILTER_VALIDATE_EMAIL)) {
-                        $this->Session->setFlash('Email Id is not in correct format.');
-                        return false;
-                    }
-                    if (!preg_match("/^[789]\d{9}$/",$this->data['Registereduser']['mobile_no'])) {
-                        $this->Session->setFlash('Mobile number is not correct. Please enter 10 digit mobile number.');
-                        return false; 
-                    }
-                    $registered_user = $this->Registereduser->find('all', array(
-                                'conditions' => array('Registereduser.email' => trim($this->data['Registereduser']['email']),
-                                                      'Registereduser.dob' => trim($this->data['Registereduser']['dob']))
-                                                    ));
-                    if(count($registered_user) != 0) {
-                        $this->Session->setFlash('Email / Date of Birth is already registered.');
-                        return false;
-                    }
-                    $this->Applicant->create();
-                    $this->Applicant->set(array(
-                        'advertisement_no' => 'T-01 (2016)'));
-                    
-                    if($this->Registereduser->save($this->data['Registereduser']) && $this->Applicant->save()) {
-                        $this->Session->write('applicant_id', $this->Applicant->getLastInsertID());
-                        $this->Session->write('registration_id', $this->Registereduser->getLastInsertID());
-                        $this->Applicant->id = $this->Session->read('applicant_id');
-                        $this->Applicant->saveField('registration_id', $this->Session->read('registration_id'));
-                        $this->Registereduser->id = $this->Session->read('registration_id');
-                        $this->Registereduser->saveField('applicant_id', $this->Session->read('applicant_id'));
-                        $this->Session->setFlash('You have successfully registered.');
-                        $this->redirect(array('controller' => 'form', 'action' => 'pay'));
-                    }
-                    else {
-                        $this->Session->setFlash('There was an error in Registration.');
-                    }
-                //}
-                //else {
-                //    $this->Session->setFlash('Data Validation Failure', 'default', array('class' =>
-                //        'cake-error'));
-                //}
+                $registered_user = $this->Registereduser->find('all', array(
+                            'conditions' => array('Registereduser.email' => trim($this->data['Registereduser']['email']),
+                                                  'Registereduser.dob' => trim($this->data['Registereduser']['dob']))
+                                                ));
+                if(count($registered_user) != 0) {
+                    $this->Session->setFlash('Email / Date of Birth already registered.');
+                    return false;
+                }
+                if($this->Registereduser->save($this->data['Registereduser'])) {
+                    $this->Session->setFlash('You have successfully registered.');
+                    $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+                }
+                else {
+                    $this->Session->setFlash('There was an error in Registration.');
+                }
             }
         }
         
-        public function prepayment() {
-        if (!empty($this->data['Applicant']['id']) && !empty($this->data['Applicant']['email']) 
-                && !empty($this->data['Applicant']['date_of_birth'])) { 
-            $segments = explode('/', $this->data['Applicant']['date_of_birth']);
-            if (count($segments) !== 3 || !preg_match("/^[0-3][0-9]\/[0-1][0-9]\/[0-9]{4}$/", $this->data['Applicant']['date_of_birth'])) {
-                $this->Session->setFlash('Date of Birth is not in correct format.');
-                return false;
-            }
-            list($dd,$mm,$yyyy) = $segments;
-            if (!checkdate((int)$mm,(int)$dd,(int)$yyyy)) {
-                $this->Session->setFlash('Date of Birth is not in correct format.');
-                return false;
-            }
-            if(!filter_var($this->data['Applicant']['email'], FILTER_VALIDATE_EMAIL)) {
-                $this->Session->setFlash('Email Id is not in correct format.');
-                return false;
-            }
-            $applicant_id = trim($this->data['Applicant']['id']);
-            $registered_user = $this->Registereduser->find('all', array(
-                'conditions' => array('Registereduser.applicant_id' => $applicant_id,
-                    'Registereduser.email' => trim($this->data['Applicant']['email']),
-                    'Registereduser.dob' => trim($this->data['Applicant']['date_of_birth']))));
-            $applicants = $this->Applicant->find('all', array(
-                'conditions' => array('Applicant.id' => $applicant_id)));
-            if (count($registered_user) == 1 && count($applicants) == 1 
-                    && $applicants['0']['Applicant']['response_code'] != "0") {
-                $this->Session->write('applicant_id', $applicant_id);
-                $this->redirect(array('controller' => 'form', 'action' => 'pay'));
-            } else if(count($registered_user) == 1 && count($applicants) == 1 
-                    && $applicants['0']['Applicant']['response_code'] == "0") {
-                // Is the below message fine for showing to applicants
-                $this->Session->setFlash('Payment has been done. Enter credentials to login.');
-                $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
-            }
-            else {
-                $this->Session->setFlash('Details entered are not valid.');
-                return false;
-            }
-        }
-        else if(strcmp(Router::url(array('controller' => 'Form','action' => 'register'), true), $this->referer()) !== 0) {
-            $this->Session->setFlash('Details entered are not complete.');
-            return false;
-        }
-    }
-
-    public function appliedposts() { 
-            /*$posts_applied = $this->Post->find('all', array(
-                        'conditions' => array('Post.registration_id' => $this->Session->read('registration_id'))));
-                                              //'Post.final_submit' => '1')));
-            $this->request->data = $posts_applied;*/
+        public function appliedposts() { 
+            $posts_applied = $this->Post->find('all', array(
+                        'conditions' => array('Post.registration_id' => $this->Session->read('registration_id'),
+                                              'Post.final_submit' => '1')));
+            $this->request->data = $posts_applied;
         }
         
         public function printform($post = null) { 
@@ -187,28 +85,20 @@ class FormController extends AppController {
             }
         }
 
-	public function pay() {
-                //print_r($this->Session->read('applicant_id')); return false;
-                $registered_user = $this->Registereduser->find('all', array(
-                    'conditions' => array('Registereduser.applicant_id' => $this->Session->read('applicant_id'))));
-                $applicants = $this->Applicant->find('all', array(
+	public function pay($post = null) { 
+		$applicants = $this->Applicant->find('all', array(
                             'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
-                if($registered_user['0']['Registereduser']['category'] == "SC" || $registered_user['0']['Registereduser']['category'] == "ST" 
-                        || $registered_user['0']['Registereduser']['physically_disabled'] == "yes") {
-                        $this->set('app_fee', '250');
-                        $this->Session->write('payment_amount','250');
-                }
-                else {
-                        $this->set('app_fee', '750');
-                        $this->Session->write('payment_amount','750');
-                }
-                $this->set('Applicant', $applicants['0']['Applicant']);
-                //}
-                //else {
-                    //$this->Session->setFlash('Invalid Applicant ID.');
-                    //$this->redirect(array('controller' => 'form', 
-                                              //'action' => 'register'));
-                //}
+		if($applicants['0']['Applicant']['category'] == "General" || $applicants['0']['Applicant']['category'] == "OBC") {
+			$this->set('app_fee', '600');
+			//$_SESSION['payment_amount'] = 600;
+			$this->Session->write('payment_amount','600');
+		}
+		else {
+			$this->set('app_fee', '300');
+			//$_SESSION['payment_amount'] = 300;
+			$this->Session->write('payment_amount','300');
+		}
+		$this->set('Applicant', $applicants['0']['Applicant']);
 	}
 
 	public function post() {
@@ -228,10 +118,10 @@ class FormController extends AppController {
 		unset($_POST['submitted']);
 
 		ksort($_POST);
-		foreach ($_POST as $key => $value) {
+		foreach ($_POST as $key => $value){
 			if (strlen($value) > 0) {
 				if($key == "amount") {
-					$hashData .= '|'. $this->Session->read('payment_amount');
+					$hashData .= '|'.$this->Session->read('payment_amount'); //$_SESSION['payment_amount'];
 				}
 				else {
 					$hashData .= '|'.$value;
@@ -243,15 +133,7 @@ class FormController extends AppController {
 			$this->set('secureHash', $secureHash);
 		}
 	}
-        
-        function validate_amount($amount) {
-            if(isset($amount) && ($amount === "750" || $amount === "250")) {
-                return $amount;
-            }
-            else 
-                return "750";
-        }
-        
+
 	public function returnpg() {
 		$HASHING_METHOD = 'sha512'; // md5,sha1
 
@@ -328,7 +210,7 @@ class FormController extends AppController {
 	}
 
 	public function print_bfs() {
-            $this->layout = false;
+		$this->layout = false;
             $this->set('data_set', 'false');
             $applicants = $this->Applicant->find('all', array(
                     'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
@@ -337,42 +219,34 @@ class FormController extends AppController {
                 return false;
             }
             $education_arr = $this->Education->find('all', array(
-                    'conditions' => array('Education.applicant_id' => $this->Session->read('applicant_id'))));
+                    'conditions' => array('Education.user_id' => $this->Session->read('applicant_id'))));
 
             $exp_arr = $this->Experience->find('all', array(
-                    'conditions' => array('Experience.applicant_id' => $this->Session->read('applicant_id'))));
-            $rpaper_arr = $this->Researchpaper->find('all', array(
-                    'conditions' => array('Researchpaper.applicant_id' => $this->Session->read('applicant_id'))));
-            $rarticle_arr = $this->Researcharticle->find('all', array(
-                    'conditions' => array('Researcharticle.applicant_id' => $this->Session->read('applicant_id'))));
-            $rproject_arr = $this->Researchproject->find('all', array(
-                    'conditions' => array('Researchproject.applicant_id' => $this->Session->read('applicant_id'))));
-            $image = $this->Document->find('all', array(
-                    'conditions' => array('Document.applicant_id' => $this->Session->read('applicant_id'))));
-            $apiscore = $this->ApiScore->find('all', array(
-                    'conditions' => array('ApiScore.applicant_id' => $this->Session->read('applicant_id'))));
+                    'conditions' => array('Experience.user_id' => $this->Session->read('applicant_id'))));
+            $publications_arr = $this->Researchpaper->find('all', array(
+                    'conditions' => array('Researchpaper.user_id' => $this->Session->read('applicant_id'))));
+            
+            $image = $this->Image->find('all', array(
+                    'conditions' => array('Image.user_id' => $this->Session->read('applicant_id'))));
 
-            //$misc = $this->Applicant->find('all', array(
-            //        'conditions' => array('Misc.user_id' => $this->Session->read('applicant_id'))));                
-            if(count($applicants) == 0) {
+            $misc = $this->Misc->find('all', array(
+                    'conditions' => array('Misc.user_id' => $this->Session->read('applicant_id'))));                
+            if(count($applicants) == 0 || count($misc) == 0) {
                 $this->Session->setFlash('Please complete your form in sequence.');
                 return false;
             }		
-            if(count($applicants) == 1) {
-                //$this->set('postAppliedFor', $this->getPostAppliedFor());
+            if(count($applicants) == 1 && count($misc) == 1) {
+                $this->set('postAppliedFor', $this->getPostAppliedFor());
                 $this->set('applicant', $applicants['0']);
                 $this->set('education_arr', $education_arr);
                 $this->set('exp_arr', $exp_arr);
-                $this->set('rpaper_arr', $rpaper_arr);
-                $this->set('rarticle_arr', $rarticle_arr);
-                $this->set('rproject_arr', $rproject_arr);
-                $this->set('apiscore', $apiscore['0']);
+                $this->set('publication_arr', $publications_arr);
                 //$this->set('miscexp', $miscexp['0']);
                 //$this->set('academic_dist', $adacdemic_dist);
                 $this->set('image', !empty($image['0']) ? $image['0'] : array());
                 //$this->set('researchpapers', $researchpapers);
                 //$this->set('researcharticles', $researcharticles);
-                //$this->set('misc', $misc['0']);
+                $this->set('misc', $misc['0']);
                 $this->set('data_set', 'true');
             }
             else {
@@ -382,12 +256,13 @@ class FormController extends AppController {
 	}
 
 	public function final_submit() {
-		$this->Applicant->id = $this->Session->read('applicant_id');
-                if (!empty($this->Applicant->id)) {
-                	$this->Applicant->saveField('final_submit', "1");
+		$this->Post->create();
+            	$this->Post->id = $this->Post->field('id', array('user_id' => $this->Session->read('applicant_id')));
+            	if ($this->Post->id) {
+                	$this->Post->saveField('final_submit', "1");
             	}
 		//$this->Session->delete('applicant_id');
-            	$this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
+            	$this->redirect(array('controller' => 'form', 'action' => 'appliedposts'));
 		//$this->redirect(array('controller' => 'users', 'action' => 'logout'));
 	}
 

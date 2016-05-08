@@ -2,9 +2,30 @@
 <table width="650px" style="table-layout: fixed; margin: 0 auto;">
 <tr>
     <td width="20%"></td>
-    <td width="30%"><span class="generalinfoheader">General Information</span></td>
-    <td width="30%"><span class="generalinfoheader">Educational Qualifications</span></td>
-    <td width="20%"><span class="generalinfoheader">Advertisement</span></td>
+    <td width="50%"><span class="generalinfoheader">Advertisement</span>
+    <br/><a href="<?php echo $this->webroot . '/files/Teaching Positions.docx'; ?>" target="_blank">Teaching Positions</a>
+    <br/></td>
+    <!--<td width="30%"><span class="generalinfoheader">Educational Qualifications</span></td>
+    <td width="20%"><span class="generalinfoheader">Advertisement</span></td>-->
+    <td></td>
+</tr>
+<tr>
+    <td></td>
+    <td><span class="generalinfoheader">Educational Qualifications</span>
+    <br/>Essential Qualifications   for Professors, Associate Professors, and Assistant Professors: <br/>
+         As per <a href="http://www.ugc.ac.in/oldpdf/regulations/revised_finalugcregulationfinal10.pdf" target="_blank">“UGC regulations on minimum qualifications for appointment of teachers and other academic staff in universities and colleges and measures for the maintenance of standards in higher education 2010“</a> 
+        <br/>and 
+        <br/><a href="http://www.ugc.ac.in/pdfnews/8539300_English.pdf" target="_blank">the 2nd Amendments to the regulation issued in June 2013</a> 
+        <br />and University rules.
+        <br/>
+        <a href="http://www.ncte-india.org/regulation/RegulationsE-2009.pdf" target="_blank">NCTE Regulation 2009</a>
+    <br/></td>
+    <td></td>
+</tr>
+<tr>
+    <td></td>
+    <td width="60%"><span class="generalinfoheader">General Information</span></td>
+    <td></td>
 </tr>
 <tr>
     <td></td>
@@ -13,31 +34,16 @@
         The last date of online application form is 30<sup>th</sup> May, 2016
         <br/>
         The last date for hard copy submission 06<sup>th</sup> June, 2016
-	<br /><br />If the candidate is selected, he/she will be required to submit Aadhar within one month of joining.
-    <br /><br >One application form can be submitted per registration. Please register seperately to apply for each post.
-    <br /><br >Billing Address is the address of Credit/Debit card holder.
-    <br /><br />
+    
     </td>
-    <td>Essential Qualifications   for Professors, Associate Professors, and Assistant Professors: <br/>
-         As per <a href="http://www.ugc.ac.in/oldpdf/regulations/revised_finalugcregulationfinal10.pdf" target="_blank">“UGC REGULATIONS ON MINIMUM QUALIFICATIONS FOR APPOINTMENT OF TEACHERS AND OTHER ACADEMIC STAFF IN UNIVERSITIES AND COLLEGES AND MEASURES FOR THE MAINTENANCE OF STANDARDS IN HIGHER EDUCATION 2010“</a> 
-        <br/>and 
-        <br/><a href="http://www.ugc.ac.in/pdfnews/8539300_English.pdf" target="_blank">the 2nd Amendments to the regulation issued in June 2013</a> 
-        <br />and University rules.
-        <br/>
-        <a href="http://www.ncte-india.org/regulation/RegulationsE-2009.pdf" target="_blank">NCTE Regulation 2009</a>
-    </td>
-    <td><a href="<?php echo $this->webroot . '/files/Teaching Positions.docx'; ?>" target="_blank">Teaching Positions</a></td>
+    <td></td>
 </tr>
-<!--
 <tr>
     <td></td>
-    <td><br /><br />If the candidate is selected, he/she will be required to submit Aadhar within one month of joining.
-    <br /><br >One application form can be submitted per registration. Please register seperately to apply for each post.
-    <br /><br >Billing Address is the address of Credit/Debit card holder.
-    </td>
+    <td>If the candidate is selected, she/he will be required to submit Aadhaar within one month of joining.</td>
     <td></td>
     <td></td>
-</tr>-->
+</tr>
 <!--
 <tr>
     <td></td>
@@ -52,13 +58,12 @@
     <td></td>
     <td></td>
 </tr>-->
-<!--
 <tr>
     <td></td>
+    <td>Billing Address is the address of Credit/Debit card holder.</td>
     <td></td>
     <td></td>
-    <td></td>
-</tr> -->
+</tr>
 <!--
 <tr>
     <td></td>
@@ -70,7 +75,7 @@
 </tr>-->
 <tr>
     <td></td>
-    <td><label>I have read the General Conditions to Apply and <a href="<?php echo $this->webroot . '/files/Payment and Refund Policy.docx'; ?>">Payment & Refund Policy</a>: (Tick the box to continue)</label>
+    <td><label>I have read the General Conditions to Apply and <a href="<?php echo $this->webroot . '/files/Payment and Refund Policy.docx'; ?>">Payment & Refund Policy</a>: (Tick the box to continue) <span>*</span></label>
     </td>
     <td><input type="checkbox" id="declaration" name="declaration"></input></td>
     <td></td>

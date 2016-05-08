@@ -13,10 +13,11 @@
         <tr>
             <td>&nbsp;(DD/MM/YYYY)<?php echo $this->Form->input('dob', array('label' => 'Date of Birth')); ?></td>
         </tr>
+        <!--
         <tr>
             <td><?php echo $this->Form->input('applicant_id', array('label' => 'Applicant Id.', 
                                                                     'type' => 'text')); ?></td>
-        </tr>
+        </tr>-->
     </table>
         
     <!--</fieldset>-->
