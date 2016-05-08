@@ -360,7 +360,7 @@ table#api_score tr td {border: 1px solid black;}
 </div>
 <div class="table_headertxt">** If a paper presented in Conference/Seminar is published in the form of Proceedings, the points would accrue for the publication (III(a)) and not under presentaion (III (e)(ii)).  <ol>
 </div>
-<div class="table_headertxt"><a href="<?php echo $this->webroot . '/files/API Result.docx'; ?>" target="_blank">For details on API Calculations, click here.</a></div>
+<div class="table_headertxt">For details on API Calculations: <a href="<?php echo $this->webroot . '/files/API Result.docx'; ?>" target="_blank">click here.</a></div>
 <?php } ?>
 <div class="submit">
     <?php echo $this->Form->submit('Save & Continue', array('id' => 'formSubmit' , 'div' => false)); ?>
