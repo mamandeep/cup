@@ -3,7 +3,7 @@
 class FormController extends AppController {
 
     var $components = array('Captcha.Captcha'=>array('Model'=>'Signup', 
-                        'field'=>'security_code'));//'Captcha.Captcha'
+                       'field'=>'security_code'));//'Captcha.Captcha'
 
     var $uses = array('Signup', 'Registereduser','Post','Applicant','Education','Experience','Image', 'Misc', 'Researchpaper','Researcharticle', 'Researchproject', 'Document', 'ApiScore');                
     

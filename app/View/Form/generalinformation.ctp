@@ -13,6 +13,10 @@
         The last date of online application form is 30<sup>th</sup> May, 2016
         <br/>
         The last date for hard copy submission 06<sup>th</sup> June, 2016
+	<br /><br />If the candidate is selected, he/she will be required to submit Aadhar within one month of joining.
+    <br /><br >One application form can be submitted per registration. Please register seperately to apply for each post.
+    <br /><br >Billing Address is the address of Credit/Debit card holder.
+    <br /><br />
     </td>
     <td>Essential Qualifications   for Professors, Associate Professors, and Assistant Professors: <br/>
          As per <a href="http://www.ugc.ac.in/oldpdf/regulations/revised_finalugcregulationfinal10.pdf" target="_blank">“UGC REGULATIONS ON MINIMUM QUALIFICATIONS FOR APPOINTMENT OF TEACHERS AND OTHER ACADEMIC STAFF IN UNIVERSITIES AND COLLEGES AND MEASURES FOR THE MAINTENANCE OF STANDARDS IN HIGHER EDUCATION 2010“</a> 
@@ -24,12 +28,16 @@
     </td>
     <td><a href="<?php echo $this->webroot . '/files/Teaching Positions.docx'; ?>" target="_blank">Teaching Positions</a></td>
 </tr>
+<!--
 <tr>
     <td></td>
-    <td>If the candidate is selected, he/she will be required to submit Aadhar within one month of joining.</td>
+    <td><br /><br />If the candidate is selected, he/she will be required to submit Aadhar within one month of joining.
+    <br /><br >One application form can be submitted per registration. Please register seperately to apply for each post.
+    <br /><br >Billing Address is the address of Credit/Debit card holder.
+    </td>
     <td></td>
     <td></td>
-</tr>
+</tr>-->
 <!--
 <tr>
     <td></td>
@@ -44,12 +52,13 @@
     <td></td>
     <td></td>
 </tr>-->
+<!--
 <tr>
     <td></td>
-    <td>Billing Address is the address of Credit/Debit card holder.</td>
     <td></td>
     <td></td>
-</tr>
+    <td></td>
+</tr> -->
 <!--
 <tr>
     <td></td>

@@ -89,19 +89,22 @@
             <td width="20%"><?php echo $this->Form->input('Registereduser.mobile_no', array('label' => false)); ?></td>
             <td></td>
         </tr>
+	<!--
         <tr>
             <td style="width: 20%"></td>
             <td class="table_headertxt" style="padding-top: 17px; width: 20%;">
                 Enter the text shown: 
             </td>
-            <td><?php 
+            <td><?php /*
                     $custom1['width']=150;
                     $custom1['height']=50;
                     $custom1['theme']='default';
-                    $this->Captcha->render($custom1);
+		    $custom1['type']='math';
+                    $this->Captcha->render($custom1);*/
                 ?></td>
             <td></td>
         </tr>
+	-->
         <tr>
             <td style="width: 20%"></td>
             <td class="table_headertxt" style="padding-top: 17px; width: 20%;">

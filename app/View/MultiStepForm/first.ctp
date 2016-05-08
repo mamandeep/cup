@@ -264,7 +264,7 @@
     }
     
     function calage() {
-        var dat = new Date("12/06/2015");
+        var dat = new Date("05/30/2016");
         var curday = dat.getDate();
         var curmon = dat.getMonth()+1;
         var curyear = dat.getFullYear();
