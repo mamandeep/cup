@@ -15,8 +15,7 @@
     <br/>Essential Qualifications   for Professors, Associate Professors, and Assistant Professors: <br/>
          As per <a href="http://www.ugc.ac.in/oldpdf/regulations/revised_finalugcregulationfinal10.pdf" target="_blank">“UGC regulations on minimum qualifications for appointment of teachers and other academic staff in universities and colleges and measures for the maintenance of standards in higher education 2010“</a> 
         <br/>and 
-        <br/><a href="http://www.ugc.ac.in/pdfnews/8539300_English.pdf" target="_blank">the 2nd Amendments to the regulation issued in June 2013</a> 
-        <br />and University rules.
+        <br/><a href="http://www.ugc.ac.in/pdfnews/8539300_English.pdf" target="_blank">the 2nd Amendments to the regulation issued in June 2013</a> and University rules.
         <br/>
         <a href="http://www.ncte-india.org/regulation/RegulationsE-2009.pdf" target="_blank">NCTE Regulation 2009</a>
     <br/></td>
@@ -31,9 +30,9 @@
     <td></td>
     <td>The fee for SC/ST/PWD applicants is Rs. 250 and for others fee is Rs. 750. 
         <br/>
-        The last date of online application form is 30<sup>th</sup> May, 2016
+        The last date of online application form is 30<sup>th</sup> May, 2016 1700 hrs
         <br/>
-        The last date for hard copy submission 06<sup>th</sup> June, 2016
+        The last date for signed copy submission is 06<sup>th</sup> June, 2016 1700 hrs
     
     </td>
     <td></td>
