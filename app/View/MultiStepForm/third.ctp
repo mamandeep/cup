@@ -40,8 +40,8 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                         echo "$('input[name$=\"data[Experience][" . $key . "][to_date]\"]').on('focusout', function(){
                             dateFormatCheck('input[name$=\"data[Experience][" . $key . "][to_date]\"]');
                         });";
-                        echo "$('input[name$=\"data[Experience][" . $key . "][no_of_yrs_mnths]\"]').on('focusin', function(){
-                            calcuateDiff('input[name$=\"data[Experience][" . $key . "][from_date]\"]', 'input[name$=\"data[Experience][" . $key . "][to_date]\"]', 'input[name$=\"data[Experience][" . $key . "][no_of_yrs_mnths]\"]');
+                        echo "$('input[name$=\"data[Experience][" . $key . "][no_of_yrs_mnths_days]\"]').on('focusin', function(){
+                            calcuateDiff('input[name$=\"data[Experience][" . $key . "][from_date]\"]', 'input[name$=\"data[Experience][" . $key . "][to_date]\"]', 'input[name$=\"data[Experience][" . $key . "][no_of_yrs_mnths_days]\"]');
                         });";
                         echo "</script>";
                     }
