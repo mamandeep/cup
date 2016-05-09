@@ -278,6 +278,8 @@ class MultiStepFormController extends AppController {
         }
         
         function _processFourth($count = 1) {
+            $applicant = $this->Applicant->find('all', array(
+                        'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
             if($this->data['modified_papers'] == 'true') {
                 $researchpaper_arr = $this->Researchpaper->deleteAll( array('Researchpaper.applicant_id' => $this->Session->read('applicant_id')));
             }
