@@ -12,7 +12,7 @@ $org = isset($org) ? $org : 'Central Government';
         <?php echo $this->Form->text("Experience.{$key}.scale_of_pay"); ?>
     </td>
     <td>
-        <?php echo $this->Form->text("Experience.{$key}.name_add"); ?>
+        <?php echo $this->Form->text("Experience.{$key}.name_address"); ?>
     </td>
     <td>
         <?php 
@@ -35,7 +35,7 @@ $org = isset($org) ? $org : 'Central Government';
         <?php echo $this->Form->text("Experience.{$key}.to_date"); ?>
     </td>
     <td>
-        <?php echo $this->Form->text("Experience.{$key}.no_of_yrs_mnths"); ?>
+        <?php echo $this->Form->text("Experience.{$key}.no_of_yrs_mnths_days"); ?>
     </td>
     <td>
         <?php echo $this->Form->text("Experience.{$key}.nature_of_work"); ?>

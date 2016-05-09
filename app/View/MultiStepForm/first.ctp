@@ -208,8 +208,8 @@
                 <td><?php echo $this->Form->label('FaxNo', 'Fax. No.'); ?></td>
             </tr>
             <tr>
-                <td><?php echo $this->Form->input('Applicant.landline_no', array('label' => false, 'maxlength' => '500')); ?></td>
-                <td><?php echo $this->Form->input('Applicant.fax_no', array('label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.landline', array('label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.fax', array('label' => false, 'maxlength' => '500')); ?></td>
             </tr>
         </table>
         <?php echo $this->Form->input('Applicant.age_on_adv_yrs', array('label' => false, 'type' => 'hidden')); ?>
