@@ -30,7 +30,7 @@ $(document).ready(function () {
             $("#modified").val('true');
             var attri1 = 'input[name$="data[Experience]['+ (numberRows - 1) + '][from_date]"]';
             var attri2 = 'input[name$="data[Experience]['+ (numberRows - 1) + '][to_date]"]';
-            var attri3 = 'input[name$="data[Experience]['+ (numberRows - 1) + '][no_of_yrs_mnths]"]';
+            var attri3 = 'input[name$="data[Experience]['+ (numberRows - 1) + '][no_of_yrs_mnths_days]"]';
             
             $(attri1).on('focusout', function(){
                 dateFormatCheck(attri1);

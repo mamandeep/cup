@@ -292,7 +292,13 @@ class MultiStepFormController extends AppController {
             
             if($this->Researchpaper->saveMany($this->data['Researchpaper']) && $this->Researcharticle->saveMany($this->data['Researcharticle'])
                     && $this->Applicant->save($this->data['Applicant']) && $this->Researchproject->saveMany($this->data['Researchproject'])
-                    && $this->ApiScore->save($this->data['ApiScore'])) { 
+                    ) {
+                if($applicant['0']['Applicant']['post_applied_for'] == "Professor" || $applicant['0']['Applicant']['post_applied_for'] == "Associate Professor") {
+                    if($this->ApiScore->save($this->data['ApiScore']))
+                        return true;
+                    else
+                        return false;
+                }
                 return true;
             }
             return false;
