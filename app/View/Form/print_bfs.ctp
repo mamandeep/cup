@@ -555,6 +555,30 @@ echo $this->Html->script('jquery-1.11.1-min');
     </table>
     <?php } ?>
     <br/>
+    <div class="print_headers">Peer Recognition</div>
+    <table id="present_position_table" border="1px solid black" style="border-right: 1px solid black; border-collapse: collapse;">
+        <tr>
+            <td width="40%" class="print_headers">Award/honours</td>
+            <td width="40%" class="print_headers">Agency</td>
+            <td width="20%" class="print_headers">Year</td>
+        </tr>
+        <tr>
+            <td class="print_value"><?php echo $applicant['Applicant']['award_honour1']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['agency1']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['year1']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_value"><?php echo $applicant['Applicant']['award_honour2']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['agency2']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['year2']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_value"><?php echo $applicant['Applicant']['award_honour3']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['agency3']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['year3']; ?></td>
+        </tr>
+    </table>
+    <br/>
     <div class="print_headers">Referees</div>
     <table width="100%" border="1px solid black" style="border-collapse: collapse;">
         <tr>

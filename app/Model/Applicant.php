@@ -119,6 +119,10 @@ class Applicant extends AppModel {
         'time_req_for_joining' => array(
             'rule' => 'notEmpty',
             'message' => 'required field'
+        ),
+        'total_self_att_docs_att' => array(
+            'rule' => 'notEmpty',
+            'message' => 'required field'
         )
         
     );

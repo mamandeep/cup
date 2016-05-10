@@ -188,12 +188,13 @@ echo $this->Form->create('Applicant', array('id' => 'Misc_Details', 'url' => Rou
             <td colspan="2" style="width: 55%"><?php echo $this->Form->input('Applicant.develop_department', array('label' => false, 'maxlength' => '500'));  ?></td>
         </tr>
     </table>
+    <!--
     <table>
         <tr>
             <td class="table_headertxt misc_col1">Any other information relevant to the post applied for:</td>
             <td colspan="2" style="width: 55%"><?php echo $this->Form->input('Applicant.any_other_info', array('label' => false, 'maxlength' => '500'));  ?></td>
         </tr>
-    </table>
+    </table>-->
 </div>
 <div class="submit">
     <?php echo $this->Form->submit('Save & Continue', array('div' => false)); ?>
