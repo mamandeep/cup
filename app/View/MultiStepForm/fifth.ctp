@@ -185,7 +185,7 @@ echo $this->Form->create('Applicant', array('id' => 'Misc_Details', 'url' => Rou
         </tr>
         <tr>
             <td class="table_headertxt misc_col1">If selected how would you like to develop your Department/University and your area of interest (only in 200 words):</td>
-            <td colspan="2" style="width: 55%"><?php echo $this->Form->input('Applicant.develop_department', array('label' => false, 'maxlength' => '500'));  ?></td>
+            <td colspan="2" style="width: 55%"><?php echo $this->Form->input('Applicant.develop_department', array('label' => false, 'maxlength' => '1500'));  ?></td>
         </tr>
     </table>
     <!--
