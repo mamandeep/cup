@@ -74,7 +74,7 @@
 </tr>-->
 <tr>
     <td></td>
-    <td><label>I have read the General Conditions to Apply and <a href="<?php echo $this->webroot . '/files/Payment and Refund Policy.docx'; ?>">Payment & Refund Policy</a>: (Tick the box to continue) <span>*</span></label>
+    <td><label>I have read the General Conditions to Apply and <a href="<?php echo $this->webroot . '/files/Refund Policy.pdf'; ?>">Payment & Refund Policy</a>: (Tick the box to continue) <span>*</span></label>
     </td>
     <td><input type="checkbox" id="declaration" name="declaration"></input></td>
     <td></td>
