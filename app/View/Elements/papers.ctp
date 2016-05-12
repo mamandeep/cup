@@ -5,19 +5,19 @@ $key = isset($key) ? $key : '<%= key %>';
     <td>
         <?php echo $this->Form->hidden("Researchpaper.{$key}.id"); ?>
         <?php echo $this->Form->hidden("Researchpaper.{$key}.applicant_id"); ?>
-        <?php echo $this->Form->text("Researchpaper.{$key}.authors"); ?>
+        <?php echo $this->Form->text("Researchpaper.{$key}.authors", array('maxlength' => '200')); ?>
     </td>
     <td>
-        <?php echo $this->Form->text("Researchpaper.{$key}.title"); ?>
+        <?php echo $this->Form->text("Researchpaper.{$key}.title", array('maxlength' => '200')); ?>
     </td>
     <td>
-        <?php echo $this->Form->text("Researchpaper.{$key}.name_place_publication"); ?>
+        <?php echo $this->Form->text("Researchpaper.{$key}.name_place_publication", array('maxlength' => '100')); ?>
     </td>
     <td>
-        <?php echo $this->Form->text("Researchpaper.{$key}.publication_ISSN"); ?>
+        <?php echo $this->Form->text("Researchpaper.{$key}.publication_ISSN", array('maxlength' => '80')); ?>
     </td>
     <td>
-        <?php echo $this->Form->text("Researchpaper.{$key}.vol_page_year"); ?>
+        <?php echo $this->Form->text("Researchpaper.{$key}.vol_page_year", array('maxlength' => '80')); ?>
     </td>
     <td>
         <?php echo $this->Form->text("Researchpaper.{$key}.impact_factor"); ?>
