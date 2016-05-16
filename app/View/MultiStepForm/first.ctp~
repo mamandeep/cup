@@ -1,5 +1,7 @@
 <?php echo $this->Form->create('Applicant', array('id' => 'Applicant_Details', 
-                                'url' => Router::url( null, true ))); ?>
+                                'url' => Router::url( null, true ))); 
+//print_r($this->request->data);
+        ?>
         <table>
             <tr>
                 <td><?php 
@@ -7,15 +9,28 @@
                     echo $this->Form->input('Applicant.id', array('type' => 'hidden'));
                     echo $this->Form->input('Applicant.advertisement_no', array(
                         'type' => 'text',
-                        'disabled' => 'disabled',
-                        'value' => 'NT-01 (2015)'
+                        'readonly' => 'readonly'
                     )); ?></td>
                 <td><?php $post = !empty($postAppliedFor) ? $postAppliedFor : '';
-                $options = array( $post => $post );
+                //$options = array( $post => $post );
                 echo $this->Form->input('Applicant.post_applied_for', array(
                     'type' => 'text',
-                     'disabled' => 'disabled',
+                     'readonly' => 'readonly',
                     'value' => $post
+                )); ?></td>
+            </tr>
+            <tr>
+                <td><?php 
+                    //echo $this->Form->input('Applicant.appId', array('type' => 'hidden'));
+                    //echo $this->Form->input('Applicant.id', array('type' => 'hidden'));
+                    echo $this->Form->input('Applicant.centre', array(
+                        'type' => 'text',
+                        'readonly' => 'readonly'
+                    )); ?></td>
+                <td><?php 
+                echo $this->Form->input('Applicant.area', array(
+                    'type' => 'text',
+                     'readonly' => 'readonly',
                 )); ?></td>
             </tr>
             <!--
@@ -83,7 +98,7 @@
                     echo $this->Form->input('Applicant.email', array('label'=>'Email:', 'maxlength' => '500'));
 		?></td>
                 <td><?php echo $this->Form->input('Applicant.mobile_no', array('label' => 'Mobile Number:', 'maxlength' => '500')); ?></td>
-                <td><?php echo $this->Form->input('Applicant.aadhar_no', array('label' => 'Aadhar Number:', 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.aadhar_no', array('label' => 'Aadhar Number: (xxxx xxxx xxxx)', 'maxlength' => '500')); ?></td>
             </tr>
             <tr>
                 <td><?php 
@@ -127,11 +142,11 @@
         </table>
         <br/>
         <?php
-        echo $this->Form->input('Applicant.physical_disable', array(
+        echo $this->Form->input('Applicant.physically_disabled', array(
                         'options' => array('yes' => 'Yes',
                                            'no' => 'No'),
                         'selected' => (!empty($physically_disabled) ? $physically_disabled : 'no'),
-                        'label' => 'If physically disabled',
+                        'label' => 'If differently abled',
                         'id' => 'physical_disable_select'
                     )); ?>
         <table id="physical_disable">
@@ -142,21 +157,22 @@
             </tr>
             <tr>
                 <td>a. Blindness or low vision</td>
-                <td><?php echo $this->Form->input('Applicant.blindness_applicable', array('label' => false, 'maxlength' => '500')); ?></td>
-                <td><?php echo $this->Form->input('Applicant.blindness_percentage', array('label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.blindness', array('label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.blindness_pertge', array('label' => false, 'maxlength' => '500')); ?></td>
             </tr>
             <tr>
                 <td>b. Hearing impairment</td>
-                <td><?php echo $this->Form->input('Applicant.hearing_applicable', array('label' => false, 'maxlength' => '500')); ?></td>
-                <td><?php echo $this->Form->input('Applicant.hearing_percentage', array('label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.hearing', array('label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.hearing_pertge', array('label' => false, 'maxlength' => '500')); ?></td>
             </tr>
             <tr>
                 <td>c. Locomotor disability or cerebral palsy</td>
-                <td><?php echo $this->Form->input('Applicant.locomotor_applicable', array('label' => false, 'maxlength' => '500')); ?></td>
-                <td><?php echo $this->Form->input('Applicant.locomotor_percentage', array('label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.locomotor', array('label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.locomotor_pertge', array('label' => false, 'maxlength' => '500')); ?></td>
             </tr>
         </table>
         <br/>
+        <!--
         <?php
         echo $this->Form->input('Applicant.departmental_cand', array(
                         'options' => array('yes' => 'Yes',
@@ -166,23 +182,34 @@
                         'id' => 'departmental_cand'
                     ));  ?>
         <br/>
+	<br/>
+        <?php
+        echo $this->Form->input('Applicant.internal_cand', array(
+                        'options' => array('yes' => 'Yes',
+                                           'no' => 'No'),
+                        'selected' => (!empty($internal_cand) ? $internal_cand : 'no'),
+                        'label' => 'Are you an Internal Candidate ? (Contractual Employee)',
+                        'id' => 'internal_cand'
+                    ));  ?>
+        -->
+        <br/>
         <div class="table_headertxt">Name & Complete Address with Pincode *</div>
-        <table id="address_table" border="2px solid black" style="border-right: 2px solid black !important;">
+        <table id="address_table" border="2px solid black" style="border-collapse: collapse; border-right: 2px solid black !important;">
             <tr>
                 <td width="20%"><?php echo $this->Form->label('MailingAddress', 'Mailing Address'); ?></td>
                 <td width="20%" colspan='2'><?php echo $this->Form->label('PermanentAddress', 'Permanent Address'); ?></td>
             </tr>
             <tr>
                 <td><?php echo $this->Form->input('Applicant.mailing_address', array('label' => false, 'maxlength' => '500')); ?></td>
-                <td><?php echo $this->Form->input('Applicant.perm_address', array('label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.permanent_address', array('label' => false, 'maxlength' => '500')); ?></td>
             </tr>
             <tr>
                 <td><?php echo $this->Form->label('PhoneNo', 'Phone No. (landline with STD code)'); ?></td>
                 <td><?php echo $this->Form->label('FaxNo', 'Fax. No.'); ?></td>
             </tr>
             <tr>
-                <td><?php echo $this->Form->input('Applicant.landline_no', array('label' => false, 'maxlength' => '500')); ?></td>
-                <td><?php echo $this->Form->input('Applicant.fax_no', array('label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.landline', array('label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.fax', array('label' => false, 'maxlength' => '500')); ?></td>
             </tr>
         </table>
         <?php echo $this->Form->input('Applicant.age_on_adv_yrs', array('label' => false, 'type' => 'hidden')); ?>
@@ -237,7 +264,7 @@
     }
     
     function calage() {
-        var dat = new Date("12/06/2015");
+        var dat = new Date("05/30/2016");
         var curday = dat.getDate();
         var curmon = dat.getMonth()+1;
         var curyear = dat.getFullYear();
@@ -310,7 +337,7 @@
             aadharFormatCheck();
         });
         
-        $("select[name='data[Applicant][physical_disable]']").change(function(){
+        $("select[name='data[Applicant][physically_disabled]']").change(function(){
             if($(this).val() === 'no') {
                 $('#physical_disable').each(function(){
                     $(this).css('display','none');

@@ -10,7 +10,7 @@ class MultiStepFormController extends AppController {
             }
             $current_datetime = new DateTime();
             $current_datetime->setTimezone(new DateTimeZone('Asia/Calcutta'));
-            $close_datetime = new DateTime("2016-05-30 17:00:00", new DateTimeZone('Asia/Calcutta'));
+            $close_datetime = new DateTime("2016-06-06 17:00:00", new DateTimeZone('Asia/Calcutta'));
             //print_r($current_datetime->format('Y-m-d-H-i-s'));
             //print_r($close_datetime->format('Y-m-d-H-i-s'));
             $applicant = $this->Applicant->find('all', array(
@@ -49,7 +49,7 @@ class MultiStepFormController extends AppController {
             $mismatch = false;
             foreach ($posts_applied as $key => $value) {
                 if ($posts_applied[$key]['Applicant']['post_applied_for'] == $this->getPostAppliedFor()
-                        && $posts_applied[$key]['Applicant']['area'] == $this->getAreaAppliedFor()
+                        //&& $posts_applied[$key]['Applicant']['area'] == $this->getAreaAppliedFor()
                         && $posts_applied[$key]['Applicant']['centre'] == $this->getCentreAppliedFor()) {
                     if ($posts_applied[$key]['Applicant']['final_submit'] == "1") {
                         // redirect to general page & disable the post
@@ -58,7 +58,7 @@ class MultiStepFormController extends AppController {
                 }
             }
             if ($mismatch == true) {
-                $this->Session->setFlash('You have already applied for the selected Post/Area/Centre.');
+                $this->Session->setFlash('You have already applied for the selected Post/Centre.');
                 $this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
             }
         }
@@ -67,8 +67,8 @@ class MultiStepFormController extends AppController {
             $applicants = $this->Applicant->find('all', array(
                         'conditions' => array('Applicant.registration_id' => $reg_id,
                                               'Applicant.post_applied_for' => $this->getPostAppliedFor(),
-                                              'Applicant.centre' => $this->getCentreAppliedFor(),
-                                              'Applicant.area' => $this->getAreaAppliedFor())));
+                                              'Applicant.centre' => $this->getCentreAppliedFor()
+                                              )));
             
             //print_r($applicants);
             if(count($applicants) == 1)
@@ -77,8 +77,8 @@ class MultiStepFormController extends AppController {
                 //this condition should not arise. delete all the above records
                 $deleted = $this->Applicant->deleteAll( array('Applicant.registration_id' => $reg_id,
                                                                     'Applicant.post_applied_for' => $this->getPostAppliedFor(),
-                                                                    'Applicant.centre' => $this->getCentreAppliedFor(),
-                                                                    'Applicant.area' => $this->getAreaAppliedFor()));
+                                                                    'Applicant.centre' => $this->getCentreAppliedFor()
+                                                                    ));
             }
         }
         
@@ -99,7 +99,7 @@ class MultiStepFormController extends AppController {
             if (count($applicants) == 1) {
                 $applicants['0']['Applicant']['post_applied_for'] = $this->getPostAppliedFor();
                 $applicants['0']['Applicant']['centre'] = $this->getCentreAppliedFor();
-                $applicants['0']['Applicant']['area'] = $this->getAreaAppliedFor();
+                //$applicants['0']['Applicant']['area'] = $this->getAreaAppliedFor();
                 $this->request->data = $applicants['0'];
                 $this->Session->write('MultiStepForm.applicantId', $applicants['0']['Applicant']['id']);
                 $maritalStatusSelected = $applicants['0']['Applicant']['marital_status'];

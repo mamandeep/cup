@@ -3,7 +3,9 @@
 <tr>
     <td width="20%"></td>
     <td width="50%"><span class="generalinfoheader">Advertisement</span>
-    <br/><a href="<?php echo $this->webroot . '/files/Teaching Positions.docx'; ?>" target="_blank">Teaching Positions</a>
+    <br/>For Advertisement: <a href="<?php echo $this->webroot . '/files/CUP Recruietment TNT-01(2016 Notice.jpg'; ?>" target="_blank">click here</a>
+    <br/>For Corrigendum: <a href="<?php echo $this->webroot . '/files/CGDM.jpg'; ?>" target="_blank">click here</a>
+    <br/><a href="<?php echo $this->webroot . '/files/Teaching_advt.pdf'; ?>" target="_blank">Teaching Positions</a>
     <br/></td>
     <!--<td width="30%"><span class="generalinfoheader">Educational Qualifications</span></td>
     <td width="20%"><span class="generalinfoheader">Advertisement</span></td>-->
@@ -30,9 +32,9 @@
     <td></td>
     <td>The fee for SC/ST/PWD applicants is Rs. 250 and for others fee is Rs. 750. 
         <br/>
-        The last date of online application form is 30<sup>th</sup> May, 2016 1700 hrs
+        The last date of online application form is 06<sup>th</sup> June, 2016 1700 hrs
         <br/>
-        The last date for signed copy submission is 06<sup>th</sup> June, 2016 1700 hrs
+        The last date for signed copy submission is 12<sup>th</sup> June, 2016 1700 hrs
     
     </td>
     <td></td>
@@ -91,6 +93,7 @@
             </select></td>
     <td></td>
 </tr>
+<!--
 <tr>
     <td></td>
     <td><span style="font-weight: bold; font-size: 20px; color:#0a0;">School: *</span>
@@ -112,12 +115,35 @@
             </select></td>
     <td></td>
 </tr>
+-->
 <tr>
     <td></td>
     <td><span style="font-weight: bold; font-size: 20px; color:#0a0;">Centre: *</span>
     </td>
     <td><select id="centre" name="centre" style="width: auto;">
             <option value="none" selected="selected">None</option>
+                <option value="Applied Agriculture">Applied Agriculture</option>
+                <option value="Animal Sciences">Animal Sciences</option>
+		<option value="Baba Satguru Ram Singh Chair">Baba Satguru Ram Singh Chair</option>
+                <option value="Biochemistry and Microbial Sciences">Biochemistry and Microbial Sciences</option>
+                <option value="Chemical Sciences">Chemical Sciences</option>
+                <option value="Classical and Modern Languages (Punjabi Languages, Literature and Culture, English)">Classical and Modern Languages (Punjabi Languages, Literature and Culture, English)</option>
+		<option value="Comparative Literature">Comparative Literature</option>
+                <option value="Computational Sciences">Computational Sciences</option>
+                <option value="Computer Science and Technology">Computer Science & Technology</option>
+                <option value="Economic Studies">Economic Studies</option>
+		<option value="Education">Education</option>
+                <option value="Environmental Sciences and Technology">Environmental Sciences & Technology</option>
+		<option value="Geography and Geology">Geography & Geology</option>
+                <option value="Human Genetics and Molecular Medicine">Human Genetics and Molecular Medicine</option>
+		<option value="Law">Law</option>
+                <option value="Mathematics and Statistics">Mathematics & Statistics</option>
+                <option value="Pharmaceutical Sciences and Natural Products">Pharmaceutical Sciences and Natural Products</option>
+                <option value="Physical Sciences">Physical Sciences</option>
+		<option value="Plant Sciences">Plant Sciences</option>
+                <option value="Sociology">Sociology</option>
+		<option value="South and Central Asian Studies (Including Historical Studies)">South & Central Asian Studies (Including Historical Studies)</option>
+		<option value="Sports Sciences">Sports Sciences</option>
             </select></td>
     <td></td>
 </tr>
@@ -182,9 +208,13 @@
             }
             else {
                 e.preventDefault();
+                //window.location.href = '<?php echo $this->webroot; ?>multi_step_form/wizard/first?post=' + 
+                //                $('#post_applied_for').find(":selected").text() + '&area=' + 
+                //                $('#area').find(":selected").text() + '&centre=' +
+                //                $('#centre').find(":selected").text();
+                
                 window.location.href = '<?php echo $this->webroot; ?>multi_step_form/wizard/first?post=' + 
-                                $('#post_applied_for').find(":selected").text() + '&area=' + 
-                                $('#area').find(":selected").text() + '&centre=' +
+                                $('#post_applied_for').find(":selected").text() + '&centre=' +
                                 $('#centre').find(":selected").text();
             }
         });
@@ -213,7 +243,7 @@
             }
         });
 
-        var Select_List_Data = {
+        /*var Select_List_Data = {
             'centre': { // name of associated select box
                 // names match option values in controlling select box
 
@@ -396,7 +426,7 @@
                 }));
             });
 
-        }());
+        }());*/
     });
 </script>
 
