@@ -138,6 +138,7 @@
                 <td><label class="table_headertxt">Age as on last date to Apply: </label>
                     <input type="text" class="age_computed"></input>
                 </td>
+                <td><?php echo $this->Form->input('Applicant.area_of_sp', array('label' => 'Area of Specialization', 'maxlength' => '500')); ?></td>
             </tr>
         </table>
         <br/>
