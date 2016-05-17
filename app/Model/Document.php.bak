@@ -74,7 +74,7 @@ class Document extends AppModel {
             // http://book.cakephp.org/2.0/en/models/data-validation.html#Validation::mimeType
             'mimeType' => array(
                 'rule' => array('mimeType', array('image/gif','image/png', 'image/jpeg', 'image/jpg', 'application/pdf')),
-                'message' => 'Invalid file, only Jpg/Jpeg/gif/png/pdf files allowed',
+                'message' => 'Invalid file, only Jpg/Jpeg/gif/png/pdf Images allowed',
                 'required' => FALSE,
                 'allowEmpty' => TRUE,
             ),
