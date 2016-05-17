@@ -5,7 +5,7 @@
     <td width="50%"><span class="generalinfoheader">Advertisement</span>
     <br/>For Advertisement: <a href="<?php echo $this->webroot . '/files/CUP Recruietment TNT-01(2016 Notice.jpg'; ?>" target="_blank">click here</a>
     <br/>For Corrigendum: <a href="<?php echo $this->webroot . '/files/CGDM.jpg'; ?>" target="_blank">click here</a>
-    <br/><a href="<?php echo $this->webroot . '/files/Teaching_advt.pdf'; ?>" target="_blank">Teaching Positions</a>
+    <br/>For Teaching Positions, General Instructions and Essential Information: <a href="<?php echo $this->webroot . '/files/Teaching_advt.pdf'; ?>" target="_blank">click here</a>
     <br/></td>
     <!--<td width="30%"><span class="generalinfoheader">Educational Qualifications</span></td>
     <td width="20%"><span class="generalinfoheader">Advertisement</span></td>-->
@@ -19,7 +19,7 @@
         <br/>and 
         <br/><a href="http://www.ugc.ac.in/pdfnews/8539300_English.pdf" target="_blank">the 2nd Amendments to the regulation issued in June 2013</a> and University rules.
         <br/>
-        <a href="http://www.ncte-india.org/regulation/RegulationsE-2009.pdf" target="_blank">NCTE Regulation 2009</a>
+        <a href="http://www.ncte-india.org/regulation2014/english/appendix5.pdf" target="_blank">NCTE Regulation 2014</a>
     <br/></td>
     <td></td>
 </tr>
