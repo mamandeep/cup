@@ -48,7 +48,7 @@
 			</td>
 			      <?php }
 			      else { 
-				echo "<td>" . isset($error_mesg) ? $error_mesg : "An error has occured during the payment." . "</td>";
+				echo "<td>" . $error_mesg . "</td>";
 			      }
 			?>
 	</tr>
