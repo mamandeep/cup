@@ -9,7 +9,7 @@
     <br/></td>
     <!--<td width="30%"><span class="generalinfoheader">Educational Qualifications</span></td>
     <td width="20%"><span class="generalinfoheader">Advertisement</span></td>-->
-    <td></td>
+    <td><?php if(!empty($this->Session->read('admin')) && $this->Session->read('admin') == "1") { ?> For Reports: <a href="<?php echo $this->webroot . 'Reports/index'; ?>" target="_blank">click here</a> <?php } ?></td>
 </tr>
 <tr>
     <td></td>
