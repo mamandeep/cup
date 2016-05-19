@@ -167,11 +167,11 @@ echo $this->Html->script('jquery-1.11.1-min');
         <?php if(!empty($applicant['Applicant']['post_applied_for']) && ($applicant['Applicant']['post_applied_for'] == "Professor" || $applicant['Applicant']['post_applied_for'] == "Associate Professor")) { ?>
             <tr>
                 <td class="print_headers">Api Score Total</td>
-                <td class="print_value"><?php echo $apiscore['ApiScore']['total_api']?></td>
+                <td class="print_value"><?php if(!empty($apiscore['ApiScore'])) echo $apiscore['ApiScore']['total_api']; ?></td>
             </tr>
             <tr>
                 <td class="print_headers">Api Score (Capped)</td>
-                <td class="print_value"><?php echo $apiscore['ApiScore']['total_api_capped']?></td>
+                <td class="print_value"><?php if(!empty($apiscore['ApiScore'])) echo $apiscore['ApiScore']['total_api_capped']?></td>
             </tr>
         <?php } ?>
     </table>
@@ -395,7 +395,9 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td class="print_value"><?php echo $applicant['Applicant']['rg_phd_undersup']; ?></td>
         </tr>
     </table>
-    <?php if(!empty($applicant['Applicant']['post_applied_for']) && ($applicant['Applicant']['post_applied_for'] == "Professor" || $applicant['Applicant']['post_applied_for'] == "Associate Professor")) { ?>
+    <?php if(!empty($applicant['Applicant']['post_applied_for']) 
+            && ($applicant['Applicant']['post_applied_for'] == "Professor" || $applicant['Applicant']['post_applied_for'] == "Associate Professor")
+            && !empty($apiscore['ApiScore'])) { ?>
     <br/>
     <div class="print_headers">API Score</div>
     <table border="1px solid black" width="100%" id="api_score" style="border-collapse: collapse;">
@@ -725,25 +727,25 @@ echo $this->Html->script('jquery-1.11.1-min');
                 <td colspan="3">The hard copy of the completed form with the required enclosures is to be sent by post.</td>
             </tr>
             <tr>
-                <td style="width: 40%;">
+                <td style="width: 40%;"> <!--
                     <?php if(isset($applicant) && $applicant['Applicant']['final_submit'] == "1" ) { ?>
                         <input type="button" onclick="window.print()" value="Print" style="width: 100px;"/>
                     <?php }
                         else { ?>
                          <input id="back_button" type="button" onclick="" value="Go Back" style="width: 100px;"/>
-                      <?php } ?>
+                      <?php } ?> -->
                 </td>
                 <td style="padding-top: 30px">.....................<br/>Signature
                 </td>
                 <td style="width: 40%;">
                     <!--<a href="<?php echo $this->webroot; ?>/multi_step_form/wizard/finalsubmit" class="button" id="finalsubmit" style="font-size: 20px;">Final Submit</a>-->
-                    <?php if(isset($applicant) && $applicant['Applicant']['final_submit'] != "1" ) {
+                    <!--<?php if(isset($applicant) && $applicant['Applicant']['final_submit'] != "1" ) {
                             echo $this->Form->create('Temp', array('id' => 'Temp_Details', 'url' => Router::url( '/form/final_submit', true )));
                             echo $this->Form->input('Document.id', array('type' => 'hidden','name' => 'temp', 'value' => 'temp'));
                             echo $this->Form->submit('Final Submission', array('div' => false, 'id' => 'finalsubmit' )); 
                             echo $this->Form->end(); 
                          } 
-                        ?>
+                        ?>-->
                     <!--<input id="finalsubmit" type="button" value="Final Submit" style="width: 200px;"/>-->
                 </td>
             </tr>
