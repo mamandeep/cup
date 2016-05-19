@@ -1,8 +1,30 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+class Reports extends AppModel {
+    
+    var $useTable = false;
+    
+    var $validate = array(
+        'applicant_id' => array(
+            'numeric' => array(
+                'rule' => 'numeric',
+                'message' => 'Please enter only numbers',
+                'allowEmpty' => false,
+                'required' => true,
+            )
+        ),
+        'type' => array(
+            'alphaNumeric' => array(
+                'rule' => 'alphaNumeric',
+                'required' => true,
+                'allowEmpty' => false,
+                'message' => 'Letters and numbers only'
+            )
+        )
+    );
+    
+    
 
+}
+
+?>

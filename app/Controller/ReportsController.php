@@ -49,9 +49,22 @@ class ReportsController extends AppController {
                 $this->generateReportNonTeaching();
                 break;
             default :
-                if(strcmp(Router::url(array('controller' => 'form','action' => 'generalinformation'), true), $this->referer()) !== 0) {
+                /*if(strcmp(Router::url(array('controller' => 'form','action' => 'generalinformation'), true), $this->referer()) !== 0) {
                     $this->Session->setFlash('Please select a report type.');
-                }
+                    return false;
+                }*/
+        }
+        if(!empty($this->data['Reports'])) {
+            $id = $this->data['Reports']['applicant_id'];
+            //$this->print_applicant_form();
+            $type = $this->data['Reports']['type'];
+            //print_r($id . $type); return false;
+            if($type == "Teaching") {
+                $this->redirect(array('controller' => 'reports', 'action' => 'print_bfs', $id));
+            }
+            else if($type == "NonTeaching") {
+                $this->redirect(array('controller' => 'reports', 'action' => 'print_bfs_nt', $id));
+            }
         }
     }
     
@@ -60,10 +73,30 @@ class ReportsController extends AppController {
         $current_datetime->setTimezone(new DateTimeZone('Asia/Calcutta'));
         //$current_datetime->format('d-m-y:H-i-s');
         $fileName = "report_t_".$current_datetime->format('d-m-y:H-i-s').".xls";
-        $headerRow = array("Post Applied For", "Centre", "First Name", "Middle Name", "Last Name");
+        $headerRow = array("id","first_name", "middle_name", "last_name", "gender", "email", "mobile_no", "post_applied_for", "final_submit", "father_name", "mother_name", "centre", "area_of_sp", "date_of_birth", "marital_status", "spouse_name", "category", "aadhar_no", "response_code", "payment_date_created", "payment_id", "payment_amount", "payment_transaction_id", "gaps_in_education", "physically_disabled", "landline", "mailing_address", "permanent_address", "Qualification", "Experience");
         
         $db = ConnectionManager::getDataSource('default');
-        $sql = "SELECT post_applied_for, centre, first_name, middle_name, last_name FROM `applicant`";
+        $db->query('SET SESSION group_concat_max_len = 100000');
+        $sql = "select 
+                a1.id, a1.first_name, a1.middle_name, a1.last_name, a1.gender, a1.email, a1.mobile_no, a1.post_applied_for, a1.final_submit, a1.father_name, a1.mother_name, 
+                a1.centre, a1.area_of_sp, a1.date_of_birth, a1.marital_status, a1.spouse_name, a1.category, a1.aadhar_no ,
+                a1.response_code, a1.payment_date_created, a1.payment_id, a1.payment_amount, a1.payment_transaction_id,
+                a1.gaps_in_education, a1.physically_disabled,
+                a1.landline, a1.mailing_address, a1.permanent_address,
+                q1.Qualification, exp.Experience
+                from applicant a1
+                left outer join (
+                        select e1.applicant_id, GROUP_CONCAT(concat_ws(';', e1.course , e1.board , e1.year_of_passing , e1.percentage 
+                        , e1.marks_obtained , e1.max_marks , e1.roll_no , e1.subjects) SEPARATOR '\n') as Qualification 
+                        from education e1
+                        group by e1.applicant_id) q1 
+                on a1.id = q1.applicant_id
+                left outer join (
+                        select e2.applicant_id, GROUP_CONCAT(concat_ws(';', e2.designation , e2.scale_of_pay , e2.name_address , e2.from_date 
+                        , e2.to_date , e2.no_of_yrs_mnths_days , e2.nature_of_work) SEPARATOR '\n') as Experience 
+                        from experience e2
+                        group by e2.applicant_id) exp
+                on a1.id = exp.applicant_id";
         $result = $db->query($sql);
         /*$count_r = 0;
         while ($row = $db->fetchRow()) { 
@@ -71,7 +104,7 @@ class ReportsController extends AppController {
             $this->Session->write('applicant_id', $row['registered_users']['applicant_id']);
             $count_r++;
         }*/
-                
+        //print_r($result);        
         $this->exportInExcel($fileName, $headerRow, $result, 't');
     }
     
@@ -82,11 +115,12 @@ class ReportsController extends AppController {
         $fileName = "report_nt_".$current_datetime->format('d-m-y:H-i-s').".xls";
         //$fileName = "bookreport_".date("d-m-y:h:s").".xls";
         //$fileName = "bookreport_".date("d-m-y:h:s").".csv";
-        $headerRow = array("id", "first_name", "middle_name", "last_name", "gender", "email", "mobile_no", "father_name", "mother_name", "name_of_centre", "specialization", "date_of_birth", "marital_status", "spouse_name", "category", "aadhar_no", "response_code", "payment_date_created", "payment_id", "payment_amount", "payment_transaction_id", "gaps_in_education", "physical_disable", "departmental_cand" , "internal_cand", "landline_no", "mailing_address", "perm_address" , "post_name", "final_submit", "Qualification", "Experience");
+        $headerRow = array("id", "first_name", "middle_name", "last_name", "gender", "email", "mobile_no", "post_applied_for", "final_submit", "father_name", "mother_name", "name_of_centre", "specialization", "date_of_birth", "marital_status", "spouse_name", "category", "aadhar_no", "response_code", "payment_date_created", "payment_id", "payment_amount", "payment_transaction_id", "gaps_in_education", "physical_disable", "departmental_cand" , "internal_cand", "landline_no", "mailing_address", "perm_address" , "Qualification", "Experience");
                                            
         $db = ConnectionManager::getDataSource('nonteaching');
+        $db->query('SET SESSION group_concat_max_len = 100000');
         $sql = "select 
-                a1.id, a1.first_name, a1.middle_name, a1.last_name, a1.gender, a1.email, a1.mobile_no, p1.post_name, p1.final_submit, a1.father_name, a1.mother_name, 
+                a1.id, a1.first_name, a1.middle_name, a1.last_name, a1.gender, a1.email, a1.mobile_no, a1.post_applied_for, a1.final_submit, a1.father_name, a1.mother_name, 
                 a1.name_of_centre, a1.specialization, a1.date_of_birth, a1.marital_status, a1.spouse_name, a1.category, a1.aadhar_no ,
                 a1.response_code, a1.payment_date_created, a1.payment_id, a1.payment_amount, a1.payment_transaction_id,
                 a1.gaps_in_education, a1.physical_disable, a1.departmental_cand, a1.internal_cand,
@@ -122,15 +156,24 @@ class ReportsController extends AppController {
         ini_set('max_execution_time', 1600); //increase max_execution_time to 10 min if data set is very large
         $fileContent = implode("\t ", $headerRow)."\n";
         foreach($data as $result) {
-            if($type == "t") {
+            array_walk($result, array($this, 'cleanData'));
+            $fileContent .=  implode("\t ", array_values($result['a1']))."\t ";
+            //$fileContent .=  implode("\t ", array_values($result['p1']))."\t ";
+            $fileContent .=  implode("\t ", array_values($result['q1']))."\t ";
+            $fileContent .=  implode("\t ", array_values($result['exp']))."\n";
+            /*if($type == "t") {
                 $fileContent .=  implode("\t ", $result['applicant'])."\n";
             }
             else if($type == "nt") {
-                $fileContent .=  implode("\t ", $result['a1']);
-                $fileContent .=  implode("\t ", $result['p1']);
-                $fileContent .=  implode("\t ", $result['q1']);
-                $fileContent .=  implode("\t ", $result['exp'])."\n";
-            }
+                //print_r($result['p1']);
+                
+                //print_r($result['p1']);
+                $fileContent .=  implode("\t ", array_values($result['a1']))."\t ";
+                //$fileContent .=  implode("\t ", array_values($result['p1']))."\t ";
+                $fileContent .=  implode("\t ", array_values($result['q1']))."\t ";
+                $fileContent .=  implode("\t ", array_values($result['exp']))."\n";
+                //print_r($fileContent);
+            }*/
         }
         header('Content-type: application/ms-excel'); /// you can set csv format
         header('Content-Disposition: attachment; filename='.$fileName);
@@ -138,337 +181,42 @@ class ReportsController extends AppController {
         exit;
     }
     
-    function cleanData(&$str)
+    private function cleanData(&$str)
     {
+        //print_r($str);
         $str = preg_replace("/\t/", "\\t", $str);
         $str = preg_replace("/\r?\n/", "\\n", $str);
+        //print_r($str);
     }
     
-    public function generalinformation() {
-           $applicants = $this->Applicant->find('all', array(
-                'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
-            if (count($applicants) == 1 ) {
-                $this->set('applicant', $applicants['0']);
-            }
-    }
-        
-        public function register() {
-            if(!empty($this->data['Registereduser'])) {
-                $this->Signup->setCaptcha('security_code', $this->Captcha->getCode('Signup.security_code')); //getting from component and passing to model to make proper validation check
-                $this->Signup->set($this->request->data);
-                if ($this->Signup->validates()) {
-                    $segments = explode('/', $this->data['Registereduser']['dob']);
-                    if (count($segments) !== 3 || !preg_match("/^[0-3][0-9]\/[0-1][0-9]\/[0-9]{4}$/", $this->data['Registereduser']['dob'])) {
-                        $this->Session->setFlash('Date of Birth is not in correct format.');
-                        return false;
-                    }
-                    list($dd,$mm,$yyyy) = $segments;
-                    if (!checkdate((int)$mm,(int)$dd,(int)$yyyy)) {
-                        $this->Session->setFlash('Date of Birth is not in correct format.');
-                        return false;
-                    }
-                    if(!filter_var($this->data['Registereduser']['email'], FILTER_VALIDATE_EMAIL)) {
-                        $this->Session->setFlash('Email Id is not in correct format.');
-                        return false;
-                    }
-                    if (!preg_match("/^[789]\d{9}$/",$this->data['Registereduser']['mobile_no'])) {
-                        $this->Session->setFlash('Mobile number is not correct. Please enter a valid 10 digit mobile number.');
-                        return false; 
-                    }
-                    $registered_user = $this->Registereduser->find('all', array(
-                                'conditions' => array('Registereduser.email' => trim($this->data['Registereduser']['email']),
-                                                      'Registereduser.dob' => trim($this->data['Registereduser']['dob']))
-                                                    ));
-                    if(count($registered_user) != 0) {
-                        $this->Session->setFlash('Email / Date of Birth is already registered.');
-                        return false;
-                    }
-                    $this->Applicant->create();
-                    $this->Applicant->set(array(
-                        'advertisement_no' => 'T-01 (2016)'));
-                    
-                    if($this->Registereduser->save($this->data['Registereduser']) && $this->Applicant->save()) {
-                        $this->Session->write('applicant_id', $this->Applicant->getLastInsertID());
-                        $this->Session->write('registration_id', $this->Registereduser->getLastInsertID());
-                        $this->Applicant->id = $this->Session->read('applicant_id');
-                        $this->Applicant->saveField('registration_id', $this->Session->read('registration_id'));
-                        $this->Registereduser->id = $this->Session->read('registration_id');
-                        $this->Registereduser->saveField('applicant_id', $this->Session->read('applicant_id'));
-                        $this->Session->setFlash('You have successfully registered.');
-                        //$this->redirect(array('controller' => 'form', 'action' => 'pay'));
-			$this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
-                    }
-                    else {
-                        $this->Session->setFlash('There was an error in Registration.');
-                    }
-                }
-                else {
-                    $this->Session->setFlash('Data Validation Failure', 'default', array('class' =>
-                        'cake-error'));
-                }
-            }
-        }
-        
-        public function prepayment() {
-        if (!empty($this->data['Applicant']['id']) && !empty($this->data['Applicant']['email']) 
-                && !empty($this->data['Applicant']['date_of_birth'])) { 
-            $segments = explode('/', $this->data['Applicant']['date_of_birth']);
-            if (count($segments) !== 3 || !preg_match("/^[0-3][0-9]\/[0-1][0-9]\/[0-9]{4}$/", $this->data['Applicant']['date_of_birth'])) {
-                $this->Session->setFlash('Date of Birth is not in correct format.');
-                return false;
-            }
-            list($dd,$mm,$yyyy) = $segments;
-            if (!checkdate((int)$mm,(int)$dd,(int)$yyyy)) {
-                $this->Session->setFlash('Date of Birth is not in correct format.');
-                return false;
-            }
-            if(!filter_var($this->data['Applicant']['email'], FILTER_VALIDATE_EMAIL)) {
-                $this->Session->setFlash('Email Id is not in correct format.');
-                return false;
-            }
-            $applicant_id = trim($this->data['Applicant']['id']);
-            $registered_user = $this->Registereduser->find('all', array(
-                'conditions' => array('Registereduser.applicant_id' => $applicant_id,
-                    'Registereduser.email' => trim($this->data['Applicant']['email']),
-                    'Registereduser.dob' => trim($this->data['Applicant']['date_of_birth']))));
-            $applicants = $this->Applicant->find('all', array(
-                'conditions' => array('Applicant.id' => $applicant_id)));
-            if (count($registered_user) == 1 && count($applicants) == 1 
-                    && $applicants['0']['Applicant']['response_code'] != "0") {
-                $this->Session->write('applicant_id', $applicant_id);
-                $this->redirect(array('controller' => 'form', 'action' => 'pay'));
-            } else if(count($registered_user) == 1 && count($applicants) == 1 
-                    && $applicants['0']['Applicant']['response_code'] == "0") {
-                // Is the below message fine for showing to applicants
-                $this->Session->setFlash('Payment has been done. Enter credentials to login.');
-                $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
-            }
-            else {
-                $this->Session->setFlash('Details entered are not valid.');
-                return false;
-            }
-        }
-        else if(strcmp(Router::url(array('controller' => 'Form','action' => 'register'), true), $this->referer()) !== 0) {
-            $this->Session->setFlash('Details entered are not complete.');
-            return false;
-        }
-    }
-
-    public function appliedposts() { 
-            /*$posts_applied = $this->Post->find('all', array(
-                        'conditions' => array('Post.registration_id' => $this->Session->read('registration_id'))));
-                                              //'Post.final_submit' => '1')));
-            $this->request->data = $posts_applied;*/
-        }
-        
-        public function printform($post = null) { 
-            if(!empty($this->Session->read('registration_id'))) {
-                $post_name = !empty($this->request->query['post']) ? $this->request->query['post'] : '';
-                $posts_applied = $this->Post->find('all', array(
-                            'conditions' => array('Post.registration_id' => $this->Session->read('registration_id'),
-                                                  'Post.post_name' => $post_name)
-                                                ));
-                if(count($posts_applied) == 1 && $posts_applied['0']['Post']['final_submit'] == '1') {
-                    $applicant_id = $posts_applied['0']['Post']['user_id'];
-                    $this->layout = false;
-                    $this->set('data_set', 'false');
-                    $applicants = $this->Applicant->find('all', array(
-                            'conditions' => array('Applicant.id' => $applicant_id)));
-                    $education_arr = $this->Education->find('all', array(
-                            'conditions' => array('Education.user_id' => $applicant_id)));
-                    $exp_arr = $this->Experience->find('all', array(
-                            'conditions' => array('Experience.user_id' => $applicant_id)));
-                    $publications_arr = $this->Researchpaper->find('all', array(
-                            'conditions' => array('Researchpaper.user_id' => $this->Session->read('applicant_id'))));
-                    $image = $this->Image->find('all', array(
-                            'conditions' => array('Image.user_id' => $applicant_id)));
-                    $misc = $this->Misc->find('all', array(
-                            'conditions' => array('Misc.user_id' => $applicant_id)));                
-                    if(count($applicants) == 1 && count($misc) == 1) {
-                        $this->set('postAppliedFor', $post_name);
-                        $this->set('applicant', $applicants['0']);
-                        $this->set('education_arr', $education_arr);
-                        $this->set('exp_arr', $exp_arr);
-                        $this->set('publication_arr', $publications_arr);
-                        $this->set('image', !empty($image['0']) ? $image['0'] : array());
-                        $this->set('misc', $misc['0']);
-                        $this->set('data_set', 'true');
-                    }
-                }
-            }
-        }
-
-	public function pay() {
-                //print_r($this->Session->read('applicant_id')); return false;
-                $registered_user = $this->Registereduser->find('all', array(
-                    'conditions' => array('Registereduser.applicant_id' => $this->Session->read('applicant_id'))));
-                $applicants = $this->Applicant->find('all', array(
-                            'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
-                if($registered_user['0']['Registereduser']['category'] == "SC" || $registered_user['0']['Registereduser']['category'] == "ST" 
-                        || $registered_user['0']['Registereduser']['physically_disabled'] == "yes") {
-                        $this->set('app_fee', '250');
-                        $this->Session->write('payment_amount','250');
-                }
-                else {
-                        $this->set('app_fee', '750');
-                        $this->Session->write('payment_amount','750');
-                }
-                $this->set('Applicant', $applicants['0']['Applicant']);
-                //}
-                //else {
-                    //$this->Session->setFlash('Invalid Applicant ID.');
-                    //$this->redirect(array('controller' => 'form', 
-                                              //'action' => 'register'));
-                //}
-	}
-
-	public function post() {
-		//print_r($this->request->data);
-		$HASHING_METHOD = 'sha512'; // md5,sha1
-		$ACTION_URL = "https://secure.ebs.in/pg/ma/payment/request/";
-
-		$this->set('ACTION_URL',$ACTION_URL);		
-		if(isset($_POST['secretkey']))
-			$_SESSION['SECRET_KEY'] = $_POST['secretkey'];
-		else
-			$_SESSION['SECRET_KEY'] = ''; //set your secretkey here
-			
-		$hashData = $_SESSION['SECRET_KEY'];
-
-		unset($_POST['secretkey']);
-		unset($_POST['submitted']);
-
-		ksort($_POST);
-		foreach ($_POST as $key => $value) {
-			if (strlen($value) > 0) {
-				if($key == "amount") {
-					$hashData .= '|'. $this->Session->read('payment_amount');
-				}
-				else {
-					$hashData .= '|'.$value;
-				}
-			}
-		}
-		if (strlen($hashData) > 0) {
-			$secureHash = strtoupper(hash($HASHING_METHOD, $hashData));
-			$this->set('secureHash', $secureHash);
-		}
-	}
-        
-        function validate_amount($amount) {
-            if(isset($amount) && ($amount === "750" || $amount === "250")) {
-                return $amount;
-            }
-            else 
-                return "750";
-        }
-        
-	public function returnpg() {
-		$HASHING_METHOD = 'sha512'; // md5,sha1
-
-		// This response.php used to receive and validate response.
-		if(!isset($_SESSION['SECRET_KEY']) || empty($_SESSION['SECRET_KEY']))
-		$_SESSION['SECRET_KEY'] = ''; //set your secretkey here
-			
-		$hashData = $_SESSION['SECRET_KEY'];
-		ksort($_POST);
-		foreach ($_POST as $key => $value){
-			if (strlen($value) > 0 && $key != 'SecureHash') {
-				$hashData .= '|'.$value;
-			}
-		}
-		if (strlen($hashData) > 0) {
-			$secureHash = strtoupper(hash($HASHING_METHOD , $hashData));
-	
-			if($secureHash == $_POST['SecureHash']){
-				
-				if($_POST['ResponseCode'] == 0){
-					// update response and the order's payment status as SUCCESS in to database
-					
-					$this->Applicant->create();
-            				$this->Applicant->id = $this->Session->read('applicant_id');
-					$this->Applicant->set(array('response_code' => $_POST['ResponseCode'],
-								    'payment_date_created' => $_POST['DateCreated'],
-								    'payment_id' => $_POST['PaymentID'],
-								    'payment_amount' => $_POST['Amount'],
-								    'payment_transaction_id' => $_POST['TransactionID']));
-            				if ($this->Applicant->id) {
-                				$this->Applicant->save();
-            				}
-            				//$this->redirect(array('controller' => 'form', 'action' => 'appliedposts'));
-					//for demo purpose, its stored in session
-					$_POST['paymentStatus'] = 'SUCCESS';
-					$_SESSION['paymentResponse'][$_POST['PaymentID']] = $_POST;
-					$this->set('paymentStatus', $_POST['ResponseCode']);
-					$this->set('paymentStatusStr', 'SUCCESS');
-					$this->set('transID', $_POST['TransactionID']);
-					$this->set('tras_amount', $_POST['Amount']);
-					
-				} else {
-					// update response and the order's payment status as FAILED in to database
-					$this->set('error_mesg', $_POST['Error']);
-					//for demo purpose, its stored in session
-					$_POST['paymentStatus'] = 'FAILED';
-					$_SESSION['paymentResponse'][$_POST['PaymentID']] = $_POST;
-				}
-				// Redirect to confirm page with reference.
-				$confirmData = array();
-				$confirmData['PaymentID'] = $_POST['PaymentID'];
-				$confirmData['Status'] = $_POST['paymentStatus'];
-				$confirmData['Amount'] = $_POST['Amount'];
-				
-				$hashData = $_SESSION['SECRET_KEY'];
-
-				ksort($confirmData);
-				foreach ($confirmData as $key => $value){
-					if (strlen($value) > 0) {
-						$hashData .= '|'.$value;
-					}
-				}
-				if (strlen($hashData) > 0) {
-					$secureHash = strtoupper(hash($HASHING_METHOD , $hashData));
-				}
-			} else {
-				echo '<h1>Error!</h1>';
-				echo '<p>Hash validation failed</p>';
-			}
-		} else {
-			echo '<h1>Error!</h1>';
-			echo '<p>Invalid response</p>';
-		}
-	}
-
-	public function print_bfs() {
+    public function print_bfs($applicant_id) {
             $this->layout = false;
             $this->set('data_set', 'false');
             $applicants = $this->Applicant->find('all', array(
-                    'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
+                    'conditions' => array('Applicant.id' => $applicant_id)));
             if(count($applicants) == 0) {
-                $this->redirect('/multi_step_form/wizard/first');
+                //$this->Session->setFlash('Applicant Data not found.');
+                echo "Applicant data for Id " . $applicant_id . " not found.";
                 return false;
             }
             $education_arr = $this->Education->find('all', array(
-                    'conditions' => array('Education.applicant_id' => $this->Session->read('applicant_id'))));
+                    'conditions' => array('Education.applicant_id' => $applicant_id)));
 
             $exp_arr = $this->Experience->find('all', array(
-                    'conditions' => array('Experience.applicant_id' => $this->Session->read('applicant_id'))));
+                    'conditions' => array('Experience.applicant_id' => $applicant_id)));
             $rpaper_arr = $this->Researchpaper->find('all', array(
-                    'conditions' => array('Researchpaper.applicant_id' => $this->Session->read('applicant_id'))));
+                    'conditions' => array('Researchpaper.applicant_id' => $applicant_id)));
             $rarticle_arr = $this->Researcharticle->find('all', array(
-                    'conditions' => array('Researcharticle.applicant_id' => $this->Session->read('applicant_id'))));
+                    'conditions' => array('Researcharticle.applicant_id' => $applicant_id)));
             $rproject_arr = $this->Researchproject->find('all', array(
-                    'conditions' => array('Researchproject.applicant_id' => $this->Session->read('applicant_id'))));
+                    'conditions' => array('Researchproject.applicant_id' => $applicant_id)));
             $image = $this->Document->find('all', array(
-                    'conditions' => array('Document.applicant_id' => $this->Session->read('applicant_id'))));
+                    'conditions' => array('Document.applicant_id' => $applicant_id)));
             $apiscore = $this->ApiScore->find('all', array(
-                    'conditions' => array('ApiScore.applicant_id' => $this->Session->read('applicant_id'))));
+                    'conditions' => array('ApiScore.applicant_id' => $applicant_id)));
 
             //$misc = $this->Applicant->find('all', array(
-            //        'conditions' => array('Misc.user_id' => $this->Session->read('applicant_id'))));                
-            if(count($applicants) == 0) {
-                $this->Session->setFlash('Please complete your form in sequence.');
-                return false;
-            }		
+            //        'conditions' => array('Misc.user_id' => $this->Session->read('applicant_id'))));                		
             if(count($applicants) == 1) {
                 //$this->set('postAppliedFor', $this->getPostAppliedFor());
                 $this->set('applicant', $applicants['0']);
@@ -490,32 +238,85 @@ class ReportsController extends AppController {
                 $this->Session->setFlash('An error has occured. Please contact Support.');
                 return false;
             }
-	}
-
-	public function final_submit() {
-		$this->Applicant->id = $this->Session->read('applicant_id');
-                if (!empty($this->Applicant->id)) {
-                	$this->Applicant->saveField('final_submit', "1");
-            	}
-		//$this->Session->delete('applicant_id');
-            	$this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
-		//$this->redirect(array('controller' => 'users', 'action' => 'logout'));
-	}
-
-	function getPostAppliedFor() {
-        	$current_post_applied = !empty($this->request->query['post']) ? $this->request->query['post'] : NULL;
-        	if (!empty($current_post_applied)) {
-            		//$this->set('postAppliedFor', $current_post_applied);
-            		$this->Session->write('post_applied_for', $current_post_applied);
-            		return $current_post_applied;
-        	} else if (!empty($this->Session->read('post_applied_for'))) {
-            		//$this->set('postAppliedFor', $this->Session->read('post_applied_for'));
-            		return $this->Session->read('post_applied_for');
-        	} else {
-            		$this->Session->setFlash('Please select a post and then continue.');
-            		$this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
-        	}
-    	}
+    }
+        
+    public function print_bfs_nt($applicant_id) {
+            //print_r($applicant_id); return false;
+            $this->layout = false;
+            $this->set('data_set', 'false');
+            $db = ConnectionManager::getDataSource('nonteaching');
+        //$db->query('SET SESSION group_concat_max_len = 100000');
+            $sql = "select * from applicants where id = '" . $applicant_id . "'";
+            $applicants = $db->query($sql);
+            if(count($applicants) == 0) {
+                //$this->Session->setFlash('Applicant Data not found.');
+                echo "Applicant data for Id " . $applicant_id . " not found.";
+                return false;
+            }
+            $sql = "select * from education where user_id = '" . $applicant_id . "'";
+            $education_arr = $db->query($sql);
+            //print_r($education_arr); return false;
+            //$education_arr = $this->Education->find('all', array(
+             //       'conditions' => array('Education.user_id' => $this->Session->read('applicant_id'))));
+            $new_edu_arr = array();
+            foreach($education_arr as $key => $value) {
+                $new_edu_arr[$key]['Education'] = $education_arr[$key]['education'];
+            }
+            $sql = "select * from experience where user_id = '" . $applicant_id . "'";
+            $exp_arr = $db->query($sql);
+            //$exp_arr = $this->Experience->find('all', array(
+            //        'conditions' => array('Experience.user_id' => $this->Session->read('applicant_id'))));
+            $new_exp_arr = array();
+            foreach($exp_arr as $key => $value) {
+                $new_exp_arr[$key]['Experience'] = $exp_arr[$key]['experience'];
+            }
+            //$publications_arr = $this->Researchpaper->find('all', array(
+            //        'conditions' => array('Researchpaper.user_id' => $this->Session->read('applicant_id'))));
+            
+            $sql = "select * from researchpapers where user_id = '" . $applicant_id . "'";
+            $publications_arr = $db->query($sql);
+            //$exp_arr = $this->Experience->find('all', array(
+            //        'conditions' => array('Experience.user_id' => $this->Session->read('applicant_id'))));
+            $new_pub_arr = array();
+            foreach($publications_arr as $key => $value) {
+                $new_pub_arr[$key]['Researchpaper'] = $publications_arr[$key]['researchpapers'];
+            }
+            
+            $sql = "select * from images where user_id = '" . $applicant_id . "'";
+            $image = $db->query($sql);
+            //$image = $this->Image->find('all', array(
+            //        'conditions' => array('Image.user_id' => $this->Session->read('applicant_id'))));
+            //print_r($image); return false;
+            //$misc = $this->Misc->find('all', array(
+            //        'conditions' => array('Misc.user_id' => $this->Session->read('applicant_id'))));                
+            $sql = "select * from misc where user_id = '" . $applicant_id . "'";
+            $misc = $db->query($sql);
+            //$new_img['Image'] = $image['0']['images'];
+            //print_r($misc);
+            if(count($applicants) == 0 || count($misc) == 0) {
+                $this->Session->setFlash('Please complete your form in sequence.');
+                //print_r("Reached Here Too");
+                return false;
+            }		
+            if(count($applicants) == 1 && count($misc) == 1) {
+                //print_r("Reached Here");
+                $this->set('applicant', array('Applicant' => $applicants['0']['applicants']));
+                $this->set('education_arr', $new_edu_arr);
+                $this->set('exp_arr', $new_exp_arr);
+                $this->set('publication_arr', $new_pub_arr);
+                //$this->set('miscexp', $miscexp['0']);
+                //$this->set('academic_dist', $adacdemic_dist);
+                $this->set('image', array('Image' => $image['0']['images']));
+                //$this->set('researchpapers', $researchpapers);
+                //$this->set('researcharticles', $researcharticles);
+                $this->set('misc', array('Misc' => $misc['0']['misc']));
+                $this->set('data_set', 'true');
+            }
+            else {
+                $this->Session->setFlash('An error has occured. Please contact Support.');
+                return false;
+            }
+	}   
 
 }
 
