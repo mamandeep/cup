@@ -23,6 +23,16 @@ class ReportsController extends AppController {
         if(!$this->Session->check('registration_id')) {
             $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
         }
+        
+        if(isset($_POST['password']) && $_POST['password'] === "RGOcup@22") {
+            $this->Session->write('rptuservalid', '1');
+        }
+        else if(empty($this->Session->read('rptuservalid'))) {
+            $this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
+        }
+        else if(isset($_POST['password']) && $_POST['password'] !== "RGOcup@22") {
+            $this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
+        }
     }
 	
 
@@ -36,6 +46,7 @@ class ReportsController extends AppController {
     }
     
     public function index() {
+        //print_r($_POST['password']);
         $param = "";
         if(isset($this->params['url']['t'])) 
             $param = $this->params['url']['t'];

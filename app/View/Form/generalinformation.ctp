@@ -1,3 +1,5 @@
+<?php   echo $this->Html->css('jquery-ui.min');
+        echo $this->Html->script('jquery-ui.min'); ?>
 <div>
 <table width="650px" style="table-layout: fixed; margin: 0 auto;">
 <tr>
@@ -9,7 +11,7 @@
     <br/></td>
     <!--<td width="30%"><span class="generalinfoheader">Educational Qualifications</span></td>
     <td width="20%"><span class="generalinfoheader">Advertisement</span></td>-->
-    <td><?php if(!empty($this->Session->read('admin')) && $this->Session->read('admin') == "1") { ?> For Reports: <a href="<?php echo $this->webroot . 'Reports/index'; ?>" target="_blank">click here</a> <?php } ?></td>
+    <td><?php if(!empty($this->Session->read('admin')) && $this->Session->read('admin') == "1") { ?> For Reports: <a href="javascript: showReports();" target="_blank">click here</a> <?php } ?></td>
 </tr>
 <tr>
     <td></td>
@@ -176,7 +178,38 @@
 </tr>
 </table>
 </div>
+
+<div id="dialog" title="Password">
+<form id="pprompt" name="pprompt" method="post" action="<?php echo $this->webroot; ?>reports/index">
+  <input name="password" type="password" size="25" />
+</form>
+</div>
 <script>
+    var currentForm;
+    $(function() {
+        $( "#dialog" ).dialog({
+            resizable: false,
+            height: 240,
+            modal: true,
+            autoOpen: false,
+            buttons: {
+                'Submit': function() {
+                    $(this).dialog('close');
+                    currentForm.submit();
+                    
+                },
+                Cancel: function() {
+                    $(this).dialog('close');
+                }
+            }
+        });
+    });
+    function showReports() {
+        currentForm = $('#pprompt');
+        //currentForm.submit();
+        $( "#dialog" ).dialog('open');
+    }
+    
     $(document).ready(function() {
         $('#post_applied_for').val('none');
         $('#area').val('none');
