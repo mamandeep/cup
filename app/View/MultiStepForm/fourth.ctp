@@ -344,11 +344,12 @@ table#api_score tr td {border: 1px solid black;}
         <td class="table_headertxt">Total</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.total_api', array('id' => 'total_api', 'label' => false, 'maxlength' => '50', 'readonly' => 'readonly'));?></td>
     </tr>
+    <!--
     <tr>
         <td colspan="3" class="table_headertxt"></td>
         <td class="table_headertxt">API Score after Capping</td>
         <td width="15%" class="table_headertxt"><?php echo $this->Form->input('ApiScore.total_api_capped', array('id' => 'total_api_capped', 'label' => false, 'maxlength' => '50', 'readonly' => 'readonly', 'step' => '0.01'));?></td>
-    </tr>
+    </tr>-->
 </table>
 <div class="table_headertxt">*Wherever relevant to any specific discipline, the API score for paper in refereed journal would be augmented as follow:
     <ol  type="i">
@@ -360,7 +361,8 @@ table#api_score tr td {border: 1px solid black;}
 </div>
 <div class="table_headertxt">** If a paper presented in Conference/Seminar is published in the form of Proceedings, the points would accrue for the publication (III(a)) and not under presentaion (III (e)(ii)).  <ol>
 </div>
-<div class="table_headertxt">For details on API Calculations: <a href="<?php echo $this->webroot . '/files/API Result.docx'; ?>" target="_blank">click here.</a></div>
+<!--
+<div class="table_headertxt">For details on API Calculations: <a href="<?php echo $this->webroot . '/files/API Result.docx'; ?>" target="_blank">click here.</a></div>-->
 <?php } ?>
 <div class="submit">
     <?php echo $this->Form->submit('Save & Continue', array('id' => 'formSubmit' , 'div' => false)); ?>
@@ -395,7 +397,7 @@ table#api_score tr td {border: 1px solid black;}
                 T += parseInt(E);
             }
             $("#total_api").val(T);
-            $("#total_api_capped").val((Math.min(A, 0.3 * T) + Math.min(B, 0.25 * T) + Math.min(C, 0.2 * T) + Math.min(D, 0.1 * T)+ Math.min(E, 0.15 * T)).toFixed(2));
+            //$("#total_api_capped").val((Math.min(A, 0.3 * T) + Math.min(B, 0.25 * T) + Math.min(C, 0.2 * T) + Math.min(D, 0.1 * T)+ Math.min(E, 0.15 * T)).toFixed(2));
         }
         
         function calculateTotalIIIA() {

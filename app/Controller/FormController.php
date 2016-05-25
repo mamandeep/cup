@@ -39,6 +39,7 @@ class FormController extends AppController {
                 'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
             if (count($applicants) == 1 ) {
                 $this->set('applicant', $applicants['0']);
+                $this->set('final_subimt', $applicants['0']['Applicant']['final_submit']);
             }
     }
         

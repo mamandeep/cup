@@ -137,8 +137,8 @@ class Document extends AppModel {
                 'allowEmpty' => TRUE,
             ),
             'fileSize'=> array(
-                'rule' => array('fileSize', '<=', '500KB'),
-                'message' => 'Document must be less than 500 KB.',
+                'rule' => array('fileSize', '<=', '800KB'),
+                'message' => 'Document must be less than 800 KB.',
                 'allowEmpty' => true
             ),
             // custom callback to deal with the file upload

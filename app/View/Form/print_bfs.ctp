@@ -169,10 +169,11 @@ echo $this->Html->script('jquery-1.11.1-min');
                 <td class="print_headers">Api Score Total</td>
                 <td class="print_value"><?php echo $apiscore['ApiScore']['total_api']?></td>
             </tr>
+            <!--
             <tr>
                 <td class="print_headers">Api Score (Capped)</td>
                 <td class="print_value"><?php echo $apiscore['ApiScore']['total_api_capped']?></td>
-            </tr>
+            </tr>-->
         <?php } ?>
     </table>
     <br />
@@ -403,8 +404,8 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td width="20%" class="print_headers"></td>
             <td width="40%" class="print_headers">Category</td>
             <td width="15%" class="print_headers">API Score Claimed by Applicant in each Category</td>
-            <td width="10%" class="print_headers">Total</td>
-            <td width="15%" class="print_headers">API Score after capping</td>
+            <td width="25%" class="print_headers">Total</td>
+            <!--<td width="15%" class="print_headers">API Score after capping</td>-->
         </tr>
         <tr>
             <td rowspan="3" class="print_headers">III (A)</td>
@@ -415,9 +416,10 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td rowspan="3" class="print_value">
                 <?php echo $apiscore['ApiScore']['total_IIIA']; ?>
             </td>
+            <!--
             <td rowspan="3" class="print_value">
                 <div id="total_IIIA_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIIA'], round(0.3 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
-            </td>
+            </td>-->
         </tr>
         <tr>
             <td class="print_headers">Non-referred but recognized and reputable journals and periodicals, having ISBN/ISSN numbers.</td>
@@ -432,9 +434,10 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td class="print_headers">Text or  Reference Books Published by International Publishers with an established peer review system</td>
             <td class="print_value"><?php echo $apiscore['ApiScore']['rpu_int_pub']; ?></td>
             <td rowspan="5" class="print_value"><?php echo $apiscore['ApiScore']['total_IIIB']; ?></td>
+            <!--
             <td rowspan="5" class="print_value">
                 <div id="total_IIIB_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIIB'], round(0.25 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
-            </td>
+            </td>-->
         </tr>
         <tr>
             <td class="print_headers">Subjects Books by National level publishers/State and Central Govt. Publications with ISBN/ISSN numbers.</td>
@@ -457,9 +460,10 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td class="print_headers">Major Projects amount mobilized with grants above 30.0 lakhs</td>
             <td class="print_value"><?php echo $apiscore['ApiScore']['sponp_gabov_30']; ?></td>
             <td rowspan="6" class="print_value"><?php echo $apiscore['ApiScore']['total_IIIC']; ?></td>
+            <!--
             <td rowspan="6" class="print_value">
                 <div id="total_IIIC_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIIC'], round(0.2 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
-            </td>
+            </td>-->
         </tr>
         <tr>
             <td class="print_headers">Major Projects amount mobilized with grants above 5.0 lakhs upto 30.0 lakhs.</td>
@@ -489,9 +493,10 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td class="print_headers">Degree awarded only</td>
             <td class="print_value"><?php echo $apiscore['ApiScore']['rg_mphil']; ?></td>
             <td rowspan="3" class="print_value"><?php echo $apiscore['ApiScore']['total_IIID']; ?></td>
+            <!--
             <td rowspan="3" class="print_value">
                 <div id="total_IIID_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIID'], round(0.1 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
-            </td>
+            </td>-->
         </tr>
         <tr>
             <td rowspan="2" class="print_headers">III (D)(ii) Ph.D</td>
@@ -507,9 +512,10 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td class="print_headers">Not less than two weeks duration</td>
             <td class="print_value"><?php echo $apiscore['ApiScore']['refreshc_train_2week']; ?></td>
             <td rowspan="8" class="print_value"><?php echo $apiscore['ApiScore']['total_IIIE']; ?></td>
+            <!--
             <td rowspan="8" class="print_value">
                 <div id="total_IIIE_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIIE'], round(0.15 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
-            </td>
+            </td>-->
         </tr>
         <tr>
             <td class="print_headers">One week duration</td>
@@ -545,14 +551,15 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td colspan="2" class="print_headers"></td>
             <td class="print_headers">Grand Total</td>
             <td class="print_value"><?php echo $apiscore['ApiScore']['total_api']; ?></td>
-            <td></td>
+            <!--<td></td>-->
         </tr>
+        <!--
         <tr>
             <td colspan="2" class="print_headers"></td>
             <td class="print_headers">Grand Total (Capped)</td>
             <td class="print_value"></td>
             <td class="print_value"><?php echo $apiscore['ApiScore']['total_api_capped']; ?></td>
-        </tr>
+        </tr>-->
     </table>
     <?php } ?>
     <br/>

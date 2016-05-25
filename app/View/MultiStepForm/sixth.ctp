@@ -37,7 +37,7 @@ echo $this->Form->create('Document', array('id' => 'Image_Details', 'url' => Rou
         </tr>
         <?php if(!empty($applicant['Applicant']['post_applied_for']) && ($applicant['Applicant']['post_applied_for'] == "Professor" || $applicant['Applicant']['post_applied_for'] == "Associate Professor")) { ?>
         <tr>
-            <td class="table_headertxt misc_col1" style="padding-top: 17px;">API Proforma (MS Word format - <a href="<?php echo $this->webroot . '/files/API Form.doc'; ?>">Download</a>, Fill and Upload here, min size 10 kb, max size 500 kb)</td>
+            <td class="table_headertxt misc_col1" style="padding-top: 17px;">API Proforma (MS Word format - <a href="<?php echo $this->webroot . '/files/API Form.doc'; ?>">Download</a>, Fill and Upload here, min size 10 kb, max size 800 kb)</td>
             <td><?php echo $this->Form->input('filename5', array('label' => false, 'type' => 'file')); ?></td>
         </tr>
         <?php } ?>
