@@ -124,7 +124,7 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
             y1--;
             m1 += 12;
         }
-        return [y1 - y2, m1 - m2, d1 - d2]; 
+        return [y1 - y2, m1 - m2, (d1 - d2) + 1 ]; 
     }
     
     function calDiff(from, to) {
