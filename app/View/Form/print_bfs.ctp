@@ -164,7 +164,8 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td class="print_headers">Centre</td>
             <td class="print_value"><?php echo $applicant['Applicant']['centre']?></td>
         </tr>
-        <?php if(!empty($applicant['Applicant']['post_applied_for']) && ($applicant['Applicant']['post_applied_for'] == "Professor" || $applicant['Applicant']['post_applied_for'] == "Associate Professor")) { ?>
+        <?php if(false) { //!empty($applicant['Applicant']['post_applied_for']) && ($applicant['Applicant']['post_applied_for'] == "Professor" || $applicant['Applicant']['post_applied_for'] == "Associate Professor")) { 
+            ?>
             <tr>
                 <td class="print_headers">Api Score Total</td>
                 <td class="print_value"><?php echo $apiscore['ApiScore']['total_api']?></td>
@@ -396,7 +397,8 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td class="print_value"><?php echo $applicant['Applicant']['rg_phd_undersup']; ?></td>
         </tr>
     </table>
-    <?php if(!empty($applicant['Applicant']['post_applied_for']) && ($applicant['Applicant']['post_applied_for'] == "Professor" || $applicant['Applicant']['post_applied_for'] == "Associate Professor")) { ?>
+    <?php if(false) { //!empty($applicant['Applicant']['post_applied_for']) && ($applicant['Applicant']['post_applied_for'] == "Professor" || $applicant['Applicant']['post_applied_for'] == "Associate Professor")) { 
+    ?>
     <br/>
     <div class="print_headers">API Score</div>
     <table border="1px solid black" width="100%" id="api_score" style="border-collapse: collapse;">

@@ -207,8 +207,9 @@ echo $this->Form->create('ResearchPaper', array('id' => 'Researchpaper_Details',
 </table>
 <br>
 <br/>
-<?php if($this->request->data['Applicant']['post_applied_for'] == "Professor"
-        || $this->request->data['Applicant']['post_applied_for'] == "Associate Professor") { ?>
+<?php if(false) {// $this->request->data['Applicant']['post_applied_for'] == "Professor"
+        //|| $this->request->data['Applicant']['post_applied_for'] == "Associate Professor") { 
+    ?>
 <style>
 table#api_score tr td {border: 1px solid black;}
 </style>
