@@ -109,7 +109,12 @@
                     'style' => 'width: 100%;'
                 ));
                  ?></td>
-                <td><?php echo $this->Form->input('Applicant.category', array(
+                <td> 
+                    <?php echo $this->Form->input('Applicant.category', array(
+                        'type' => 'text',
+                        'readonly' => 'readonly'
+                        ));
+                    /*echo $this->Form->input('Applicant.category', array(
                     'options' => array(
                         'General' => 'General',
                         'SC' => 'SC',
@@ -117,8 +122,8 @@
                         'OBC' => 'OBC'),
                     'empty' => 'Select',
                     'selected' => (!empty($category) ? $category : 'Select'),
-                    'style' => 'width: 100%;'
-                )); ?></td>
+                    'style' => 'width: 100%;' 
+                )); */ ?></td>
                 <td><?php echo $this->Form->input('Applicant.gender', array(
                     'options' => array(
                         'Male' => 'Male',

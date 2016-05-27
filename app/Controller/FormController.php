@@ -76,7 +76,8 @@ class FormController extends AppController {
                     }
                     $this->Applicant->create();
                     $this->Applicant->set(array(
-                        'advertisement_no' => 'T-01 (2016)'));
+                        'advertisement_no' => 'T-01 (2016)',
+                        'category' => $this->data['Registereduser']['category']));
                     
                     if($this->Registereduser->save($this->data['Registereduser']) && $this->Applicant->save()) {
                         $this->Session->write('applicant_id', $this->Applicant->getLastInsertID());
