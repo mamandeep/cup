@@ -126,7 +126,7 @@ class ReportsController extends AppController {
         $fileName = "report_nt_".$current_datetime->format('d-m-y:H-i-s').".xls";
         //$fileName = "bookreport_".date("d-m-y:h:s").".xls";
         //$fileName = "bookreport_".date("d-m-y:h:s").".csv";
-        $headerRow = array("id", "first_name", "middle_name", "last_name", "gender", "email", "mobile_no", "post_applied_for", "final_submit", "father_name", "mother_name", "name_of_centre", "specialization", "date_of_birth", "marital_status", "spouse_name", "category", "aadhar_no", "response_code", "payment_date_created", "payment_id", "payment_amount", "payment_transaction_id", "gaps_in_education", "physical_disable", "departmental_cand" , "internal_cand", "landline_no", "mailing_address", "perm_address" , "Qualification", "Experience");
+        $headerRow = array("id", "first_name", "middle_name", "last_name", "gender", "email", "mobile_no", "post_applied_for", "final_submit", "father_name", "mother_name", "name_of_centre", "specialization", "date_of_birth", "marital_status", "spouse_name", "category", "aadhar_no", "response_code", "payment_date_created", "payment_id", "payment_amount", "payment_transaction_id", "gaps_in_education", "physical_disable", "departmental_cand" , "internal_cand", "internal_regular", "landline_no", "mailing_address", "perm_address" , "Qualification", "Experience");
                                            
         $db = ConnectionManager::getDataSource('nonteaching');
         $db->query('SET SESSION group_concat_max_len = 100000');
@@ -134,7 +134,7 @@ class ReportsController extends AppController {
                 a1.id, a1.first_name, a1.middle_name, a1.last_name, a1.gender, a1.email, a1.mobile_no, a1.post_applied_for, a1.final_submit, a1.father_name, a1.mother_name, 
                 a1.name_of_centre, a1.specialization, a1.date_of_birth, a1.marital_status, a1.spouse_name, a1.category, a1.aadhar_no ,
                 a1.response_code, a1.payment_date_created, a1.payment_id, a1.payment_amount, a1.payment_transaction_id,
-                a1.gaps_in_education, a1.physical_disable, a1.departmental_cand, a1.internal_cand,
+                a1.gaps_in_education, a1.physical_disable, a1.departmental_cand, a1.internal_cand, a1.internal_regular,
                 a1.landline_no, a1.mailing_address, a1.perm_address,
                 q1.Qualification, exp.Experience
                 from applicants a1

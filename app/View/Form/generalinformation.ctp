@@ -130,7 +130,7 @@
             <option value="none" selected="selected">None</option>
                 <option value="Applied Agriculture">Applied Agriculture</option>
                 <option value="Animal Sciences">Animal Sciences</option>
-		<option value="Baba Satguru Ram Singh Chair">Baba Satguru Ram Singh Chair</option>
+				<!--<option value="Baba Satguru Ram Singh Chair">Baba Satguru Ram Singh Chair</option>-->
                 <option value="Biochemistry and Microbial Sciences">Biochemistry and Microbial Sciences</option>
                 <option value="Chemical Sciences">Chemical Sciences</option>
                 <option value="Classical and Modern Languages (Punjabi Languages, Literature and Culture, English)">Classical and Modern Languages (Punjabi Languages, Literature and Culture, English)</option>
