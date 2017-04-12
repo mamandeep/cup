@@ -34,40 +34,44 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->fetch('css');
 		echo $this->fetch('script');
                 echo $this->Html->script('jquery-1.11.1-min');
-                //echo $this->Html->script('onlineform');
+                echo $this->Html->script('jquery.marquee');
                 echo $this->Html->script('underscore-min');
 	?>
 </head>
 <body>
 	<div id="container">
-		<div id="header">
-                    <table>
-                        <tr>
-                            <td><img src="<?php echo $this->webroot . '/img/logo.jpg'; ?>" alt="Central University of Punjab" height="132px" width="100px" /></td>
-                            <td>
-                                <label class="headerText">Central University of Punjab</label>
-                                <label style="font-weight: bold; font-size: 12px; color: white; padding-left: 200px;">Application Form for Recruitment</label>
-                                <label style="font-weight: bold; font-size: 12px; color: white; padding-left: 200px;">For Technical Support Contact on: 0164-2864139</label>
-                            </td>
-                        </tr>
-                    </table>
-                    
-                    
-                    <?php
-                        if($this->Session->check('registration_id')) {
-                           // user is logged in, show logout..user menu etc
-                         /* ?><span style="padding: 1px 10px;"><?php echo $this->Html->link(('Step 1'), array('first')); 
-			  ?></span><span style="padding: 1px 10px;"><?php
-			  echo $this->Html->link(('Upload Documents'), array('fourth'));
-			   */ ?><!--</span>--><span style="padding: 1px 10px; float: right;"><?php
-			   echo $this->Html->link(('Logout'), array('controller'=>'users', 'action'=>'logout'));
-                           ?></span>
+            <div id="wrapper">
+                <div id="sidebar"><img src="<?php echo $this->webroot . '/img/logo.jpg'; ?>" alt="Central University of Punjab" height="132px" width="100px" /></div>
+                <div id="maincontent">
+                    <div id="header">
+                        <label style="font-size: 36px; font-weight: bold; padding-left: 50px;">Central University of Punjab</label>
+                        <label style="font-size: 16px; padding-left: 50px; ">City Campus, Mansa Road, Bathinda - 151001</label>
+                        <br/>
+                        <!--<label style="font-size: 18px; font-weight: bold; padding-left: 50px;">NAAC Accredited 'A' Grade University. NIRF Rank 65 out of 3565.</label>-->
+                            <label style="font-size: 18px; font-weight: bold; padding-left: 50px;">Registration for Participation in 2<sup>nd</sup> Convocation</label>
+                        <br/>
+                        <div class='marquee' style="overflow-x: hidden; width: 600px; margin-left: 0px; font-size: 16px;">Last Date to Apply Online 2<sup>nd</sup> October, 2016 1700 hrs. For any query please contact: +91-9464269330, 0164-2864109, (Technical) 0164-2864139</div>
+
                         <?php
-                        } else {
-                           
-                        }
-                    ?>
-		</div>
+                            if($this->Session->check('registration_id') && $this->Session->check('std_id')) {
+                               // user is logged in, show logout..user menu etc
+                             /* ?><span style="padding: 1px 10px;"><?php echo $this->Html->link(('Step 1'), array('first')); 
+                              ?></span><span style="padding: 1px 10px;"><?php
+                              echo $this->Html->link(('Upload Documents'), array('fourth'));
+                               */ ?><!--</span>--><span style="padding: 1px 10px; float: right;"><?php
+                               echo $this->Html->link(('Logout'), array('controller'=>'users', 'action'=>'logout'));
+                               ?></span>
+                            <?php
+                            } else {
+
+                            }
+                        ?>
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+            </div>
 		<div id="content">
 
 			<?php echo $this->Session->flash(); ?>
@@ -87,4 +91,11 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	</div>
 	<?php //echo $this->element('sql_dump'); ?>
 </body>
+<script>
+
+    $(function(){
+            $('.marquee').marquee();		
+    });
+
+</script>
 </html>
