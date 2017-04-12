@@ -44,7 +44,11 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                     <table>
                         <tr>
                             <td><img src="<?php echo $this->webroot . '/img/logo.jpg'; ?>" alt="Central University of Punjab" height="132px" width="100px" /></td>
-                            <td class="headerText">Central University of Punjab</td>
+                            <td>
+                                <label class="headerText">Central University of Punjab</label>
+                                <label style="font-weight: bold; font-size: 12px; color: white; padding-left: 200px;">Application Form for Recruitment</label>
+                                <label style="font-weight: bold; font-size: 12px; color: white; padding-left: 200px;">For Technical Support Contact on: 0164-2864139</label>
+                            </td>
                         </tr>
                     </table>
                     

@@ -10,7 +10,7 @@ class MultiStepFormController extends AppController {
             }
             $current_datetime = new DateTime();
             $current_datetime->setTimezone(new DateTimeZone('Asia/Calcutta'));
-            $close_datetime = new DateTime("2016-06-06 17:00:00", new DateTimeZone('Asia/Calcutta'));
+            $close_datetime = new DateTime("2017-04-20 17:00:00", new DateTimeZone('Asia/Calcutta'));
             //print_r($current_datetime->format('Y-m-d-H-i-s'));
             //print_r($close_datetime->format('Y-m-d-H-i-s'));
             $applicant = $this->Applicant->find('all', array(
