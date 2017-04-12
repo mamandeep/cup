@@ -109,12 +109,7 @@
                     'style' => 'width: 100%;'
                 ));
                  ?></td>
-                <td> 
-                    <?php echo $this->Form->input('Applicant.category', array(
-                        'type' => 'text',
-                        'readonly' => 'readonly'
-                        ));
-                    /*echo $this->Form->input('Applicant.category', array(
+                <td> <?php echo $this->Form->input('Applicant.category', array(
                     'options' => array(
                         'General' => 'General',
                         'SC' => 'SC',
@@ -122,8 +117,9 @@
                         'OBC' => 'OBC'),
                     'empty' => 'Select',
                     'selected' => (!empty($category) ? $category : 'Select'),
-                    'style' => 'width: 100%;' 
-                )); */ ?></td>
+                    'style' => 'width: 100%;',
+                    'label' => 'Category of the applicant'
+                )); ?></td>
                 <td><?php echo $this->Form->input('Applicant.gender', array(
                     'options' => array(
                         'Male' => 'Male',
@@ -135,8 +131,19 @@
                 )); ?></td>
             </tr>
             <tr>
-                <td>If Married, specify name of the spouse: </td>
-                <td><?php echo $this->Form->input('Applicant.spouse_name', array('label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.spouse_name', array('label' => 'If Married, specify name of the spouse: ', 'maxlength' => '500')); ?></td>
+                <td> 
+                    <?php echo $this->Form->input('Applicant.category_applied', array(
+                    'options' => array(
+                        'General' => 'General',
+                        'SC' => 'SC',
+                        'ST' => 'ST',
+                        'OBC' => 'OBC'),
+                    'empty' => 'Select',
+                    'selected' => (!empty($category) ? $category : 'Select'),
+                    'style' => 'width: 100%;',
+                    'label' => 'Category of the post applied for'
+                )); ?></td>
             </tr>
             <tr>
                 <td><?php echo $this->Form->input('Applicant.date_of_birth', array('id' => 'date_of_birth' , 'label' => 'Date of Birth (DD/MM/YYYY)', 'maxlength' => '500')); ?></td>

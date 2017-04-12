@@ -7,7 +7,7 @@ class UsersController extends AppController {
     var $components = array('Captcha.Captcha'=>array('Model'=>'Signup', 
                         'field'=>'security_code'));
     
-    var $uses = array('Signup', 'Registereduser', 'Student');
+    var $uses = array('Signup', 'Registereduser', 'Applicant');
     
     public $paginate = array(
         'limit' => 25,
@@ -193,26 +193,22 @@ class UsersController extends AppController {
                         return false; 
                     }
                     $registered_user = $this->Registereduser->find('all', array(
-                                'conditions' => array('Registereduser.email' => trim($this->data['Registereduser']['email']),
-                                                      'Registereduser.dob' => trim($this->data['Registereduser']['dob']))
+                                'conditions' => array('Registereduser.email' => trim($this->data['Registereduser']['email']))
                                                     ));
                     if(count($registered_user) != 0) {
-                        $this->Session->setFlash('Email / Date of Birth is already registered.');
+                        $this->Session->setFlash('Email is already registered.');
                         return false;
                     }
-                    $this->Student->create();
-                    //$this->Student->set(array(
-                    //    'advertisement_no' => 'T-01 (2016)'));
-                    if(!$this->Student->save(array(), false)){
-                        debug($this->Student->validationErrors); die();
-                    }
-                    if($this->Student->save(null, false) && $this->Registereduser->save($this->data['Registereduser'])) {
-                        $this->Session->write('std_id', $this->Student->getLastInsertID());
+                    $this->Applicant->create();
+                    $this->Applicant->set(array(
+                        'advertisement_no' => 'T-02 (2017)'));
+                    if($this->Applicant->save(null, false) && $this->Registereduser->save($this->data['Registereduser'])) {
+                        $this->Session->write('applicant_id', $this->Applicant->getLastInsertID());
                         $this->Session->write('registration_id', $this->Registereduser->getLastInsertID());
-                        $this->Student->id = $this->Session->read('std_id');
-                        $this->Student->saveField('reg_id', $this->Session->read('registration_id'));
+                        $this->Applicant->id = $this->Session->read('applicant_id');
+                        $this->Applicant->saveField('registration_id', $this->Session->read('registration_id'));
                         $this->Registereduser->id = $this->Session->read('registration_id');
-                        $this->Registereduser->saveField('std_id', $this->Session->read('std_id'));
+                        $this->Registereduser->saveField('applicant_id', $this->Session->read('applicant_id'));
                         $this->Session->setFlash('You have successfully registered. Please login and fill your Application Form.');
                         //$this->redirect(array('controller' => 'form', 'action' => 'pay'));
 			$this->redirect(array('controller' => 'users', 'action' => 'dashboard'));

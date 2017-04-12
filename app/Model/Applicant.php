@@ -85,6 +85,10 @@ class Applicant extends AppModel {
             'rule' => 'notEmpty',
             'message' => 'required field'
         ),
+        'category_applied' => array(
+            'rule' => 'notEmpty',
+            'message' => 'required field'
+        ),
         'aadhar_no',
         'nationality' => array(
             'rule' => 'notEmpty',

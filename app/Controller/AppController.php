@@ -32,26 +32,26 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
     var $OTPValidity = "30";
-	public $components = array(
-				'Session',
-				'DebugKit.Toolbar'
-                                /*'Auth' => array(
-                                    //'loginRedirect' => array( 'controller' => 'posts', 'action' => 'index' ),
-                                    'loginRedirect' => '/onlineform', //array( 'controller' => 'posts', 'action' => 'index' ),
-                                    //'logoutRedirect' => array( 'controller' => 'pages', 'action' => 'display', 'home' ),
-                                    'logoutRedirect' => array( 'controller' => 'users', 'action' => 'login' ),
-                                    'authenticate' => array(
-                                        'Form' => array(
-                                            'passwordHasher' => 'Blowfish'
-                                        )
+    public $components = array(
+                            'Session',
+                            'DebugKit.Toolbar'
+                            /*'Auth' => array(
+                                //'loginRedirect' => array( 'controller' => 'posts', 'action' => 'index' ),
+                                'loginRedirect' => '/onlineform', //array( 'controller' => 'posts', 'action' => 'index' ),
+                                //'logoutRedirect' => array( 'controller' => 'pages', 'action' => 'display', 'home' ),
+                                'logoutRedirect' => array( 'controller' => 'users', 'action' => 'login' ),
+                                'authenticate' => array(
+                                    'Form' => array(
+                                        'passwordHasher' => 'Blowfish'
                                     )
-                                )*/
-			);
-						
+                                )
+                            )*/
+                    );
 
-	public function beforeFilter() {
-            
-        }
+
+    public function beforeFilter() {
+
+    }
     public function is_connected() {
         $connected = @fsockopen("www.smsjust.com", 80);
         $is_conn = false;
