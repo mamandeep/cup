@@ -53,7 +53,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                         <div class='marquee' style="overflow-x: hidden; width: 600px; margin-left: 0px; font-size: 16px;">Last Date to Apply Online 2<sup>nd</sup> October, 2016 1700 hrs. For any query please contact: +91-9464269330, 0164-2864109, (Technical) 0164-2864139</div>
 
                         <?php
-                            if($this->Session->check('registration_id') && $this->Session->check('std_id')) {
+                            if($this->Session->check('registration_id') && $this->Session->check('applicant_id')) {
                                // user is logged in, show logout..user menu etc
                              /* ?><span style="padding: 1px 10px;"><?php echo $this->Html->link(('Step 1'), array('first')); 
                               ?></span><span style="padding: 1px 10px;"><?php

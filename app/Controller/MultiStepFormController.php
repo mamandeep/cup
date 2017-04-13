@@ -2,7 +2,8 @@
 class MultiStepFormController extends AppController {
 	var $components = array('Wizard.Wizard');
         public $uses = array('Registereduser', 'Post' , 'MultiStepForm','Applicant','Education','Experience',
-                            'Academic_dist','Image','Document', 'Researchpaper', 'Researcharticle','Researchproject', 'ApiScore');
+                            'Academic_dist','Image','Document', 'Researchpaper', 'Researcharticle','Researchproject', 
+                            'Experiencephd', 'ApiScore');
         
         function beforeFilter() {
             if(!$this->Session->check('registration_id')) {
@@ -162,11 +163,12 @@ class MultiStepFormController extends AppController {
         }
         
         function _processSecond($count = 1) {
-            
-            if($this->data['modified'] == 'true') {
-                $education_arr = $this->Education->deleteAll( array('Education.applicant_id' => $this->Session->read('applicant_id')));
+            $rows = $this->Education->find('all', array('condition' => array('Education.applicant_id' => $this->Session->read('applicant_id'))));
+            if(count($rows) == 12 && empty($this->data['Education'][0]['id'])) {
+                $this->Session->setFlash('An error has occured. Please logout and login again.');
+                //$this->redirect(array('controller' => 'users', 'action' => 'logout'));
+                return false;
             }
-            
             if($this->Education->saveMany($this->data['Education']) && $this->Applicant->save($this->data['Applicant'])) { 
                 return true;
             }
@@ -202,12 +204,18 @@ class MultiStepFormController extends AppController {
         }
         
         function _processThird($count = 1) {
+            $rows = $this->Experiencephd->find('all', array('condition' => array('Experiencephd.applicant_id' => $this->Session->read('applicant_id'))));
+            if(count($rows) == 7 && empty($this->data['Experiencephd'][0]['id'])) {
+                $this->Session->setFlash('An error has occured. Please logout and login again.');
+                return false;
+            }
             if($this->data['modified'] == 'true') {
                 $this->Experience->deleteAll( array('Experience.applicant_id' => $this->Session->read('applicant_id')));
             }
             
-            if($this->Experience->saveMany($this->data['Experience']) && $this->Applicant->save($this->data['Applicant'])) {
-                    return true;
+            if($this->Experience->saveMany($this->data['Experience']) && $this->Applicant->save($this->data['Applicant'])
+                    && $this->Experiencephd->saveMany($this->data['Experiencephd'])) {
+                return true;
             }
             return false;
 	}

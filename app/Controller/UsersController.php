@@ -51,7 +51,7 @@ class UsersController extends AppController {
                 $password_hash = "";
                 while ($row = $db->fetchRow()) { 
                     $this->Session->write('registration_id', $row['registered_users']['id']);
-                    $this->Session->write('std_id', $row['registered_users']['std_id']);
+                    $this->Session->write('applicant_id', $row['registered_users']['applicant_id']);
                     $password_hash = $row['registered_users']['password'];
                     $count_r++;
                 }

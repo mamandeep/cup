@@ -57,6 +57,618 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
             </tr>
         </tfoot>
     </table>
+    <br/><br/>
+    <div style="font-family: sans-serif; font-weight: bold; font-size: 20px; text-decoration-line: underline;">TEACHING EXPERIENCE ACQUIRED SIMULTANEOUSLY DURING PH.D.</div>
+    <table id="grade-table">
+        <thead>
+            <tr>
+                <th rowspan="2">Designation</th>
+                <th rowspan="2">Scale of Pay</th>
+                <th rowspan="2">Name & address of University / Institution</th>
+                <th rowspan="2">Organization / Institute</th>
+                <th colspan="3">Period of Experience</th>
+                <th rowspan="2">Nature Of Service (Full Time)</th>
+                <th rowspan="2">Work Load as per UGC Norms</th>
+                <th rowspan="2">Fulfilled the minimum eligibility conditions as per UGC and concerned statutory bodies at the time of appointment</th>
+                <th rowspan="2">Any leave taken during this period for Ph.D. research</th>                
+            </tr>
+            <tr>
+                <th>From Date <span style="font-size: 12px;">(DD/MM/YYYY)</span></th>
+                <th>To Date <span style="font-size: 12px;">(DD/MM/YYYY)</span></th>
+                <th>No. of Years / Months (as on last date of online form)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <?php echo $this->Form->hidden("Experiencephd.0.id") ?>
+                    <?php echo $this->Form->hidden("Experiencephd.0.applicant_id", array('value' => $this->Session->read('applicant_id'))); ?>
+                    <?php echo $this->Form->text("Experiencephd.0.designation"); ?>
+                </td>   
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.0.scale_of_pay"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.0.name_address"); ?>
+                </td>
+                <td>
+                    <?php 
+                                echo $this->Form->input("Experiencephd.0.institute_type", array(
+                                'options' => array('Central Government' => 'Central Govt.',
+                                                   'State Government' => 'State Govt.',
+                                                   'Autonomous' => 'Autonomous',
+                                                   'Government Aided' => 'Govt. Aided',
+                                                   'Private' => 'Private',
+                                                   'Other' => 'Other'),
+                                'label' => false
+                            ));
+                             ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.0.from_date"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.0.to_date"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.0.no_of_mnths_yrs"); ?>
+                    <?php 
+                        echo "<script>";
+                        echo "$('input[name$=\"data[Experiencephd][0][from_date]\"]').on('focusout', function(){
+                            dateFormatCheck('input[name$=\"data[Experiencephd][0][from_date]\"]');
+                        });";
+                        echo "$('input[name$=\"data[Experiencephd][0][to_date]\"]').on('focusout', function(){
+                            dateFormatCheck('input[name$=\"data[Experiencephd][0][to_date]\"]');
+                        });";
+                        echo "$('input[name$=\"data[Experiencephd][0][no_of_mnths_yrs]\"]').on('focusin', function(){
+                            calcuateDiff('input[name$=\"data[Experiencephd][0][from_date]\"]', 'input[name$=\"data[Experiencephd][0][to_date]\"]', 'input[name$=\"data[Experiencephd][0][no_of_mnths_yrs]\"]');
+                        });";
+                        echo "</script>";
+                    ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.0.nature_of_service", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.0.work_load", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.0.minimum_eligibility", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.0.leave_taken", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+            </tr>
+            <tr>
+                <td>
+                    <?php echo $this->Form->hidden("Experiencephd.1.id") ?>
+                    <?php echo $this->Form->hidden("Experiencephd.1.applicant_id", array('value' => $this->Session->read('applicant_id'))); ?>
+                    <?php echo $this->Form->text("Experiencephd.1.designation"); ?>
+                </td>   
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.1.scale_of_pay"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.1.name_address"); ?>
+                </td>
+                <td>
+                    <?php 
+                                echo $this->Form->input("Experiencephd.1.institute_type", array(
+                                'options' => array('Central Government' => 'Central Govt.',
+                                                   'State Government' => 'State Govt.',
+                                                   'Autonomous' => 'Autonomous',
+                                                   'Government Aided' => 'Govt. Aided',
+                                                   'Private' => 'Private',
+                                                   'Other' => 'Other'),
+                                'label' => false
+                            ));
+                             ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.1.from_date"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.1.to_date"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.1.no_of_mnths_yrs"); ?>
+                    <?php 
+                        echo "<script>";
+                        echo "$('input[name$=\"data[Experiencephd][1][from_date]\"]').on('focusout', function(){
+                            dateFormatCheck('input[name$=\"data[Experiencephd][1][from_date]\"]');
+                        });";
+                        echo "$('input[name$=\"data[Experiencephd][1][to_date]\"]').on('focusout', function(){
+                            dateFormatCheck('input[name$=\"data[Experiencephd][1][to_date]\"]');
+                        });";
+                        echo "$('input[name$=\"data[Experiencephd][1][no_of_mnths_yrs]\"]').on('focusin', function(){
+                            calcuateDiff('input[name$=\"data[Experiencephd][1][from_date]\"]', 'input[name$=\"data[Experiencephd][1][to_date]\"]', 'input[name$=\"data[Experiencephd][1][no_of_mnths_yrs]\"]');
+                        });";
+                        echo "</script>";
+                    ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.1.nature_of_service", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.1.work_load", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.1.minimum_eligibility", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.1.leave_taken", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+            </tr>
+            <tr>
+                <td>
+                    <?php echo $this->Form->hidden("Experiencephd.2.id") ?>
+                    <?php echo $this->Form->hidden("Experiencephd.2.applicant_id", array('value' => $this->Session->read('applicant_id'))); ?>
+                    <?php echo $this->Form->text("Experiencephd.2.designation"); ?>
+                </td>   
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.2.scale_of_pay"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.2.name_address"); ?>
+                </td>
+                <td>
+                    <?php 
+                                echo $this->Form->input("Experiencephd.2.institute_type", array(
+                                'options' => array('Central Government' => 'Central Govt.',
+                                                   'State Government' => 'State Govt.',
+                                                   'Autonomous' => 'Autonomous',
+                                                   'Government Aided' => 'Govt. Aided',
+                                                   'Private' => 'Private',
+                                                   'Other' => 'Other'),
+                                'label' => false
+                            ));
+                             ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.2.from_date"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.2.to_date"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.2.no_of_mnths_yrs"); ?>
+                    <?php 
+                        echo "<script>";
+                        echo "$('input[name$=\"data[Experiencephd][2][from_date]\"]').on('focusout', function(){
+                            dateFormatCheck('input[name$=\"data[Experiencephd][2][from_date]\"]');
+                        });";
+                        echo "$('input[name$=\"data[Experiencephd][2][to_date]\"]').on('focusout', function(){
+                            dateFormatCheck('input[name$=\"data[Experiencephd][2][to_date]\"]');
+                        });";
+                        echo "$('input[name$=\"data[Experiencephd][2][no_of_mnths_yrs]\"]').on('focusin', function(){
+                            calcuateDiff('input[name$=\"data[Experiencephd][2][from_date]\"]', 'input[name$=\"data[Experiencephd][2][to_date]\"]', 'input[name$=\"data[Experiencephd][2][no_of_mnths_yrs]\"]');
+                        });";
+                        echo "</script>";
+                    ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.2.nature_of_service", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.2.work_load", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.2.minimum_eligibility", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.2.leave_taken", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+            </tr>
+            <tr>
+                <td>
+                    <?php echo $this->Form->hidden("Experiencephd.3.id") ?>
+                    <?php echo $this->Form->hidden("Experiencephd.3.applicant_id", array('value' => $this->Session->read('applicant_id'))); ?>
+                    <?php echo $this->Form->text("Experiencephd.3.designation"); ?>
+                </td>   
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.3.scale_of_pay"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.3.name_address"); ?>
+                </td>
+                <td>
+                    <?php 
+                                echo $this->Form->input("Experiencephd.3.institute_type", array(
+                                'options' => array('Central Government' => 'Central Govt.',
+                                                   'State Government' => 'State Govt.',
+                                                   'Autonomous' => 'Autonomous',
+                                                   'Government Aided' => 'Govt. Aided',
+                                                   'Private' => 'Private',
+                                                   'Other' => 'Other'),
+                                'label' => false
+                            ));
+                             ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.3.from_date"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.3.to_date"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.3.no_of_mnths_yrs"); ?>
+                    <?php 
+                        echo "<script>";
+                        echo "$('input[name$=\"data[Experiencephd][3][from_date]\"]').on('focusout', function(){
+                            dateFormatCheck('input[name$=\"data[Experiencephd][3][from_date]\"]');
+                        });";
+                        echo "$('input[name$=\"data[Experiencephd][3][to_date]\"]').on('focusout', function(){
+                            dateFormatCheck('input[name$=\"data[Experiencephd][3][to_date]\"]');
+                        });";
+                        echo "$('input[name$=\"data[Experiencephd][3][no_of_mnths_yrs]\"]').on('focusin', function(){
+                            calcuateDiff('input[name$=\"data[Experiencephd][3][from_date]\"]', 'input[name$=\"data[Experiencephd][3][to_date]\"]', 'input[name$=\"data[Experiencephd][3][no_of_mnths_yrs]\"]');
+                        });";
+                        echo "</script>";
+                    ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.3.nature_of_service", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.3.work_load", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.3.minimum_eligibility", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.3.leave_taken", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+            </tr>
+            <tr>
+                <td>
+                    <?php echo $this->Form->hidden("Experiencephd.4.id") ?>
+                    <?php echo $this->Form->hidden("Experiencephd.4.applicant_id", array('value' => $this->Session->read('applicant_id'))); ?>
+                    <?php echo $this->Form->text("Experiencephd.4.designation"); ?>
+                </td>   
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.4.scale_of_pay"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.4.name_address"); ?>
+                </td>
+                <td>
+                    <?php 
+                                echo $this->Form->input("Experiencephd.4.institute_type", array(
+                                'options' => array('Central Government' => 'Central Govt.',
+                                                   'State Government' => 'State Govt.',
+                                                   'Autonomous' => 'Autonomous',
+                                                   'Government Aided' => 'Govt. Aided',
+                                                   'Private' => 'Private',
+                                                   'Other' => 'Other'),
+                                'label' => false
+                            ));
+                             ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.4.from_date"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.4.to_date"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.4.no_of_mnths_yrs"); ?>
+                    <?php 
+                        echo "<script>";
+                        echo "$('input[name$=\"data[Experiencephd][4][from_date]\"]').on('focusout', function(){
+                            dateFormatCheck('input[name$=\"data[Experiencephd][4][from_date]\"]');
+                        });";
+                        echo "$('input[name$=\"data[Experiencephd][4][to_date]\"]').on('focusout', function(){
+                            dateFormatCheck('input[name$=\"data[Experiencephd][4][to_date]\"]');
+                        });";
+                        echo "$('input[name$=\"data[Experiencephd][4][no_of_mnths_yrs]\"]').on('focusin', function(){
+                            calcuateDiff('input[name$=\"data[Experiencephd][4][from_date]\"]', 'input[name$=\"data[Experiencephd][4][to_date]\"]', 'input[name$=\"data[Experiencephd][4][no_of_mnths_yrs]\"]');
+                        });";
+                        echo "</script>";
+                    ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.4.nature_of_service", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.4.work_load", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.4.minimum_eligibility", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.4.leave_taken", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+            </tr>
+            <tr>
+                <td>
+                    <?php echo $this->Form->hidden("Experiencephd.5.id") ?>
+                    <?php echo $this->Form->hidden("Experiencephd.5.applicant_id", array('value' => $this->Session->read('applicant_id'))); ?>
+                    <?php echo $this->Form->text("Experiencephd.5.designation"); ?>
+                </td>   
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.5.scale_of_pay"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.5.name_address"); ?>
+                </td>
+                <td>
+                    <?php 
+                                echo $this->Form->input("Experiencephd.5.institute_type", array(
+                                'options' => array('Central Government' => 'Central Govt.',
+                                                   'State Government' => 'State Govt.',
+                                                   'Autonomous' => 'Autonomous',
+                                                   'Government Aided' => 'Govt. Aided',
+                                                   'Private' => 'Private',
+                                                   'Other' => 'Other'),
+                                'label' => false
+                            ));
+                             ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.5.from_date"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.5.to_date"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.5.no_of_mnths_yrs"); ?>
+                    <?php 
+                        echo "<script>";
+                        echo "$('input[name$=\"data[Experiencephd][5][from_date]\"]').on('focusout', function(){
+                            dateFormatCheck('input[name$=\"data[Experiencephd][5][from_date]\"]');
+                        });";
+                        echo "$('input[name$=\"data[Experiencephd][5][to_date]\"]').on('focusout', function(){
+                            dateFormatCheck('input[name$=\"data[Experiencephd][5][to_date]\"]');
+                        });";
+                        echo "$('input[name$=\"data[Experiencephd][5][no_of_mnths_yrs]\"]').on('focusin', function(){
+                            calcuateDiff('input[name$=\"data[Experiencephd][5][from_date]\"]', 'input[name$=\"data[Experiencephd][5][to_date]\"]', 'input[name$=\"data[Experiencephd][5][no_of_mnths_yrs]\"]');
+                        });";
+                        echo "</script>";
+                    ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.5.nature_of_service", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.5.work_load", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.5.minimum_eligibility", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.5.leave_taken", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+            </tr>
+            <tr>
+                <td>
+                    <?php echo $this->Form->hidden("Experiencephd.6.id") ?>
+                    <?php echo $this->Form->hidden("Experiencephd.6.applicant_id", array('value' => $this->Session->read('applicant_id'))); ?>
+                    <?php echo $this->Form->text("Experiencephd.6.designation"); ?>
+                </td>   
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.6.scale_of_pay"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.6.name_address"); ?>
+                </td>
+                <td>
+                    <?php 
+                                echo $this->Form->input("Experiencephd.6.institute_type", array(
+                                'options' => array('Central Government' => 'Central Govt.',
+                                                   'State Government' => 'State Govt.',
+                                                   'Autonomous' => 'Autonomous',
+                                                   'Government Aided' => 'Govt. Aided',
+                                                   'Private' => 'Private',
+                                                   'Other' => 'Other'),
+                                'label' => false
+                            ));
+                             ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.6.from_date"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.6.to_date"); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->text("Experiencephd.6.no_of_mnths_yrs"); ?>
+                    <?php 
+                        echo "<script>";
+                        echo "$('input[name$=\"data[Experiencephd][6][from_date]\"]').on('focusout', function(){
+                            dateFormatCheck('input[name$=\"data[Experiencephd][6][from_date]\"]');
+                        });";
+                        echo "$('input[name$=\"data[Experiencephd][6][to_date]\"]').on('focusout', function(){
+                            dateFormatCheck('input[name$=\"data[Experiencephd][6][to_date]\"]');
+                        });";
+                        echo "$('input[name$=\"data[Experiencephd][6][no_of_mnths_yrs]\"]').on('focusin', function(){
+                            calcuateDiff('input[name$=\"data[Experiencephd][6][from_date]\"]', 'input[name$=\"data[Experiencephd][6][to_date]\"]', 'input[name$=\"data[Experiencephd][6][no_of_mnths_yrs]\"]');
+                        });";
+                        echo "</script>";
+                    ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.6.nature_of_service", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td>
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.6.work_load", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.6.minimum_eligibility", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+                <td>
+                    <?php echo $this->Form->input("Experiencephd.6.leave_taken", array(
+                        'options' => array(
+                            'Yes' => 'Yes',
+                            'No' => 'No'
+                        ),
+                        'label' => false
+                     )); ?>
+                </td> 
+            </tr>
+        </tbody>
+    </table>
     <table>
         <tr>
             <td>Total period of experience
@@ -77,7 +689,6 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
         </tr>
     </table>
 </fieldset>
-
 <script id="grade-template" type="text/x-underscore-template">
     <?php echo $this->element('experience'); ?>
 </script>
