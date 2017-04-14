@@ -1,7 +1,7 @@
 <?php
 class MultiStepFormController extends AppController {
 	var $components = array('Wizard.Wizard');
-        public $uses = array('Registereduser', 'Post' , 'MultiStepForm','Applicant','Education','Experience',
+        public $uses = array('Registereduser', 'Post' , 'MultiStepForm','Applicant', 'Applicantext', 'Education','Experience',
                             'Academic_dist','Image','Document', 'Researchpaper', 'Researcharticle','Researchproject', 
                             'Experiencephd', 'ApiScore');
         
@@ -180,6 +180,8 @@ class MultiStepFormController extends AppController {
                 $data = array();
                 $exp_arr = $this->Experience->find('all', array(
                         'conditions' => array('Experience.applicant_id' => $this->Session->read('applicant_id'))));
+                $expphd_arr = $this->Experiencephd->find('all', array(
+                        'conditions' => array('Experiencephd.applicant_id' => $this->Session->read('applicant_id'))));
                 $misc = $this->Applicant->find('all', array(
                         'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
                 $expId_arr = array();
@@ -189,6 +191,14 @@ class MultiStepFormController extends AppController {
                     $exp_data[$key] = $exp_arr[$key]['Experience'];
                 }
                 $data['Experience'] = $exp_data;
+                
+                $expphdId_arr = array();
+                $expphd_data = array();
+                foreach($expphd_arr as $key => $value){
+                    $expphdId_arr[$key] = $value['Experiencephd']['id'];
+                    $expphd_data[$key] = $expphd_arr[$key]['Experiencephd'];
+                }
+                $data['Experiencephd'] = $expphd_data;
                 
                 if(count($misc) == 1) {
                     $data['Applicant'] = $misc['0']['Applicant'];
@@ -318,8 +328,10 @@ class MultiStepFormController extends AppController {
             $applicant = $this->Applicant->find('all', array(
                     'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
 
+            $data['Applicant'] = $applicant['0']['Applicant'];
+            $data['Applicantext'] = $applicant['0']['Applicant'];
             if(count($applicant) == 1) {
-                $this->request->data = $applicant['0'];
+                $this->request->data = $data;
                 $this->set('json_radio', $this->getJsonObject($applicant));
                 //$this->Session->write('MultiStepForm.miscIdEighth', $misc['0']['Misc']['id']);
             }
@@ -330,8 +342,8 @@ class MultiStepFormController extends AppController {
         }
         
         function _processFifth($count = 1) {
-            //print_r($this->data); return false;
-            if($this->Applicant->save($this->data)) {
+            //debug($this->data); return false;
+            if($this->Applicant->save($this->data['Applicant']) && $this->Applicantext->save($this->data['Applicantext'])) {
                 return true;
             }
             return false;

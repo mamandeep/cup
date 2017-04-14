@@ -119,14 +119,6 @@ class Applicant extends AppModel {
         'permanent_address' => array(
             'rule' => 'notEmpty',
             'message' => 'required field'
-        ),
-        'time_req_for_joining' => array(
-            'rule' => 'notEmpty',
-            'message' => 'required field'
-        ),
-        'total_self_att_docs_att' => array(
-            'rule' => 'notEmpty',
-            'message' => 'required field'
         )
         
     );
