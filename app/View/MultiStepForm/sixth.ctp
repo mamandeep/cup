@@ -10,18 +10,14 @@ echo $this->Form->create('Document', array('id' => 'Image_Details', 'url' => Rou
         <tr>
             <td class="table_headertxt misc_col1" style="padding-top: 17px;">Upload passport size photograph (.jpg format, min size 10 kb, max size 200 kb)<?php echo $this->Form->input('Document.id', array('type' => 'hidden'));
                                                                                                                                                                              echo $this->Form->input('Document.applicant_id', array('type' => 'hidden', 'value' => $this->Session->read('applicant_id')));   ?>
-            <span style="color: red;">MANDATORY</span>    
+            <span style="color: red;">COMPULSORY</span>    
             </td>
             <td><?php echo $this->Form->input('filename', array('label' => false, 'type' => 'file')); ?>
             </td>
         </tr>
-        <!--<tr>
-            <td class="table_headertxt misc_col1" style="padding-top: 17px;">Upload NOC, if you are working in a Government Organization. If not, upload Form 16 (.jpg format, min size 10 kb, max size 200 kb)</td>
-            <td><?php echo $this->Form->input('filename2', array('label' => false, 'type' => 'file')); ?></td>
-        </tr>-->
         <tr>
             <td class="table_headertxt misc_col1" style="padding-top: 17px;">Date of Birth Certificate - 10<sup>th</sup> / 11<sup>th</sup> / 10+2 Certificate - where DOB is mentioned (.jpg/.png/.gif/.pdf format, min size 10 kb, max size 200 kb)
-            <span style="color: red;">MANDATORY</span> 
+            <span style="color: red;">COMPULSORY</span> 
             </td>
             <td><?php echo $this->Form->input('filename2', array('label' => false, 'type' => 'file')); ?></td>
         </tr>
@@ -31,14 +27,17 @@ echo $this->Form->create('Document', array('id' => 'Image_Details', 'url' => Rou
         </tr>
         <tr>
             <td class="table_headertxt misc_col1" style="padding-top: 17px;">Signature of the candidate (.jpg format, min size 10 kb, max size 200 kb)
-            <span style="color: red;">MANDATORY</span> 
+            <span style="color: red;">COMPULSORY</span> 
             </td>
             <td><?php echo $this->Form->input('filename4', array('label' => false, 'type' => 'file')); ?></td>
         </tr>
         <?php if(!empty($applicant['Applicant']['post_applied_for']) && ($applicant['Applicant']['post_applied_for'] == "Professor" || $applicant['Applicant']['post_applied_for'] == "Associate Professor")) { ?>
         <tr>
-            <td class="table_headertxt misc_col1" style="padding-top: 17px;">API Proforma (MS Word format - <a href="<?php echo $this->webroot . '/files/API Form.doc'; ?>">Download</a>, Fill and Upload here, min size 10 kb, max size 800 kb)</td>
+            <td class="table_headertxt misc_col1" style="padding-top: 17px;">API Proforma (MS Word format - <a href="<?php echo $this->webroot . '/files/API Form.doc'; ?>">Download</a>, To be filled and uploaded here, min size 10 kb, max size 800 kb)</td>
             <td><?php echo $this->Form->input('filename5', array('label' => false, 'type' => 'file')); ?></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="table_headertxt misc_col1" style="padding-top: 17px;">Selection Criteria (<a href="<?php echo $this->webroot . '/files/T_selection_criteria.pdf'; ?>">Download</a>, To be filled and attached with Application Form)</td>
         </tr>
         <?php } ?>
         <tr>

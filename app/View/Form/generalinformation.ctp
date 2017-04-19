@@ -38,9 +38,9 @@
     <td></td>
     <td>The fee for SC/ST/PWD applicants is Rs. 250 and for others fee is Rs. 750. 
         <br/>
-        The last date of online application form is 06<sup>th</sup> June, 2016 1700 hrs
+        The last date of online application form is 30<sup>th</sup> April, 2017 1700 hrs
         <br/>
-        The last date for signed copy submission is 12<sup>th</sup> June, 2016 1700 hrs
+        The last date for signed copy submission is 8<sup>th</sup> May, 2017 1700 hrs
     
     </td>
     <td></td>

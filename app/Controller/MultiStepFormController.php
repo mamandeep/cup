@@ -30,7 +30,7 @@ class MultiStepFormController extends AppController {
                 }
                 $this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
             }
-            $this->Wizard->steps = array('first','second','third','fourth','fifth','sixth', 'seventh');
+            $this->Wizard->steps = array('first','second','third','fourth','fifth','sixth', 'seventh', 'eighth');
         }
         
         function wizard($step = null) {
@@ -388,33 +388,44 @@ class MultiStepFormController extends AppController {
         }
         
 	function _prepareSeventh($count = 1) {
-		//$applicants = $this->Applicant->find('all', array(
-                //            'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
-		//$this->set('payment_status', $applicants['0']['Applicant']['response_code']);
-                //$this->redirect(array('controller'=>'form', 'action' => 'print_bfs'));
-		/*$registered_user = $this->Registereduser->find('all', array(
-                    'conditions' => array('Registereduser.applicant_id' => $this->Session->read('applicant_id'))));
-
-                if($registered_user['0']['Registereduser']['category'] == "SC" || $registered_user['0']['Registereduser']['category'] == "ST" 
-                        || $registered_user['0']['Registereduser']['physically_disabled'] == "yes") {
-                    //$this->set('payment_status', "0");
-                    $this->set('exempted', '0');
+            $images = $this->Document->find('all', array(
+                    'conditions' => array('Document.applicant_id' => $this->Session->read('applicant_id'))));
+            
+            if(count($images) == 1) {
+                //$this->request->data = $images['0'];
+                if((isset($images['0']['Document']['filename']) && empty($images['0']['Document']['filename']))
+                    || (isset($images['0']['Document']['filename2']) && empty($images['0']['Document']['filename2']))
+                    || (isset($images['0']['Document']['filename4']) && empty($images['0']['Document']['filename4']))
+                )
+                {
+                    if(isset($images['0']['Document']['filename']) && empty($images['0']['Document']['filename']))
+                        $this->Session->setFlash('Photograph is compulsory');
+                    if(isset($images['0']['Document']['filename2']) && empty($images['0']['Document']['filename2']))
+                        $this->Session->setFlash('Date of Birth Certificate is compulsory');
+                    if(isset($images['0']['Document']['filename4']) && empty($images['0']['Document']['filename4']))
+                        $this->Session->setFlash('Signature is compulsory');
+                    $this->wizard('sixth');
                 }
-                else {*/
-                
-                    $applicants = $this->Applicant->find('all', array(
-                            'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
-                    $this->set('payment_status', $applicants['0']['Applicant']['response_code']);
-                //}
-                //$this->set('payment_status', "0");
+                $this->set('image', $images['0']);
+                //print_r($this->request->data);
+            }
+            else if(count($images) > 1) {
+                $this->Session->setFlash('An error has occured. Please contact Support.');
+            }
+            else {
+                $this->Session->setFlash('Kindly upload the necessary documents.');
+                $this->wizard('sixth');
+            }
 	}
 
 	function _processSeventh($count = 1) {
-		
+            return true;
 	}
         
 	function _prepareEighth($count = 1) {
-            
+            $applicants = $this->Applicant->find('all', array(
+                            'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
+            $this->set('payment_status', $applicants['0']['Applicant']['response_code']);
 	}
         
         function _processEighth() {

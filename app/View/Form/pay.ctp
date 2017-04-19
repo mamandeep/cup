@@ -88,19 +88,17 @@
             <td align="left">
                 <input name="postal_code" type="text" value="" />            </td>
         </tr>
-
         <tr>
             <td class="fieldName"><span class="error">*</span>Country</td>
             <td align="left">
-                                <input name="country" type="text" value="IND" />            </td>
+                <input name="country" type="text" value="IND" readonly="readonly"/>
+            </td>
         </tr>
-
         <tr>
             <td class="fieldName"><span class="error">*</span>Email</td>
             <td align="left">
                 <input name="email" type="text" value="" />            </td>
         </tr>
-
         <tr>
             <td class="fieldName"><span class="error">*</span>Telephone</td>
             <td align="left"><input name="phone" type="text" value="" /></td>
