@@ -1,10 +1,17 @@
+<style type="text/css">
+.table_header {
+    font-size: 16px;
+    font-weight: bold;
+}
+</style>
 <div>
-    <span class="generalinfoheader">General Information</span>
+    <span class="generalinfoheader">List of Applied Posts</span>
     <table width="100%" style="table-layout: fixed;">
         <tr>
-            <td style="">S.No.</td>
-            <td style="">List of Applied Posts</td>
-            <td style="">Print Form</td>
+            <td width="20%" class="table_header">S.No.</td>
+            <td width="20%" class="table_header">Post Applied For</td>
+            <td width="40%" class="table_header">Centre</td>
+            <td width="20%" class="table_header">Print Form</td>
         </tr>
         <?php
             if(!empty($this->request->data)) {
@@ -12,7 +19,10 @@
                     echo "<tr>";
                     echo "<td>" . ($key + 1) . "</td>";
                     echo "<td>" . $this->request->data[$key]['Post']['post_name'] . "</td>";
-                    echo "<td><a href=\"" . $this->webroot . "/form/printform?post=" .  $this->request->data[$key]['Post']['post_name'] .
+                    echo "<td>" . $this->request->data[$key]['Post']['centre'] . "</td>";
+                    $url = $this->webroot . "/form/printform?post=" .  $this->request->data[$key]['Post']['post_name'] 
+                                          . "&id=" . $this->request->data[$key]['Post']['applicant_id'];
+                    echo "<td><a href=\"" . $url .
                         "\" id=\"print_" . $key . "\" style=\"font-size: 20px;\">Click Here</a></td>";
                     echo "</tr>";
                 }

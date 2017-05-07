@@ -9,7 +9,8 @@
                     echo $this->Form->input('Applicant.id', array('type' => 'hidden'));
                     echo $this->Form->input('Applicant.advertisement_no', array(
                         'type' => 'text',
-                        'readonly' => 'readonly'
+                        'readonly' => 'readonly',
+                        'value' => 'T-02 (2017)'
                     )); ?></td>
                 <td><?php $post = !empty($postAppliedFor) ? $postAppliedFor : '';
                 //$options = array( $post => $post );
@@ -116,7 +117,7 @@
                         'ST' => 'ST',
                         'OBC' => 'OBC'),
                     'empty' => 'Select',
-                    'selected' => (!empty($category) ? $category : 'Select'),
+                    //'selected' => (!empty($category) ? $category : 'Select'),
                     'style' => 'width: 100%;',
                     'label' => 'Category of the applicant'
                 )); ?></td>
@@ -140,7 +141,7 @@
                         'ST' => 'ST',
                         'OBC' => 'OBC'),
                     'empty' => 'Select',
-                    'selected' => (!empty($category) ? $category : 'Select'),
+                    //'selected' => (!empty($category) ? $category : 'Select'),
                     'style' => 'width: 100%;',
                     'label' => 'Category of the post applied for'
                 )); ?></td>

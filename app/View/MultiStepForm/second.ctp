@@ -89,6 +89,7 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                         'Distance' => 'Distance'
                     ),
                     'style' => 'width: 100%;',
+                    'empty' => ['select' => 'Select'],
                     'label' => false
                 )); ?>
                 </td>
@@ -129,6 +130,7 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                         'Distance' => 'Distance'
                     ),
                     'style' => 'width: 100%;',
+                    'empty' => ['select' => 'Select'],
                     'label' => false
                 )); ?>
                 </td>
@@ -167,6 +169,7 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                         'Distance' => 'Distance'
                     ),
                     'style' => 'width: 100%;',
+                    'empty' => ['select' => 'Select'],
                     'label' => false
                 )); ?>
                 </td>
@@ -186,10 +189,11 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
             <tr><td>
                     <?php echo $this->Form->hidden("Education.3.id") ?>
                     <?php echo $this->Form->hidden("Education.3.applicant_id", array('value' => $this->Session->read('applicant_id'))); ?>
-                    <?php echo $this->Form->input('Education.3.qualification', array('type' => 'text',
+                    <?php echo $this->Form->input('Education.3.qualification', array('type' => 'textarea',
                                             'readonly' => 'readonly',
-                                            'value' => 'B.Sc.',
-                                            'label' => false)); ?>
+                                            'value' => 'B.Sc. / B-Tech / B.A',
+                                            'label' => false,
+                                            'style' => 'overflow-y: scroll; height: 44px;')); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input('Education.3.course', array('type' => 'text',
@@ -205,6 +209,7 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                         'Distance' => 'Distance'
                     ),
                     'style' => 'width: 100%;',
+                    'empty' => ['select' => 'Select'],
                     'label' => false
                 )); ?>
                 </td>
@@ -224,10 +229,11 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
             <tr><td>
                     <?php echo $this->Form->hidden("Education.4.id") ?>
                     <?php echo $this->Form->hidden("Education.4.applicant_id", array('value' => $this->Session->read('applicant_id'))); ?>
-                    <?php echo $this->Form->input('Education.4.qualification', array('type' => 'text',
+                    <?php echo $this->Form->input('Education.4.qualification', array('type' => 'textarea',
                                             'readonly' => 'readonly',
-                                            'value' => 'M.Sc.',
-                                            'label' => false)); ?>
+                                            'value' => 'M.Sc. / M-Tech / M.A.',
+                                            'label' => false,
+                                            'style' => 'overflow-y: scroll; height: 44px;')); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input('Education.4.course', array('type' => 'text',
@@ -243,6 +249,7 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                         'Distance' => 'Distance'
                     ),
                     'style' => 'width: 100%;',
+                    'empty' => ['select' => 'Select'],
                     'label' => false
                 )); ?>
                 </td>
@@ -264,7 +271,7 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     <?php echo $this->Form->hidden("Education.5.applicant_id", array('value' => $this->Session->read('applicant_id'))); ?>
                     <?php echo $this->Form->input('Education.5.qualification', array('type' => 'text',
                                             'readonly' => 'readonly',
-                                            'value' => 'B.A.',
+                                            'value' => 'M.Phil.',
                                             'label' => false)); ?>
                 </td>
                 <td>
@@ -281,6 +288,7 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                         'Distance' => 'Distance'
                     ),
                     'style' => 'width: 100%;',
+                    'empty' => ['select' => 'Select'],
                     'label' => false
                 )); ?>
                 </td>
@@ -302,7 +310,7 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     <?php echo $this->Form->hidden("Education.6.applicant_id", array('value' => $this->Session->read('applicant_id'))); ?>
                     <?php echo $this->Form->input('Education.6.qualification', array('type' => 'text',
                                             'readonly' => 'readonly',
-                                            'value' => 'M.A.',
+                                            'value' => 'Ph.D.',
                                             'label' => false)); ?>
                 </td>
                 <td>
@@ -316,9 +324,11 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     <?php echo $this->Form->input("Education.6.mode_of_study", array(
                     'options' => array(
                         'Regular' => 'Regular',
-                        'Distance' => 'Distance'
+                        'Part Time' => 'Part Time',
+                        'Long Distance' => 'Long Distance'
                     ),
                     'style' => 'width: 100%;',
+                    'empty' => ['select' => 'Select'],
                     'label' => false
                 )); ?>
                 </td>
@@ -339,8 +349,6 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     <?php echo $this->Form->hidden("Education.7.id") ?>
                     <?php echo $this->Form->hidden("Education.7.applicant_id", array('value' => $this->Session->read('applicant_id'))); ?>
                     <?php echo $this->Form->input('Education.7.qualification', array('type' => 'text',
-                                            'readonly' => 'readonly',
-                                            'value' => 'M.Phil.',
                                             'label' => false)); ?>
                 </td>
                 <td>
@@ -357,6 +365,7 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                         'Distance' => 'Distance'
                     ),
                     'style' => 'width: 100%;',
+                    'empty' => ['select' => 'Select'],
                     'label' => false
                 )); ?>
                 </td>
@@ -377,8 +386,6 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     <?php echo $this->Form->hidden("Education.8.id") ?>
                     <?php echo $this->Form->hidden("Education.8.applicant_id", array('value' => $this->Session->read('applicant_id'))); ?>
                     <?php echo $this->Form->input('Education.8.qualification', array('type' => 'text',
-                                            'readonly' => 'readonly',
-                                            'value' => 'Ph.D.',
                                             'label' => false)); ?>
                 </td>
                 <td>
@@ -392,10 +399,10 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     <?php echo $this->Form->input("Education.8.mode_of_study", array(
                     'options' => array(
                         'Regular' => 'Regular',
-                        'Part Time' => 'Part Time',
-                        'Long Distance' => 'Long Distance'
+                        'Distance' => 'Distance'
                     ),
                     'style' => 'width: 100%;',
+                    'empty' => ['select' => 'Select'],
                     'label' => false
                 )); ?>
                 </td>
@@ -432,6 +439,7 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                         'Distance' => 'Distance'
                     ),
                     'style' => 'width: 100%;',
+                    'empty' => ['select' => 'Select'],
                     'label' => false
                 )); ?>
                 </td>
@@ -468,6 +476,7 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                         'Distance' => 'Distance'
                     ),
                     'style' => 'width: 100%;',
+                    'empty' => ['select' => 'Select'],
                     'label' => false
                 )); ?>
                 </td>
@@ -504,6 +513,7 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                         'Distance' => 'Distance'
                     ),
                     'style' => 'width: 100%;',
+                    'empty' => ['select' => 'Select'],
                     'label' => false
                 )); ?>
                 </td>

@@ -163,20 +163,12 @@
 <tr>
     <td></td>
     <td><div style="text-align: center; font-size: 20px;">
-        <?php if(isset($applicant) && $applicant['Applicant']['final_submit'] != "1" ) {
+        <?php 
               echo $this->Form->create('Temp', array('id' => 'Continue_Form', 'url' => Router::url( '/multi_step_form/wizard/first', true ))); 
               echo $this->Form->submit('Continue to Application Form', array('div' => false, 'id' => 'continue_bt' ));
               echo $this->Form->end(); 
-            } ?>
-        <!--<a href="<?php echo $this->webroot; ?>multi_step_form/wizard/first" class="button" id="continue_bt">Continue</a>-->
+             ?>
     </div>
-    </td>
-    <td><div style="text-align: center; font-size: 20px;"><?php if(isset($applicant) && $applicant['Applicant']['final_submit'] == "1" ) {
-              echo $this->Form->create('Temp2', array('id' => 'Print_Form', 'url' => Router::url( '/form/print_bfs', true ))); 
-              echo $this->Form->submit('Print Application Form', array('div' => false, 'id' => 'print_bt' ));
-              echo $this->Form->end(); 
-              } ?>
-        </div>
     </td>
     <td></td>
 </tr>

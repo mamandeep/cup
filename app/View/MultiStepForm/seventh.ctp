@@ -46,23 +46,11 @@
                     <a href="<?php echo $link; ?>" target="_blank">Download</a>
                 <td></td>
             </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <div class="submit">
-                        <a href="<?php echo $this->webroot; ?>multistepform/wizard/eighth" id="continue_bt" class="button_ct" style="font-size: 20px;">Continue</a>
-                    </div>
-                </td>
-                <td>
-                </td>
-                <td></td>
-            </tr>
         </table>
       <?php echo $this->Form->create('Document', array('id' => 'Image_Details', 'url' => Router::url( null, true ))); ?>
         <div class="submit">
             <input type="hidden" name="temp" value="1"/>
             <?php echo $this->Form->submit('Continue', array('div' => false)); ?>
-            <?php echo $this->Form->submit('Cancel', array('name' => 'Cancel', 'div' => false)); ?>
         </div>
       <?php echo $this->Form->end(); ?>
   </div>

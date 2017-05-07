@@ -3,7 +3,7 @@ class MultiStepFormController extends AppController {
 	var $components = array('Wizard.Wizard');
         public $uses = array('Registereduser', 'Post' , 'MultiStepForm','Applicant', 'Applicantext', 'Education','Experience',
                             'Academic_dist','Image','Document', 'Researchpaper', 'Researcharticle','Researchproject', 
-                            'Experiencephd', 'ApiScore');
+                            'Experiencephd', 'ApiScore', 'NewAPIScore');
         
         function beforeFilter() {
             if(!$this->Session->check('registration_id')) {
@@ -11,31 +11,25 @@ class MultiStepFormController extends AppController {
             }
             $current_datetime = new DateTime();
             $current_datetime->setTimezone(new DateTimeZone('Asia/Calcutta'));
-            $close_datetime = new DateTime("2017-04-20 17:00:00", new DateTimeZone('Asia/Calcutta'));
+            $close_datetime = new DateTime("2017-05-06 17:00:00", new DateTimeZone('Asia/Calcutta'));
             //print_r($current_datetime->format('Y-m-d-H-i-s'));
             //print_r($close_datetime->format('Y-m-d-H-i-s'));
             $applicant = $this->Applicant->find('all', array(
                         'conditions' => array('Applicant.registration_id' => $this->Session->read('registration_id'))));
-            if ($current_datetime > $close_datetime || (count($applicant) == 1 && $applicant['0']['Applicant']['final_submit'] == "1")
-                        || count($applicant) > 1) {
-                //exit("The Application Form is closed at this time.");
-                if($current_datetime > $close_datetime) { 
-                    $this->Session->setFlash('Application Form is disabled.');
-                }
-                if(count($applicant) == 1 && $applicant['0']['Applicant']['final_submit'] == "1") {
-                    $this->Session->setFlash('Application Form has been final submitted.');
-                }
-                if(count($applicant) > 1) {
-                    $this->Session->setFlash('A MRF error has occured. Please contact Support.');
-                }
+            if ($current_datetime > $close_datetime) {
+                $this->Session->setFlash('Application Form is closed.');
+                
                 $this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
             }
-            $this->Wizard->steps = array('first','second','third','fourth','fifth','sixth', 'seventh', 'eighth');
+            $this->Wizard->steps = array('first','second','third','fourth','fifth','sixth', 'seventh', 'eighth', 'ninth');
         }
         
         function wizard($step = null) {
             if($this->Session->check('registration_id')) {
+                //debug($this->alreadyAppliedCheck());
+                //debug($this->isApplicantIdValid()); return false;
                 $this->alreadyAppliedCheck();
+                $this->isApplicantIdValid();
                 $this->Wizard->process($step);
             }
             else {
@@ -59,42 +53,65 @@ class MultiStepFormController extends AppController {
                 }
             }
             if ($mismatch == true) {
-                $this->Session->setFlash('You have already applied for the selected Post/Centre.');
+                $this->Session->setFlash('You have already applied for and final submitted the selected Post/Centre.');
                 $this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
             }
         }
         
-        private function getApplicantIdAsPerPostAreaCentre($reg_id) {
-            $applicants = $this->Applicant->find('all', array(
-                        'conditions' => array('Applicant.registration_id' => $reg_id,
-                                              'Applicant.post_applied_for' => $this->getPostAppliedFor(),
-                                              'Applicant.centre' => $this->getCentreAppliedFor()
-                                              )));
-            
-            //print_r($applicants);
-            if(count($applicants) == 1)
-                return $applicants['0']['Applicant']['id'];
+        private function getApplicantIdAsPerPostAreaCentre() {
+            $reg_id = $this->Session->read('registration_id');
+            if(!empty($reg_id)) {
+                $applicants = $this->Applicant->find('all', array(
+                            'conditions' => array('Applicant.registration_id' => $reg_id,
+                                                  'Applicant.post_applied_for' => $this->getPostAppliedFor(),
+                                                  'Applicant.centre' => $this->getCentreAppliedFor()
+                                                  )));
+
+                //print_r($applicants);
+                if(count($applicants) == 0) {
+                    $this->Applicant->create();
+                    $this->Applicant->set(['registration_id' => $reg_id,
+                                           'post_applied_for' => $this->getPostAppliedFor(),
+                                           'centre' => $this->getCentreAppliedFor()]);
+                    $this->Applicant->save();
+                    return $this->Applicant->getLastInsertID();
+                }
+                else if(count($applicants) == 1)
+                    return $applicants['0']['Applicant']['id'];
+                else {
+                    //this condition should not arise. delete all the above records
+                    $deleted = $this->Applicant->deleteAll( array('Applicant.registration_id' => $reg_id,
+                                                                        'Applicant.post_applied_for' => $this->getPostAppliedFor(),
+                                                                        'Applicant.centre' => $this->getCentreAppliedFor()
+                                                                        ));
+                    $this->Session->setFlash('Multiple entries found for applied posts. Please contact support.');
+                    $this->redirect(array('controller' => 'users', 'action' => 'logout'));
+                }
+            }
+        }
+        
+        // This function should be called after alreadyappliedcheck
+        private function isApplicantIdValid() {
+            if(!empty($this->Session->read('applicant_id'))) {
+                $applicantId = $this->getApplicantIdAsPerPostAreaCentre();
+                if($applicantId == $this->Session->read('applicant_id')) {
+                    return true;
+                }
+                else {
+                    $this->Session->write('applicant_id', $applicantId);
+                }
+            }
             else {
-                //this condition should not arise. delete all the above records
-                $deleted = $this->Applicant->deleteAll( array('Applicant.registration_id' => $reg_id,
-                                                                    'Applicant.post_applied_for' => $this->getPostAppliedFor(),
-                                                                    'Applicant.centre' => $this->getCentreAppliedFor()
-                                                                    ));
+                $applicantId = $this->getApplicantIdAsPerPostAreaCentre();
+                $this->Session->write('applicant_id', $applicantId);
+                return true;
             }
         }
         
         function _prepareFirst() {
-        //print_r($this->Session);
         if (!empty($this->Session->read('registration_id')) && !empty($this->Session->read('applicant_id'))) {
             $registration_data = $this->Registereduser->find('all', array(
                 'conditions' => array('Registereduser.id' => $this->Session->read('registration_id'))));
-            $this->set(Configure::read('GENERALINFO.post'), $this->getPostAppliedFor());
-            $existing_applicant_id = $this->getApplicantIdAsPerPostAreaCentre($this->Session->read('registration_id'));
-            if ($existing_applicant_id != null && $existing_applicant_id != $this->Session->read('applicant_id')) {
-                $this->Session->setFlash('Mismatch of Application Id. Please contact IT Cell');
-                //this case should not occur
-                $this->redirect(array('controller' => 'users', 'action' => 'logout'));
-            }
             $applicants = $this->Applicant->find('all', array(
                 'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
             if (count($applicants) == 1) {
@@ -105,11 +122,11 @@ class MultiStepFormController extends AppController {
                 $this->Session->write('MultiStepForm.applicantId', $applicants['0']['Applicant']['id']);
                 $maritalStatusSelected = $applicants['0']['Applicant']['marital_status'];
                 $postAppliedFor = $applicants['0']['Applicant']['post_applied_for'];
-                $category = $applicants['0']['Applicant']['category'];
+                //$category = $applicants['0']['Applicant']['category'];
                 $gender = $applicants['0']['Applicant']['gender'];
                 $physically_disabled = $applicants['0']['Applicant']['physically_disabled'];
                 $this->set('maritalStatusSelected', $maritalStatusSelected);
-                $this->set('category', $category);
+                //$this->set('category', $category);
                 $this->set('gender', $gender);
                 $this->set('physically_disabled', $physically_disabled);
                 $this->set('postAppliedFor', $postAppliedFor);
@@ -346,6 +363,7 @@ class MultiStepFormController extends AppController {
             if($this->Applicant->save($this->data['Applicant']) && $this->Applicantext->save($this->data['Applicantext'])) {
                 return true;
             }
+            $this->Session->setFlash('An error has occured. Please contact Support.');
             return false;
 	}
         
@@ -423,12 +441,34 @@ class MultiStepFormController extends AppController {
 	}
         
 	function _prepareEighth($count = 1) {
+            $applicants = $this->NewAPIScore->find('all', array(
+                            'conditions' => array('NewAPIScore.id' => $this->Session->read('applicant_id'))));
+            if($applicants[0]['NewAPIScore']['post_applied_for'] === "Assistant Professor") {
+                $this->wizard('ninth');
+            }
+            else {
+                $this->request->data = $applicants[0];
+            }
+	}
+        
+        function _processEighth() {
+            //debug($this->data['Applicant']); return false;
+            $this->NewAPIScore->create();    
+            $this->NewAPIScore->set($this->data);
+            if($this->NewAPIScore->validates()) { //&& $this->User->validates()) {
+                $this->NewAPIScore->save();
+                return true;
+            }
+            return false;
+        }
+        
+        function _prepareNinth($count = 1) {
             $applicants = $this->Applicant->find('all', array(
                             'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
             $this->set('payment_status', $applicants['0']['Applicant']['response_code']);
 	}
         
-        function _processEighth() {
+        function _processNinth() {
             
         }
         

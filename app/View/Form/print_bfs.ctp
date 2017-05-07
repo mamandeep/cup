@@ -97,8 +97,12 @@ echo $this->Html->script('jquery-1.11.1-min');
             </td>
         </tr>
         <tr>
-            <td class="print_headers">Category</td>
+            <td class="print_headers">Category of the applicant</td>
             <td class="print_value"><?php echo $applicant['Applicant']['category']?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Category of the post applied for</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['category_applied']?></td>
         </tr>
         <tr>
             <td class="print_headers">Differently Abled</td>
@@ -164,17 +168,20 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td class="print_headers">Centre</td>
             <td class="print_value"><?php echo $applicant['Applicant']['centre']?></td>
         </tr>
-        <?php if(false) { //!empty($applicant['Applicant']['post_applied_for']) && ($applicant['Applicant']['post_applied_for'] == "Professor" || $applicant['Applicant']['post_applied_for'] == "Associate Professor")) { 
+        <?php if(!empty($applicant['Applicant']['post_applied_for']) && ($applicant['Applicant']['post_applied_for'] == "Professor" || $applicant['Applicant']['post_applied_for'] == "Associate Professor")) { 
             ?>
             <tr>
-                <td class="print_headers">Api Score Total</td>
-                <td class="print_value"><?php echo $apiscore['ApiScore']['total_api']?></td>
+                <td class="print_headers">Api Score Category II</td>
+                <td class="print_value"><?php echo $applicant['Applicant']['apiscore_cat_2']?></td>
             </tr>
-            <!--
             <tr>
-                <td class="print_headers">Api Score (Capped)</td>
-                <td class="print_value"><?php echo $apiscore['ApiScore']['total_api_capped']?></td>
-            </tr>-->
+                <td class="print_headers">Api Score Category III</td>
+                <td class="print_value"><?php echo $applicant['Applicant']['apiscore_cat_3']?></td>
+            </tr>
+            <tr>
+                <td class="print_headers">Total Api Score (Category II & III)</td>
+                <td class="print_value"><?php echo $applicant['Applicant']['totalapiscore_cat_2_3']?></td>
+            </tr>
         <?php } ?>
     </table>
     <br />
@@ -183,7 +190,8 @@ echo $this->Html->script('jquery-1.11.1-min');
         <tr>
             <td width="5%" class="print_headers">Name of Degree / Diploma / Certificate / Class</td>
             <td width="10%" class="print_headers">Course</td>
-            <td width="30%" class="print_headers">Board / University</td>
+            <td width="10%" class="print_headers">Mode of Study</td>
+            <td width="20%" class="print_headers">Board / University</td>
             <td width="5%" class="print_headers">Grade / CGPA / Division</td>
             <td width="5%" class="print_headers">Percentage</td>
             <td width="5%" class="print_headers">Year of Passing</td>
@@ -194,6 +202,7 @@ echo $this->Html->script('jquery-1.11.1-min');
         echo "<tr>";
         echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['qualification'] . "</td>";
         echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['course'] . "</td>";
+        echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['mode_of_study'] . "</td>";
         echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['board'] . "</td>";
         //echo "<td>" . $education_arr[$key]['Education']['system'] . "</td>";
         echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['grade'] . "</td>";
@@ -205,7 +214,29 @@ echo $this->Html->script('jquery-1.11.1-min');
         ?>
         <tr>
             <td colspan="2" class="print_headers">Gaps in Education: </td>
-            <td colspan="5" class="print_value"><?php echo $applicant['Applicant']['gaps_in_education']; ?></td>
+            <td colspan="6" class="print_value"><?php echo $applicant['Applicant']['gaps_in_education']; ?></td>
+        </tr>
+    </table>
+    <br />
+    <div class="print_headers">UGC-NET Details</div>
+    <table id="present_position_table" border="1px solid black" style="border-right: 1px solid black; border-collapse: collapse;">
+        <tr>
+            <td width="10%" class="print_headers">Name of Subject</td>
+            <td width="20%" class="print_headers">Year of Passing</td>
+            <td width="20%" class="print_headers">Roll No.</td>
+            <td width="15%" class="print_headers">Marks Obtained</td>
+            <td width="15%" class="print_headers">Total Marks</td>
+            <td width="10%" class="print_headers">Cut-off Marks</td>
+            <td width="10%" class="print_headers">Category</td>
+        </tr>
+        <tr>
+            <td class="print_value"><?php echo $applicant['Applicant']['ugc_net_subject']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ugc_net_mnth_yr']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ugc_net_rollno']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ugc_net_marks']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ugc_net_total_marks']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ugc_net_cutoff_marks']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ugc_net_category']; ?></td>
         </tr>
     </table>
     <br />
@@ -254,6 +285,46 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td colspan="2" class="print_headers">Gaps in Experience: </td>
             <td colspan="6" class="print_value"><?php echo $applicant['Applicant']['gaps_in_experience']; ?></td>
         </tr>
+    </table>
+    <br />
+    <!--<p style="page-break-after:always;"></p>-->
+    <div class="print_headers">TEACHING EXPERIENCE ACQUIRED SIMULTANEOUSLY DURING PH.D.</div>
+    <table border="1px solid black" style="border-right: 1px solid black ; border-collapse: collapse;">
+        <tr>
+            <td rowspan="2" width="10%" class="print_headers">Designation</td>
+            <td rowspan="2" width="10%" class="print_headers">Scale of Pay</td>
+            <td rowspan="2" width="10%" class="print_headers">Name & address of University / Institute</td>
+            <td rowspan="2" width="10%" class="print_headers">Organization / Institute</td>
+            <td colspan="3"><div style="text-align: center" class="print_headers">Period of Experience</div></td>
+            <td rowspan="2" width="10%" class="print_headers">Nature Of Service (Full Time)</td>
+            <td rowspan="2" width="10%" class="print_headers">Work Load as per UGC Norms</td>
+            <td rowspan="2" width="10%" class="print_headers">Fulfilled the minimum eligibility conditions as per UGC and concerned statutory bodies at the time of appointment</td>
+            <td rowspan="2" width="10%" class="print_headers">Any leave taken during this period for Ph.D. research</td>
+            <!--<td rowspan="2" width="10%">Sr. No. of Proof Enclosed</td>-->
+        </tr>
+        <tr>
+            <td width="10%" class="print_headers">From Date</td>
+            <td width="10%" class="print_headers">To Date</td>
+            <td width="10%" class="print_headers">No. of Years/Months(as on last date of online form)</td>
+        </tr>
+        <?php
+        foreach($exp_arr_phd as $key => $value){
+        echo "<tr>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['designation'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['scale_of_pay'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['name_address'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['institute_type'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['from_date'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['to_date'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['no_of_mnths_yrs'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['nature_of_service'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['work_load'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['minimum_eligibility'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['leave_taken'] . "</td>";
+        //echo "<td>" . $exp_arr[$key]['Experience']['sr_of_proof'] . "</td>";
+        echo "</tr>";
+        }
+        ?>
     </table>
     <br />
     <div class="print_headers">Research Papers</div>

@@ -52,6 +52,7 @@ class AppController extends Controller {
     public function beforeFilter() {
 
     }
+    
     public function is_connected() {
         $connected = @fsockopen("www.smsjust.com", 80);
         $is_conn = false;

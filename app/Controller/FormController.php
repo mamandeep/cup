@@ -5,7 +5,8 @@ class FormController extends AppController {
     var $components = array('Captcha.Captcha'=>array('Model'=>'Signup', 
                         'field'=>'security_code'));//'Captcha.Captcha'
 
-    var $uses = array('Signup', 'Registereduser','Post','Applicant','Education','Experience','Image', 'Misc', 'Researchpaper','Researcharticle', 'Researchproject', 'Document', 'ApiScore');                
+    var $uses = array('Signup', 'Registereduser','Post','Applicant','Education','Experience','Image', 'Misc', 'Researchpaper', 
+                      'Researcharticle', 'Researchproject', 'Document', 'ApiScore', 'Experiencephd');                
     
     public $helpers = array('Captcha.Captcha');
     
@@ -147,44 +148,67 @@ class FormController extends AppController {
     }
 
     public function appliedposts() { 
-            /*$posts_applied = $this->Post->find('all', array(
-                        'conditions' => array('Post.registration_id' => $this->Session->read('registration_id'))));
+        $posts_applied = $this->Post->find('all', array(
+                        'conditions' => array('Post.reg_id' => $this->Session->read('registration_id'))));
                                               //'Post.final_submit' => '1')));
-            $this->request->data = $posts_applied;*/
-        }
+        $this->request->data = $posts_applied;
+        //$this->Session->delete('applicant_id');
+    }
         
-        public function printform($post = null) { 
+        public function printform($post = null) {
+            //$this->Session->delete('applicant_id');
             if(!empty($this->Session->read('registration_id'))) {
                 $post_name = !empty($this->request->query['post']) ? $this->request->query['post'] : '';
+                if(!(strcmp($post_name, "Professor") == 0 || strcmp($post_name, "Associate Professor") == 0 || strcmp($post_name, "Assistant Professor") == 0)) {
+                    $this->Session->setFlash('Details entered are not valid in Post name.');
+                    return false;
+                }
+                $applicant_id = !empty($this->request->query['id']) ? $this->request->query['id'] : '';
+                if(!(is_numeric($applicant_id) && intval($applicant_id) > 0))  {
+                    $this->Session->setFlash('Details entered are not valid in id.');
+                    return false;
+                }
+                
                 $posts_applied = $this->Post->find('all', array(
-                            'conditions' => array('Post.registration_id' => $this->Session->read('registration_id'),
-                                                  'Post.post_name' => $post_name)
+                            'conditions' => array('Post.reg_id' => $this->Session->read('registration_id'),
+                                                  'Post.post_name' => $post_name,
+                                                  'Post.applicant_id' => $applicant_id)
                                                 ));
                 if(count($posts_applied) == 1 && $posts_applied['0']['Post']['final_submit'] == '1') {
-                    $applicant_id = $posts_applied['0']['Post']['user_id'];
                     $this->layout = false;
                     $this->set('data_set', 'false');
                     $applicants = $this->Applicant->find('all', array(
                             'conditions' => array('Applicant.id' => $applicant_id)));
                     $education_arr = $this->Education->find('all', array(
-                            'conditions' => array('Education.user_id' => $applicant_id)));
+                            'conditions' => array('Education.applicant_id' => $applicant_id)));
+
                     $exp_arr = $this->Experience->find('all', array(
-                            'conditions' => array('Experience.user_id' => $applicant_id)));
-                    $publications_arr = $this->Researchpaper->find('all', array(
-                            'conditions' => array('Researchpaper.user_id' => $this->Session->read('applicant_id'))));
-                    $image = $this->Image->find('all', array(
-                            'conditions' => array('Image.user_id' => $applicant_id)));
-                    $misc = $this->Misc->find('all', array(
-                            'conditions' => array('Misc.user_id' => $applicant_id)));                
-                    if(count($applicants) == 1 && count($misc) == 1) {
-                        $this->set('postAppliedFor', $post_name);
+                            'conditions' => array('Experience.applicant_id' => $applicant_id)));
+                    $exp_arr_phd = $this->Experiencephd->find('all', array(
+                            'conditions' => array('Experiencephd.applicant_id' => $applicant_id)));
+                    $rpaper_arr = $this->Researchpaper->find('all', array(
+                            'conditions' => array('Researchpaper.applicant_id' => $applicant_id)));
+                    $rarticle_arr = $this->Researcharticle->find('all', array(
+                            'conditions' => array('Researcharticle.applicant_id' => $applicant_id)));
+                    $rproject_arr = $this->Researchproject->find('all', array(
+                            'conditions' => array('Researchproject.applicant_id' => $applicant_id)));
+                    $image = $this->Document->find('all', array(
+                            'conditions' => array('Document.applicant_id' => $applicant_id)));
+                    
+                    if(count($applicants) == 1) {
                         $this->set('applicant', $applicants['0']);
                         $this->set('education_arr', $education_arr);
                         $this->set('exp_arr', $exp_arr);
-                        $this->set('publication_arr', $publications_arr);
+                        $this->set('exp_arr_phd', $exp_arr_phd);
+                        $this->set('rpaper_arr', $rpaper_arr);
+                        $this->set('rarticle_arr', $rarticle_arr);
+                        $this->set('rproject_arr', $rproject_arr);
                         $this->set('image', !empty($image['0']) ? $image['0'] : array());
-                        $this->set('misc', $misc['0']);
                         $this->set('data_set', 'true');
+                    }
+                    else {
+                        $this->Session->setFlash('An error has occured. Please contact Support.');
+                        return false;
                     }
                 }
             }
@@ -344,6 +368,8 @@ class FormController extends AppController {
 
             $exp_arr = $this->Experience->find('all', array(
                     'conditions' => array('Experience.applicant_id' => $this->Session->read('applicant_id'))));
+            $exp_arr_phd = $this->Experiencephd->find('all', array(
+                    'conditions' => array('Experiencephd.applicant_id' => $this->Session->read('applicant_id'))));
             $rpaper_arr = $this->Researchpaper->find('all', array(
                     'conditions' => array('Researchpaper.applicant_id' => $this->Session->read('applicant_id'))));
             $rarticle_arr = $this->Researcharticle->find('all', array(
@@ -366,6 +392,7 @@ class FormController extends AppController {
                 $this->set('applicant', $applicants['0']);
                 $this->set('education_arr', $education_arr);
                 $this->set('exp_arr', $exp_arr);
+                $this->set('exp_arr_phd', $exp_arr_phd);
                 $this->set('rpaper_arr', $rpaper_arr);
                 $this->set('rarticle_arr', $rarticle_arr);
                 $this->set('rproject_arr', $rproject_arr);
@@ -385,12 +412,24 @@ class FormController extends AppController {
 	}
 
 	public function final_submit() {
+                $applicants = $this->Applicant->find('all', array(
+                    'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
+                $this->Applicant->create();
 		$this->Applicant->id = $this->Session->read('applicant_id');
-                if (!empty($this->Applicant->id)) {
-                	$this->Applicant->saveField('final_submit', "1");
+                $this->Post->create();
+                $this->Post->set(['reg_id' => $this->Session->read('registration_id'),
+                                  'applicant_id' => $this->Session->read('applicant_id'),
+                                  'final_submit' => '1',
+                                  'post_name' => $applicants[0]['Applicant']['post_applied_for'],
+                                  'area' => $applicants[0]['Applicant']['area_of_sp'],
+                                  'centre' => $applicants[0]['Applicant']['centre']]);
+                if (!empty($this->Applicant->id) && $this->Applicant->saveField('final_submit', "1")
+                        && $this->Post->save()) {
+                    //$this->Session->delete('applicant_id');
+                    $this->redirect(array('controller' => 'form', 'action' => 'appliedposts'));
             	}
-		//$this->Session->delete('applicant_id');
-            	$this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
+                $this->Session->setFlash('An error has occured in final submission. Please contact Support.');
+            	return false;
 		//$this->redirect(array('controller' => 'users', 'action' => 'logout'));
 	}
 

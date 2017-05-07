@@ -1,40 +1,26 @@
-<table width="900" cellpadding="2" cellspacing="2" border="0" align="center">
-<tr>
-<th colspan="2">
-<div id="tabs">
-
-<div id="tabs-1">
-	<table>
-		<tr>
-			<?php if($payment_status == "0") {
-				echo "<td>You have already made the payment.</td>";
-				?>
-				<td>
-					<form action="<?php echo $this->webroot; ?>form/print_bfs" name="payment" method="POST">
-               				<button onClick="document.payment.submit();"> Continue </button>
-        				</form>
-				</td>
-				<?php
-			      }
-			      else {
-				echo "<td>To make the payment, click on Submit.</td>";
-				?>
-				<form action="<?php echo $this->webroot; ?>form/pay" name="payment" method="POST">
-        
-        			<button onClick="document.payment.submit();"> SUBMIT </button>
-        			</form>
-				<?php
-			      } ?>
-		</tr>
-	</table>
-        
-	<!--<form  method="post" action="validate_api.php" name="frmTransaction" id="frmTransaction" onSubmit="return validate()">-->
-	<!--<div style="font-size: 30px;">Kindly do not proceed further. It will be enabled shortly!</div>-->
-
-</div>
-
-
-</div>
-</th>
-</tr>
+<?php echo $this->Form->create('NewAPIScore', array('id' => 'Applicant_Details', 
+                                'url' => Router::url( null, true ))); ?>
+<table>
+    <tr>
+        <td>
+            <div class="main_content_header">API Score Details</div>
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><?php echo $this->Form->input('NewAPIScore.id', array('type' => 'hidden'));
+            echo $this->Form->input('NewAPIScore.apiscore_cat_2', array('label' => 'API Score Category II:', 'maxlength' => '10'));
+         ?></td>
+        <td><?php echo $this->Form->input('NewAPIScore.apiscore_cat_3', array('label' => 'API Score Category III:', 'maxlength' => '10'));
+        ?></td>
+        <td><?php 
+            echo $this->Form->input('NewAPIScore.totalapiscore_cat_2_3', array('label' => 'Total API Score Category II & III:', 'maxlength' => '10'));
+        ?></td>
+    </tr>
 </table>
+<div class="submit">
+    <?php echo $this->Form->submit('Save & Continue', array('div' => false)); ?>
+    <?php echo $this->Form->submit('Cancel', array('name' => 'Cancel', 'div' => false)); ?>
+</div>
+<?php echo $this->Form->end(); ?>

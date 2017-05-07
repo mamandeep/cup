@@ -1,75 +1,82 @@
 <style type="text/css">
 
- td {
+    td {
 
-    /* css-3 */
-    white-space: -o-pre-wrap; 
-    word-wrap: break-word;
-    white-space: pre-wrap; 
-    white-space: -moz-pre-wrap; 
-    white-space: -pre-wrap; 
+        /* css-3 */
+        white-space: -o-pre-wrap; 
+        word-wrap: break-word;
+        white-space: pre-wrap; 
+        white-space: -moz-pre-wrap; 
+        white-space: -pre-wrap; 
 
- }
+    }
 
-table { 
-  //table-layout: fixed;
-  width: 100%
-}
+    table { 
+        table-layout: fixed;
+        width: 100%
+    }
 
-.print_required label:after { content:"*"; }
+    .print_required label:after { content:"*"; }
 
-.print_headers {
-    font-size: 12px;
-    font-weight: bold;
-    color: #0a0;
-}
+    .print_headers {
+        font-size: 12px;
+        font-weight: bold;
+        color: #010101;
+        padding: 5px;
+    }
 
-.print_value {
-    font-size: 12px;
-    color: black;
-}
+    .print_value {
+        font-size: 12px;
+        color: black;
+        padding: 5px;
+    }
 
-.misc_col1 {
-    width: 45%;
-}
+    .misc_col1 {
+        width: 45%;
+    }
 
 </style>
-<?php if(isset($data_set) && $data_set === 'true') {
-    $this->Html->css('cake.generic.css');
-    echo $this->Html->script('jquery-1.11.1-min');
+<?php 
+
+function bcmin() {
+  $args = func_get_args();
+  if (count($args)==0) return false;
+  $min = $args[0];
+  foreach($args as $value) {
+    if (bccomp($min, $value)==1) {
+      $min = $value;
+    }
+  }
+  return $min;
+}
+
+if($data_set === 'true') {
+$this->Html->css('cake.generic.css');
+echo $this->Html->script('jquery-1.11.1-min');
 ?>
-<div id="contentContainer" style="width: 650px; margin-left: 100px;">
+<span style="padding: 1px 10px; float: right;">
+</span>
+<div id="contentContainer" style="width: 650px; max-width: 650px; margin-left: 100px;">
     <p style="font-size: 28px; font-weight: bold; text-align: center">CENTRAL UNIVERSITY OF PUNJAB</p>
     <p style="font-size: 12px; font-weight: bold; text-align: center">(Established vide Act no 25(2009) of Parliament)</p>
-    <p style="font-size: 28px; font-weight: bold; text-align: center">Online Application Form for Non-Teaching</p>
+    <p style="font-size: 28px; font-weight: bold; text-align: center">Online Application Form for Teaching Positions</p>
+    <p style="font-size: 24px; font-weight: bold; text-align: center">Position: <?php echo $applicant['Applicant']['post_applied_for']?></p>
     <table id="onlineformdata"  class="print_table" style="table-layout:fixed;">
         <tr>
             <td width="40%" class="print_headers">Advertisement No.</td>
             <td width="40%" class="print_value"><?php echo $applicant['Applicant']['advertisement_no'] ?></td>
-            <td width="20%"><img src="<?php if(!empty($image['Image']['filename'])) { echo $this->webroot . '/' . $image['Image']['filename']; } else { echo ""; } ?>" alt="Passport Size Photograph" height="132px" width="132px"></td>
+            <td width="20%"><img src="<?php if(!empty($image['Document']['filename'])) { echo $this->webroot . '/' . $image['Document']['filename']; } else { echo ""; } ?>" alt="Passport Size Photograph" height="132px" width="132px"></td>
         </tr>
         <tr>
-            <td width="40%" class="print_headers">Applicant Number</td>
+            <td width="40%" class="print_headers">Application Number</td>
             <td width="40%" class="print_value"><?php echo $applicant['Applicant']['id'] ?></td>
+            <td width="20%"><img src="<?php if(!empty($image['Document']['filename4'])) { echo $this->webroot . '/' . $image['Document']['filename4']; } else { echo ""; } ?>" alt="Signature" height="50px" width="132px"></td>
         </tr>
         <tr>
             <td class="print_headers">Details of application fee</td>
             <td style="word-wrap: normal;" class="print_value">Transaction ID:<?php echo $applicant['Applicant']['payment_transaction_id']?> Date:<?php echo $applicant['Applicant']['payment_date_created']?> Amount:<?php echo $applicant['Applicant']['payment_amount']?>
             </td>
         </tr>
-        <br />
-        <tr>
-            <td class="print_headers">Name of the post applied for</td>
-            <td class="print_value"><?php echo isset($postAppliedFor) ? $postAppliedFor : '' ; ?></td>
-        </tr>
-        <!--<tr>
-            <td>Name of the Centre / Non-Teaching Post</td>
-            <td><?php echo $applicant['Applicant']['name_of_centre']?></td>
-        </tr>
-        <tr>
-            <td>Area of specialization</td>
-            <td><?php echo $applicant['Applicant']['specialization']?></td>
-        </tr>-->
         <br />
         <tr>
             <td class="print_headers">Name of the Applicant</td>
@@ -87,9 +94,34 @@ table {
             </td>
         </tr>
         <tr>
-            <td class="print_headers">Category</td>
+            <td class="print_headers">Category of the applicant</td>
             <td class="print_value"><?php echo $applicant['Applicant']['category']?></td>
         </tr>
+        <tr>
+            <td class="print_headers">Category of the post applied for</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['category_applied']?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Differently Abled</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['physically_disabled']?></td>
+        </tr>
+        <?php if(!empty($applicant['Applicant']['physically_disabled']) && $applicant['Applicant']['physically_disabled'] == "yes") { ?>
+            <tr>
+                <td class="print_headers" style="padding-left: 20px;">a. Blindness or low vision</td>
+                <td class="print_value"><?php echo $applicant['Applicant']['blindness']?></td>
+                <td class="print_value"><?php echo $applicant['Applicant']['blindness_pertge']?></td>
+            </tr>
+            <tr>
+                <td class="print_headers" style="padding-left: 20px;">b. Hearing impairment</td>
+                <td class="print_value"><?php echo $applicant['Applicant']['hearing']?></td>
+                <td class="print_value"><?php echo $applicant['Applicant']['hearing_pertge']?></td>
+            </tr>
+            <tr>
+                <td class="print_headers" style="padding-left: 20px;">c. Locomotor disability or cerebral palsy</td>
+                <td class="print_value"><?php echo $applicant['Applicant']['locomotor']?></td>
+                <td class="print_value"><?php echo $applicant['Applicant']['locomotor_pertge']?></td>
+            </tr>
+        <?php } ?>
         <tr>
             <td class="print_headers">Email: </td>
             <td class="print_value"><?php echo $applicant['Applicant']['email']?>
@@ -124,40 +156,88 @@ table {
             <td class="print_value"><?php echo $applicant['Applicant']['nationality']?>
             </td>
         </tr>
+        <!--
+        <tr>
+            <td class="print_headers">School</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['area']?></td>
+        </tr>-->
+        <tr>
+            <td class="print_headers">Centre</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['centre']?></td>
+        </tr>
+        <?php if(!empty($applicant['Applicant']['post_applied_for']) && ($applicant['Applicant']['post_applied_for'] == "Professor" || $applicant['Applicant']['post_applied_for'] == "Associate Professor")) { 
+            ?>
+            <tr>
+                <td class="print_headers">Api Score Category II</td>
+                <td class="print_value"><?php echo $applicant['Applicant']['apiscore_cat_2']?></td>
+            </tr>
+            <tr>
+                <td class="print_headers">Api Score Category III</td>
+                <td class="print_value"><?php echo $applicant['Applicant']['apiscore_cat_3']?></td>
+            </tr>
+            <tr>
+                <td class="print_headers">Total Api Score (Category II & III)</td>
+                <td class="print_value"><?php echo $applicant['Applicant']['totalapiscore_cat_2_3']?></td>
+            </tr>
+        <?php } ?>
     </table>
     <br />
-    <div class="print_headers">Education Qualifications</div>
+    <div class="print_headers">Educational Qualifications</div>
     <table border="1px solid black" style="border: 1px solid black; border-collapse: collapse;">
         <tr>
             <td width="5%" class="print_headers">Name of Degree / Diploma / Certificate / Class</td>
             <td width="10%" class="print_headers">Course</td>
-            <td width="30%" class="print_headers">Board / University</td>
+            <td width="10%" class="print_headers">Mode of Study</td>
+            <td width="20%" class="print_headers">Board / University</td>
             <td width="5%" class="print_headers">Grade / CGPA / Division</td>
             <td width="5%" class="print_headers">Percentage</td>
             <td width="5%" class="print_headers">Year of Passing</td>
             <td width="10%" class="print_headers">Subjects</td>
         </tr>
         <?php
-            foreach($education_arr as $key => $value){
-                echo "<tr>";
-                echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['qualification'] . "</td>";
-                echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['course'] . "</td>";
-                echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['board'] . "</td>";
-                //echo "<td>" . $education_arr[$key]['Education']['system'] . "</td>";
-                echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['grade'] . "</td>";
-                echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['percentage'] . "</td>";
-                echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['year_of_passing'] . "</td>";
-                echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['subjects'] . "</td>";
-                echo "</tr>";
-            }
+        foreach($education_arr as $key => $value){
+        echo "<tr>";
+        echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['qualification'] . "</td>";
+        echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['course'] . "</td>";
+        echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['mode_of_study'] . "</td>";
+        echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['board'] . "</td>";
+        //echo "<td>" . $education_arr[$key]['Education']['system'] . "</td>";
+        echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['grade'] . "</td>";
+        echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['percentage'] . "</td>";
+        echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['year_of_passing'] . "</td>";
+        echo "<td class=\"print_value\">" . $education_arr[$key]['Education']['subjects'] . "</td>";
+        echo "</tr>";
+        }
         ?>
         <tr>
             <td colspan="2" class="print_headers">Gaps in Education: </td>
-            <td colspan="5" class="print_value"><?php echo $misc['Misc']['gaps_in_education']; ?></td>
+            <td colspan="6" class="print_value"><?php echo $applicant['Applicant']['gaps_in_education']; ?></td>
         </tr>
     </table>
     <br />
-    <p style="page-break-after:always;"></p>
+    <div class="print_headers">UGC-NET Details</div>
+    <table id="present_position_table" border="1px solid black" style="border-right: 1px solid black; border-collapse: collapse;">
+        <tr>
+            <td width="10%" class="print_headers">Name of Subject</td>
+            <td width="20%" class="print_headers">Year of Passing</td>
+            <td width="20%" class="print_headers">Roll No.</td>
+            <td width="15%" class="print_headers">Marks Obtained</td>
+            <td width="15%" class="print_headers">Total Marks</td>
+            <td width="10%" class="print_headers">Cut-off Marks</td>
+            <td width="10%" class="print_headers">Category</td>
+        </tr>
+        <tr>
+            <td class="print_value"><?php echo $applicant['Applicant']['ugc_net_subject']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ugc_net_mnth_yr']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ugc_net_rollno']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ugc_net_marks']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ugc_net_total_marks']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ugc_net_cutoff_marks']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ugc_net_category']; ?></td>
+        </tr>
+    </table>
+    <br />
+    <!--<p style="page-break-after:always;"></p>-->
     <div class="print_headers">Experience</div>
     <table border="1px solid black" style="border-right: 1px solid black ; border-collapse: collapse;">
         <tr>
@@ -172,99 +252,448 @@ table {
         <tr>
             <td width="10%" class="print_headers">From Date</td>
             <td width="10%" class="print_headers">To Date</td>
-            <td width="10%" class="print_headers">No. of Years/Months(as on date of advertisement)</td>
+            <td width="10%" class="print_headers">No. of Years/Months(as on last date of online form)</td>
         </tr>
         <?php
-            foreach($exp_arr as $key => $value){
-                echo "<tr>";
-                echo "<td class=\"print_value\">" . $exp_arr[$key]['Experience']['designation'] . "</td>";
-                echo "<td class=\"print_value\">" . $exp_arr[$key]['Experience']['scale_of_pay'] . "</td>";
-                echo "<td class=\"print_value\">" . $exp_arr[$key]['Experience']['name_add'] . "</td>";
-                echo "<td class=\"print_value\">" . $exp_arr[$key]['Experience']['insti_type'] . "</td>";
-                echo "<td class=\"print_value\">" . $exp_arr[$key]['Experience']['from_date'] . "</td>";
-                echo "<td class=\"print_value\">" . $exp_arr[$key]['Experience']['to_date'] . "</td>";
-                echo "<td class=\"print_value\">" . $exp_arr[$key]['Experience']['no_of_yrs_mnths'] . "</td>";
-                echo "<td class=\"print_value\">" . $exp_arr[$key]['Experience']['nature_of_work'] . "</td>";
-                //echo "<td>" . $exp_arr[$key]['Experience']['sr_of_proof'] . "</td>";
-                echo "</tr>";
-            }
+        foreach($exp_arr as $key => $value){
+        echo "<tr>";
+        echo "<td class=\"print_value\">" . $exp_arr[$key]['Experience']['designation'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr[$key]['Experience']['scale_of_pay'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr[$key]['Experience']['name_address'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr[$key]['Experience']['institute_type'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr[$key]['Experience']['from_date'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr[$key]['Experience']['to_date'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr[$key]['Experience']['no_of_yrs_mnths_days'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr[$key]['Experience']['nature_of_work'] . "</td>";
+        //echo "<td>" . $exp_arr[$key]['Experience']['sr_of_proof'] . "</td>";
+        echo "</tr>";
+        }
         ?>
         <tr>
             <td colspan="1" class="print_headers">Total period of experience</td>
             <td class="print_headers">Years</td>
-            <td class="print_value"><?php echo $misc['Misc']['tot_exp_years']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['tot_exp_years']; ?></td>
             <td class="print_headers">Months</td>
-            <td class="print_value"><?php echo $misc['Misc']['tot_exp_mnths']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['tot_exp_mnths']; ?></td>
             <td class="print_headers">Days</td>
-            <td colspan="2" class="print_value"><?php echo $misc['Misc']['tot_exp_days']; ?></td>
+            <td colspan="2" class="print_value"><?php echo $applicant['Applicant']['tot_exp_days']; ?></td>
         </tr>
         <tr>
             <td colspan="2" class="print_headers">Gaps in Experience: </td>
-            <td colspan="6" class="print_value"><?php echo $misc['Misc']['gaps_in_experience']; ?></td>
+            <td colspan="6" class="print_value"><?php echo $applicant['Applicant']['gaps_in_experience']; ?></td>
         </tr>
     </table>
     <br />
-    <div class="print_headers">Publications</div>
+    <!--<p style="page-break-after:always;"></p>-->
+    <div class="print_headers">TEACHING EXPERIENCE ACQUIRED SIMULTANEOUSLY DURING PH.D.</div>
+    <table border="1px solid black" style="border-right: 1px solid black ; border-collapse: collapse;">
+        <tr>
+            <td rowspan="2" width="10%" class="print_headers">Designation</td>
+            <td rowspan="2" width="10%" class="print_headers">Scale of Pay</td>
+            <td rowspan="2" width="10%" class="print_headers">Name & address of University / Institute</td>
+            <td rowspan="2" width="10%" class="print_headers">Organization / Institute</td>
+            <td colspan="3"><div style="text-align: center" class="print_headers">Period of Experience</div></td>
+            <td rowspan="2" width="10%" class="print_headers">Nature Of Service (Full Time)</td>
+            <td rowspan="2" width="10%" class="print_headers">Work Load as per UGC Norms</td>
+            <td rowspan="2" width="10%" class="print_headers">Fulfilled the minimum eligibility conditions as per UGC and concerned statutory bodies at the time of appointment</td>
+            <td rowspan="2" width="10%" class="print_headers">Any leave taken during this period for Ph.D. research</td>
+            <!--<td rowspan="2" width="10%">Sr. No. of Proof Enclosed</td>-->
+        </tr>
+        <tr>
+            <td width="10%" class="print_headers">From Date</td>
+            <td width="10%" class="print_headers">To Date</td>
+            <td width="10%" class="print_headers">No. of Years/Months(as on last date of online form)</td>
+        </tr>
+        <?php
+        foreach($exp_arr_phd as $key => $value){
+        echo "<tr>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['designation'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['scale_of_pay'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['name_address'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['institute_type'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['from_date'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['to_date'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['no_of_mnths_yrs'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['nature_of_service'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['work_load'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['minimum_eligibility'] . "</td>";
+        echo "<td class=\"print_value\">" . $exp_arr_phd[$key]['Experiencephd']['leave_taken'] . "</td>";
+        //echo "<td>" . $exp_arr[$key]['Experience']['sr_of_proof'] . "</td>";
+        echo "</tr>";
+        }
+        ?>
+    </table>
+    <br />
+    <div class="print_headers">Research Papers</div>
     <table border="1px solid black" style="border-right: 1px solid black ; border-collapse: collapse;">
         <tr>
             <td width="10%" class="print_headers">Authors</td>
             <td width="30%" class="print_headers">Title of the Paper</td>
             <td width="15%" class="print_headers">Journal's Name & Place of Publication</td>
-            <td width="20" class="print_headers">Publication & ISSN</td>
+            <td width="20%" class="print_headers">Publication & ISSN</td>
             <td width="15%" class="print_headers">Vol./Page No/Year</td>
             <td width="10%" class="print_headers">Impact Factor</td>
         </tr>
         <?php
-            foreach($publication_arr as $key => $value){
-                echo "<tr>";
-                echo "<td class=\"print_value\">" . $publication_arr[$key]['Researchpaper']['author'] . "</td>";
-                echo "<td class=\"print_value\">" . $publication_arr[$key]['Researchpaper']['title_of_paper'] . "</td>";
-                echo "<td class=\"print_value\">" . $publication_arr[$key]['Researchpaper']['journal_name_place'] . "</td>";
-                echo "<td class=\"print_value\">" . $publication_arr[$key]['Researchpaper']['publication_issn'] . "</td>";
-                echo "<td class=\"print_value\">" . $publication_arr[$key]['Researchpaper']['vol_pageno_year'] . "</td>";
-                echo "<td class=\"print_value\">" . $publication_arr[$key]['Researchpaper']['impact_factor'] . "</td>";
-                echo "</tr>";
-            }
+        foreach($rpaper_arr as $key => $value){
+        echo "<tr>";
+        echo "<td class=\"print_value\">" . $rpaper_arr[$key]['Researchpaper']['authors'] . "</td>";
+        echo "<td class=\"print_value\">" . $rpaper_arr[$key]['Researchpaper']['title'] . "</td>";
+        echo "<td class=\"print_value\">" . $rpaper_arr[$key]['Researchpaper']['name_place_publication'] . "</td>";
+        echo "<td class=\"print_value\">" . $rpaper_arr[$key]['Researchpaper']['publication_ISSN'] . "</td>";
+        echo "<td class=\"print_value\">" . $rpaper_arr[$key]['Researchpaper']['vol_page_year'] . "</td>";
+        echo "<td class=\"print_value\">" . $rpaper_arr[$key]['Researchpaper']['impact_factor'] . "</td>";
+        echo "</tr>";
+        }
+        ?>
+    </table>
+    <br />
+    <div class="print_headers">Research Articles</div>
+    <table border="1px solid black" style="border-right: 1px solid black ; border-collapse: collapse;">
+        <tr>
+            <td width="10%" class="print_headers">Authors</td>
+            <td width="30%" class="print_headers">Title of the Book</td>
+            <td width="15%" class="print_headers">Title of the Article</td>
+            <td width="20%" class="print_headers">Place of Publication</td>
+            <td width="15%" class="print_headers">Publisher & ISBN</td>
+            <td width="10%" class="print_headers">Page No</td>
+        </tr>
+        <?php
+        foreach($rarticle_arr as $key => $value){
+        echo "<tr>";
+        echo "<td class=\"print_value\">" . $rarticle_arr[$key]['Researcharticle']['authors'] . "</td>";
+        echo "<td class=\"print_value\">" . $rarticle_arr[$key]['Researcharticle']['title_of_book'] . "</td>";
+        echo "<td class=\"print_value\">" . $rarticle_arr[$key]['Researcharticle']['title_of_article'] . "</td>";
+        echo "<td class=\"print_value\">" . $rarticle_arr[$key]['Researcharticle']['place_of_publication'] . "</td>";
+        echo "<td class=\"print_value\">" . $rarticle_arr[$key]['Researcharticle']['publisher_ISBN'] . "</td>";
+        echo "<td class=\"print_value\">" . $rarticle_arr[$key]['Researcharticle']['page_no'] . "</td>";
+        echo "</tr>";
+        }
+        ?>
+    </table>
+    <br />
+    <div class="print_headers">Research Projects</div>
+    <table border="1px solid black" style="border-right: 1px solid black ; border-collapse: collapse;">
+        <tr>
+            <td width="30%" class="print_headers">Title of Project</td>
+            <td width="10%" class="print_headers">Completed / Ongoing</td>
+            <td width="15%" class="print_headers">Funding Agency</td>
+            <td width="20%" class="print_headers">As PI/CO-PI or Investigator</td>
+            <td width="15%" class="print_headers">Amount of Grant</td>
+            <td width="10%" class="print_headers">Duration</td>
+        </tr>
+        <?php
+        foreach($rproject_arr as $key => $value){
+        echo "<tr>";
+        echo "<td class=\"print_value\">" . $rproject_arr[$key]['Researchproject']['title'] . "</td>";
+        echo "<td class=\"print_value\">" . $rproject_arr[$key]['Researchproject']['comp_ongoing'] . "</td>";
+        echo "<td class=\"print_value\">" . $rproject_arr[$key]['Researchproject']['funding_agency'] . "</td>";
+        echo "<td class=\"print_value\">" . $rproject_arr[$key]['Researchproject']['investigator'] . "</td>";
+        echo "<td class=\"print_value\">" . $rproject_arr[$key]['Researchproject']['amount_of_grant'] . "</td>";
+        echo "<td class=\"print_value\">" . $rproject_arr[$key]['Researchproject']['duration'] . "</td>";
+        echo "</tr>";
+        }
         ?>
     </table>
     <br/>
-    <div class="print_headers">Referees</div>
-    <table id="referee_table" border="1px solid black" style="border-right: 1px solid black; border-collapse: collapse;">
+    <table width="100%" border="1px solid black" style="border-collapse: collapse; ">
         <tr>
-            <td width="25%"></td>
+            <td width="50%" class="print_headers">Total Impact Factor as per SCI/SCOPUS</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['tot_impact_sci']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Total Impact Factor as per Google search</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['tot_impact_google']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">h-Index Factor as per SCOPUS</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['h_index_scopus']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">h-Index Factor as per Google search</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['h_index_google']; ?></td>
+        </tr>
+        <td class="print_headers">i-10 Index Factor as per Google search</td>
+        <td class="print_value"><?php echo $applicant['Applicant']['i10_index_google']; ?></td>
+        </tr>
+    </table>
+    <br/>
+    <table width="100%" border="1px solid black" style="border-collapse: collapse; ">
+        <tr>
+            <td width="50%" class="print_headers">Seminars / Conferences / Workshops / Training programmes, attended</td>
+            <td class="print_headers">National (No.)</td>
+            <td class="print_headers">International (No.)</td>
+            <td class="print_headers">Total (No.)</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['sem_att_national']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['sem_att_international']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['sem_att_total']; ?></td>
+        </tr>
+    </table>
+    <br/>
+    <table width="100%" border="1px solid black" style="border-collapse: collapse; ">
+        <tr>
+            <td width="50%" class="print_headers">Seminars / Conferences / Workshops / Training programmes, organized</td>
+            <td class="print_headers">National (No.)</td>
+            <td class="print_headers">International (No.)</td>
+            <td class="print_headers">Total (No.)</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['sem_org_national']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['sem_org_international']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['sem_org_total']; ?></td>
+        </tr>
+    </table>
+    <br/>
+    <table width="100%" border="1px solid black" style="border-collapse: collapse; ">
+        <tr>
+            <td width="50%" class="print_headers">Research Guidance (No. of students guided)</td>
+            <td class="print_headers">M.Phil. / Equivalent (No.)</td>
+            <td class="print_headers">Ph.D. (No.)</td>
+        </tr>
+        <tr>
+            <td class="print_headers">Completed</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['rg_mphil_completed']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['rg_phd_completed']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Under supervision</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['rg_mphil_undersup']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['rg_phd_undersup']; ?></td>
+        </tr>
+    </table>
+    <?php if(false) { //!empty($applicant['Applicant']['post_applied_for']) && ($applicant['Applicant']['post_applied_for'] == "Professor" || $applicant['Applicant']['post_applied_for'] == "Associate Professor")) { 
+    ?>
+    <br/>
+    <div class="print_headers">API Score</div>
+    <table border="1px solid black" width="100%" id="api_score" style="border-collapse: collapse;">
+        <tr>
+            <td width="20%" class="print_headers"></td>
+            <td width="40%" class="print_headers">Category</td>
+            <td width="15%" class="print_headers">API Score Claimed by Applicant in each Category</td>
+            <td width="25%" class="print_headers">Total</td>
+            <!--<td width="15%" class="print_headers">API Score after capping</td>-->
+        </tr>
+        <tr>
+            <td rowspan="3" class="print_headers">III (A)</td>
+            <td class="print_headers">Referred Journals</td>
+            <td class="print_value">
+                <?php echo $apiscore['ApiScore']['rp_refered_jour']; ?>
+            </td>
+            <td rowspan="3" class="print_value">
+                <?php echo $apiscore['ApiScore']['total_IIIA']; ?>
+            </td>
+            <!--
+            <td rowspan="3" class="print_value">
+                <div id="total_IIIA_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIIA'], round(0.3 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
+            </td>-->
+        </tr>
+        <tr>
+            <td class="print_headers">Non-referred but recognized and reputable journals and periodicals, having ISBN/ISSN numbers.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rp_nonref_reco']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Conference proceedings as full papers, etc. (Abstracts not to be included).</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rp_conf_full_paper']; ?></td>
+        </tr>
+        <tr>
+            <td rowspan="5" class="print_headers">III (B)</td>
+            <td class="print_headers">Text or  Reference Books Published by International Publishers with an established peer review system</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rpu_int_pub']; ?></td>
+            <td rowspan="5" class="print_value"><?php echo $apiscore['ApiScore']['total_IIIB']; ?></td>
+            <!--
+            <td rowspan="5" class="print_value">
+                <div id="total_IIIB_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIIB'], round(0.25 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
+            </td>-->
+        </tr>
+        <tr>
+            <td class="print_headers">Subjects Books by National level publishers/State and Central Govt. Publications with ISBN/ISSN numbers.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rpu_national_pub']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Subject Books by Other local publishers with ISBN/ISSN numbers.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rpu_local_pub']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Chapters contributed to edited knowledge based volumes published by International Publishers.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rpu_chap_int_pub']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Chapters in knowledge based volumes by Indian/National level publishers with ISBN/ISSN numbers and with numbers of national and international directories.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rpu_chap_nat_pub']; ?></td>
+        </tr>
+        <tr>
+            <td rowspan="3" class="print_headers">III (C)(i) Sponsored Projects carried out/ongoing</td>
+            <td class="print_headers">Major Projects amount mobilized with grants above 30.0 lakhs</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['sponp_gabov_30']; ?></td>
+            <td rowspan="6" class="print_value"><?php echo $apiscore['ApiScore']['total_IIIC']; ?></td>
+            <!--
+            <td rowspan="6" class="print_value">
+                <div id="total_IIIC_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIIC'], round(0.2 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
+            </td>-->
+        </tr>
+        <tr>
+            <td class="print_headers">Major Projects amount mobilized with grants above 5.0 lakhs upto 30.0 lakhs.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['sponp_gabov_5']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Minor Projects (Amount mobilized with grants above Rs. 50,000 up to Rs. 5.0 lakhs.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['sponp_gabov_50k']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">III (C)(ii) Consultancy Projects carried out/ongoing</td>
+            <td class="print_headers">Amount mobilized with minimum of Rs. 10.00 lakh</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['consp_gabove_10']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">III (C)(iii) Completed Projects: Quality Evaluation</td>
+            <td class="print_headers">Completed project Report (Acceptance from funding agency)</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['comp_projects_qe']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">III (C)(iv) Projects Outcome / Outputs </td>
+            <td class="print_headers">Patent/Technology transfer/Product/Process</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['proj_patent']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">III (D)(i) M.Phil.</td>
+            <td class="print_headers">Degree awarded only</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rg_mphil']; ?></td>
+            <td rowspan="3" class="print_value"><?php echo $apiscore['ApiScore']['total_IIID']; ?></td>
+            <!--
+            <td rowspan="3" class="print_value">
+                <div id="total_IIID_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIID'], round(0.1 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
+            </td>-->
+        </tr>
+        <tr>
+            <td rowspan="2" class="print_headers">III (D)(ii) Ph.D</td>
+            <td class="print_headers">Degree awarded</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rg_phd']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Thesis submitted</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rg_thesis_sub']; ?></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="print_headers">III (E)(i) Refresher courses, Methodology workshops, Training, Teaching-Learning-Evaluation Technology Programmes, Soft Skills development.</td>
+            <td class="print_headers">Not less than two weeks duration</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['refreshc_train_2week']; ?></td>
+            <td rowspan="8" class="print_value"><?php echo $apiscore['ApiScore']['total_IIIE']; ?></td>
+            <!--
+            <td rowspan="8" class="print_value">
+                <div id="total_IIIE_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIIE'], round(0.15 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
+            </td>-->
+        </tr>
+        <tr>
+            <td class="print_headers">One week duration</td>
+            <td width="15%" class="print_value"><?php echo $apiscore['ApiScore']['refreshc_one_week']; ?></td>
+        </tr>
+        <tr>
+            <td rowspan="4" class="print_headers">III (E)(ii) Papers in Conferences/Seminars/workshops etc. **</td>
+            <td class="print_headers">Participation and Presentation of research papers (oral/poster) in International conference</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['pap_pp_int']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Participation and Presentation of research papers (oral/poster) in National</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['pap_pp_nat']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Participation and Presentation of research papers (oral/poster) in Regional/State level</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['pap_pp_reg']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Participation and Presentation of research papers (oral/poster) in Local - University/College level</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['pap_pp_local']; ?></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="print_headers">III (E)(iii) Invited lectures or presentations for conferences/symposia.</td>
+            <td class="print_headers">International</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['invited_lec_int']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">National level</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['invited_lec_nat']; ?></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="print_headers"></td>
+            <td class="print_headers">Grand Total</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['total_api']; ?></td>
+            <!--<td></td>-->
+        </tr>
+        <!--
+        <tr>
+            <td colspan="2" class="print_headers"></td>
+            <td class="print_headers">Grand Total (Capped)</td>
+            <td class="print_value"></td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['total_api_capped']; ?></td>
+        </tr>-->
+    </table>
+    <?php } ?>
+    <br/>
+    <div class="print_headers">Peer Recognition</div>
+    <table id="present_position_table" border="1px solid black" style="border-right: 1px solid black; border-collapse: collapse;">
+        <tr>
+            <td width="40%" class="print_headers">Award/honours</td>
+            <td width="40%" class="print_headers">Agency</td>
+            <td width="20%" class="print_headers">Year</td>
+        </tr>
+        <tr>
+            <td class="print_value"><?php echo $applicant['Applicant']['award_honour1']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['agency1']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['year1']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_value"><?php echo $applicant['Applicant']['award_honour2']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['agency2']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['year2']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_value"><?php echo $applicant['Applicant']['award_honour3']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['agency3']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['year3']; ?></td>
+        </tr>
+    </table>
+    <br/>
+    <div class="print_headers">Referees</div>
+    <table width="100%" border="1px solid black" style="border-collapse: collapse;">
+        <tr>
+            <td width="25%"> </td>
             <td width="25%" class="print_headers">Referee 1</td>
             <td width="25%" class="print_headers">Referee 2</td>
             <td width="25%" class="print_headers">Referee 3</td>    
         </tr>
         <tr>
             <td class="print_headers">Name & complete postal addresses</td>
-            <td class="print_value"><?php echo $misc['Misc']['ref_add1']; ?></td>
-            <td class="print_value"><?php echo $misc['Misc']['ref_add2']; ?></td>
-            <td class="print_value"><?php echo $misc['Misc']['ref_add3']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_add1']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_add2']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_add3']; ?></td>
         </tr>
         <tr>
             <td class="print_headers">Email:</td>
-            <td class="print_value"><?php echo $misc['Misc']['ref_email1']; ?></td>
-            <td class="print_value"><?php echo $misc['Misc']['ref_email2']; ?></td>
-            <td class="print_value"><?php echo $misc['Misc']['ref_email3']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_email1']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_email2']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_email3']; ?></td>
         </tr>
         <tr>
             <td class="print_headers">Phone (Landline) with STD Code:</td>
-            <td class="print_value"><?php echo $misc['Misc']['ref_landline1']; ?></td>
-            <td class="print_value"><?php echo $misc['Misc']['ref_landline2']; ?></td>
-            <td class="print_value"><?php echo $misc['Misc']['ref_landline3']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_landline1']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_landline2']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_landline3']; ?></td>
         </tr>
         <tr>
             <td class="print_headers">Mobile Ph:</td>
-            <td class="print_value"><?php echo $misc['Misc']['ref_mobile1']; ?></td>
-            <td class="print_value"><?php echo $misc['Misc']['ref_mobile2']; ?></td>
-            <td class="print_value"><?php echo $misc['Misc']['ref_mobile3']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_mobile1']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_mobile2']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_mobile3']; ?></td>
         </tr>
         <tr>
             <td class="print_headers">Fax:</td>
-            <td class="print_value"><?php echo $misc['Misc']['ref_fax1']; ?></td>
-            <td class="print_value"><?php echo $misc['Misc']['ref_fax2']; ?></td>
-            <td class="print_value"><?php echo $misc['Misc']['ref_fax3']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_fax1']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_fax2']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_fax3']; ?></td>
         </tr>
     </table>
     <br />
@@ -277,88 +706,86 @@ table {
             <td width="15%" class="print_headers">Grade Pay(Rs.)</td>
             <td width="15%" class="print_headers">Gross Pay / Total Salary p.m. (Rs.)</td>
             <td width="10%" class="print_headers">Increment date (Date/Month)</td>
-            <!--<td width="10%">Sr. no. of proof enclosed</td>-->
         </tr>
         <tr>
-            <td class="print_value"><?php echo $misc['Misc']['presentp_desig']; ?></td>
-            <td class="print_value"><?php echo $misc['Misc']['presentp_nameuniv']; ?></td>
-            <td class="print_value"><?php echo $misc['Misc']['presentp_basic_pay']; ?></td>
-            <td class="print_value"><?php echo $misc['Misc']['presentp_pay_scale']; ?></td>
-            <td class="print_value"><?php echo $misc['Misc']['presentp_gross_salary']; ?></td>
-            <td class="print_value"><?php echo $misc['Misc']['presentp_increment_date']; ?></td>
-            <!--<td><?php echo $misc['Misc']['presentp_sr_proof']; ?></td>-->
+            <td class="print_value"><?php echo $applicant['Applicant']['presentp_desig']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['presentp_nameuniv']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['presentp_basic_pay']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['presentp_pay_scale']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['presentp_gross_salary']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['presentp_increment_date']; ?></td>
         </tr>
     </table>
     <br/>
     <table border="1px solid black" style="border-right: 1px solid black; border-collapse: collapse;">
         <tr>
             <td class="print_headers misc_col1">Time required for joining if selected:</td>
-            <td class="print_value"><?php echo $misc['Misc']['time_req_for_joining']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['time_req_for_joining']; ?></td>
         </tr>
         <tr>
             <td class="print_headers misc_col1">Any Other Information/qualification relevant to the post applied for:</td>
-            <td class="print_value"><?php echo $misc['Misc']['any_other_info']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['any_other_info']; ?></td>
         </tr>
         <tr>
             <td class="print_headers misc_col1">Membership in Professional Bodies:</td>
-            <td class="print_value"><?php echo $misc['Misc']['mem_pro_bodies']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['mem_pro_bodies']; ?></td>
         </tr>
-        <?php if($misc['Misc']['mem_pro_bodies'] == "yes") { ?>
-            <tr>
-                <td class="print_headers misc_col1">Membership Details:</td>
-                <td class="print_value"><?php echo $misc['Misc']['mem_details']; ?></td>
-            </tr>
+        <?php if($applicant['Applicant']['mem_pro_bodies'] == "yes") { ?>
+        <tr>
+            <td class="print_headers misc_col1">Membership Details:</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['mem_details']; ?></td>
+        </tr>
         <?php } ?>
         <tr>
             <td class="print_headers misc_col1">Have you ever been punished during your service or convicted by a court of law?</td>
-            <td class="print_value"><?php echo $misc['Misc']['convicted']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['convicted']; ?></td>
         </tr>
         <tr>
             <td class="print_headers misc_col1">Do you have any case pending against you in any court of law?</td>
-            <td class="print_value"><?php echo $misc['Misc']['pending_court']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['pending_court']; ?></td>
         </tr>
         <tr>
             <td class="print_headers misc_col1">Are you willing to accept the minimum initial pay in the grade?</td>
-            <td class="print_value"><?php echo $misc['Misc']['willg_min_pay']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['willg_min_pay']; ?></td>
         </tr>
-        <?php if($misc['Misc']['willg_min_pay'] == "no") { ?>
-            <tr>
-                <td class="print_headers misc_col1">Reason(s):</td>
-                <td class="print_value"><?php echo $misc['Misc']['min_pay_no']; ?></td>
-            </tr>
+        <?php if($applicant['Applicant']['willg_min_pay'] == "no") { ?>
+        <tr>
+            <td class="print_headers misc_col1">Reason(s):</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['min_pay_no']; ?></td>
+        </tr>
         <?php } ?>
         <tr>
             <td class="print_headers misc_col1">Total number of self-attested documents attached: </td>
-            <td class="print_value"><?php echo $misc['Misc']['total_self_att_docs_att']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['total_self_att_docs_att']; ?></td>
         </tr>
         <tr>
             <td class="print_headers misc_col1">If selected how would you like to develop your Department/University and your area of interest: </td>
-            <td class="print_value"><?php echo $misc['Misc']['develop_department']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['develop_department']; ?></td>
         </tr>
     </table>
     <br/>
-    <p style="page-break-after:always;"></p>
+    <!--<p style="page-break-after:always;"></p>-->
     <div class="print_headers">Applicant's Name and Address for correspondence</div>
-        <table id="address_table" border="1px solid black" style="border-right: 1px solid black; border-collapse: collapse;">
-            <tr>
-                <td width="20%"></td>
-                <td width="20%" class="print_headers">Mailing Address</td>
-                <td width="20%" colspan='2' class="print_headers">Permanent Address</td>
-            </tr>
-            <tr>
-                <td class="print_headers">Name & Complete Address with Pincode</td>
-                <td class="print_value"><?php echo $applicant['Applicant']['mailing_address']; ?></td>
-                <td class="print_value"><?php echo $applicant['Applicant']['perm_address']; ?></td>
-            </tr>
-            <tr>
-                <td colspan="2" class="print_headers">Phone No. (landline)</td>
-                <td class="print_headers">Fax. No.</td>
-            </tr>
-            <tr>
-                <td colspan="2" class="print_value"><?php echo $applicant['Applicant']['landline_no']; ?></td>
-                <td class="print_value"><?php echo $applicant['Applicant']['fax_no']; ?></td>
-            </tr>
-        </table>
+    <table width="100%" id="address_table" border="1px solid black" style="border-right: 1px solid black; border-collapse: collapse;">
+        <tr>
+            <td width="20%"></td>
+            <td width="40%" class="print_headers">Mailing Address</td>
+            <td width="40%" class="print_headers">Permanent Address</td>
+        </tr>
+        <tr>
+            <td class="print_headers">Name & Complete Address with Pincode</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['mailing_address']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['permanent_address']; ?></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="print_headers">Phone No. (landline)</td>
+            <td class="print_headers">Fax. No.</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="print_value"><?php echo $applicant['Applicant']['landline']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['fax']; ?></td>
+        </tr>
+    </table>
 <div>
     <table>
         <tr>

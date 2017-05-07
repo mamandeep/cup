@@ -62,7 +62,7 @@ class UsersController extends AppController {
                     $this->Registereduser->create();
                     $this->Registereduser->id = $this->Session->read('registration_id');
                     $this->Registereduser->saveField('last_login', gmdate("Y-m-d H:i:s"));
-                    $this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
+                    $this->redirect(array('controller' => 'form', 'action' => 'appliedposts'));
                 }
                 else if($count_r == 0) {
                     $this->Session->setFlash('Please check the credentials entered below.');
@@ -199,18 +199,11 @@ class UsersController extends AppController {
                         $this->Session->setFlash('Email is already registered.');
                         return false;
                     }
-                    $this->Applicant->create();
-                    $this->Applicant->set(array(
-                        'advertisement_no' => 'T-02 (2017)'));
-                    if($this->Applicant->save(null, false) && $this->Registereduser->save($this->data['Registereduser'])) {
-                        $this->Session->write('applicant_id', $this->Applicant->getLastInsertID());
+                    
+                    if($this->Registereduser->save($this->data['Registereduser'])) {
                         $this->Session->write('registration_id', $this->Registereduser->getLastInsertID());
-                        $this->Applicant->id = $this->Session->read('applicant_id');
-                        $this->Applicant->saveField('registration_id', $this->Session->read('registration_id'));
                         $this->Registereduser->id = $this->Session->read('registration_id');
-                        $this->Registereduser->saveField('applicant_id', $this->Session->read('applicant_id'));
                         $this->Session->setFlash('You have successfully registered. Please login and fill your Application Form.');
-                        //$this->redirect(array('controller' => 'form', 'action' => 'pay'));
 			$this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
                     }
                     else {
