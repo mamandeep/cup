@@ -191,7 +191,7 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     <?php echo $this->Form->hidden("Education.3.applicant_id", array('value' => $this->Session->read('applicant_id'))); ?>
                     <?php echo $this->Form->input('Education.3.qualification', array('type' => 'textarea',
                                             'readonly' => 'readonly',
-                                            'value' => 'B.Sc. / B-Tech / B.A',
+                                            'value' => 'B.Sc. / B-Tech / B.A / B.Pharm.',
                                             'label' => false,
                                             'style' => 'overflow-y: scroll; height: 44px;')); ?>
                 </td>
@@ -231,7 +231,7 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     <?php echo $this->Form->hidden("Education.4.applicant_id", array('value' => $this->Session->read('applicant_id'))); ?>
                     <?php echo $this->Form->input('Education.4.qualification', array('type' => 'textarea',
                                             'readonly' => 'readonly',
-                                            'value' => 'M.Sc. / M-Tech / M.A.',
+                                            'value' => 'M.Sc. / M-Tech / M.A. / M.Pharm.',
                                             'label' => false,
                                             'style' => 'overflow-y: scroll; height: 44px;')); ?>
                 </td>

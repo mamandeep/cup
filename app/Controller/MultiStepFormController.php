@@ -11,7 +11,7 @@ class MultiStepFormController extends AppController {
             }
             $current_datetime = new DateTime();
             $current_datetime->setTimezone(new DateTimeZone('Asia/Calcutta'));
-            $close_datetime = new DateTime("2017-05-06 17:00:00", new DateTimeZone('Asia/Calcutta'));
+            $close_datetime = new DateTime("2017-05-09 17:00:00", new DateTimeZone('Asia/Calcutta'));
             //print_r($current_datetime->format('Y-m-d-H-i-s'));
             //print_r($close_datetime->format('Y-m-d-H-i-s'));
             $applicant = $this->Applicant->find('all', array(
@@ -180,7 +180,8 @@ class MultiStepFormController extends AppController {
         }
         
         function _processSecond($count = 1) {
-            $rows = $this->Education->find('all', array('condition' => array('Education.applicant_id' => $this->Session->read('applicant_id'))));
+            $rows = $this->Education->find('all', array('conditions' => array('Education.applicant_id' => $this->Session->read('applicant_id'))));
+            //debug($this->Session->read('applicant_id')); debug($rows);
             if(count($rows) == 12 && empty($this->data['Education'][0]['id'])) {
                 $this->Session->setFlash('An error has occured. Please logout and login again.');
                 //$this->redirect(array('controller' => 'users', 'action' => 'logout'));
@@ -231,7 +232,7 @@ class MultiStepFormController extends AppController {
         }
         
         function _processThird($count = 1) {
-            $rows = $this->Experiencephd->find('all', array('condition' => array('Experiencephd.applicant_id' => $this->Session->read('applicant_id'))));
+            $rows = $this->Experiencephd->find('all', array('conditions' => array('Experiencephd.applicant_id' => $this->Session->read('applicant_id'))));
             if(count($rows) == 7 && empty($this->data['Experiencephd'][0]['id'])) {
                 $this->Session->setFlash('An error has occured. Please logout and login again.');
                 return false;
@@ -363,7 +364,7 @@ class MultiStepFormController extends AppController {
             if($this->Applicant->save($this->data['Applicant']) && $this->Applicantext->save($this->data['Applicantext'])) {
                 return true;
             }
-            $this->Session->setFlash('An error has occured. Please contact Support.');
+            $this->Session->setFlash('An error has occured during saving data (P5).');
             return false;
 	}
         

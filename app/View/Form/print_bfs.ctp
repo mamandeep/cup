@@ -159,6 +159,21 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td class="print_value"><?php echo $applicant['Applicant']['nationality']?>
             </td>
         </tr>
+        <tr>
+            <td class="print_headers">Criteria (A): </td>
+            <td class="print_value"><?php echo $applicant['Applicant']['criteria_partA']?>
+            </td>
+        </tr>
+        <tr>
+            <td class="print_headers">Criteria (B): </td>
+            <td class="print_value"><?php echo $applicant['Applicant']['criteria_partB']?>
+            </td>
+        </tr>
+        <tr>
+            <td class="print_headers">Criteria (A+B) </td>
+            <td class="print_value"><?php echo $applicant['Applicant']['criteria_totalAB']?>
+            </td>
+        </tr>
         <!--
         <tr>
             <td class="print_headers">School</td>

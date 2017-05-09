@@ -36,9 +36,10 @@ echo $this->Form->create('Document', array('id' => 'Image_Details', 'url' => Rou
             <td class="table_headertxt misc_col1" style="padding-top: 17px;">API Proforma (MS Word format - <a href="<?php echo $this->webroot . '/files/API Form.doc'; ?>">Download</a>, To be filled and uploaded here, min size 10 kb, max size 800 kb)</td>
             <td><?php echo $this->Form->input('filename5', array('label' => false, 'type' => 'file')); ?></td>
         </tr>
+        <!--
         <tr>
-            <td colspan="2" class="table_headertxt misc_col1" style="padding-top: 17px;">Selection Criteria (<a href="<?php echo $this->webroot . '/files/T_selection_criteria.pdf'; ?>">Download</a>, To be filled and attached with Application Form)</td>
-        </tr>
+            <td colspan="2" class="table_headertxt misc_col1" style="padding-top: 17px;">Selection Criteria (<a href="<?php echo $this->webroot . '/files/T_selection_criteria.pdf'; ?>">Download</a>, Computed Part A, Part B and Total Marks to be filled in next section.)</td>
+        </tr>-->
         <?php } ?>
         <tr>
             <td class="table_headertxt misc_col1" style="padding-top: 17px;">Note: Images can be uploaded using the mobile phone also.</td>

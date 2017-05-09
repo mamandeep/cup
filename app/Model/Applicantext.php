@@ -12,6 +12,35 @@ class Applicantext extends AppModel {
             'rule' => 'notEmpty',
             'message' => 'required field'
         ),
+        'criteria_partA' => array(
+            'numeric' => array(
+                'rule' => 'numeric',
+                'message' => 'Please enter only numbers',
+                'allowEmpty' => false,
+                'required' => true,
+            )
+        ),
+        'criteria_partB' => array(
+            'numeric' => array(
+                'rule' => 'numeric',
+                'message' => 'Please enter only numbers',
+                'allowEmpty' => false,
+                'required' => true,
+            )
+        ),
+        'criteria_totalAB' => array(
+            'numeric' => array(
+                'rule' => 'numeric',
+                'message' => 'Please enter only numbers',
+                'allowEmpty' => false,
+                'required' => true,
+            ),
+            'sum' => array(
+                'rule' => 'checksum',
+                'message' => 'Sum of API Score II and III does not match.',
+
+            )
+        ),
         'mem_pro_bodies' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
@@ -96,6 +125,12 @@ class Applicantext extends AppModel {
             return true;
         }
         return (strcmp($data['willg_min_pay'], 'no') === 0 && strlen($this->data[$this->alias][$minpay]) > 0) ? true : false;
+    }
+    
+    public function checksum($check)
+    {
+        //debug($check); debug($this->data[$this->alias]);
+        return (intval($check['criteria_totalAB']) === (intval($this->data[$this->alias]['criteria_partA']) + intval($this->data[$this->alias]['criteria_partB'])));
     }
 }
 
