@@ -22,25 +22,17 @@
         font-size: 15px;
         font-weight: bold;
         color: #010101;
-        padding: 3px;
+        padding: 5px;
     }
 
     .print_value {
         font-size: 15px;
         color: black;
-        padding: 2px;
+        padding: 5px;
     }
 
     .misc_col1 {
         width: 45%;
-    }
-
-    tr.spaceUnder>td {
-        padding-bottom: 15px;
-    }
-
-    tr.spaceUpper>td {
-        padding-top: 15px;
     }
 
 </style>
@@ -74,31 +66,33 @@ echo $this->Html->script('jquery-1.11.1-min');
     <p style="font-size: 24px; font-weight: bold; text-align: center">Position: <?php echo $applicant['Applicant']['post_applied_for']?></p>
     <table id="onlineformdata"  class="print_table" style="table-layout:fixed;">
         <tr>
+            <td colspan="3" class="print_headers" align="center">PERSONAL DETAILS</td>
+        </tr>
+        <tr>
             <td width="40%" class="print_headers">Advertisement No.</td>
             <td width="40%" class="print_value"><?php echo $applicant['Applicant']['advertisement_no'] ?></td>
+            <td width="20%"><img src="<?php if(!empty($image['Document']['filename'])) { echo $this->webroot . '/' . $image['Document']['filename']; } else { echo ""; } ?>" alt="Passport Size Photograph" height="132px" width="132px"></td>
         </tr>
-        <tr >
+        <tr>
             <td width="40%" class="print_headers">Application Number</td>
             <td width="40%" class="print_value"><?php echo $applicant['Applicant']['id'] ?></td>
+            <td width="20%"><img src="<?php if(!empty($image['Document']['filename4'])) { echo $this->webroot . '/' . $image['Document']['filename4']; } else { echo ""; } ?>" alt="Signature" height="50px" width="132px"></td>
         </tr>
-        <tr class="spaceUnder">
-            <td class="print_headers">Centre</td>
-            <td class="print_value"><?php echo $applicant['Applicant']['centre']?></td>
+        <tr>
+            <td class="print_headers">Details of application fee</td>
+            <td style="word-wrap: normal;" class="print_value">Transaction ID:<?php echo $applicant['Applicant']['payment_transaction_id']?> Date:<?php echo $applicant['Applicant']['payment_date_created']?> Amount:<?php echo $applicant['Applicant']['payment_amount']?>
+            </td>
         </tr>
-        <tr class="spaceUnder">
-            <td colspan="3" class="print_headers" align="center">PERSONAL INFORMATION</td>
-        </tr>
+        <br />
         <tr>
             <td class="print_headers">Name of the Applicant</td>
             <td class="print_value"><?php echo $applicant['Applicant']['first_name']?>&nbsp;<?php echo $applicant['Applicant']['middle_name']?>&nbsp;<?php echo $applicant['Applicant']['last_name']?>
             </td>
-            <td width="20%"><img src="<?php if(!empty($image['Document']['filename'])) { echo $this->webroot . '/' . $image['Document']['filename']; } else { echo ""; } ?>" alt="Passport Size Photograph" height="132px" width="132px"></td>
         </tr>
         <tr>
             <td class="print_headers">Gender</td>
             <td class="print_value"><?php echo $applicant['Applicant']['gender']?>
             </td>
-            <td width="20%"><img src="<?php if(!empty($image['Document']['filename4'])) { echo $this->webroot . '/' . $image['Document']['filename4']; } else { echo ""; } ?>" alt="Signature" height="50px" width="132px"></td>
         </tr>
         <tr>
             <td class="print_headers">Date of Birth</td>
@@ -168,34 +162,48 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td class="print_value"><?php echo $applicant['Applicant']['nationality']?>
             </td>
         </tr>
+        <tr>
+            <td class="print_headers">Criteria (A): </td>
+            <td class="print_value"><?php echo $applicant['Applicant']['criteria_partA']?>
+            </td>
+        </tr>
+        <tr>
+            <td class="print_headers">Criteria (B): </td>
+            <td class="print_value"><?php echo $applicant['Applicant']['criteria_partB']?>
+            </td>
+        </tr>
+        <tr>
+            <td class="print_headers">Criteria (A+B) </td>
+            <td class="print_value"><?php echo $applicant['Applicant']['criteria_totalAB']?>
+            </td>
+        </tr>
+        <!--
+        <tr>
+            <td class="print_headers">School</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['area']?></td>
+        </tr>-->
+        <tr>
+            <td class="print_headers">Centre</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['centre']?></td>
+        </tr>
+        <?php if(!empty($applicant['Applicant']['post_applied_for']) && ($applicant['Applicant']['post_applied_for'] == "Professor" || $applicant['Applicant']['post_applied_for'] == "Associate Professor")) { 
+            ?>
+            <tr>
+                <td class="print_headers">Api Score Category II</td>
+                <td class="print_value"><?php echo $applicant['Applicant']['apiscore_cat_2']?></td>
+            </tr>
+            <tr>
+                <td class="print_headers">Api Score Category III</td>
+                <td class="print_value"><?php echo $applicant['Applicant']['apiscore_cat_3']?></td>
+            </tr>
+            <tr>
+                <td class="print_headers">Total Api Score (Category II & III)</td>
+                <td class="print_value"><?php echo $applicant['Applicant']['totalapiscore_cat_2_3']?></td>
+            </tr>
+        <?php } ?>
     </table>
-    <div class="print_headers">Applicant's Name and Address for correspondence</div>
-    <table width="100%" id="address_table" border="1px solid black" style="border-right: 1px solid black; border-collapse: collapse;">
-        <tr>
-            <td width="20%"></td>
-            <td width="40%" class="print_headers">Mailing Address</td>
-            <td width="40%" class="print_headers">Permanent Address</td>
-        </tr>
-        <tr>
-            <td class="print_headers">Name & Complete Address with Pincode</td>
-            <td class="print_value"><?php echo $applicant['Applicant']['mailing_address']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['permanent_address']; ?></td>
-        </tr>
-        <tr>
-            <td colspan="2" class="print_headers">Phone No. (landline)</td>
-            <td class="print_headers">Fax. No.</td>
-        </tr>
-        <tr>
-            <td colspan="2" class="print_value"><?php echo $applicant['Applicant']['landline']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['fax']; ?></td>
-        </tr>
-    </table>
-    <br/>
-    <table>
-        <tr class="spaceUpper spaceUnder">
-            <td colspan="3" class="print_headers" align="center">PROFESSIONAL INFORMATION</td>
-        </tr>
-    </table>
+    <br />
+    <div class="print_headers">Educational Qualifications</div>
     <table border="1px solid black" style="border: 1px solid black; border-collapse: collapse;">
         <tr>
             <td width="5%" class="print_headers">Name of Degree / Diploma / Certificate / Class</td>
@@ -227,6 +235,7 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td colspan="6" class="print_value"><?php echo $applicant['Applicant']['gaps_in_education']; ?></td>
         </tr>
     </table>
+    <br />
     <div class="print_headers">UGC-NET Details</div>
     <table id="present_position_table" border="1px solid black" style="border-right: 1px solid black; border-collapse: collapse;">
         <tr>
@@ -248,13 +257,9 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td class="print_value"><?php echo $applicant['Applicant']['ugc_net_category']; ?></td>
         </tr>
     </table>
-    <br/>
+    <br />
     <!--<p style="page-break-after:always;"></p>-->
-    <table>
-        <tr class="spaceUpper spaceUnder">
-            <td colspan="3" class="print_headers" align="center">EXPERIENCE</td>
-        </tr>
-    </table>
+    <div class="print_headers">Experience</div>
     <table border="1px solid black" style="border-right: 1px solid black ; border-collapse: collapse;">
         <tr>
             <td rowspan="2" width="10%" class="print_headers">Designation</td>
@@ -299,92 +304,9 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td colspan="6" class="print_value"><?php echo $applicant['Applicant']['gaps_in_experience']; ?></td>
         </tr>
     </table>
-    <br/>
-    <div class="print_headers">Present Position</div>
-    <table id="present_position_table" border="1px solid black" style="border-right: 1px solid black; border-collapse: collapse;">
-        <tr>
-            <td width="10%" class="print_headers">Designation</td>
-            <td width="30%" class="print_headers">Name of the University / Institution</td>
-            <td width="20%" class="print_headers">Basic Pay(Rs.)</td>
-            <td width="15%" class="print_headers">Grade Pay(Rs.)</td>
-            <td width="15%" class="print_headers">Gross Pay / Total Salary p.m. (Rs.)</td>
-            <td width="10%" class="print_headers">Increment date (Date/Month)</td>
-        </tr>
-        <tr>
-            <td class="print_value"><?php echo $applicant['Applicant']['presentp_desig']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['presentp_nameuniv']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['presentp_basic_pay']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['presentp_pay_scale']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['presentp_gross_salary']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['presentp_increment_date']; ?></td>
-        </tr>
-    </table>
-    <br/>
-    <div class="print_headers">Peer Recognition</div>
-    <table id="present_position_table" border="1px solid black" style="border-right: 1px solid black; border-collapse: collapse;">
-        <tr>
-            <td width="40%" class="print_headers">Award/honours</td>
-            <td width="40%" class="print_headers">Agency</td>
-            <td width="20%" class="print_headers">Year</td>
-        </tr>
-        <tr>
-            <td class="print_value"><?php echo $applicant['Applicant']['award_honour1']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['agency1']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['year1']; ?></td>
-        </tr>
-        <tr>
-            <td class="print_value"><?php echo $applicant['Applicant']['award_honour2']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['agency2']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['year2']; ?></td>
-        </tr>
-        <tr>
-            <td class="print_value"><?php echo $applicant['Applicant']['award_honour3']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['agency3']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['year3']; ?></td>
-        </tr>
-    </table>
-    <br/>
-    <div class="print_headers">Referees</div>
-    <table width="100%" border="1px solid black" style="border-collapse: collapse;">
-        <tr>
-            <td width="25%"> </td>
-            <td width="25%" class="print_headers">Referee 1</td>
-            <td width="25%" class="print_headers">Referee 2</td>
-            <td width="25%" class="print_headers">Referee 3</td>    
-        </tr>
-        <tr>
-            <td class="print_headers">Name & complete postal addresses</td>
-            <td class="print_value"><?php echo $applicant['Applicant']['ref_add1']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['ref_add2']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['ref_add3']; ?></td>
-        </tr>
-        <tr>
-            <td class="print_headers">Email:</td>
-            <td class="print_value"><?php echo $applicant['Applicant']['ref_email1']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['ref_email2']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['ref_email3']; ?></td>
-        </tr>
-        <tr>
-            <td class="print_headers">Phone (Landline) with STD Code:</td>
-            <td class="print_value"><?php echo $applicant['Applicant']['ref_landline1']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['ref_landline2']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['ref_landline3']; ?></td>
-        </tr>
-        <tr>
-            <td class="print_headers">Mobile Ph:</td>
-            <td class="print_value"><?php echo $applicant['Applicant']['ref_mobile1']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['ref_mobile2']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['ref_mobile3']; ?></td>
-        </tr>
-        <tr>
-            <td class="print_headers">Fax:</td>
-            <td class="print_value"><?php echo $applicant['Applicant']['ref_fax1']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['ref_fax2']; ?></td>
-            <td class="print_value"><?php echo $applicant['Applicant']['ref_fax3']; ?></td>
-        </tr>
-    </table>
-    <br/>
-    <div class="print_headers">Teaching Experience acquired simultaneously during Ph.D.</div>
+    <br />
+    <!--<p style="page-break-after:always;"></p>-->
+    <div class="print_headers">TEACHING EXPERIENCE ACQUIRED SIMULTANEOUSLY DURING PH.D.</div>
     <table border="1px solid black" style="border-right: 1px solid black ; border-collapse: collapse;">
         <tr>
             <td rowspan="2" width="10%" class="print_headers">Designation</td>
@@ -422,44 +344,7 @@ echo $this->Html->script('jquery-1.11.1-min');
         }
         ?>
     </table>
-    <br/>
-    <table>
-        <tr class="spaceUpper spaceUnder">
-            <td colspan="3" class="print_headers" align="center">RESEARCH WORK</td>
-        </tr>
-    </table>
-    <table>
-        <tr>
-            <td class="print_headers">Selection Criteria (A): </td>
-            <td class="print_value"><?php echo $applicant['Applicant']['criteria_partA']?>
-            </td>
-        </tr>
-        <tr>
-            <td class="print_headers">Selection Criteria (B): </td>
-            <td class="print_value"><?php echo $applicant['Applicant']['criteria_partB']?>
-            </td>
-        </tr>
-        <tr>
-            <td class="print_headers">Selection Criteria (A+B) </td>
-            <td class="print_value"><?php echo $applicant['Applicant']['criteria_totalAB']?>
-            </td>
-        </tr>
-        <?php if(!empty($applicant['Applicant']['post_applied_for']) && ($applicant['Applicant']['post_applied_for'] == "Professor" || $applicant['Applicant']['post_applied_for'] == "Associate Professor")) { 
-            ?>
-            <tr>
-                <td class="print_headers">API Score Category II</td>
-                <td class="print_value"><?php echo $applicant['Applicant']['apiscore_cat_2']?></td>
-            </tr>
-            <tr>
-                <td class="print_headers">API Score Category III</td>
-                <td class="print_value"><?php echo $applicant['Applicant']['apiscore_cat_3']?></td>
-            </tr>
-            <tr>
-                <td class="print_headers">Total API Score (Category II & III)</td>
-                <td class="print_value"><?php echo $applicant['Applicant']['totalapiscore_cat_2_3']?></td>
-            </tr>
-        <?php } ?>
-    </table>
+    <br />
     <div class="print_headers">Research Papers</div>
     <table border="1px solid black" style="border-right: 1px solid black ; border-collapse: collapse;">
         <tr>
@@ -601,12 +486,258 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td class="print_value"><?php echo $applicant['Applicant']['rg_phd_undersup']; ?></td>
         </tr>
     </table>
+    <?php if(false) { //!empty($applicant['Applicant']['post_applied_for']) && ($applicant['Applicant']['post_applied_for'] == "Professor" || $applicant['Applicant']['post_applied_for'] == "Associate Professor")) { 
+    ?>
     <br/>
-    <table>
-        <tr class="spaceUpper spaceUnder">
-            <td colspan="3" class="print_headers" align="center">FEE DETAILS & OTHER INFORMATION</td>
+    <div class="print_headers">API Score</div>
+    <table border="1px solid black" width="100%" id="api_score" style="border-collapse: collapse;">
+        <tr>
+            <td width="20%" class="print_headers"></td>
+            <td width="40%" class="print_headers">Category</td>
+            <td width="15%" class="print_headers">API Score Claimed by Applicant in each Category</td>
+            <td width="25%" class="print_headers">Total</td>
+            <!--<td width="15%" class="print_headers">API Score after capping</td>-->
+        </tr>
+        <tr>
+            <td rowspan="3" class="print_headers">III (A)</td>
+            <td class="print_headers">Referred Journals</td>
+            <td class="print_value">
+                <?php echo $apiscore['ApiScore']['rp_refered_jour']; ?>
+            </td>
+            <td rowspan="3" class="print_value">
+                <?php echo $apiscore['ApiScore']['total_IIIA']; ?>
+            </td>
+            <!--
+            <td rowspan="3" class="print_value">
+                <div id="total_IIIA_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIIA'], round(0.3 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
+            </td>-->
+        </tr>
+        <tr>
+            <td class="print_headers">Non-referred but recognized and reputable journals and periodicals, having ISBN/ISSN numbers.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rp_nonref_reco']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Conference proceedings as full papers, etc. (Abstracts not to be included).</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rp_conf_full_paper']; ?></td>
+        </tr>
+        <tr>
+            <td rowspan="5" class="print_headers">III (B)</td>
+            <td class="print_headers">Text or  Reference Books Published by International Publishers with an established peer review system</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rpu_int_pub']; ?></td>
+            <td rowspan="5" class="print_value"><?php echo $apiscore['ApiScore']['total_IIIB']; ?></td>
+            <!--
+            <td rowspan="5" class="print_value">
+                <div id="total_IIIB_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIIB'], round(0.25 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
+            </td>-->
+        </tr>
+        <tr>
+            <td class="print_headers">Subjects Books by National level publishers/State and Central Govt. Publications with ISBN/ISSN numbers.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rpu_national_pub']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Subject Books by Other local publishers with ISBN/ISSN numbers.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rpu_local_pub']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Chapters contributed to edited knowledge based volumes published by International Publishers.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rpu_chap_int_pub']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Chapters in knowledge based volumes by Indian/National level publishers with ISBN/ISSN numbers and with numbers of national and international directories.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rpu_chap_nat_pub']; ?></td>
+        </tr>
+        <tr>
+            <td rowspan="3" class="print_headers">III (C)(i) Sponsored Projects carried out/ongoing</td>
+            <td class="print_headers">Major Projects amount mobilized with grants above 30.0 lakhs</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['sponp_gabov_30']; ?></td>
+            <td rowspan="6" class="print_value"><?php echo $apiscore['ApiScore']['total_IIIC']; ?></td>
+            <!--
+            <td rowspan="6" class="print_value">
+                <div id="total_IIIC_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIIC'], round(0.2 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
+            </td>-->
+        </tr>
+        <tr>
+            <td class="print_headers">Major Projects amount mobilized with grants above 5.0 lakhs upto 30.0 lakhs.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['sponp_gabov_5']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Minor Projects (Amount mobilized with grants above Rs. 50,000 up to Rs. 5.0 lakhs.</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['sponp_gabov_50k']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">III (C)(ii) Consultancy Projects carried out/ongoing</td>
+            <td class="print_headers">Amount mobilized with minimum of Rs. 10.00 lakh</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['consp_gabove_10']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">III (C)(iii) Completed Projects: Quality Evaluation</td>
+            <td class="print_headers">Completed project Report (Acceptance from funding agency)</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['comp_projects_qe']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">III (C)(iv) Projects Outcome / Outputs </td>
+            <td class="print_headers">Patent/Technology transfer/Product/Process</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['proj_patent']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">III (D)(i) M.Phil.</td>
+            <td class="print_headers">Degree awarded only</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rg_mphil']; ?></td>
+            <td rowspan="3" class="print_value"><?php echo $apiscore['ApiScore']['total_IIID']; ?></td>
+            <!--
+            <td rowspan="3" class="print_value">
+                <div id="total_IIID_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIID'], round(0.1 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
+            </td>-->
+        </tr>
+        <tr>
+            <td rowspan="2" class="print_headers">III (D)(ii) Ph.D</td>
+            <td class="print_headers">Degree awarded</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rg_phd']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Thesis submitted</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['rg_thesis_sub']; ?></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="print_headers">III (E)(i) Refresher courses, Methodology workshops, Training, Teaching-Learning-Evaluation Technology Programmes, Soft Skills development.</td>
+            <td class="print_headers">Not less than two weeks duration</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['refreshc_train_2week']; ?></td>
+            <td rowspan="8" class="print_value"><?php echo $apiscore['ApiScore']['total_IIIE']; ?></td>
+            <!--
+            <td rowspan="8" class="print_value">
+                <div id="total_IIIE_capped"><?php echo bcmin($apiscore['ApiScore']['total_IIIE'], round(0.15 * intval($apiscore['ApiScore']['total_api']), 2)); ?></div>
+            </td>-->
+        </tr>
+        <tr>
+            <td class="print_headers">One week duration</td>
+            <td width="15%" class="print_value"><?php echo $apiscore['ApiScore']['refreshc_one_week']; ?></td>
+        </tr>
+        <tr>
+            <td rowspan="4" class="print_headers">III (E)(ii) Papers in Conferences/Seminars/workshops etc. **</td>
+            <td class="print_headers">Participation and Presentation of research papers (oral/poster) in International conference</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['pap_pp_int']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Participation and Presentation of research papers (oral/poster) in National</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['pap_pp_nat']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Participation and Presentation of research papers (oral/poster) in Regional/State level</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['pap_pp_reg']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Participation and Presentation of research papers (oral/poster) in Local - University/College level</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['pap_pp_local']; ?></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="print_headers">III (E)(iii) Invited lectures or presentations for conferences/symposia.</td>
+            <td class="print_headers">International</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['invited_lec_int']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">National level</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['invited_lec_nat']; ?></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="print_headers"></td>
+            <td class="print_headers">Grand Total</td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['total_api']; ?></td>
+            <!--<td></td>-->
+        </tr>
+        <!--
+        <tr>
+            <td colspan="2" class="print_headers"></td>
+            <td class="print_headers">Grand Total (Capped)</td>
+            <td class="print_value"></td>
+            <td class="print_value"><?php echo $apiscore['ApiScore']['total_api_capped']; ?></td>
+        </tr>-->
+    </table>
+    <?php } ?>
+    <br/>
+    <div class="print_headers">Peer Recognition</div>
+    <table id="present_position_table" border="1px solid black" style="border-right: 1px solid black; border-collapse: collapse;">
+        <tr>
+            <td width="40%" class="print_headers">Award/honours</td>
+            <td width="40%" class="print_headers">Agency</td>
+            <td width="20%" class="print_headers">Year</td>
+        </tr>
+        <tr>
+            <td class="print_value"><?php echo $applicant['Applicant']['award_honour1']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['agency1']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['year1']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_value"><?php echo $applicant['Applicant']['award_honour2']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['agency2']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['year2']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_value"><?php echo $applicant['Applicant']['award_honour3']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['agency3']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['year3']; ?></td>
         </tr>
     </table>
+    <br/>
+    <div class="print_headers">Referees</div>
+    <table width="100%" border="1px solid black" style="border-collapse: collapse;">
+        <tr>
+            <td width="25%"> </td>
+            <td width="25%" class="print_headers">Referee 1</td>
+            <td width="25%" class="print_headers">Referee 2</td>
+            <td width="25%" class="print_headers">Referee 3</td>    
+        </tr>
+        <tr>
+            <td class="print_headers">Name & complete postal addresses</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_add1']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_add2']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_add3']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Email:</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_email1']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_email2']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_email3']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Phone (Landline) with STD Code:</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_landline1']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_landline2']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_landline3']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Mobile Ph:</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_mobile1']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_mobile2']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_mobile3']; ?></td>
+        </tr>
+        <tr>
+            <td class="print_headers">Fax:</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_fax1']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_fax2']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['ref_fax3']; ?></td>
+        </tr>
+    </table>
+    <br />
+    <div class="print_headers">Present Position</div>
+    <table id="present_position_table" border="1px solid black" style="border-right: 1px solid black; border-collapse: collapse;">
+        <tr>
+            <td width="10%" class="print_headers">Designation</td>
+            <td width="30%" class="print_headers">Name of the University / Institution</td>
+            <td width="20%" class="print_headers">Basic Pay(Rs.)</td>
+            <td width="15%" class="print_headers">Grade Pay(Rs.)</td>
+            <td width="15%" class="print_headers">Gross Pay / Total Salary p.m. (Rs.)</td>
+            <td width="10%" class="print_headers">Increment date (Date/Month)</td>
+        </tr>
+        <tr>
+            <td class="print_value"><?php echo $applicant['Applicant']['presentp_desig']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['presentp_nameuniv']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['presentp_basic_pay']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['presentp_pay_scale']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['presentp_gross_salary']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['presentp_increment_date']; ?></td>
+        </tr>
+    </table>
+    <br/>
     <table border="1px solid black" style="border-right: 1px solid black; border-collapse: collapse;">
         <tr>
             <td class="print_headers misc_col1">Time required for joining if selected:</td>
@@ -652,10 +783,28 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td class="print_headers misc_col1">If selected how would you like to develop your Department/University and your area of interest: </td>
             <td class="print_value"><?php echo $applicant['Applicant']['develop_department']; ?></td>
         </tr>
+    </table>
+    <br/>
+    <!--<p style="page-break-after:always;"></p>-->
+    <div class="print_headers">Applicant's Name and Address for correspondence</div>
+    <table width="100%" id="address_table" border="1px solid black" style="border-right: 1px solid black; border-collapse: collapse;">
         <tr>
-            <td class="print_headers">Details of application fee</td>
-            <td style="word-wrap: normal;" class="print_value">Transaction ID:<?php echo $applicant['Applicant']['payment_transaction_id']?> Date:<?php echo $applicant['Applicant']['payment_date_created']?> Amount:<?php echo $applicant['Applicant']['payment_amount']?>
-            </td>
+            <td width="20%"></td>
+            <td width="40%" class="print_headers">Mailing Address</td>
+            <td width="40%" class="print_headers">Permanent Address</td>
+        </tr>
+        <tr>
+            <td class="print_headers">Name & Complete Address with Pincode</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['mailing_address']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['permanent_address']; ?></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="print_headers">Phone No. (landline)</td>
+            <td class="print_headers">Fax. No.</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="print_value"><?php echo $applicant['Applicant']['landline']; ?></td>
+            <td class="print_value"><?php echo $applicant['Applicant']['fax']; ?></td>
         </tr>
     </table>
     <br />

@@ -11,7 +11,7 @@ class MultiStepFormController extends AppController {
             }
             $current_datetime = new DateTime();
             $current_datetime->setTimezone(new DateTimeZone('Asia/Calcutta'));
-            $close_datetime = new DateTime("2017-05-09 17:00:00", new DateTimeZone('Asia/Calcutta'));
+            $close_datetime = new DateTime("2017-06-28 17:00:00", new DateTimeZone('Asia/Calcutta'));
             //print_r($current_datetime->format('Y-m-d-H-i-s'));
             //print_r($close_datetime->format('Y-m-d-H-i-s'));
             $applicant = $this->Applicant->find('all', array(
@@ -390,11 +390,11 @@ class MultiStepFormController extends AppController {
         
         function _processSixth() {
             //print_r($this->data); return false;
+            //$images = $this->Document->find('all', array(
+                    //'conditions' => array('Document.applicant_id' => $this->Session->read('applicant_id'))));
             if(!empty($this->data['Document']['filename']['error']) && $this->data['Document']['filename']['error'] == 4
                 && !empty($this->data['Document']['filename2']['error']) && $this->data['Document']['filename2']['error'] == 4
-                && !empty($this->data['Document']['filename3']['error']) && $this->data['Document']['filename3']['error'] == 4
                 && !empty($this->data['Document']['filename4']['error']) && $this->data['Document']['filename4']['error'] == 4
-                && !empty($this->data['Document']['filename5']['error']) && $this->data['Document']['filename5']['error'] == 4
                )
             return true;
             
@@ -409,6 +409,9 @@ class MultiStepFormController extends AppController {
 	function _prepareSeventh($count = 1) {
             $images = $this->Document->find('all', array(
                     'conditions' => array('Document.applicant_id' => $this->Session->read('applicant_id'))));
+            
+            $applicant = $this->Applicant->find('all', array(
+                    'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
             
             if(count($images) == 1) {
                 //$this->request->data = $images['0'];
@@ -426,6 +429,7 @@ class MultiStepFormController extends AppController {
                     $this->wizard('sixth');
                 }
                 $this->set('image', $images['0']);
+                $this->set('applicant', $applicant['0']);
                 //print_r($this->request->data);
             }
             else if(count($images) > 1) {

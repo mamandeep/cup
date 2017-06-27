@@ -220,8 +220,8 @@ class FormController extends AppController {
                     'conditions' => array('Registereduser.applicant_id' => $this->Session->read('applicant_id'))));
                 $applicants = $this->Applicant->find('all', array(
                             'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
-                if($registered_user['0']['Registereduser']['category'] == "SC" || $registered_user['0']['Registereduser']['category'] == "ST" 
-                        || $registered_user['0']['Registereduser']['physically_disabled'] == "yes") {
+                if($applicants['0']['Applicant']['category'] == "SC" || $applicants['0']['Applicant']['category'] == "ST" 
+                        || $applicants['0']['Applicant']['physically_disabled'] == "yes") {
                         $this->set('app_fee', '250');
                         $this->Session->write('payment_amount','250');
                 }
