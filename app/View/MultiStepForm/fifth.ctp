@@ -1,4 +1,4 @@
-<?php
+<?php echo $this->element('nav-top');
 //debug($this->request->data);
 echo $this->Form->create('Applicant', array('id' => 'Misc_Details', 'url' => Router::url( null, true ))); ?>
 <div class="main_content_header">5.  Peer Recognition</div>
@@ -97,28 +97,6 @@ echo $this->Form->create('Applicant', array('id' => 'Misc_Details', 'url' => Rou
             <td class="table_headertxt" style="width: 30%">Minimum time required for joining, if selected:</td>
             <td style="width: 30%"><?php echo $this->Form->input('Applicantext.id', array('type' => 'hidden')); 
                                         echo $this->Form->input('Applicantext.time_req_for_joining', array('label' => false, 'maxlength' => '500')); ?></td>
-            <td></td>
-        </tr>
-    </table>
-    <table>
-        <tr>
-            <td class="table_headertxt" style="width: 30%">Selection Criteria (<a href="<?php echo $this->webroot . '/files/T_selection_criteria.pdf'; ?>">Download</a>):</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td style="width: 30%"><?php echo $this->Form->input('Applicantext.criteria_partA', array('label' => 'Part A', 'maxlength' => '10')); ?></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td style="width: 30%"><?php echo $this->Form->input('Applicantext.criteria_partB', array('label' => 'Part B', 'maxlength' => '10')); ?></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td style="width: 40%"><?php echo $this->Form->input('Applicantext.criteria_totalAB', array('label' => 'Total (Part A + Part B)', 'maxlength' => '10')); ?></td>
-            <td></td>
             <td></td>
         </tr>
     </table>
@@ -231,7 +209,12 @@ echo $this->Form->create('Applicant', array('id' => 'Misc_Details', 'url' => Rou
 </div>
 <div class="submit">
     <?php echo $this->Form->submit('Save & Continue', array('div' => false)); ?>
-    <?php echo $this->Form->submit('Cancel', array('name' => 'Cancel', 'div' => false)); ?>
+    <?php //echo $this->Form->submit('Cancel', array('name' => 'Cancel', 'div' => false)); 
+          echo $this->Form->button('Reset', array(
+            'type' => 'reset',
+            'div' => false            
+        ));
+          ?>
 </div>
 <?php echo $this->Form->end(); ?>
 <script>
@@ -255,7 +238,6 @@ echo $this->Form->create('Applicant', array('id' => 'Misc_Details', 'url' => Rou
                     $(this).css('display','table-cell');
                 });
         };
-        
         $("input[name='data[Applicantext][mem_pro_bodies]']").change(function(){
             if($(this).val() === 'yes') {
                 $('.mem_details').each(function(){

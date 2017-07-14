@@ -25,18 +25,7 @@ class Registereduser extends AppModel {
                 'message'       =>  'Passwords do not match'  
             )  
         ),
-        'dob' => array(
-            'rule' => 'notEmpty',
-            'message' => 'required field'
-        ),
-        'category' => array(
-            'rule' => 'notEmpty',
-            'message' => 'required field'
-        ),
-        'physically_disabled' => array(
-            'rule' => 'notEmpty',
-            'message' => 'required field'
-        )
+        
     );
 
     function validatePasswdConfirm($data)  

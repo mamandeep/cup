@@ -1,4 +1,5 @@
-<?php echo $this->Form->create('Applicant', array('id' => 'Applicant_Details', 
+<?php echo $this->element('nav-top'); 
+echo $this->Form->create('Applicant', array('id' => 'Applicant_Details', 
                                 'url' => Router::url( null, true ))); 
 //print_r($this->request->data);
         ?>
@@ -231,7 +232,11 @@
         <?php echo $this->Form->input('Applicant.age_on_adv_days', array('label' => false, 'type' => 'hidden')); ?>
 	<div class="submit">
             <?php echo $this->Form->submit('Save & Continue', array('div' => false)); ?>
-            <?php echo $this->Form->submit('Cancel', array('name' => 'Cancel', 'div' => false)); ?>
+            <?php //echo $this->Form->submit('Cancel', array('name' => 'Cancel', 'div' => false)); 
+                  echo $this->Form->button('Reset', array(
+                    'type' => 'reset',
+                    'div' => false            
+                )); ?>
 	</div>
 <?php echo $this->Form->end(); ?>
 

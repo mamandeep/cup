@@ -9,9 +9,11 @@
     <br/>For Corrigendum: <a href="<?php echo $this->webroot . '/files/CGDM.jpg'; ?>" target="_blank">click here</a>
 	<br/>For Corrigendum II: <a href="<?php echo $this->webroot . '/files/CGDM 2.jpg'; ?>" target="_blank">click here</a>
     <br/>For Teaching Positions, General Instructions and Essential Information: <a href="<?php echo $this->webroot . '/files/Teaching_advt.pdf'; ?>" target="_blank">click here</a>
-    <?php if(isset($final_subimt) && $final_subimt == "1") { ?>
+    <br/>For Screening Criteria (To be filled and attached with hard copy of Application Form): <a href="<?php echo $this->webroot . '/files/T_selection_criteria.pdf'; ?>">click here</a>
+    <br/>For API Proforma (To be filled and uploaded. MS Word format): <a href="<?php echo $this->webroot . '/files/API Form.doc'; ?>">click here</a>
+    <?php /*if(isset($final_subimt) && $final_subimt == "1") { ?>
     <br/>For Uploading new API Proforma: <a href="<?php echo $this->webroot . 'uploadproforma/upload'; ?>">click here</a>
-    <?php } ?>
+    <?php }*/ ?>
     <br/></td>
     <!--<td width="30%"><span class="generalinfoheader">Educational Qualifications</span></td>
     <td width="20%"><span class="generalinfoheader">Advertisement</span></td>-->
@@ -84,7 +86,7 @@
     <td></td>
     <td><label>I have read the General Conditions to Apply and <a href="<?php echo $this->webroot . '/files/Refund Policy.pdf'; ?>">Payment & Refund Policy</a>: (Tick the box to continue) <span>*</span></label>
     </td>
-    <td><input type="checkbox" id="declaration" name="declaration"></input></td>
+    <td><input type="checkbox" id="declaration" name="declaration" style="width: 20px; height: 20px;"></input></td>
     <td></td>
 </tr>
 <tr>
@@ -162,13 +164,24 @@
 </tr>
 <tr>
     <td></td>
-    <td><div style="text-align: center; font-size: 20px;">
+    <td><?php if(isset($postsapplied) && count($postsapplied) === 0) { ?>
+        <div style="text-align: center; font-size: 20px;">
         <?php 
               echo $this->Form->create('Temp', array('id' => 'Continue_Form', 'url' => Router::url( '/multi_step_form/wizard/first', true ))); 
               echo $this->Form->submit('Continue to Application Form', array('div' => false, 'id' => 'continue_bt' ));
               echo $this->Form->end(); 
              ?>
-    </div>
+        </div>
+    <?php } else { ?>
+            <div style="text-align: center; font-size: 20px;">
+        <?php 
+              echo $this->Form->create('Temp', array('id' => 'Continue_Form', 'url' => Router::url( '/multi_step_form/wizard/filldata', true ))); 
+              echo $this->Form->submit('Click here to Apply for Another Post', array('div' => false, 'id' => 'continue_bt' ));
+              echo $this->Form->end(); 
+             ?>
+        </div>
+    <?php } ?>
+    
     </td>
     <td></td>
 </tr>
@@ -242,9 +255,16 @@
                 //                $('#area').find(":selected").text() + '&centre=' +
                 //                $('#centre').find(":selected").text();
                 
-                window.location.href = '<?php echo $this->webroot; ?>multi_step_form/wizard/first?post=' + 
+                <?php if(isset($postsapplied) && count($postsapplied) === 0) { ?>
+                    window.location.href = '<?php echo $this->webroot; ?>multi_step_form/wizard/first?post=' + 
                                 $('#post_applied_for').find(":selected").text() + '&centre=' +
-                                $('#centre').find(":selected").text();
+                                $('#centre').find(":selected").val();
+                <?php } else { ?>
+                    window.location.href = '<?php echo $this->webroot; ?>multi_step_form/wizard/filldata?post=' + 
+                                $('#post_applied_for').find(":selected").text() + '&centre=' +
+                                $('#centre').find(":selected").val();
+                <?php } ?>
+                
             }
         });
         

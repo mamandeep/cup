@@ -1,4 +1,4 @@
-<?php
+<?php echo $this->element('nav-top');
 echo $this->Html->script('experience');
 
 echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url' => Router::url( null, true ))); ?>
@@ -729,7 +729,12 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
 </script>
 <div class="submit">
     <?php echo $this->Form->submit('Save & Continue', array('div' => false)); ?>
-    <?php echo $this->Form->submit('Cancel', array('name' => 'Cancel', 'div' => false)); ?>
+    <?php //echo $this->Form->submit('Cancel', array('name' => 'Cancel', 'div' => false)); 
+          echo $this->Form->button('Reset', array(
+            'type' => 'reset',
+            'div' => false            
+        ));
+          ?>
 </div>
 <?php echo $this->Form->end(); ?>
 <script>

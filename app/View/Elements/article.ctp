@@ -14,6 +14,9 @@ $key = isset($key) ? $key : '<%= key %>';
         <?php echo $this->Form->text("Researcharticle.{$key}.title_of_article", array('maxlength' => '200')); ?>
     </td>
     <td>
+        <?php echo $this->Form->text("Researcharticle.{$key}.journal_no_ugc", array('maxlength' => '200')); ?>
+    </td>
+    <td>
         <?php echo $this->Form->text("Researcharticle.{$key}.place_of_publication", array('maxlength' => '100')); ?>
     </td>
     <td>

@@ -3,7 +3,7 @@
 class FormController extends AppController {
 
     var $components = array('Captcha.Captcha'=>array('Model'=>'Signup', 
-                        'field'=>'security_code'));//'Captcha.Captcha'
+                        'field'=>'security_code'), 'Wizard.Wizard');//'Captcha.Captcha'
 
     var $uses = array('Signup', 'Registereduser','Post','Applicant','Education','Experience','Image', 'Misc', 'Researchpaper', 
                       'Researcharticle', 'Researchproject', 'Document', 'ApiScore', 'Experiencephd');                
@@ -38,10 +38,14 @@ class FormController extends AppController {
     public function generalinformation() {
            $applicants = $this->Applicant->find('all', array(
                 'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
+           $posts_applied = $this->Post->find('all', array(
+                        'conditions' => array('Post.reg_id' => $this->Session->read('registration_id'))));
             if (count($applicants) == 1 ) {
                 $this->set('applicant', $applicants['0']);
                 $this->set('final_subimt', $applicants['0']['Applicant']['final_submit']);
             }
+            $this->set('postsapplied', $posts_applied);
+            $this->Wizard->resetWizard();
     }
         
         public function register() {

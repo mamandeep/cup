@@ -35,6 +35,23 @@
         width: 45%;
     }
 
+    tr.spaceUnder>td {
+        padding-bottom: 15px;
+    }
+
+    tr.spaceUpper>td {
+        padding-top: 15px;
+    }
+
+    #employee_endorsement {
+        border: none;
+    }
+    #employee_endorsement tr {
+        border: none;
+    }
+    #employee_endorsement tr td{
+        border: none;
+    }
 </style>
 <?php 
 
@@ -367,9 +384,10 @@ echo $this->Html->script('jquery-1.11.1-min');
     <table border="1px solid black" style="border-right: 1px solid black ; border-collapse: collapse;">
         <tr>
             <td width="10%" class="print_headers">Authors</td>
-            <td width="30%" class="print_headers">Title of the Book</td>
+            <td width="20%" class="print_headers">Title of the Book</td>
             <td width="15%" class="print_headers">Title of the Article</td>
-            <td width="20%" class="print_headers">Place of Publication</td>
+            <td width="15%" class="print_headers">Journal No. as per UGC List</td>
+            <td width="15%" class="print_headers">Place of Publication</td>
             <td width="15%" class="print_headers">Publisher & ISBN</td>
             <td width="10%" class="print_headers">Page No</td>
         </tr>
@@ -379,6 +397,7 @@ echo $this->Html->script('jquery-1.11.1-min');
         echo "<td class=\"print_value\">" . $rarticle_arr[$key]['Researcharticle']['authors'] . "</td>";
         echo "<td class=\"print_value\">" . $rarticle_arr[$key]['Researcharticle']['title_of_book'] . "</td>";
         echo "<td class=\"print_value\">" . $rarticle_arr[$key]['Researcharticle']['title_of_article'] . "</td>";
+        echo "<td class=\"print_value\">" . $rarticle_arr[$key]['Researcharticle']['journal_no_ugc'] . "</td>";
         echo "<td class=\"print_value\">" . $rarticle_arr[$key]['Researcharticle']['place_of_publication'] . "</td>";
         echo "<td class=\"print_value\">" . $rarticle_arr[$key]['Researcharticle']['publisher_ISBN'] . "</td>";
         echo "<td class=\"print_value\">" . $rarticle_arr[$key]['Researcharticle']['page_no'] . "</td>";
@@ -801,6 +820,42 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td class="print_value"><?php echo $applicant['Applicant']['fax']; ?></td>
         </tr>
     </table>
+    <br/>
+    <table>
+        <tr class="spaceUpper spaceUnder">
+            <td colspan="3" class="print_headers" align="center">ENDORSEMENT by the EMPLOYEE</td>
+        </tr>
+    </table>
+    <div><label class="print_headers" style="line-height: 150%;">(In case of in-service candidates, whether in permanent / contract / temporary capacity, the application must be endorsed / forwarded by the Head of the Department / Employer. Otherwise the application is liable to be rejected)</label></div>
+    <div><label class="print_headers" style="text-decoration: underline; line-height: 150%;">Forwarded to the Central University of Punjab, City Campus, District - Bathinda, Punjab, India - 151001.</label></div>
+    <br/>
+    <table id="employee_endorsement">
+        <tr>
+            <td class="print_headers" colspan="3" style="line-height: 200%;">The applicant Dr./Mr./Mrs. <span style="text-decoration: underline;"><?php echo $applicant['Applicant']['first_name'] . " " . $applicant['Applicant']['middle_name'] . " " . $applicant['Applicant']['last_name']?></span> who has submitted the application for the post of <span style="text-decoration: underline;"><?php echo $applicant['Applicant']['post_applied_for']; ?></span> in the Central University of Punjab, has been working in the organization namely 
+            <span style="text-decoration: underline;">                                         </span> in the post of <span style="text-decoration: underline;">                                         </span> in a temporary / contract / permanent capacity with effect from <span style="text-decoration: underline;">                                         </span> in the Scale of Pay / Pay Band of 
+            <span style="text-decoration: underline;">                                         </span>. He / She is drawing a basic pay of <span style="text-decoration: underline;">                                         </span>. His / Her next increment is due on <span style="text-decoration: underline;">                                         </span>.
+            </td>
+        </tr>
+        <tr>
+            <td class="print_headers" colspan="3" style="line-height: 150%;">Further, It is Certified that no vigilance case or disciplinary proceedings or criminal proceeding is either pending or contemplated against the said applicant. There is no objection for his/her application being considered by Central University of Punjab.</td>
+        <tr/>
+        <tr>
+            <td colspan="3"></td>
+        </tr>
+        <tr>
+            <td valign="bottom"><div>Place: <span style="text-decoration: underline;">         </span></div>
+                <div>Date: <span style="text-decoration: underline;">          </span></div>
+            </td>
+            <td valign="bottom"><span><strong>Seal</strong></span></td>
+            <td valign="bottom"><div>&nbsp;</div>
+                <div>(Signature of the forwarding officer)</div>
+                <div>Name: <span style="text-decoration: underline;">          </span></div>
+                <div>Designation: <span style="text-decoration: underline;">          </span></div>
+            </td>
+        <tr/>
+    </table>
+    <br/>
+    <br />
 <div>
     <table>
         <tr>

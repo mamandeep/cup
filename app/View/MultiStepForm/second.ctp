@@ -1,4 +1,4 @@
-<?php 
+<?php echo $this->element('nav-top');
 echo $this->Html->script('education');
 //print_r($this->request->data);
 echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' => Router::url( null, true ))); ?>
@@ -569,7 +569,16 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     <?php echo $this->Form->text("Applicant.ugc_net_cutoff_marks"); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Applicant.ugc_net_category"); ?>
+                    <?php echo $this->Form->input('Applicant.ugc_net_category', array(
+                    'options' => array(
+                        'General' => 'General',
+                        'SC' => 'SC',
+                        'ST' => 'ST',
+                        'OBC' => 'OBC'),
+                    'empty' => 'Select',
+                    'style' => 'width: 100%;',
+                    'label' => false
+                )); ?>
                 </td>
             </tr>
     </table>
@@ -584,7 +593,11 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
 
 <div class="submit">
     <?php echo $this->Form->submit('Save & Continue', array('id' => 'formSubmit' , 'div' => false)); ?>
-    <?php echo $this->Form->submit('Cancel', array('name' => 'Cancel', 'div' => false)); ?>
+    <?php //echo $this->Form->submit('Cancel', array('name' => 'Cancel', 'div' => false)); 
+            echo $this->Form->button('Reset', array(
+                    'type' => 'reset',
+                    'div' => false            
+                )); ?>
 </div>
 
 <?php echo $this->Form->end(); ?>

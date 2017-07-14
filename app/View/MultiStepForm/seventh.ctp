@@ -1,3 +1,4 @@
+<?php echo $this->element('nav-top'); ?>
 <div id="wrapper">
   <div id="maincontent">
         <table>

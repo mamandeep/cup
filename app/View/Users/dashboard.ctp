@@ -10,9 +10,6 @@
         <tr>
             <td><?php echo $this->Form->input('email'); ?></td>
         </tr>
-        <!--<tr>
-            <td>&nbsp;(DD/MM/YYYY)<?php echo $this->Form->input('dob', array('label' => 'Date of Birth')); ?></td>
-        </tr>-->
         <tr>
             <td><?php echo $this->Form->input('password', array('label' => 'Password')); ?></td>
         </tr>

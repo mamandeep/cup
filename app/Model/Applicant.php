@@ -119,8 +119,41 @@ class Applicant extends AppModel {
         'permanent_address' => array(
             'rule' => 'notEmpty',
             'message' => 'required field'
+        ),
+        'criteria_partA' => array(
+            'partA' => array(
+                'rule' => 'notEmpty',
+                'message' => 'required field'
+            ),
+            'numeric' => array(
+                'rule' => 'numeric',
+                'message' => 'Please enter only numbers'
+            )
+        ),
+        'criteria_partB' => array(
+            'partB' => array(
+                'rule' => 'notEmpty',
+                'message' => 'required field'
+            ),
+            'numeric' => array(
+                'rule' => 'numeric',
+                'message' => 'Please enter only numbers'
+            )
+        ),
+        'criteria_totalAB' => array(
+            'partAB' => array(
+                'rule' => 'notEmpty',
+                'message' => 'required field'
+            ),
+            'numeric' => array(
+                'rule' => 'numeric',
+                'message' => 'Please enter only numbers'
+            ),
+            'sum' => array(
+                'rule' => 'checksum',
+                'message' => 'Sum of Criteria Part A and Criteria Part B does not match.'
+            )
         )
-        
     );
 
     function beforeSave($options = array()) {
@@ -151,6 +184,11 @@ class Applicant extends AppModel {
                 );*/
     }
 
+    public function checksum($check)
+    {
+        //debug($check); debug($this->data[$this->alias]);
+        return (intval($check['criteria_totalAB']) === (intval($this->data[$this->alias]['criteria_partA']) + intval($this->data[$this->alias]['criteria_partB'])));
+    }
 }
 
 ?>

@@ -2,8 +2,8 @@
 class MultiStepFormController extends AppController {
 	var $components = array('Wizard.Wizard');
         public $uses = array('Registereduser', 'Post' , 'MultiStepForm','Applicant', 'Applicantext', 'Education','Experience',
-                            'Academic_dist','Image','Document', 'Researchpaper', 'Researcharticle','Researchproject', 
-                            'Experiencephd', 'ApiScore', 'NewAPIScore');
+                            'Academic_dist','Image','Document', 'Researchpaper', 'Researcharticle','Researchproject', 'Peerrecognition',
+                            'Experiencephd', 'ApiScore', 'NewAPIScore', 'Applicantprefill', 'Publication');
         
         function beforeFilter() {
             if(!$this->Session->check('registration_id')) {
@@ -11,7 +11,7 @@ class MultiStepFormController extends AppController {
             }
             $current_datetime = new DateTime();
             $current_datetime->setTimezone(new DateTimeZone('Asia/Calcutta'));
-            $close_datetime = new DateTime("2017-06-28 17:00:00", new DateTimeZone('Asia/Calcutta'));
+            $close_datetime = new DateTime("2017-07-14 17:00:00", new DateTimeZone('Asia/Calcutta'));
             //print_r($current_datetime->format('Y-m-d-H-i-s'));
             //print_r($close_datetime->format('Y-m-d-H-i-s'));
             $applicant = $this->Applicant->find('all', array(
@@ -21,16 +21,26 @@ class MultiStepFormController extends AppController {
                 
                 $this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
             }
-            $this->Wizard->steps = array('first','second','third','fourth','fifth','sixth', 'seventh', 'eighth', 'ninth');
+            $posts_applied = $this->Post->find('all', array(
+                        'conditions' => array('Post.reg_id' => $this->Session->read('registration_id'))));
+            if(count($posts_applied) === 0) {
+                $this->Wizard->steps = array('first','second','third','fourth','fifth','sixth', 'seventh', 'eighth', 'ninth');
+            }
+            else {
+                $this->Wizard->steps = array('filldata','first','second','third','fourth','fifth','sixth', 'seventh', 'eighth', 'ninth');
+            }
+            
         }
         
         function wizard($step = null) {
             if($this->Session->check('registration_id')) {
+                //debug($step);
                 //debug($this->alreadyAppliedCheck());
                 //debug($this->isApplicantIdValid()); return false;
                 $this->alreadyAppliedCheck();
                 $this->isApplicantIdValid();
                 $this->Wizard->process($step);
+                //return false;
             }
             else {
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
@@ -108,6 +118,182 @@ class MultiStepFormController extends AppController {
             }
         }
         
+        function _prepareFilldata() {
+            $this->Applicantprefill->clear();
+            $posts_applied = $this->Post->find('all', array(
+                        'conditions' => array('Post.reg_id' => $this->Session->read('registration_id'))));
+            if(count($posts_applied) === 0) {
+                $this->Wizard->redirect('first', null, true);
+            }
+        }
+        
+        function _processFilldata() {
+            if (!empty($this->Session->read('registration_id')) && !empty($this->Session->read('applicant_id'))) {
+                $this->Applicantprefill->clear();    
+                $this->Applicantprefill->set($this->data);
+                if(!empty($this->data['Applicantprefill']) && $this->Applicantprefill->validates()) {
+                    $existingApplicantId = $this->data['Applicantprefill']['existing_id'];
+                    $applicants = $this->Applicant->find('all', array(
+                                       'conditions' => array('Applicant.id' => intval($existingApplicantId))));
+                    $applicants_new = $this->Applicant->find('all', array(
+                                       'conditions' => array('Applicant.id' => intval($this->Session->read('applicant_id')))));
+                    if(intval($applicants_new[0]['Applicant']['multiple_post']) !== 1) {
+                        if($applicants[0]['Applicant']['post_applied_for'] === $this->data['Applicantprefill']['existing_post'] && $applicants[0]['Applicant']['date_of_birth'] === $this->data['Applicantprefill']['date_of_birth']) {
+                            if(count($this->Applicant->find('all', array('conditions' => array('Applicant.id' => intval($this->Session->read('applicant_id')))))) === 1) {
+                                $this->Applicant->query('update applicant as a INNER JOIN (select  id,area,area_of_sp,first_name,middle_name,last_name,date_of_birth,email,mobile_no,age_on_advt,place_of_birth,father_name,mother_name,nationality,gender,marital_status,spouse_name,category,physically_disabled,blindness,blindness_pertge,hearing,hearing_pertge,locomotor,locomotor_pertge,mailing_address,permanent_address,landline,fax,aadhar_no,api_score,api_capped,created,modified,final_submit,advertisement_no,gaps_in_education,ugc_net_subject,ugc_net_mnth_yr,ugc_net_rollno,tot_exp_years,tot_exp_mnths,tot_exp_days,gaps_in_experience,sem_att_national,sem_att_international,sem_att_total,sem_org_national,sem_org_international,sem_org_total,rg_mphil_completed,rg_phd_completed,rg_mphil_undersup,rg_phd_undersup,tot_impact_sci,tot_impact_google,h_index_scopus,h_index_google,i10_index_google,ref_add1,ref_email1,ref_landline1,ref_mobile1,ref_fax1,ref_add2,ref_email2,ref_landline2,ref_mobile2,ref_fax2,ref_add3,ref_email3,ref_landline3,ref_mobile3,ref_fax3,presentp_desig,presentp_nameuniv,presentp_basic_pay,presentp_pay_scale,presentp_gross_salary,presentp_increment_date,time_req_for_joining,any_other_info,mem_pro_bodies,mem_details,convicted,pending_court,total_self_att_docs_att,willg_min_pay,min_pay_no,develop_department,award_honour1,agency1,year1,award_honour2,agency2,year2,award_honour3,agency3,year3,response_code,payment_date_created,payment_id,payment_amount,payment_transaction_id,category_applied,ugc_net_marks,ugc_net_total_marks,ugc_net_cutoff_marks,ugc_net_category,apiscore_cat_2,apiscore_cat_3,totalapiscore_cat_2_3,criteria_partA,criteria_partB,criteria_totalAB from applicant where id = ' . intval($existingApplicantId) . ') as e
+                                                         set 
+                                                            a.area = e.area,
+                                                            a.first_name = e.first_name,
+                                                            a.middle_name = e.middle_name,
+                                                            a.last_name = e.last_name,
+                                                            a.date_of_birth = e.date_of_birth,
+                                                            a.email = e.email,
+                                                            a.mobile_no = e.mobile_no,
+                                                            a.age_on_advt = e.age_on_advt,
+                                                            a.place_of_birth = e.place_of_birth,
+                                                            a.father_name = e.father_name,
+                                                            a.mother_name = e.mother_name,
+                                                            a.nationality = e.nationality,
+                                                            a.gender = e.gender,
+                                                            a.marital_status = e.marital_status,
+                                                            a.spouse_name = e.spouse_name,
+                                                            a.category = e.category,
+                                                            a.physically_disabled = e.physically_disabled,
+                                                            a.blindness = e.blindness,
+                                                            a.blindness_pertge = e.blindness_pertge,
+                                                            a.hearing = e.hearing,
+                                                            a.hearing_pertge = e.hearing_pertge,
+                                                            a.locomotor = e.locomotor,
+                                                            a.locomotor_pertge = e.locomotor_pertge,
+                                                            a.mailing_address = e.mailing_address,
+                                                            a.permanent_address = e.permanent_address,
+                                                            a.landline = e.landline,
+                                                            a.fax = e.fax,
+                                                            a.aadhar_no = e.aadhar_no,
+                                                            a.api_score = e.api_score,
+                                                            a.api_capped = e.api_capped,
+                                                            a.advertisement_no = e.advertisement_no,
+                                                            a.gaps_in_education = e.gaps_in_education,
+                                                            a.ugc_net_subject = e.ugc_net_subject,
+                                                            a.ugc_net_mnth_yr = e.ugc_net_mnth_yr,
+                                                            a.ugc_net_rollno = e.ugc_net_rollno,
+                                                            a.tot_exp_years = e.tot_exp_years,
+                                                            a.tot_exp_mnths = e.tot_exp_mnths,
+                                                            a.tot_exp_days = e.tot_exp_days,
+                                                            a.gaps_in_experience = e.gaps_in_experience,
+                                                            a.sem_att_national = e.sem_att_national,
+                                                            a.sem_att_international = e.sem_att_international,
+                                                            a.sem_att_total = e.sem_att_total,
+                                                            a.sem_org_national = e.sem_org_national,
+                                                            a.sem_org_international = e.sem_org_international,
+                                                            a.sem_org_total = e.sem_org_total,
+                                                            a.rg_mphil_completed = e.rg_mphil_completed,
+                                                            a.rg_phd_completed = e.rg_phd_completed,
+                                                            a.rg_mphil_undersup = e.rg_mphil_undersup,
+                                                            a.rg_phd_undersup = e.rg_phd_undersup,
+                                                            a.tot_impact_sci = e.tot_impact_sci,
+                                                            a.tot_impact_google = e.tot_impact_google,
+                                                            a.h_index_scopus = e.h_index_scopus,
+                                                            a.h_index_google = e.h_index_google,
+                                                            a.i10_index_google = e.i10_index_google,
+                                                            a.ref_add1 = e.ref_add1,
+                                                            a.ref_email1 = e.ref_email1,
+                                                            a.ref_landline1 = e.ref_landline1,
+                                                            a.ref_mobile1 = e.ref_mobile1,
+                                                            a.ref_fax1 = e.ref_fax1,
+                                                            a.ref_add2 = e.ref_add2,
+                                                            a.ref_email2 = e.ref_email2,
+                                                            a.ref_landline2 = e.ref_landline2,
+                                                            a.ref_mobile2 = e.ref_mobile2,
+                                                            a.ref_fax2 = e.ref_fax2,
+                                                            a.ref_add3 = e.ref_add3,
+                                                            a.ref_email3 = e.ref_email3,
+                                                            a.ref_landline3 = e.ref_landline3,
+                                                            a.ref_mobile3 = e.ref_mobile3,
+                                                            a.ref_fax3 = e.ref_fax3,
+                                                            a.presentp_desig = e.presentp_desig,
+                                                            a.presentp_nameuniv = e.presentp_nameuniv,
+                                                            a.presentp_basic_pay = e.presentp_basic_pay,
+                                                            a.presentp_pay_scale = e.presentp_pay_scale,
+                                                            a.presentp_gross_salary = e.presentp_gross_salary,
+                                                            a.presentp_increment_date = e.presentp_increment_date,
+                                                            a.time_req_for_joining = e.time_req_for_joining,
+                                                            a.any_other_info = e.any_other_info,
+                                                            a.mem_pro_bodies = e.mem_pro_bodies,
+                                                            a.mem_details = e.mem_details,
+                                                            a.convicted = e.convicted,
+                                                            a.pending_court = e.pending_court,
+                                                            a.total_self_att_docs_att = e.total_self_att_docs_att,
+                                                            a.willg_min_pay = e.willg_min_pay,
+                                                            a.min_pay_no = e.min_pay_no,
+                                                            a.develop_department = e.develop_department,
+                                                            a.award_honour1 = e.award_honour1,
+                                                            a.agency1 = e.agency1,
+                                                            a.year1 = e.year1,
+                                                            a.award_honour2 = e.award_honour2,
+                                                            a.agency2 = e.agency2,
+                                                            a.year2 = e.year2,
+                                                            a.award_honour3 = e.award_honour3,
+                                                            a.agency3 = e.agency3,
+                                                            a.year3 = e.year3,
+                                                            a.category_applied = e.category_applied,
+                                                            a.ugc_net_marks = e.ugc_net_marks,
+                                                            a.ugc_net_total_marks = e.ugc_net_total_marks,
+                                                            a.ugc_net_cutoff_marks = e.ugc_net_cutoff_marks,
+                                                            a.ugc_net_category = e.ugc_net_category,
+                                                            a.apiscore_cat_2 = e.apiscore_cat_2,
+                                                            a.apiscore_cat_3 = e.apiscore_cat_3,
+                                                            a.totalapiscore_cat_2_3 = e.totalapiscore_cat_2_3,
+                                                            a.criteria_partA = e.criteria_partA,
+                                                            a.criteria_partB = e.criteria_partB,
+                                                            a.criteria_totalAB = e.criteria_totalAB,
+                                                            a.multiple_post = 1
+                                                            where a.id = ' . intval($this->Session->read('applicant_id')) . ';');
+                            }
+                            if(count($this->Education->find('all', ['conditions' => ['Education.applicant_id' => intval($this->Session->read('applicant_id'))]])) === 0) {
+                                $this->Education->query('insert into education (applicant_id, board, course, grade, marks_obtained, max_marks, percentage,qualification,roll_no,subjects,system,year_of_passing,mode_of_study) select ' . $this->Session->read('applicant_id') . ', 
+                                        board, course, grade, marks_obtained, max_marks, percentage,qualification,roll_no,subjects,system,year_of_passing,mode_of_study from education where applicant_id = ' . intval($existingApplicantId));
+                            }
+                            if(count($this->Experience->find('all', ['conditions' => ['Experience.applicant_id' => intval($this->Session->read('applicant_id'))]])) === 0) {
+                                $this->Experience->query('insert into experience (applicant_id,designation,institute_type,name_address,from_date,to_date,no_of_yrs_mnths_days,nature_of_work,scale_of_pay) select ' . $this->Session->read('applicant_id') . ', 
+                                        designation,institute_type,name_address,from_date,to_date,no_of_yrs_mnths_days,nature_of_work,scale_of_pay from experience where applicant_id = ' . intval($existingApplicantId));
+                            }
+                            if(count($this->Document->find('all', ['conditions' => ['Document.applicant_id' => intval($this->Session->read('applicant_id'))]])) === 0) {
+                                $this->Document->query('insert into document (applicant_id,filename,type,size,filename2,type2,size2,filename3,type3,size3,filename4,type4,size4,filename5,type5,size5) select ' . $this->Session->read('applicant_id') . ', 
+                                        filename,type,size,filename2,type2,size2,filename3,type3,size3,filename4,type4,size4,filename5,type5,size5 from document where applicant_id = ' . intval($existingApplicantId));
+                            }
+                            if(count($this->Experiencephd->find('all', ['conditions' => ['Experiencephd.applicant_id' => intval($this->Session->read('applicant_id'))]])) === 0) {
+                                $this->Experiencephd->query('insert into experiencephd (applicant_id,designation,institute_type,name_address,from_date,to_date,no_of_mnths_yrs,nature_of_service,work_load,minimum_eligibility,leave_taken,scale_of_pay) select ' . $this->Session->read('applicant_id') . ', 
+                                        designation,institute_type,name_address,from_date,to_date,no_of_mnths_yrs,nature_of_service,work_load,minimum_eligibility,leave_taken,scale_of_pay from experiencephd where applicant_id = ' . intval($existingApplicantId));
+                            }
+                            if(count($this->Peerrecognition->find('all', ['conditions' => ['Peerrecognition.applicant_id' => intval($this->Session->read('applicant_id'))]])) === 0) {
+                                $this->Peerrecognition->query('insert into peerrecognition (applicant_id,award_honour,agency,year) select ' . $this->Session->read('applicant_id') . ', 
+                                        award_honour,agency,year from peerrecognition where applicant_id = ' . intval($existingApplicantId));
+                            }
+                            if(count($this->Publication->find('all', ['conditions' => ['Publication.applicant_id' => intval($this->Session->read('applicant_id'))]])) === 0) {
+                                $this->Publication->query('insert into publication (applicant_id,authors,title,paper_book,title_article,name_place_publication,publication_ISSN,publisher_ISBN,vol_page_year,impact_factor) select ' . $this->Session->read('applicant_id') . ', 
+                                        authors,title,paper_book,title_article,name_place_publication,publication_ISSN,publisher_ISBN,vol_page_year,impact_factor from publication where applicant_id = ' . intval($existingApplicantId));
+                            }
+                            if(count($this->Researcharticle->find('all', ['conditions' => ['Researcharticle.applicant_id' => intval($this->Session->read('applicant_id'))]])) === 0) {
+                                $this->Researcharticle->query('insert into researcharticle (applicant_id,authors,title_of_book,title_of_article,journal_no_ugc,place_of_publication,publisher_ISBN,page_no) select ' . $this->Session->read('applicant_id') . ', 
+                                        authors,title_of_book,title_of_article,journal_no_ugc,place_of_publication,publisher_ISBN,page_no from researcharticle where applicant_id = ' . intval($existingApplicantId));
+                            }
+                            if(count($this->Researchpaper->find('all', ['conditions' => ['Researchpaper.applicant_id' => intval($this->Session->read('applicant_id'))]])) === 0) {
+                                $this->Researchpaper->query('insert into researchpaper (applicant_id,authors,title,name_place_publication,publication_ISSN,vol_page_year,impact_factor) select ' . $this->Session->read('applicant_id') . ', 
+                                        authors,title,name_place_publication,publication_ISSN,vol_page_year,impact_factor from researchpaper where applicant_id = ' . intval($existingApplicantId));
+                            }
+                            if(count($this->Researchproject->find('all', ['conditions' => ['Researchproject.applicant_id' => intval($this->Session->read('applicant_id'))]])) === 0) {
+                                $this->Researchproject->query('insert into researchproject (applicant_id,title,comp_ongoing,funding_agency,investigator,amount_of_grant,duration) select ' . $this->Session->read('applicant_id') . ', 
+                                        title,comp_ongoing,funding_agency,investigator,amount_of_grant,duration from researchproject where applicant_id = ' . intval($existingApplicantId));
+                            }
+                        }
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        
         function _prepareFirst() {
         if (!empty($this->Session->read('registration_id')) && !empty($this->Session->read('applicant_id'))) {
             $registration_data = $this->Registereduser->find('all', array(
@@ -140,14 +326,14 @@ class MultiStepFormController extends AppController {
     }
 
     function _processFirst() {
-            $this->Applicant->create();    
-            $this->Applicant->set($this->data);
-            if($this->Applicant->validates()) { //&& $this->User->validates()) {
-                $this->Applicant->save();
-                return true;
-            }
-            return false;
-	}
+        $this->Applicant->create();    
+        $this->Applicant->set($this->data);
+        if($this->Applicant->validates()) { //&& $this->User->validates()) {
+            $this->Applicant->save();
+            return true;
+        }
+        return false;
+    }
         
         function _prepareSecond() {
             if (!empty($this->Session->read('applicant_id'))) {
@@ -278,29 +464,19 @@ class MultiStepFormController extends AppController {
             
             $misc = $this->Applicant->find('all', array(
                         'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
+                        
             if(count($misc) > 1) {
                 $this->Session->setFlash('An error has occured. Please contact Support.');
                 return false;
             }
-            /*$api = $this->ApiScore->find('all', array(
-                        'conditions' => array('ApiScore.applicant_id' => $this->Session->read('applicant_id'))));
-            if(count($api) > 1) {
-               $this->Session->setFlash('An error has occured. Please contact Support.');
-                return false;
-            }
-            else if(count($api) == 0) {
-                $this->ApiScore->create();
-                $this->ApiScore->set(array(
-                    'applicant_id' => $this->Session->read('applicant_id')));
-                $this->ApiScore->save();
-                $this->ApiScore->id = $this->ApiScore->getLastInsertId();
-                $api = $this->ApiScore->find('all', array(
-                        'conditions' => array('ApiScore.applicant_id' => $this->Session->read('applicant_id'))));
-            }*/
+            $newAPIScore = $this->NewAPIScore->find('all', array(
+                            'conditions' => array('NewAPIScore.id' => $this->Session->read('applicant_id'))));
             $this->request->data = array('Researchpaper' => $researchpaper_data,
                                          'Researcharticle' => $researcharticle_data,
                                          'Researchproject' => $researchproject_data,
-                                         'Applicant' => $misc['0']['Applicant']);
+                                         'Applicant' => $misc['0']['Applicant'],
+                                         'Applicantext' => $misc['0']['Applicant'],
+                                         'NewAPIScore' => $newAPIScore['0']['NewAPIScore']);
                                          //'ApiScore' => $api['0']['ApiScore']);
         }
         
@@ -330,13 +506,7 @@ class MultiStepFormController extends AppController {
             
             if($this->Researchpaper->saveMany($this->data['Researchpaper']) && $this->Researcharticle->saveMany($this->data['Researcharticle'])
                     && $this->Applicant->save($this->data['Applicant']) && $this->Researchproject->saveMany($this->data['Researchproject'])
-                    ) {
-                if(false) { //$applicant['0']['Applicant']['post_applied_for'] == "Professor" || $applicant['0']['Applicant']['post_applied_for'] == "Associate Professor") {
-                    if($this->ApiScore->save($this->data['ApiScore']))
-                        return true;
-                    else
-                        return false;
-                }
+                    && $this->NewAPIScore->save($this->data['NewAPIScore'])) {
                 return true;
             }
             return false;
@@ -360,10 +530,11 @@ class MultiStepFormController extends AppController {
         }
         
         function _processFifth($count = 1) {
-            //debug($this->data); return false;
+            //debug($this->data); //return false;
             if($this->Applicant->save($this->data['Applicant']) && $this->Applicantext->save($this->data['Applicantext'])) {
                 return true;
             }
+            //debug($this->Applicant->validationErrors); debug($this->Applicantext->validationErrors);
             $this->Session->setFlash('An error has occured during saving data (P5).');
             return false;
 	}
@@ -395,8 +566,51 @@ class MultiStepFormController extends AppController {
             if(!empty($this->data['Document']['filename']['error']) && $this->data['Document']['filename']['error'] == 4
                 && !empty($this->data['Document']['filename2']['error']) && $this->data['Document']['filename2']['error'] == 4
                 && !empty($this->data['Document']['filename4']['error']) && $this->data['Document']['filename4']['error'] == 4
+		&& !empty($this->data['Document']['filename3']['error']) && $this->data['Document']['filename3']['error'] == 4
+                && !empty($this->data['Document']['filename5']['error']) && $this->data['Document']['filename5']['error'] == 4
+
+               
                )
             return true;
+            
+            $images = $this->Document->find('all', array(
+                    'conditions' => array('Document.applicant_id' => $this->Session->read('applicant_id'))));
+
+            $applicant = $this->Applicant->find('all', array(
+                    'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
+            if(count($images) == 1) {
+                
+                //$this->request->data = $images['0'];
+                if(((!empty($this->data['Document']['filename']['error']) && $this->data['Document']['filename']['error'] !== 0) && is_null($images['0']['Document']['filename']))
+                    || ((!empty($this->data['Document']['filename2']['error']) && $this->data['Document']['filename2']['error'] !== 0) && is_null($images['0']['Document']['filename2']))
+                    || ((!empty($this->data['Document']['filename4']['error']) && $this->data['Document']['filename4']['error'] !== 0) && is_null($images['0']['Document']['filename4'])))
+                { 
+                    $str = '';
+                    if((!empty($this->data['Document']['filename']['error']) && $this->data['Document']['filename']['error'] !== 0) && is_null($images['0']['Document']['filename'])) {
+                        $str .= "Photograph is compulsory. ";
+                        //$this->Session->setFlash('Photograph is compulsory');
+                    }
+                    if((!empty($this->data['Document']['filename2']['error']) && $this->data['Document']['filename2']['error'] !== 0) && is_null($images['0']['Document']['filename2'])) {
+                        $str .= "Date of Birth Certificate is compulsory. ";
+                        //$this->Session->setFlash('Date of Birth Certificate is compulsory');
+                    }
+                    if((!empty($this->data['Document']['filename4']['error']) && $this->data['Document']['filename4']['error'] !== 0) && is_null($images['0']['Document']['filename4'])) {
+                        $str .= "Signature is compulsory.";
+                        //$this->Session->setFlash('Signature is compulsory');
+                    }
+                    if(trim($str) !== '') {
+                        $this->Session->setFlash($str);
+                        return false;
+                    }
+                }
+                //print_r($this->request->data);
+            }
+            else if(count($images) > 1) {
+                $this->Session->setFlash('An error has occured. Please contact Support.');
+            }
+            else {
+                $this->Session->setFlash('An error has occured. Please contact Support.');
+            }
             
             if ($this->Document->save($this->data['Document'])) {
                 //$this->Session->setFlash('Your documents have been submitted');
@@ -414,30 +628,17 @@ class MultiStepFormController extends AppController {
                     'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
             
             if(count($images) == 1) {
-                //$this->request->data = $images['0'];
-                if((isset($images['0']['Document']['filename']) && empty($images['0']['Document']['filename']))
-                    || (isset($images['0']['Document']['filename2']) && empty($images['0']['Document']['filename2']))
-                    || (isset($images['0']['Document']['filename4']) && empty($images['0']['Document']['filename4']))
-                )
-                {
-                    if(isset($images['0']['Document']['filename']) && empty($images['0']['Document']['filename']))
-                        $this->Session->setFlash('Photograph is compulsory');
-                    if(isset($images['0']['Document']['filename2']) && empty($images['0']['Document']['filename2']))
-                        $this->Session->setFlash('Date of Birth Certificate is compulsory');
-                    if(isset($images['0']['Document']['filename4']) && empty($images['0']['Document']['filename4']))
-                        $this->Session->setFlash('Signature is compulsory');
-                    $this->wizard('sixth');
-                }
                 $this->set('image', $images['0']);
                 $this->set('applicant', $applicant['0']);
                 //print_r($this->request->data);
             }
             else if(count($images) > 1) {
                 $this->Session->setFlash('An error has occured. Please contact Support.');
+                return false;
             }
             else {
-                $this->Session->setFlash('Kindly upload the necessary documents.');
-                $this->wizard('sixth');
+                $this->Session->setFlash('Kindly upload the compulsory documents.');
+                return false;
             }
 	}
 
@@ -446,25 +647,19 @@ class MultiStepFormController extends AppController {
 	}
         
 	function _prepareEighth($count = 1) {
-            $applicants = $this->NewAPIScore->find('all', array(
-                            'conditions' => array('NewAPIScore.id' => $this->Session->read('applicant_id'))));
-            if($applicants[0]['NewAPIScore']['post_applied_for'] === "Assistant Professor") {
-                $this->wizard('ninth');
-            }
-            else {
-                $this->request->data = $applicants[0];
-            }
+            //$applicants = $this->NewAPIScore->find('all', array(
+            //                'conditions' => array('NewAPIScore.id' => $this->Session->read('applicant_id'))));
+            //if($applicants[0]['NewAPIScore']['post_applied_for'] === "Assistant Professor") {
+            //    $this->wizard('ninth');
+            //}
+            //else {
+            //    $this->request->data = $applicants[0];
+            //}
 	}
         
         function _processEighth() {
             //debug($this->data['Applicant']); return false;
-            $this->NewAPIScore->create();    
-            $this->NewAPIScore->set($this->data);
-            if($this->NewAPIScore->validates()) { //&& $this->User->validates()) {
-                $this->NewAPIScore->save();
-                return true;
-            }
-            return false;
+            return true;
         }
         
         function _prepareNinth($count = 1) {
@@ -572,7 +767,7 @@ class MultiStepFormController extends AppController {
     }
     
     function getAreaAppliedFor() {
-        $current_area_applied = !empty($this->request->query['area']) ? $this->request->query['area'] : NULL;
+        $current_area_applied = !empty($this->request->query['area']) ? urldecode($this->request->query['area']) : NULL;
         if (!empty($current_area_applied)) {
             //$this->set('postAppliedFor', $current_post_applied);
             $this->Session->write(Configure::read('GENERALINFO.area'), $current_area_applied);
@@ -587,7 +782,7 @@ class MultiStepFormController extends AppController {
     }
     
     function getCentreAppliedFor() {
-        $current_centre_applied = !empty($this->request->query['centre']) ? $this->request->query['centre'] : NULL;
+        $current_centre_applied = !empty($this->request->query['centre']) ? urldecode($this->request->query['centre']) : NULL;
         if (!empty($current_centre_applied)) {
             //$this->set('postAppliedFor', $current_post_applied);
             $this->Session->write(Configure::read('GENERALINFO.centre'), $current_centre_applied);

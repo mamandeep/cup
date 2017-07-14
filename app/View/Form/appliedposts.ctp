@@ -13,7 +13,7 @@
             <td width="40%" class="table_header">Centre</td>
             <td width="20%" class="table_header">Print Form</td>
         </tr>
-        <?php
+        <?php $final_submit_atleast_one  = false;
             if(!empty($this->request->data)) {
                 foreach($this->request->data as $key => $value) {
                     echo "<tr>";
@@ -25,6 +25,7 @@
                     echo "<td><a href=\"" . $url .
                         "\" id=\"print_" . $key . "\" style=\"font-size: 20px;\">Click Here</a></td>";
                     echo "</tr>";
+                    $final_submit_atleast_one = true;
                 }
             }
         ?>
@@ -33,9 +34,16 @@
         <tr>
             <td></td>
             <td>
-                <div style="text-align: center; font-size: 30px;">
-                    <a href="<?php echo $this->webroot; ?>form/generalinformation" class="button" id="continue_bt">Continue</a>
-                </div>
+                <?php if($final_submit_atleast_one === false) { ?>
+                    <div style="text-align: center; font-size: 30px;">
+                        <a href="<?php echo $this->webroot; ?>form/generalinformation" class="button" id="continue_bt">Continue</a>
+                    </div>
+                <?php }
+                else { ?>
+                    <div style="text-align: center; font-size: 20px;">
+                        <a href="<?php echo $this->webroot; ?>form/generalinformation" class="button" id="continue_bt">Do you want to apply for another post? If Yes, click here</a>
+                    </div>
+                <?php } ?>
             </td>
             <td></td>
         </tr>

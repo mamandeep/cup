@@ -48,11 +48,9 @@ class UsersController extends AppController {
                         //trim($this->data['User']['applicant_id']) . "'";
                 $result = $db->rawQuery($sql);
                 $count_r = 0;
-                $password_hash = "";
                 while ($row = $db->fetchRow()) { 
                     $this->Session->write('registration_id', $row['registered_users']['id']);
                     $this->Session->write('applicant_id', $row['registered_users']['applicant_id']);
-                    $password_hash = $row['registered_users']['password'];
                     $count_r++;
                 }
                 
@@ -68,7 +66,7 @@ class UsersController extends AppController {
                     $this->Session->setFlash('Please check the credentials entered below.');
                 }
                 else {
-                    $this->Session->setFlash('Please contact support.');
+                    $this->Session->setFlash('Unable to login. Please contact support.');
                 }
             }
         }
@@ -79,7 +77,7 @@ class UsersController extends AppController {
              //$this->redirect($this->Auth->logout());
 	}
 
-    public function index() {
+    private function index() {
 		$this->paginate = array(
 			'limit' => 6,
 			'order' => array('User.username' => 'asc' )
@@ -89,7 +87,7 @@ class UsersController extends AppController {
     }
 
 
-    public function add() {
+    private function add() {
         if ($this->request->is('post')) {
             $this->User->create();
             if ($this->User->save($this->request->data)) {
@@ -233,7 +231,6 @@ class UsersController extends AppController {
                 return false;
             }
             
-            //$this->Session->write('std_id', $registered_user['0']['Registereduser']['std_id']);
             $this->Session->write('registration_id', $registered_user['0']['Registereduser']['id']);
             $_SESSION['otp'] = $this->ozekiOTP();
             //print_r($_SESSION['otp']);
