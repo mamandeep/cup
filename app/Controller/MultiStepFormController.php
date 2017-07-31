@@ -3,7 +3,7 @@ class MultiStepFormController extends AppController {
 	var $components = array('Wizard.Wizard');
         public $uses = array('Registereduser', 'Post' , 'MultiStepForm','Applicant', 'Applicantext', 'Education','Experience',
                             'Academic_dist','Image','Document', 'Researchpaper', 'Researcharticle','Researchproject', 'Peerrecognition',
-                            'Experiencephd', 'ApiScore', 'NewAPIScore', 'Applicantprefill', 'Publication');
+                            'Experiencephd', 'ApiScore', 'NewAPIScore', 'Applicantprefill', 'Publication', 'Applicantugcnet');
         
         function beforeFilter() {
             if(!$this->Session->check('registration_id')) {
@@ -11,36 +11,59 @@ class MultiStepFormController extends AppController {
             }
             $current_datetime = new DateTime();
             $current_datetime->setTimezone(new DateTimeZone('Asia/Calcutta'));
-            $close_datetime = new DateTime("2017-07-14 17:00:00", new DateTimeZone('Asia/Calcutta'));
-            //print_r($current_datetime->format('Y-m-d-H-i-s'));
-            //print_r($close_datetime->format('Y-m-d-H-i-s'));
-            $applicant = $this->Applicant->find('all', array(
-                        'conditions' => array('Applicant.registration_id' => $this->Session->read('registration_id'))));
+            $close_datetime = new DateTime("2017-07-28 17:00:00", new DateTimeZone('Asia/Calcutta'));            
+            $applicants_new = $this->Applicant->find('all', array(
+                                       'conditions' => array('Applicant.id' => intval($this->Session->read('applicant_id')))));
+            
             if ($current_datetime > $close_datetime) {
                 $this->Session->setFlash('Application Form is closed.');
-                
+                    
                 $this->redirect(array('controller' => 'form', 'action' => 'generalinformation'));
             }
             $posts_applied = $this->Post->find('all', array(
                         'conditions' => array('Post.reg_id' => $this->Session->read('registration_id'))));
-            if(count($posts_applied) === 0) {
+            //debug($applicants_new);
+            if(count($posts_applied) === 0 || (count($applicants_new) == 1 && $applicants_new[0]['Applicant']['multiple_post'] == 1)) {                
                 $this->Wizard->steps = array('first','second','third','fourth','fifth','sixth', 'seventh', 'eighth', 'ninth');
+                //debug('entered');
             }
             else {
                 $this->Wizard->steps = array('filldata','first','second','third','fourth','fifth','sixth', 'seventh', 'eighth', 'ninth');
+                //debug('entered2');
             }
-            
         }
         
         function wizard($step = null) {
             if($this->Session->check('registration_id')) {
-                //debug($step);
-                //debug($this->alreadyAppliedCheck());
-                //debug($this->isApplicantIdValid()); return false;
                 $this->alreadyAppliedCheck();
                 $this->isApplicantIdValid();
-                $this->Wizard->process($step);
-                //return false;
+                $applicants_new = $this->Applicant->find('all', array(
+                                       'conditions' => array('Applicant.id' => intval($this->Session->read('applicant_id')))));
+                $ugc_net_category_check = (count($applicants_new) == 1 && !empty($applicants_new[0]['Applicant']['ugc_net_category']) 
+                                                        && $applicants_new[0]['Applicant']['ugc_net_category'] == "SC"
+                                                        && !empty($applicants_new[0]['Applicant']['category_applied'])
+                                                        && $applicants_new[0]['Applicant']['category_applied'] != "SC");
+                if($ugc_net_category_check == true) {
+                    $this->Session->setFlash('The category of UGC-NET and category of currently applied Post do not match.');
+                }
+                else {
+                    $this->Session->delete('Message.flash');
+                }
+                //debug($ugc_net_category_check); debug($step);
+                if($ugc_net_category_check == true && ($step == 'filldata' || $step == 'first' || $step == 'second')) {
+                    if($step == 'filldata') {
+                        $this->Wizard->process('first');
+                    }
+                    else {
+                        $this->Wizard->process($step);
+                    }
+                }
+                else if($ugc_net_category_check == false) {
+                    $this->Wizard->process($step);
+                }
+                else {
+                    $this->Session->setFlash('There is a mismatch error. Please logout and fix the error or contact support.');
+                }
             }
             else {
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
@@ -122,8 +145,10 @@ class MultiStepFormController extends AppController {
             $this->Applicantprefill->clear();
             $posts_applied = $this->Post->find('all', array(
                         'conditions' => array('Post.reg_id' => $this->Session->read('registration_id'))));
-            if(count($posts_applied) === 0) {
-                $this->Wizard->redirect('first', null, true);
+            $applicants_new = $this->Applicant->find('all', array(
+                                       'conditions' => array('Applicant.id' => intval($this->Session->read('applicant_id')))));
+            if(count($posts_applied) === 0 || (count($applicants_new) == 1 && $applicants_new[0]['Applicant']['multiple_post'] == 1)) {
+                $this->Wizard->process('first');
             }
         }
         
@@ -289,6 +314,9 @@ class MultiStepFormController extends AppController {
                         }
                         return true;
                     }
+                    else {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -342,17 +370,34 @@ class MultiStepFormController extends AppController {
                         'conditions' => array('Education.applicant_id' => $this->Session->read('applicant_id'))));
                 $misc = $this->Applicant->find('all', array(
                         'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
+                $images = $this->Document->find('all', array(
+                    'conditions' => array('Document.applicant_id' => $this->Session->read('applicant_id'))));
+           
+                if(count($images) == 0) {
+                    $this->Document->create();    
+                    $this->Document->set(['applicant_id' => $this->Session->read('applicant_id')]);
+                    if($this->Document->save()) {
+                        $images = $this->Document->find('all', array(
+                                    'conditions' => array('Document.applicant_id' => $this->Session->read('applicant_id'))));
+                    }
+                }
+                else if(count($images) > 1) {
+                    $this->Session->setFlash('An error has occured. Please contact Support.');
+                    return false;
+                }
                 //print_r($this->Session->read('applicant_id'));
                 //if(count($education_arr) == 7 || count($education_arr) == 12) {
                     //$this->request->data = $education_arr;
-                    $educationId_arr = array();
-                    $education_data = array();
-                    foreach($education_arr as $key => $value){
-                        $educationId_arr[$key] = $value['Education']['id'];
-                        $education_data[$key] = $education_arr[$key]['Education'];
-                    }
-                    $this->request->data = array('Education' => $education_data,
-                                                  'Applicant' => !empty($misc) ?  $misc['0']['Applicant'] : array());
+                $educationId_arr = array();
+                $education_data = array();
+                foreach($education_arr as $key => $value){
+                    $educationId_arr[$key] = $value['Education']['id'];
+                    $education_data[$key] = $education_arr[$key]['Education'];
+                }
+                $this->request->data = array('Education' => $education_data,
+                                              'Applicant' => !empty($misc) ?  $misc['0']['Applicant'] : array(),
+                                              'Applicantugcnet' => !empty($misc) ?  $misc['0']['Applicant'] : array(),
+                                              'Document' => $images['0']['Document']);
                     //$this->Session->write('MultiStepForm.educationId_arr', $educationId_arr);
                 //}
                 //else if(count($education_arr) > 7) {
@@ -367,14 +412,28 @@ class MultiStepFormController extends AppController {
         
         function _processSecond($count = 1) {
             $rows = $this->Education->find('all', array('conditions' => array('Education.applicant_id' => $this->Session->read('applicant_id'))));
-            //debug($this->Session->read('applicant_id')); debug($rows);
-            if(count($rows) == 12 && empty($this->data['Education'][0]['id'])) {
+            
+            if(count($rows) == 13 && empty($this->data['Education'][0]['id'])) {
                 $this->Session->setFlash('An error has occured. Please logout and login again.');
-                //$this->redirect(array('controller' => 'users', 'action' => 'logout'));
+                
                 return false;
             }
-            if($this->Education->saveMany($this->data['Education']) && $this->Applicant->save($this->data['Applicant'])) { 
+            //debug($this->data);
+            if($this->Education->saveMany($this->data['Education']) 
+                    && $this->Applicantugcnet->save($this->data['Applicantugcnet']) 
+                    && $this->Document->save($this->data['Document'])) { 
                 return true;
+            }
+            //debug($this->Applicantugcnet->validationErrors);
+            if($this->Applicantugcnet->validationErrors) {
+                $this->Session->setFlash('The fields in UGC-NET are not filled correctly. Please correct and then save/submit.');
+            }
+            if($this->Document->validationErrors) {
+                //debug($this->Document->validationErrors);
+                $this->Session->setFlash('The file upload has errors. Please correct and then save/submit.');
+            }
+            if($this->Education->validationErrors) {
+                $this->Session->setFlash('The fields in Education Qualifications are not filled correctly. Please correct and then save/submit.');
             }
             return false;
 	}
@@ -464,6 +523,21 @@ class MultiStepFormController extends AppController {
             
             $misc = $this->Applicant->find('all', array(
                         'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
+            $images = $this->Document->find('all', array(
+                    'conditions' => array('Document.applicant_id' => $this->Session->read('applicant_id'))));
+           
+            if(count($images) == 0) {
+                $this->Document->create();    
+                $this->Document->set(['applicant_id' => $this->Session->read('applicant_id')]);
+                if($this->Document->save()) {
+                    $images = $this->Document->find('all', array(
+                                'conditions' => array('Document.applicant_id' => $this->Session->read('applicant_id'))));
+                }
+            }
+            else if(count($images) > 1) {
+                $this->Session->setFlash('An error has occured. Please contact Support.');
+                return false;
+            }
                         
             if(count($misc) > 1) {
                 $this->Session->setFlash('An error has occured. Please contact Support.');
@@ -476,6 +550,7 @@ class MultiStepFormController extends AppController {
                                          'Researchproject' => $researchproject_data,
                                          'Applicant' => $misc['0']['Applicant'],
                                          'Applicantext' => $misc['0']['Applicant'],
+                                         'Document' => $images['0']['Document'],
                                          'NewAPIScore' => $newAPIScore['0']['NewAPIScore']);
                                          //'ApiScore' => $api['0']['ApiScore']);
         }
@@ -506,8 +581,12 @@ class MultiStepFormController extends AppController {
             
             if($this->Researchpaper->saveMany($this->data['Researchpaper']) && $this->Researcharticle->saveMany($this->data['Researcharticle'])
                     && $this->Applicant->save($this->data['Applicant']) && $this->Researchproject->saveMany($this->data['Researchproject'])
-                    && $this->NewAPIScore->save($this->data['NewAPIScore'])) {
+                    && $this->NewAPIScore->save($this->data['NewAPIScore']) && $this->Document->save($this->data['Document'])) {
                 return true;
+            }
+            if($this->Document->validationErrors) {
+                //debug($this->Document->validationErrors);
+                $this->Session->setFlash('The file upload has errors. Please correct and then save/submit.');
             }
             return false;
 	}
@@ -544,77 +623,72 @@ class MultiStepFormController extends AppController {
                     'conditions' => array('Document.applicant_id' => $this->Session->read('applicant_id'))));
             $applicant = $this->Applicant->find('all', array(
                     'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
-            
-            if(count($applicant) == 1) {
-                $this->set('applicant', $applicant['0']);
-            }
-            
-            if(count($images) == 1) {
-                $this->request->data = $images['0'];
-                
-                //$this->Session->write('MultiStepForm.imageId', $images['0']['Image']['id']);
+           
+            if(count($images) == 0) {
+                //debug($images);
+                $this->Document->create();    
+                $this->Document->set(['applicant_id' => $this->Session->read('applicant_id')]);
+                if($this->Document->save()) {
+                    //debug($images);
+                    $images = $this->Document->find('all', array(
+                                'conditions' => array('Document.applicant_id' => $this->Session->read('applicant_id'))));
+                    //debug($images);
+                }
             }
             else if(count($images) > 1) {
                 $this->Session->setFlash('An error has occured. Please contact Support.');
+                return false;
+            }
+            else if(count($images) == 1) {
+                $this->request->data = $images['0'];
+            }
+            if(count($applicant) == 1) {
+                $this->set('applicant', $applicant['0']);
             }
         }
         
         function _processSixth() {
-            //print_r($this->data); return false;
-            //$images = $this->Document->find('all', array(
-                    //'conditions' => array('Document.applicant_id' => $this->Session->read('applicant_id'))));
+            $images = $this->Document->find('all', array(
+                    'conditions' => array('Document.applicant_id' => $this->Session->read('applicant_id'))));
+            if(count($images) === 1) {
+                $errorStr = '';
+                $flag = false;
+                if(empty($images['0']['Document']['filename']) && !empty($this->data['Document']['filename']['error']) && $this->data['Document']['filename']['error'] !== 0) {
+                    $errorStr .= "Passport size photograph is COMPULSORY. ";
+                    $flag = true;
+                }
+                if(empty($images['0']['Document']['filename2']) && !empty($this->data['Document']['filename2']['error']) && $this->data['Document']['filename2']['error'] !== 0) {
+                    $errorStr .= "Date of birth certificate is COMPULSORY. ";
+                    $flag = true;
+                }
+                if(empty($images['0']['Document']['filename4']) && !empty($this->data['Document']['filename4']['error']) && $this->data['Document']['filename4']['error'] !== 0) {
+                    $errorStr .= "Signature is COMPULSORY. ";
+                    $flag = true;
+                }
+                if($flag === true) {
+                    $this->Session->setFlash($errorStr);
+                    return false;
+                }
+            }
+            else if(count($images) > 1) {
+                $this->Session->setFlash('An error has occured. Please contact Support.');
+                return false;
+            }
+            else {
+                $this->Session->setFlash('An error has occured. Please contact Support.');
+                return false;
+            }
+            
             if(!empty($this->data['Document']['filename']['error']) && $this->data['Document']['filename']['error'] == 4
                 && !empty($this->data['Document']['filename2']['error']) && $this->data['Document']['filename2']['error'] == 4
                 && !empty($this->data['Document']['filename4']['error']) && $this->data['Document']['filename4']['error'] == 4
 		&& !empty($this->data['Document']['filename3']['error']) && $this->data['Document']['filename3']['error'] == 4
                 && !empty($this->data['Document']['filename5']['error']) && $this->data['Document']['filename5']['error'] == 4
-
-               
-               )
-            return true;
-            
-            $images = $this->Document->find('all', array(
-                    'conditions' => array('Document.applicant_id' => $this->Session->read('applicant_id'))));
-
-            $applicant = $this->Applicant->find('all', array(
-                    'conditions' => array('Applicant.id' => $this->Session->read('applicant_id'))));
-            if(count($images) == 1) {
-                
-                //$this->request->data = $images['0'];
-                if(((!empty($this->data['Document']['filename']['error']) && $this->data['Document']['filename']['error'] !== 0) && is_null($images['0']['Document']['filename']))
-                    || ((!empty($this->data['Document']['filename2']['error']) && $this->data['Document']['filename2']['error'] !== 0) && is_null($images['0']['Document']['filename2']))
-                    || ((!empty($this->data['Document']['filename4']['error']) && $this->data['Document']['filename4']['error'] !== 0) && is_null($images['0']['Document']['filename4'])))
-                { 
-                    $str = '';
-                    if((!empty($this->data['Document']['filename']['error']) && $this->data['Document']['filename']['error'] !== 0) && is_null($images['0']['Document']['filename'])) {
-                        $str .= "Photograph is compulsory. ";
-                        //$this->Session->setFlash('Photograph is compulsory');
-                    }
-                    if((!empty($this->data['Document']['filename2']['error']) && $this->data['Document']['filename2']['error'] !== 0) && is_null($images['0']['Document']['filename2'])) {
-                        $str .= "Date of Birth Certificate is compulsory. ";
-                        //$this->Session->setFlash('Date of Birth Certificate is compulsory');
-                    }
-                    if((!empty($this->data['Document']['filename4']['error']) && $this->data['Document']['filename4']['error'] !== 0) && is_null($images['0']['Document']['filename4'])) {
-                        $str .= "Signature is compulsory.";
-                        //$this->Session->setFlash('Signature is compulsory');
-                    }
-                    if(trim($str) !== '') {
-                        $this->Session->setFlash($str);
-                        return false;
-                    }
-                }
-                //print_r($this->request->data);
-            }
-            else if(count($images) > 1) {
-                $this->Session->setFlash('An error has occured. Please contact Support.');
-            }
-            else {
-                $this->Session->setFlash('An error has occured. Please contact Support.');
-            }
+               ) {
+                    return true;
+               }
             
             if ($this->Document->save($this->data['Document'])) {
-                //$this->Session->setFlash('Your documents have been submitted');
-                //$this->redirect(array('controller'=>'form', 'action' => 'print_bfs'));
                 return true;
             }
             return false;

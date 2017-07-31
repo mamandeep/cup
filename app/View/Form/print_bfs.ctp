@@ -80,7 +80,7 @@ echo $this->Html->script('jquery-1.11.1-min');
     <p style="font-size: 28px; font-weight: bold; text-align: center">CENTRAL UNIVERSITY OF PUNJAB</p>
     <p style="font-size: 12px; font-weight: bold; text-align: center">(Established vide Act no 25(2009) of Parliament)</p>
     <p style="font-size: 28px; font-weight: bold; text-align: center">Online Application Form for Teaching Positions</p>
-    <p style="font-size: 24px; font-weight: bold; text-align: center">Position: <?php echo $applicant['Applicant']['post_applied_for']?></p>
+    <p style="font-size: 24px; font-weight: bold; text-align: center">Position Applied For: <?php echo $applicant['Applicant']['post_applied_for']?></p>
     <table id="onlineformdata"  class="print_table" style="table-layout:fixed;">
         <tr>
             <td width="40%" class="print_headers">Advertisement No.</td>
@@ -93,6 +93,14 @@ echo $this->Html->script('jquery-1.11.1-min');
         <tr class="spaceUnder">
             <td class="print_headers">Centre</td>
             <td class="print_value"><?php echo $applicant['Applicant']['centre']?></td>
+        </tr>
+        <tr class="spaceUnder">
+            <td class="print_headers">Area of Specialization</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['area_of_sp']?></td>
+        </tr>
+        <tr class="spaceUnder">
+            <td class="print_headers">Area of Sub-Specialization</td>
+            <td class="print_value"><?php echo $applicant['Applicant']['area_sub_sp']?></td>
         </tr>
         <tr class="spaceUnder">
             <td colspan="3" class="print_headers" align="center">PERSONAL INFORMATION</td>
@@ -207,14 +215,14 @@ echo $this->Html->script('jquery-1.11.1-min');
     </table>
     <table border="1px solid black" style="border: 1px solid black; border-collapse: collapse;">
         <tr>
-            <td width="5%" class="print_headers">Name of Degree / Diploma / Certificate / Class</td>
-            <td width="10%" class="print_headers">Course</td>
-            <td width="10%" class="print_headers">Mode of Study</td>
-            <td width="20%" class="print_headers">Board / University</td>
+            <td width="10%" class="print_headers">Name of Degree / Diploma / Certificate / Class</td>
+            <td width="8%" class="print_headers">Course</td>
+            <td width="7%" class="print_headers">Mode of Study</td>
+            <td width="15%" class="print_headers">Board / University</td>
             <td width="5%" class="print_headers">Grade / CGPA / Division</td>
-            <td width="5%" class="print_headers">Percentage</td>
+            <td width="5%" class="print_headers">Percentage(%)</td>
             <td width="5%" class="print_headers">Year of Passing</td>
-            <td width="10%" class="print_headers">Subjects</td>
+            <td width="15%" class="print_headers">Subjects</td>
         </tr>
         <?php
         foreach($education_arr as $key => $value){
@@ -232,10 +240,22 @@ echo $this->Html->script('jquery-1.11.1-min');
         }
         ?>
         <tr>
-            <td colspan="2" class="print_headers">Gaps in Education: </td>
+            <td colspan="8" class="print_headers">Gaps in Education</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="print_headers">Reason 1: </td>
             <td colspan="6" class="print_value"><?php echo $applicant['Applicant']['gaps_in_education']; ?></td>
         </tr>
+        <tr>
+            <td colspan="2" class="print_headers">Reason 2: </td>
+            <td colspan="6" class="print_value"><?php echo $applicant['Applicant']['gaps_in_education2']; ?></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="print_headers">Reason 3: </td>
+            <td colspan="6" class="print_value"><?php echo $applicant['Applicant']['gaps_in_education3']; ?></td>
+        </tr>
     </table>
+    <br/>
     <div class="print_headers">UGC-NET Details</div>
     <table id="present_position_table" border="1px solid black" style="border-right: 1px solid black; border-collapse: collapse;">
         <tr>

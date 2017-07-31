@@ -149,6 +149,64 @@ class Document extends AppModel {
                 'allowEmpty' => TRUE,
                 'last' => TRUE,
             )
+        ),
+        'filename6' => array(
+            // http://book.cakephp.org/2.0/en/models/data-validation.html#Validation::uploadError
+            'uploadError' => array(
+                'rule' => 'uploadError',
+                'message' => 'Something went wrong with the file upload',
+                'required' => FALSE,
+                'allowEmpty' => TRUE,
+            ),
+            // http://book.cakephp.org/2.0/en/models/data-validation.html#Validation::mimeType
+            'mimeType' => array(
+                'rule' => array('mimeType', array('application/pdf')),
+                'message' => 'Invalid file, only PDF files are to be uploaded',
+                'required' => FALSE,
+                'allowEmpty' => TRUE,
+            ),
+            'fileSize'=> array(
+                'rule' => array('fileSize', '<=', '500KB'),
+                'message' => 'Document must be less than 500 KB.',
+                'allowEmpty' => true
+            ),
+            // custom callback to deal with the file upload
+            'processUpload' => array(
+                'rule' => 'processUpload',
+                'message' => 'Something went wrong processing your file',
+                'required' => FALSE,
+                'allowEmpty' => TRUE,
+                'last' => TRUE,
+            )
+        ),
+        'filename7' => array(
+            // http://book.cakephp.org/2.0/en/models/data-validation.html#Validation::uploadError
+            'uploadError' => array(
+                'rule' => 'uploadError',
+                'message' => 'Something went wrong with the file upload',
+                'required' => FALSE,
+                'allowEmpty' => TRUE,
+            ),
+            // http://book.cakephp.org/2.0/en/models/data-validation.html#Validation::mimeType
+            'mimeType' => array(
+                'rule' => array('mimeType', array('image/gif','image/png', 'image/jpeg', 'image/jpg', 'application/pdf')),
+                'message' => 'Invalid file type, only JPEG/PNG/GIF/PDF files are allowed',
+                'required' => FALSE,
+                'allowEmpty' => TRUE,
+            ),
+            'fileSize'=> array(
+                'rule' => array('fileSize', '<=', '500KB'),
+                'message' => 'Document must be less than 500 KB.',
+                'allowEmpty' => true
+            ),
+            // custom callback to deal with the file upload
+            'processUpload' => array(
+                'rule' => 'processUpload',
+                'message' => 'Something went wrong processing your file',
+                'required' => FALSE,
+                'allowEmpty' => TRUE,
+                'last' => TRUE,
+            )
         )
     );
 
@@ -281,6 +339,52 @@ class Document extends AppModel {
             }
         }
 
+        if (!empty($check['filename6']['tmp_name'])) {
+
+            // check file is uploaded
+            if (!is_uploaded_file($check['filename6']['tmp_name'])) {
+                return FALSE;
+            }
+
+            // build full filename
+            //$filename = WWW_ROOT . $this->uploadDir . DS . Inflector::slug(sha1(pathinfo($check['filename']['name'], PATHINFO_FILENAME))) . '.' . pathinfo($check['filename']['name'], PATHINFO_EXTENSION);
+            $filename = WWW_ROOT . $this->uploadDir . DS . $this->generateRandomString() . '.' . pathinfo($check['filename6']['name'], PATHINFO_EXTENSION);
+
+            // @todo check for duplicate filename
+            // try moving file
+            if (!move_uploaded_file($check['filename6']['tmp_name'], $filename)) {
+                return FALSE;
+
+                // file successfully uploaded
+            } else {
+                // save the file path relative from WWW_ROOT e.g. uploads/example_filename.jpg
+                $this->data[$this->alias]['filepath6'] = str_replace(DS, "/", str_replace(WWW_ROOT, "", $filename));
+            }
+        }
+        
+        if (!empty($check['filename7']['tmp_name'])) {
+
+            // check file is uploaded
+            if (!is_uploaded_file($check['filename7']['tmp_name'])) {
+                return FALSE;
+            }
+
+            // build full filename
+            //$filename = WWW_ROOT . $this->uploadDir . DS . Inflector::slug(sha1(pathinfo($check['filename']['name'], PATHINFO_FILENAME))) . '.' . pathinfo($check['filename']['name'], PATHINFO_EXTENSION);
+            $filename = WWW_ROOT . $this->uploadDir . DS . $this->generateRandomString() . '.' . pathinfo($check['filename7']['name'], PATHINFO_EXTENSION);
+
+            // @todo check for duplicate filename
+            // try moving file
+            if (!move_uploaded_file($check['filename7']['tmp_name'], $filename)) {
+                return FALSE;
+
+                // file successfully uploaded
+            } else {
+                // save the file path relative from WWW_ROOT e.g. uploads/example_filename.jpg
+                $this->data[$this->alias]['filepath7'] = str_replace(DS, "/", str_replace(WWW_ROOT, "", $filename));
+            }
+        }
+        
         return TRUE;
     }
 
@@ -323,6 +427,18 @@ class Document extends AppModel {
             $this->data[$this->alias]['filename5'] = $this->data[$this->alias]['filepath5'];
         }
         
+        if (!empty($this->data[$this->alias]['filepath6'])) {
+            $this->data[$this->alias]['type6'] = $this->data[$this->alias]['filename6']['type'];
+            $this->data[$this->alias]['size6'] = $this->data[$this->alias]['filename6']['size'];
+            $this->data[$this->alias]['filename6'] = $this->data[$this->alias]['filepath6'];
+        }
+        
+        if (!empty($this->data[$this->alias]['filepath7'])) {
+            $this->data[$this->alias]['type7'] = $this->data[$this->alias]['filename7']['type'];
+            $this->data[$this->alias]['size7'] = $this->data[$this->alias]['filename7']['size'];
+            $this->data[$this->alias]['filename7'] = $this->data[$this->alias]['filepath7'];
+        }
+        
         return parent::beforeSave($options);
     }
     
@@ -342,6 +458,12 @@ class Document extends AppModel {
 	}
         if (!empty($this->data[$this->alias]['filename5']['error']) && $this->data[$this->alias]['filename5']['error']==4 && $this->data[$this->alias]['filename5']['size']==0) {
                 unset($this->data[$this->alias]['filename5']);
+	}
+        if (!empty($this->data[$this->alias]['filename6']['error']) && $this->data[$this->alias]['filename6']['error']==4 && $this->data[$this->alias]['filename6']['size']==0) {
+                unset($this->data[$this->alias]['filename6']);
+	}
+        if (!empty($this->data[$this->alias]['filename7']['error']) && $this->data[$this->alias]['filename7']['error']==4 && $this->data[$this->alias]['filename7']['size']==0) {
+                unset($this->data[$this->alias]['filename7']);
 	}
 
 	parent::beforeValidate($options);

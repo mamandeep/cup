@@ -146,13 +146,14 @@ echo $this->Form->create('Applicant', array('id' => 'Applicant_Details',
                     'style' => 'width: 100%;',
                     'label' => 'Category of the post applied for'
                 )); ?></td>
+                <td><?php echo $this->Form->input('Applicant.area_of_sp', array('label' => 'Area of Specialization', 'maxlength' => '500')); ?></td>
             </tr>
             <tr>
                 <td><?php echo $this->Form->input('Applicant.date_of_birth', array('id' => 'date_of_birth' , 'label' => 'Date of Birth (DD/MM/YYYY)', 'maxlength' => '500')); ?></td>
                 <td><label class="table_headertxt">Age as on last date to Apply: </label>
                     <input type="text" class="age_computed"></input>
                 </td>
-                <td><?php echo $this->Form->input('Applicant.area_of_sp', array('label' => 'Area of Specialization', 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.area_sub_sp', array('label' => 'Area of Sub-Specialization', 'maxlength' => '100')); ?></td>
             </tr>
         </table>
         <br/>
@@ -283,7 +284,7 @@ echo $this->Form->create('Applicant', array('id' => 'Applicant_Details',
     }
     
     function calage() {
-        var dat = new Date("06/06/2016");
+        var dat = new Date("08/17/2017");
         var curday = dat.getDate();
         var curmon = dat.getMonth()+1;
         var curyear = dat.getFullYear();

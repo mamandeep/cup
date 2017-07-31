@@ -704,6 +704,7 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
             </tr>
         </tbody>
     </table>
+    <br/>
     <table>
         <tr>
             <td>Total period of experience
@@ -716,11 +717,20 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
             <td><?php echo $this->Form->input('Applicant.tot_exp_days', array('label' => false, 'maxlength' => '500')); ?></td>
         </tr>
     </table>
+    <br/>
+    <div style="font-family: sans-serif; font-size: 20px; font-weight: bold">Gaps in Experience: If yes, give reason(s) </div>    
     <table>
         <tr>
-            <td class="table_headertxt">Gaps in experience: If yes, give reason(s) </td>
-            <td><?php 
-                      echo $this->Form->input('Applicant.gaps_in_experience', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td class="table_headertxt">Reason for Gap in Experience 1</td>
+            <td><?php echo $this->Form->input('Applicant.gaps_in_experience', array('label' => false, 'maxlength' => '500')); ?></td>
+        </tr>
+        <tr>
+            <td class="table_headertxt">Reason for Gap in Experience 2</td>
+            <td><?php echo $this->Form->input('Applicant.gaps_in_experience2', array('label' => false, 'maxlength' => '500')); ?></td>
+        </tr>
+        <tr>
+            <td class="table_headertxt">Reason for Gap in Experience 3</td>
+            <td><?php echo $this->Form->input('Applicant.gaps_in_experience3', array('label' => false, 'maxlength' => '500')); ?></td>
         </tr>
     </table>
 </fieldset>

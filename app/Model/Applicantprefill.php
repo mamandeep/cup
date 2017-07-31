@@ -24,22 +24,6 @@ class Applicantprefill extends AppModel {
                  'message'   => 'Please enter valid applicant ID.'
             )
         ),
-        'existing_post' => array(
-            'notempty' => array(
-                'rule' => array('notempty'),
-                'required'   => true,
-                'message' => 'This field cannot be left blank'
-            ),
-            'length' => array (
-                'rule' => array('maxLength', 20),
-                'message' => 'This field has crossed allowed limit.',
-                'allowEmpty' => true
-            ),
-            'pattern'=>array(
-                 'rule'      => '/^Professor|Associate Professor|Assistant Professor$/i',
-                 'message'   => 'Please enter valid Post Name'
-            )
-        ),
         'date_of_birth' => array(
             'notempty' => array(
                 'rule' => array('notempty'),

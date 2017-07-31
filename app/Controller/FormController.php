@@ -18,10 +18,6 @@ class FormController extends AppController {
 	
     public function beforeFilter() {
         parent::beforeFilter();
-        //$this->Auth->allow('login','add','logout'); 
-        /*if(!$this->Session->check('registration_id')) {
-            $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
-        }*/
     }
 	
 

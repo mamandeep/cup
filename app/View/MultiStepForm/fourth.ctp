@@ -5,7 +5,7 @@ echo $this->Html->script('researchproject');
 
 //print_r($this->request->data);
 
-echo $this->Form->create('ResearchPaper', array('id' => 'Researchpaper_Details', 'url' => Router::url( null, true ))); ?>
+echo $this->Form->create('ResearchPaper', array('id' => 'Researchpaper_Details', 'url' => Router::url( null, true ), 'enctype' => 'multipart/form-data')); ?>
 <div class="main_content_header">4. Research Work</div>
 <div class="main_content_header">Research Papers, if any</div>
 <input type="hidden" name="modified_papers" id="modified_papers" value="false" />
@@ -208,8 +208,15 @@ echo $this->Form->create('ResearchPaper', array('id' => 'Researchpaper_Details',
 </table>
 <table>
         <tr>
-            <td class="table_headertxt" style="width: 30%">Selection Criteria</td>
+            <td class="table_headertxt" style="width: 30%">Screening Criteria</td>
             <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="table_headertxt" style="width: 30%">Upload Screening Criteria document in JPEG/PNG/GIF/PDF format. (Click "Save & Continue" to upload file and save other information)</td>
+            <td><?php   echo $this->Form->input('Document.id', array('type' => 'hidden'));
+                        echo $this->Form->input('Document.applicant_id', array('type' => 'hidden', 'value' => $this->Session->read('applicant_id')));
+                        echo $this->Form->input('Document.filename7', array('label' => false, 'type' => 'file')); ?></td>
             <td></td>
         </tr>
         <tr>
