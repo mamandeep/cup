@@ -71,17 +71,18 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                           echo $this->Form->input('Education.0.qualification', array('type' => 'text',
                                             'readonly' => 'readonly',
                                             'value' => 'Matric',
-                                            'label' => false)); ?>
+                                            'label' => false,
+                                            'div' => false)); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->input('Education.0.course', array('type' => 'textarea',
+                    <?php echo $this->Form->input('Education.0.course', array('type' => 'text',
                                             'readonly' => 'readonly',
                                             'value' => 'Matric',
                                             'label' => false,
-                                            'style' => 'overflow-y: scroll; height: 44px;')); ?>
+                                            'div' => false)); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.0.board"); ?>
+                    <?php echo $this->Form->text("Education.0.board", ['div' => false]); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input("Education.0.mode_of_study", array(
@@ -92,20 +93,24 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     ),
                     'style' => 'width: 100%;',
                     'empty' => ['select' => 'Select'],
-                    'label' => false
+                    'label' => false,
+                    'div' => false
                 )); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.0.grade"); ?>
+                    <?php echo $this->Form->text("Education.0.grade", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.0.percentage"); ?>
+                    <?php echo $this->Form->text("Education.0.percentage", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.0.year_of_passing"); ?>
+                    <?php echo $this->Form->text("Education.0.year_of_passing", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.0.subjects"); ?>
+                    <?php echo $this->Form->input("Education.0.subjects", array('type' => 'textarea',
+                                                'label' => false,
+                                                'div' => false,
+                                                'style' => 'overflow-y: scroll; height: 60px;')); ?>
                 </td>
             </tr>
             <tr><td>
@@ -115,14 +120,16 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                                             'readonly' => 'readonly',
                                             'value' => 'Higher Secondary',
                                             'label' => false,
-                                            'style' => 'overflow-y: scroll; height: 44px;')); ?>
+                                            'style' => 'overflow-y: scroll; height: 60px;',
+                                            'div' => false)); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input('Education.1.course', array('type' => 'text',
-                                            'label' => false)); ?>
+                                            'label' => false,
+                                            'div' => false)); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.1.board"); ?>
+                    <?php echo $this->Form->text("Education.1.board", ['div' => false]); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input("Education.1.mode_of_study", array(
@@ -133,20 +140,24 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     ),
                     'style' => 'width: 100%;',
                     'empty' => ['select' => 'Select'],
-                    'label' => false
+                    'label' => false,
+                    'div' => false
                 )); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.1.grade"); ?>
+                    <?php echo $this->Form->text("Education.1.grade", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.1.percentage"); ?>
+                    <?php echo $this->Form->text("Education.1.percentage", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.1.year_of_passing"); ?>
+                    <?php echo $this->Form->text("Education.1.year_of_passing", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.1.subjects"); ?>
+                    <?php echo $this->Form->input("Education.1.subjects", array('type' => 'textarea',
+                                                'label' => false,
+                                                'div' => false,
+                                                'style' => 'overflow-y: scroll; height: 60px;')); ?>
                 </td>
             </tr>
             <tr><td>
@@ -156,14 +167,16 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                                             'readonly' => 'readonly',
                                             'value' => 'Diploma',
                                             'label' => false,
-                                            'style' => 'overflow-y: scroll; height: 44px;')); ?>
+                                            'style' => 'overflow-y: scroll; height: 60px;',
+                                            'div' => false)); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input('Education.2.course', array('type' => 'text',
-                                            'label' => false)); ?>
+                                            'label' => false,
+                                            'div' => false)); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.2.board"); ?>
+                    <?php echo $this->Form->text("Education.2.board", ['div' => false]); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input("Education.2.mode_of_study", array(
@@ -174,20 +187,24 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     ),
                     'style' => 'width: 100%;',
                     'empty' => ['select' => 'Select'],
-                    'label' => false
+                    'label' => false,
+                    'div' => false
                 )); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.2.grade"); ?>
+                    <?php echo $this->Form->text("Education.2.grade", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.2.percentage"); ?>
+                    <?php echo $this->Form->text("Education.2.percentage", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.2.year_of_passing"); ?>
+                    <?php echo $this->Form->text("Education.2.year_of_passing", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.2.subjects"); ?>
+                    <?php echo $this->Form->input("Education.2.subjects", array('type' => 'textarea',
+                                                'label' => false,
+                                                'div' => false,
+                                                'style' => 'overflow-y: scroll; height: 60px;')); ?>
                 </td>
             </tr>
             <tr><td>
@@ -197,14 +214,16 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                                             'readonly' => 'readonly',
                                             'value' => 'Graduation',
                                             'label' => false,
-                                            'style' => 'overflow-y: scroll; height: 44px;')); ?>
+                                            'style' => 'overflow-y: scroll; height: 60px;',
+                                            'div' => false)); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input('Education.3.course', array('type' => 'text',
-                                            'label' => false)); ?>
+                                            'label' => false,
+                                            'div' => false)); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.3.board"); ?>
+                    <?php echo $this->Form->text("Education.3.board", ['div' => false]); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input("Education.3.mode_of_study", array(
@@ -215,20 +234,24 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     ),
                     'style' => 'width: 100%;',
                     'empty' => ['select' => 'Select'],
-                    'label' => false
+                    'label' => false,
+                    'div' => false
                 )); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.3.grade"); ?>
+                    <?php echo $this->Form->text("Education.3.grade", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.3.percentage"); ?>
+                    <?php echo $this->Form->text("Education.3.percentage", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.3.year_of_passing"); ?>
+                    <?php echo $this->Form->text("Education.3.year_of_passing", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.3.subjects"); ?>
+                    <?php echo $this->Form->input("Education.3.subjects", array('type' => 'textarea',
+                                                'label' => false,
+                                                'div' => false,
+                                                'style' => 'overflow-y: scroll; height: 60px;')); ?>
                 </td>
             </tr>
             <tr><td>
@@ -238,14 +261,16 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                                             'readonly' => 'readonly',
                                             'value' => 'Post Graduation',
                                             'label' => false,
-                                            'style' => 'overflow-y: scroll; height: 44px;')); ?>
+                                            'style' => 'overflow-y: scroll; height: 60px;',
+                                            'div' => false)); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input('Education.4.course', array('type' => 'text',
-                                            'label' => false)); ?>
+                                            'label' => false,
+                                            'div' => false)); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.4.board"); ?>
+                    <?php echo $this->Form->text("Education.4.board", ['div' => false]); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input("Education.4.mode_of_study", array(
@@ -256,20 +281,24 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     ),
                     'style' => 'width: 100%;',
                     'empty' => ['select' => 'Select'],
-                    'label' => false
+                    'label' => false,
+                    'div' => false
                 )); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.4.grade"); ?>
+                    <?php echo $this->Form->text("Education.4.grade", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.4.percentage"); ?>
+                    <?php echo $this->Form->text("Education.4.percentage", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.4.year_of_passing"); ?>
+                    <?php echo $this->Form->text("Education.4.year_of_passing", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.4.subjects"); ?>
+                    <?php echo $this->Form->input("Education.4.subjects", array('type' => 'textarea',
+                                                'label' => false,
+                                                'div' => false,
+                                                'style' => 'overflow-y: scroll; height: 60px;')); ?>
                 </td>
             </tr>
             <tr><td>
@@ -278,14 +307,17 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     <?php echo $this->Form->input('Education.5.qualification', array('type' => 'text',
                                             'readonly' => 'readonly',
                                             'value' => 'M.Phil.',
-                                            'label' => false)); ?>
+                                            'label' => false,
+                                            'div' => false)); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input('Education.5.course', array('type' => 'text',
-                                            'label' => false)); ?>
+                                            'label' => false,
+                                            'div' => false
+                                            )); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.5.board"); ?>
+                    <?php echo $this->Form->text("Education.5.board", ['div' => false]); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input("Education.5.mode_of_study", array(
@@ -296,20 +328,24 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     ),
                     'style' => 'width: 100%;',
                     'empty' => ['select' => 'Select'],
-                    'label' => false
+                    'label' => false,
+                    'div' => false
                 )); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.5.grade"); ?>
+                    <?php echo $this->Form->text("Education.5.grade", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.5.percentage"); ?>
+                    <?php echo $this->Form->text("Education.5.percentage", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.5.year_of_passing"); ?>
+                    <?php echo $this->Form->text("Education.5.year_of_passing", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.5.subjects"); ?>
+                    <?php echo $this->Form->input("Education.5.subjects", array('type' => 'textarea',
+                                                'label' => false,
+                                                'div' => false,
+                                                'style' => 'overflow-y: scroll; height: 60px;')); ?>
                 </td>
             </tr>
             <tr><td>
@@ -319,14 +355,16 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                                             'readonly' => 'readonly',
                                             'value' => 'Ph.D. Awarded',
                                             'label' => false,
-                                            'style' => 'overflow-y: scroll; height: 44px;')); ?>
+                                            'style' => 'overflow-y: scroll; height: 60px;',
+                                            'div' => false)); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input('Education.6.course', array('type' => 'text',
-                                            'label' => false)); ?>
+                                            'label' => false,
+                                            'div' => false)); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.6.board"); ?>
+                    <?php echo $this->Form->text("Education.6.board", ['div' => false]); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input("Education.6.mode_of_study", array(
@@ -337,20 +375,24 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     ),
                     'style' => 'width: 100%;',
                     'empty' => ['select' => 'Select'],
-                    'label' => false
+                    'label' => false,
+                    'div' => false
                 )); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.6.grade"); ?>
+                    <?php echo $this->Form->text("Education.6.grade", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.6.percentage"); ?>
+                    <?php echo $this->Form->text("Education.6.percentage", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.6.year_of_passing"); ?>
+                    <?php echo $this->Form->text("Education.6.year_of_passing", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.6.subjects"); ?>
+                    <?php echo $this->Form->input("Education.6.subjects", array('type' => 'textarea',
+                                                'label' => false,
+                                                'div' => false,
+                                                'style' => 'overflow-y: scroll; height: 60px;')); ?>
                 </td>
             </tr>
             <tr><td>
@@ -359,14 +401,16 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     <?php echo $this->Form->input('Education.7.qualification', array('type' => 'textarea',
                                             'value' => 'Any Other Exam',
                                             'label' => false,
-                                            'style' => 'overflow-y: scroll; height: 44px;')); ?>
+                                            'style' => 'overflow-y: scroll; height: 60px;',
+                                            'div' => false)); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input('Education.7.course', array('type' => 'text',
-                                            'label' => false)); ?>
+                                            'label' => false,
+                                            'div' => false)); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.7.board"); ?>
+                    <?php echo $this->Form->text("Education.7.board", ['div' => false]); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input("Education.7.mode_of_study", array(
@@ -377,20 +421,24 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     ),
                     'style' => 'width: 100%;',
                     'empty' => ['select' => 'Select'],
-                    'label' => false
+                    'label' => false,
+                    'div' => false
                 )); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.7.grade"); ?>
+                    <?php echo $this->Form->text("Education.7.grade", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.7.percentage"); ?>
+                    <?php echo $this->Form->text("Education.7.percentage", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.7.year_of_passing"); ?>
+                    <?php echo $this->Form->text("Education.7.year_of_passing", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.7.subjects"); ?>
+                    <?php echo $this->Form->input("Education.7.subjects", array('type' => 'textarea',
+                                                'label' => false,
+                                                'div' => false,
+                                                'style' => 'overflow-y: scroll; height: 60px;')); ?>
                 </td>
             </tr>
             <tr><td>
@@ -399,14 +447,16 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     <?php echo $this->Form->input('Education.8.qualification', array('type' => 'textarea',
                                             'value' => 'Any Other Exam',
                                             'label' => false,
-                                            'style' => 'overflow-y: scroll; height: 44px;')); ?>
+                                            'style' => 'overflow-y: scroll; height: 60px;',
+                                            'div' => false)); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input('Education.8.course', array('type' => 'text',
-                                            'label' => false)); ?>
+                                            'label' => false,
+                                            'div' => false)); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.8.board"); ?>
+                    <?php echo $this->Form->text("Education.8.board", ['div' => false]); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input("Education.8.mode_of_study", array(
@@ -417,20 +467,24 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     ),
                     'style' => 'width: 100%;',
                     'empty' => ['select' => 'Select'],
-                    'label' => false
+                    'label' => false,
+                    'div' => false
                 )); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.8.grade"); ?>
+                    <?php echo $this->Form->text("Education.8.grade", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.8.percentage"); ?>
+                    <?php echo $this->Form->text("Education.8.percentage", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.8.year_of_passing"); ?>
+                    <?php echo $this->Form->text("Education.8.year_of_passing", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.8.subjects"); ?>
+                    <?php echo $this->Form->input("Education.8.subjects", array('type' => 'textarea',
+                                                'label' => false,
+                                                'div' => false,
+                                                'style' => 'overflow-y: scroll; height: 60px;')); ?>
                 </td>
             </tr>
             <tr><td>
@@ -439,14 +493,16 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     <?php echo $this->Form->input('Education.9.qualification', array('type' => 'textarea',
                                             'value' => 'Any Other Exam',
                                             'label' => false,
-                                            'style' => 'overflow-y: scroll; height: 44px;')); ?>
+                                            'style' => 'overflow-y: scroll; height: 60px;',
+                                            'div' => false)); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input('Education.9.course', array('type' => 'text',
-                                            'label' => false)); ?>
+                                            'label' => false,
+                                            'div' => false)); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.9.board"); ?>
+                    <?php echo $this->Form->text("Education.9.board", ['div' => false]); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input("Education.9.mode_of_study", array(
@@ -457,20 +513,24 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     ),
                     'style' => 'width: 100%;',
                     'empty' => ['select' => 'Select'],
-                    'label' => false
+                    'label' => false,
+                    'div' => false
                 )); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.9.grade"); ?>
+                    <?php echo $this->Form->text("Education.9.grade", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.9.percentage"); ?>
+                    <?php echo $this->Form->text("Education.9.percentage", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.9.year_of_passing"); ?>
+                    <?php echo $this->Form->text("Education.9.year_of_passing", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.9.subjects"); ?>
+                    <?php echo $this->Form->input("Education.9.subjects", array('type' => 'textarea',
+                                                'label' => false,
+                                                'div' => false,
+                                                'style' => 'overflow-y: scroll; height: 60px;')); ?>
                 </td>
             </tr>
             <tr><td>
@@ -479,14 +539,16 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     <?php echo $this->Form->input('Education.10.qualification', array('type' => 'textarea',
                                             'value' => 'Any Other Exam',
                                             'label' => false,
-                                            'style' => 'overflow-y: scroll; height: 44px;')); ?>
+                                            'style' => 'overflow-y: scroll; height: 60px;',
+                                            'div' => false)); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input('Education.10.course', array('type' => 'text',
-                                            'label' => false)); ?>
+                                            'label' => false,
+                                            'div' => false)); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.10.board"); ?>
+                    <?php echo $this->Form->text("Education.10.board", ['div' => false]); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input("Education.10.mode_of_study", array(
@@ -497,20 +559,24 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     ),
                     'style' => 'width: 100%;',
                     'empty' => ['select' => 'Select'],
-                    'label' => false
+                    'label' => false,
+                    'div' => false
                 )); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.10.grade"); ?>
+                    <?php echo $this->Form->text("Education.10.grade", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.10.percentage"); ?>
+                    <?php echo $this->Form->text("Education.10.percentage", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.10.year_of_passing"); ?>
+                    <?php echo $this->Form->text("Education.10.year_of_passing", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.10.subjects"); ?>
+                    <?php echo $this->Form->input("Education.10.subjects", array('type' => 'textarea',
+                                                'label' => false,
+                                                'div' => false,
+                                                'style' => 'overflow-y: scroll; height: 60px;')); ?>
                 </td>
             </tr>
             <tr><td>
@@ -519,14 +585,16 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     <?php echo $this->Form->input('Education.11.qualification', array('type' => 'textarea',
                                             'value' => 'Any Other Exam',
                                             'label' => false,
-                                            'style' => 'overflow-y: scroll; height: 44px;')); ?>
+                                            'style' => 'overflow-y: scroll; height: 60px;',
+                                            'div' => false)); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input('Education.11.course', array('type' => 'text',
-                                            'label' => false)); ?>
+                                            'label' => false,
+                                            'div' => false)); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.11.board"); ?>
+                    <?php echo $this->Form->text("Education.11.board", ['div' => false]); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input("Education.11.mode_of_study", array(
@@ -537,20 +605,24 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     ),
                     'style' => 'width: 100%;',
                     'empty' => ['select' => 'Select'],
-                    'label' => false
+                    'label' => false,
+                    'div' => false
                 )); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.11.grade"); ?>
+                    <?php echo $this->Form->text("Education.11.grade", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.11.percentage"); ?>
+                    <?php echo $this->Form->text("Education.11.percentage", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.11.year_of_passing"); ?>
+                    <?php echo $this->Form->text("Education.11.year_of_passing", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.11.subjects"); ?>
+                    <?php echo $this->Form->input("Education.11.subjects", array('type' => 'textarea',
+                                                'label' => false,
+                                                'div' => false,
+                                                'style' => 'overflow-y: scroll; height: 60px;')); ?>
                 </td>
             </tr>
         </tbody>
@@ -574,14 +646,16 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     <?php echo $this->Form->input('Education.12.qualification', array('type' => 'textarea',
                                             'value' => 'Ph.D. Pursuing',
                                             'label' => false,
-                                            'style' => 'overflow-y: scroll; height: 44px;')); ?>
+                                            'style' => 'overflow-y: scroll; height: 60px;',
+                                            'div' => false)); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input('Education.12.course', array('type' => 'text',
-                                            'label' => false)); ?>
+                                            'label' => false,
+                                            'div' => false)); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.12.board"); ?>
+                    <?php echo $this->Form->text("Education.12.board", ['div' => false]); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input("Education.12.mode_of_study", array(
@@ -592,17 +666,18 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                     ),
                     'style' => 'width: 100%;',
                     'empty' => ['select' => 'Select'],
-                    'label' => false
+                    'label' => false,
+                    'div' => false
                 )); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.12.grade"); ?>
+                    <?php echo $this->Form->text("Education.12.grade", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.12.percentage"); ?>
+                    <?php echo $this->Form->text("Education.12.percentage", ['div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Education.12.year_of_passing"); ?>
+                    <?php echo $this->Form->text("Education.12.year_of_passing", ['div' => false]); ?>
                 </td>
             </tr>
         </tbody>
@@ -630,22 +705,23 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
             <tr><td>
                     <?php  echo $this->Form->input('Applicantugcnet.id', array('type' => 'hidden'));
                             echo $this->Form->text('Applicantugcnet.ugc_net_subject', array('type' => 'text',
-                                            'label' => false)); ?>
+                                            'label' => false,
+                                            'div' => false)); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text('Applicantugcnet.ugc_net_mnth_yr', ['type' => 'number', 'maxlength' => '10']); ?>
+                    <?php echo $this->Form->text('Applicantugcnet.ugc_net_mnth_yr', ['type' => 'number', 'maxlength' => '10', 'div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Applicantugcnet.ugc_net_rollno", ['type' => 'number', 'maxlength' => '10']); ?>
+                    <?php echo $this->Form->text("Applicantugcnet.ugc_net_rollno", ['type' => 'number', 'maxlength' => '10', 'div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Applicantugcnet.ugc_net_marks", ['type' => 'number', 'maxlength' => '10', 'step' => '.01']); ?>
+                    <?php echo $this->Form->text("Applicantugcnet.ugc_net_marks", ['type' => 'number', 'maxlength' => '10', 'step' => '.01', 'div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Applicantugcnet.ugc_net_total_marks", ['type' => 'number', 'maxlength' => '10', 'step' => '.01']); ?>
+                    <?php echo $this->Form->text("Applicantugcnet.ugc_net_total_marks", ['type' => 'number', 'maxlength' => '10', 'step' => '.01','div' => false]); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->text("Applicantugcnet.ugc_net_cutoff_marks", ['type' => 'number', 'maxlength' => '10', 'step' => '.01']); ?>
+                    <?php echo $this->Form->text("Applicantugcnet.ugc_net_cutoff_marks", ['type' => 'number', 'maxlength' => '10', 'step' => '.01', 'div' => false]); ?>
                 </td>
                 <td>
                     <?php echo $this->Form->input('Applicantugcnet.ugc_net_category', array(
@@ -656,25 +732,26 @@ echo $this->Form->create('Education', array('id' => 'Education_Details', 'url' =
                         'OBC' => 'OBC'),
                     'empty' => 'Select',
                     'style' => 'width: 100%;',
-                    'label' => false
+                    'label' => false,
+                    'div' => false
                 )); ?>
                 </td>
             </tr>
     </table>
     <br/><br/>
-    <div style="font-family: sans-serif; font-size: 20px; font-weight: bold">Gaps in Education: If yes, give reason(s)</div>
+    <div style="font-family: sans-serif; font-size: 20px; font-weight: bold; padding-left: 0px">Gaps in Education: If yes, give reason(s)</div>
     <table>
         <tr>
             <td style="font-family: sans-serif; font-size: 20px; font-weight: bold">Reason for Gap in Education 1</td>
-            <td><?php echo $this->Form->input('Applicant.gaps_in_education', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.gaps_in_education', array('type' => 'textarea',  'div' => false, 'style' => 'overflow-y: scroll; height: 60px;', 'label' => false, 'maxlength' => '500')); ?></td>
         </tr>
         <tr>
             <td style="font-family: sans-serif; font-size: 20px; font-weight: bold">Reason for Gap in Education 2</td>
-            <td><?php echo $this->Form->input('Applicant.gaps_in_education2', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.gaps_in_education2', array('type' => 'textarea', 'div' => false, 'style' => 'overflow-y: scroll; height: 60px;', 'label' => false, 'maxlength' => '500')); ?></td>
         </tr>
         <tr>
             <td style="font-family: sans-serif; font-size: 20px; font-weight: bold">Reason for Gap in Education 3</td>
-            <td><?php echo $this->Form->input('Applicant.gaps_in_education3', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.gaps_in_education3', array('type' => 'textarea', 'div' => false, 'style' => 'overflow-y: scroll; height: 60px;', 'label' => false, 'maxlength' => '500')); ?></td>
         </tr>
     </table>
 </fieldset>

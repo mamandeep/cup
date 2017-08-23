@@ -26,7 +26,7 @@ body {
 	background: #003d4c;
 	color: #fff;
 	font-family:'lucida grande',verdana,helvetica,arial,sans-serif;
-	font-size:90%;
+        font-size:90%;
 	margin: 0;
 }
 a {
@@ -161,7 +161,7 @@ th a.desc:after {
 	content: ' ⇡';
 }
 table tr td {
-	padding: 6px;
+	#padding: 6px;
 	text-align: left;
 	vertical-align: top;
 	border-bottom:1px solid #ddd;
@@ -289,7 +289,7 @@ fieldset fieldset div {
 }
 form div {
 	clear: both;
-	margin-bottom: 1em;
+	#margin-bottom: 1em;
 	padding: .5em;
 	vertical-align: text-top;
 }
@@ -311,14 +311,14 @@ form div.submit {
 }
 label {
 	display: block;
-	font-size: 110%;
+	#font-size: 110%;
 	margin-bottom:3px;
 }
 input, textarea {
 	clear: both;
-	font-size: 140%;
+	#font-size: 140%;
 	font-family: "frutiger linotype", "lucida grande", "verdana", sans-serif;
-	padding: 1%;
+	#padding: 1%;
 	width:98%;
 }
 select {

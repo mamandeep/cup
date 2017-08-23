@@ -11,7 +11,7 @@ class MultiStepFormController extends AppController {
             }
             $current_datetime = new DateTime();
             $current_datetime->setTimezone(new DateTimeZone('Asia/Calcutta'));
-            $close_datetime = new DateTime("2017-07-28 17:00:00", new DateTimeZone('Asia/Calcutta'));            
+            $close_datetime = new DateTime("2017-08-23 17:00:00", new DateTimeZone('Asia/Calcutta'));
             $applicants_new = $this->Applicant->find('all', array(
                                        'conditions' => array('Applicant.id' => intval($this->Session->read('applicant_id')))));
             
@@ -168,6 +168,7 @@ class MultiStepFormController extends AppController {
                                 $this->Applicant->query('update applicant as a INNER JOIN (select  id,area,area_of_sp,first_name,middle_name,last_name,date_of_birth,email,mobile_no,age_on_advt,place_of_birth,father_name,mother_name,nationality,gender,marital_status,spouse_name,category,physically_disabled,blindness,blindness_pertge,hearing,hearing_pertge,locomotor,locomotor_pertge,mailing_address,permanent_address,landline,fax,aadhar_no,api_score,api_capped,created,modified,final_submit,advertisement_no,gaps_in_education,ugc_net_subject,ugc_net_mnth_yr,ugc_net_rollno,tot_exp_years,tot_exp_mnths,tot_exp_days,gaps_in_experience,sem_att_national,sem_att_international,sem_att_total,sem_org_national,sem_org_international,sem_org_total,rg_mphil_completed,rg_phd_completed,rg_mphil_undersup,rg_phd_undersup,tot_impact_sci,tot_impact_google,h_index_scopus,h_index_google,i10_index_google,ref_add1,ref_email1,ref_landline1,ref_mobile1,ref_fax1,ref_add2,ref_email2,ref_landline2,ref_mobile2,ref_fax2,ref_add3,ref_email3,ref_landline3,ref_mobile3,ref_fax3,presentp_desig,presentp_nameuniv,presentp_basic_pay,presentp_pay_scale,presentp_gross_salary,presentp_increment_date,time_req_for_joining,any_other_info,mem_pro_bodies,mem_details,convicted,pending_court,total_self_att_docs_att,willg_min_pay,min_pay_no,develop_department,award_honour1,agency1,year1,award_honour2,agency2,year2,award_honour3,agency3,year3,response_code,payment_date_created,payment_id,payment_amount,payment_transaction_id,category_applied,ugc_net_marks,ugc_net_total_marks,ugc_net_cutoff_marks,ugc_net_category,apiscore_cat_2,apiscore_cat_3,totalapiscore_cat_2_3,criteria_partA,criteria_partB,criteria_totalAB from applicant where id = ' . intval($existingApplicantId) . ') as e
                                                          set 
                                                             a.area = e.area,
+                                                            a.area_sub_sp = e.area_sub_sp,
                                                             a.first_name = e.first_name,
                                                             a.middle_name = e.middle_name,
                                                             a.last_name = e.last_name,
@@ -199,6 +200,8 @@ class MultiStepFormController extends AppController {
                                                             a.api_capped = e.api_capped,
                                                             a.advertisement_no = e.advertisement_no,
                                                             a.gaps_in_education = e.gaps_in_education,
+                                                            a.gaps_in_education2 = e.gaps_in_education2,
+                                                            a.gaps_in_education3 = e.gaps_in_education3,
                                                             a.ugc_net_subject = e.ugc_net_subject,
                                                             a.ugc_net_mnth_yr = e.ugc_net_mnth_yr,
                                                             a.ugc_net_rollno = e.ugc_net_rollno,
@@ -206,6 +209,8 @@ class MultiStepFormController extends AppController {
                                                             a.tot_exp_mnths = e.tot_exp_mnths,
                                                             a.tot_exp_days = e.tot_exp_days,
                                                             a.gaps_in_experience = e.gaps_in_experience,
+                                                            a.gaps_in_experience2 = e.gaps_in_experience2,
+                                                            a.gaps_in_experience3 = e.gaps_in_experience3,
                                                             a.sem_att_national = e.sem_att_national,
                                                             a.sem_att_international = e.sem_att_international,
                                                             a.sem_att_total = e.sem_att_total,
@@ -284,8 +289,8 @@ class MultiStepFormController extends AppController {
                                         designation,institute_type,name_address,from_date,to_date,no_of_yrs_mnths_days,nature_of_work,scale_of_pay from experience where applicant_id = ' . intval($existingApplicantId));
                             }
                             if(count($this->Document->find('all', ['conditions' => ['Document.applicant_id' => intval($this->Session->read('applicant_id'))]])) === 0) {
-                                $this->Document->query('insert into document (applicant_id,filename,type,size,filename2,type2,size2,filename3,type3,size3,filename4,type4,size4,filename5,type5,size5) select ' . $this->Session->read('applicant_id') . ', 
-                                        filename,type,size,filename2,type2,size2,filename3,type3,size3,filename4,type4,size4,filename5,type5,size5 from document where applicant_id = ' . intval($existingApplicantId));
+                                $this->Document->query('insert into document (applicant_id,filename,type,size,filename2,type2,size2,filename3,type3,size3,filename4,type4,size4,filename5,type5,size5,filename6,type6,size6,filename7,type7,size7) select ' . $this->Session->read('applicant_id') . ', 
+                                        filename,type,size,filename2,type2,size2,filename3,type3,size3,filename4,type4,size4,filename5,type5,size5,filename6,type6,size6,filename7,type7,size7 from document where applicant_id = ' . intval($existingApplicantId));
                             }
                             if(count($this->Experiencephd->find('all', ['conditions' => ['Experiencephd.applicant_id' => intval($this->Session->read('applicant_id'))]])) === 0) {
                                 $this->Experiencephd->query('insert into experiencephd (applicant_id,designation,institute_type,name_address,from_date,to_date,no_of_mnths_yrs,nature_of_service,work_load,minimum_eligibility,leave_taken,scale_of_pay) select ' . $this->Session->read('applicant_id') . ', 

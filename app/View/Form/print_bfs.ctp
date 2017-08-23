@@ -288,16 +288,16 @@ echo $this->Html->script('jquery-1.11.1-min');
         <tr>
             <td rowspan="2" width="10%" class="print_headers">Designation</td>
             <td rowspan="2" width="10%" class="print_headers">Scale of Pay</td>
-            <td rowspan="2" width="10%" class="print_headers">Name & address of University / Institute</td>
+            <td rowspan="2" width="20%" class="print_headers">Name & address of University / Institute</td>
             <td rowspan="2" width="10%" class="print_headers">Organization / Institute</td>
             <td colspan="3"><div style="text-align: center" class="print_headers">Period of Experience</div></td>
             <td rowspan="2" width="10%" class="print_headers">Nature Of Work</td>
             <!--<td rowspan="2" width="10%">Sr. No. of Proof Enclosed</td>-->
         </tr>
         <tr>
-            <td width="10%" class="print_headers">From Date</td>
-            <td width="10%" class="print_headers">To Date</td>
-            <td width="10%" class="print_headers">No. of Years/Months(as on last date of online form)</td>
+            <td width="7%" class="print_headers">From Date</td>
+            <td width="7%" class="print_headers">To Date</td>
+            <td width="6%" class="print_headers">No. of Years/Months(as on last date of online form)</td>
         </tr>
         <?php
         foreach($exp_arr as $key => $value){
@@ -324,8 +324,19 @@ echo $this->Html->script('jquery-1.11.1-min');
             <td colspan="2" class="print_value"><?php echo $applicant['Applicant']['tot_exp_days']; ?></td>
         </tr>
         <tr>
-            <td colspan="2" class="print_headers">Gaps in Experience: </td>
+            <td colspan="8" class="print_headers">Gaps in Experience</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="print_headers">Reason 1: </td>
             <td colspan="6" class="print_value"><?php echo $applicant['Applicant']['gaps_in_experience']; ?></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="print_headers">Reason 2: </td>
+            <td colspan="6" class="print_value"><?php echo $applicant['Applicant']['gaps_in_experience2']; ?></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="print_headers">Reason 3: </td>
+            <td colspan="6" class="print_value"><?php echo $applicant['Applicant']['gaps_in_experience3']; ?></td>
         </tr>
     </table>
     <br/>
