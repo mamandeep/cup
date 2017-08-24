@@ -15,7 +15,9 @@ $rp = isset($rp) ? $rp : 'completed';
                                        'ongoing' => 'Ongoing'
                                        ),
                     'selected' => $rp,
-                    'label' => false
+                    'label' => false,
+                    'div' => false,
+                    'style' => 'width: 100%'
                 ));
                  ?>
     </td>

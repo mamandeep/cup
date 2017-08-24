@@ -24,7 +24,8 @@ $org = isset($org) ? $org : 'Central Government';
                                        'Private' => 'Private',
                                        'Other' => 'Other'),
                     'selected' => $org,
-                    'label' => false
+                    'label' => false,
+                    'div' => false
                 ));
                  ?>
     </td>

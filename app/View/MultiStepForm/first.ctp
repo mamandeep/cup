@@ -216,8 +216,8 @@ echo $this->Form->create('Applicant', array('id' => 'Applicant_Details',
                 <td width="20%" colspan='2'><?php echo $this->Form->label('PermanentAddress', 'Permanent Address'); ?></td>
             </tr>
             <tr>
-                <td><?php echo $this->Form->input('Applicant.mailing_address', array('label' => false, 'maxlength' => '500')); ?></td>
-                <td><?php echo $this->Form->input('Applicant.permanent_address', array('label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.mailing_address', array('type' => 'textarea', 'style' => 'overflow-y: scroll; height: 60px;', 'label' => false, 'maxlength' => '500')); ?></td>
+                <td><?php echo $this->Form->input('Applicant.permanent_address', array('type' => 'textarea', 'style' => 'overflow-y: scroll; height: 60px;', 'label' => false, 'maxlength' => '500')); ?></td>
             </tr>
             <tr>
                 <td><?php echo $this->Form->label('PhoneNo', 'Phone No. (landline with STD code)'); ?></td>

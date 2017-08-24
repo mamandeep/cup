@@ -180,32 +180,33 @@ echo $this->Form->create('ResearchPaper', array('id' => 'Researchpaper_Details',
 <br/>
 <table width="100%" id="factors_disable">
     <tr>
-        <td width="30%" class="table_headertxt" style="padding-top: 20px;">Total Impact Factor as per SCI/SCOPUS</td>
+        <td width="30%" class="table_headertxt" style="padding: .5em; vertical-align: middle; ">Total Impact Factor as per SCI/SCOPUS</td>
         <td class="table_headertxt"><?php echo $this->Form->input('Applicant.id', array('type', 'hidden'));
                                         echo $this->Form->input('Applicant.tot_impact_sci', array('label' => false, 'maxlength' => '500')); ?></td>
         <td width="40%" class="table_headertxt"></td>
     </tr>
     <tr>
-        <td class="table_headertxt" style="padding-top: 20px;">Total Impact Factor as per Google search</td>
+        <td class="table_headertxt" style="padding: .5em; vertical-align: middle;">Total Impact Factor as per Google search</td>
         <td class="table_headertxt"><?php echo $this->Form->input('Applicant.tot_impact_google', array('label' => false, 'maxlength' => '500')); ?></td>
         <td class="table_headertxt"></td>
     </tr>
     <tr>
-        <td class="table_headertxt" style="padding-top: 20px;">h-Index Factor as per SCOPUS</td>
+        <td class="table_headertxt" style="padding: .5em; vertical-align: middle;">h-Index Factor as per SCOPUS</td>
         <td class="table_headertxt"><?php echo $this->Form->input('Applicant.h_index_scopus', array('label' => false, 'maxlength' => '500')); ?></td>
         <td class="table_headertxt"></td>
     </tr>
     <tr>
-        <td class="table_headertxt" style="padding-top: 20px;">h-Index Factor as per Google search</td>
+        <td class="table_headertxt" style="padding: .5em; vertical-align: middle;">h-Index Factor as per Google search</td>
         <td class="table_headertxt"><?php echo $this->Form->input('Applicant.h_index_google', array('label' => false, 'maxlength' => '500')); ?></td>
         <td class="table_headertxt"></td>
     </tr>
     <tr>
-        <td class="table_headertxt" style="padding-top: 20px;">i-10 Index Factor as per Google search</td>
+        <td class="table_headertxt" style="padding: .5em; vertical-align: middle;">i-10 Index Factor as per Google search</td>
         <td class="table_headertxt"><?php echo $this->Form->input('Applicant.i10_index_google', array('label' => false, 'maxlength' => '500')); ?></td>
         <td class="table_headertxt"></td>
     </tr>
 </table>
+<br/><br/>
 <table>
         <tr>
             <td class="table_headertxt" style="width: 30%">Screening Criteria</td>
@@ -220,21 +221,12 @@ echo $this->Form->create('ResearchPaper', array('id' => 'Researchpaper_Details',
             <td></td>
         </tr>
         <tr>
-            <td style="width: 30%"><?php echo $this->Form->input('Applicant.criteria_partA', array('label' => 'Part A', 'maxlength' => '10')); ?></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
+            <td><?php echo $this->Form->input('Applicant.criteria_partA', array('label' => 'Part A', 'maxlength' => '10')); ?></td>
             <td style="width: 30%"><?php echo $this->Form->input('Applicant.criteria_partB', array('label' => 'Part B', 'maxlength' => '10')); ?></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td style="width: 40%"><?php echo $this->Form->input('Applicant.criteria_totalAB', array('label' => 'Total (Part A + Part B)', 'maxlength' => '10')); ?></td>
-            <td></td>
-            <td></td>
+            <td style="width: 30%"><?php echo $this->Form->input('Applicant.criteria_totalAB', array('label' => 'Total (Part A + Part B)', 'maxlength' => '10')); ?></td>
         </tr>
     </table>
+<br/>
 <table>
     <tr>
         <td class="table_headertxt">
@@ -245,12 +237,12 @@ echo $this->Form->create('ResearchPaper', array('id' => 'Researchpaper_Details',
         <td></td>
     </tr>
     <tr>
-        <td><?php echo $this->Form->input('NewAPIScore.id', array('type' => 'hidden'));
+        <td style="width: 30%"><?php echo $this->Form->input('NewAPIScore.id', array('type' => 'hidden'));
             echo $this->Form->input('NewAPIScore.apiscore_cat_2', array('label' => 'API Score Category II:', 'maxlength' => '10'));
          ?></td>
-        <td><?php echo $this->Form->input('NewAPIScore.apiscore_cat_3', array('label' => 'API Score Category III:', 'maxlength' => '10'));
+        <td style="width: 30%"><?php echo $this->Form->input('NewAPIScore.apiscore_cat_3', array('label' => 'API Score Category III:', 'maxlength' => '10'));
         ?></td>
-        <td><?php 
+        <td style="width: 30%"><?php 
             echo $this->Form->input('NewAPIScore.totalapiscore_cat_2_3', array('label' => 'Total API Score Category II & III:', 'maxlength' => '10'));
         ?></td>
     </tr>

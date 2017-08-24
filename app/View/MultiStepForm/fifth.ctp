@@ -39,38 +39,38 @@ echo $this->Form->create('Applicant', array('id' => 'Misc_Details', 'url' => Rou
         </tr>
         <tr>
             <td>Name & complete postal addresses</td>
-            <td><?php //echo $this->Form->input('Applicant.id', array('type', 'hidden'));
+            <td style="padding: 5px;"><?php //echo $this->Form->input('Applicant.id', array('type', 'hidden'));
                       //echo $this->Form->input('Applicant.user_id', array('type' => 'hidden', 'value' => $this->Session->read('applicant_id')));
-                      echo $this->Form->input('Applicant.ref_add1', array('label' => false, 'maxlength' => '500')); ?></td>
-            <td><?php echo $this->Form->input('Applicant.ref_add2', array('label' => false, 'maxlength' => '500')); ?></td>
-            <td><?php echo $this->Form->input('Applicant.ref_add3', array('label' => false, 'maxlength' => '500')); ?></td>
+                      echo $this->Form->input('Applicant.ref_add1', array('type' => 'textarea',  'div' => false, 'style' => 'width: 96%; overflow-y: scroll; height: 60px;', 'label' => false, 'maxlength' => '500')); ?></td>
+            <td style="padding: 5px;"><?php echo $this->Form->input('Applicant.ref_add2', array('type' => 'textarea',  'div' => false, 'style' => 'width: 96%; overflow-y: scroll; height: 60px;', 'label' => false, 'maxlength' => '500')); ?></td>
+            <td style="padding: 5px;"><?php echo $this->Form->input('Applicant.ref_add3', array('type' => 'textarea',  'div' => false, 'style' => 'width: 96%; overflow-y: scroll; height: 60px;', 'label' => false, 'maxlength' => '500')); ?></td>
         </tr>
         <tr>
             <td>Email:</td>
-            <td><?php echo $this->Form->input('Applicant.ref_email1', array('label' => false, 'maxlength' => '500')); ?></td>
-            <td><?php echo $this->Form->input('Applicant.ref_email2', array('label' => false, 'maxlength' => '500')); ?></td>
-            <td><?php echo $this->Form->input('Applicant.ref_email3', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.ref_email1', array('label' => false, 'maxlength' => '50')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.ref_email2', array('label' => false, 'maxlength' => '50')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.ref_email3', array('label' => false, 'maxlength' => '50')); ?></td>
         </tr>
         <tr>
             <td>Phone (Landline) with STD Code:</td>
-            <td><?php echo $this->Form->input('Applicant.ref_landline1', array('label' => false, 'maxlength' => '500')); ?></td>
-            <td><?php echo $this->Form->input('Applicant.ref_landline2', array('label' => false, 'maxlength' => '500')); ?></td>
-            <td><?php echo $this->Form->input('Applicant.ref_landline3', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.ref_landline1', array('label' => false, 'maxlength' => '20')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.ref_landline2', array('label' => false, 'maxlength' => '20')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.ref_landline3', array('label' => false, 'maxlength' => '20')); ?></td>
         </tr>
         <tr>
             <td>Mobile Ph:</td>
-            <td><?php echo $this->Form->input('Applicant.ref_mobile1', array('label' => false, 'maxlength' => '500')); ?></td>
-            <td><?php echo $this->Form->input('Applicant.ref_mobile2', array('label' => false, 'maxlength' => '500')); ?></td>
-            <td><?php echo $this->Form->input('Applicant.ref_mobile3', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.ref_mobile1', array('label' => false, 'maxlength' => '10')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.ref_mobile2', array('label' => false, 'maxlength' => '10')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.ref_mobile3', array('label' => false, 'maxlength' => '10')); ?></td>
         </tr>
         <tr>
             <td>Fax:</td>
-            <td><?php echo $this->Form->input('Applicant.ref_fax1', array('label' => false, 'maxlength' => '500')); ?></td>
-            <td><?php echo $this->Form->input('Applicant.ref_fax2', array('label' => false, 'maxlength' => '500')); ?></td>
-            <td><?php echo $this->Form->input('Applicant.ref_fax3', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.ref_fax1', array('label' => false, 'maxlength' => '50')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.ref_fax2', array('label' => false, 'maxlength' => '50')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.ref_fax3', array('label' => false, 'maxlength' => '50')); ?></td>
         </tr>
     </table>
-    <br />
+    <br />  
     <div class="main_content_header">7. Present Position</div>
     <table id="present_position_table" border="2px solid black" style="border-collapse: collapse; border-right: 2px solid black !important;">
         <tr>
@@ -79,32 +79,34 @@ echo $this->Form->create('Applicant', array('id' => 'Misc_Details', 'url' => Rou
             <td width="15%"><?php echo $this->Form->label('BasicPay', 'Basic Pay(Rs.)'); ?></td>
             <td width="20%"><?php echo $this->Form->label('PayScale', 'Grade Pay(Rs.)'); ?></td>
             <td width="15%"><?php echo $this->Form->label('GrossPay', 'Gross Pay/Total Salary p.m. (Rs.)'); ?></td>
-            <td width="10%"><?php echo $this->Form->label('IncrementDate', 'Increment date(Date/Month)'); ?></td>
+            <td width="10%"><?php echo $this->Form->label('IncrementDate', 'Increment Date (DD/MM/YYYY) / Month'); ?></td>
             <!--<td width="10%"><?php echo $this->Form->label('SrNoOfProof', 'Sr. no. of proof enclosed'); ?></td>-->
         </tr>
         <tr>
-            <td><?php echo $this->Form->input('Applicant.presentp_desig', array('label' => false, 'maxlength' => '500')); ?></td>
-            <td><?php echo $this->Form->input('Applicant.presentp_nameuniv', array('label' => false, 'maxlength' => '500')); ?></td>
-            <td><?php echo $this->Form->input('Applicant.presentp_basic_pay', array('label' => false, 'maxlength' => '500')); ?></td>
-            <td><?php echo $this->Form->input('Applicant.presentp_pay_scale', array('label' => false, 'maxlength' => '500')); ?></td>
-            <td><?php echo $this->Form->input('Applicant.presentp_gross_salary', array('label' => false, 'maxlength' => '500')); ?></td>
-            <td><?php echo $this->Form->input('Applicant.presentp_increment_date', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.presentp_desig', array('label' => false, 'maxlength' => '50')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.presentp_nameuniv', array('label' => false, 'maxlength' => '100')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.presentp_basic_pay', array('label' => false, 'maxlength' => '20')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.presentp_pay_scale', array('label' => false, 'maxlength' => '50')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.presentp_gross_salary', array('label' => false, 'maxlength' => '20')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.presentp_increment_date', array('label' => false, 'maxlength' => '10')); ?></td>
             <!--<td><?php echo $this->Form->input('Applicant.presentp_sr_proof', array('label' => false, 'maxlength' => '500')); ?></td>-->
         </tr>
     </table>
+    <br/>
     <table>
         <tr>
-            <td class="table_headertxt" style="width: 30%">Minimum time required for joining, if selected:</td>
+            <td class="table_headertxt" style="vertical-align: middle; width: 30%">Minimum time required for joining, if selected:</td>
             <td style="width: 30%"><?php echo $this->Form->input('Applicantext.id', array('type' => 'hidden')); 
                                         echo $this->Form->input('Applicantext.time_req_for_joining', array('label' => false, 'maxlength' => '500')); ?></td>
             <td></td>
         </tr>
     </table>
+    <br/>
     <div class="main_content_header">8. Miscellaneous</div>
     <table>
         <tr>
             <td class="table_headertxt misc_col1">Any other information relevant to the post applied for:</td>
-            <td colspan="2" style="width: 55%"><?php echo $this->Form->input('Applicant.any_other_info', array('label' => false, 'maxlength' => '500'));  ?></td>
+            <td colspan="2" style="width: 55%"><?php echo $this->Form->input('Applicant.any_other_info', array('type' => 'textarea',  'div' => false, 'style' => 'overflow-y: scroll; height: 60px;', 'label' => false, 'maxlength' => '500'));  ?></td>
         </tr>
         <tr>
             <td class="table_headertxt misc_col1">Membership in Professional Bodies</td>
@@ -126,7 +128,8 @@ echo $this->Form->create('Applicant', array('id' => 'Misc_Details', 'url' => Rou
         <tr>
             <td class="mem_details table_headertxt misc_col1">Membership Details</td>
             <td class="mem_details" colspan="2" style="width: 55%">
-                <?php echo $this->Form->input('Applicantext.mem_details', array('label' => false, 
+                <?php echo $this->Form->input('Applicantext.mem_details', array('type' => 'textarea',  'div' => false, 'style' => 'overflow-y: scroll; height: 60px;',
+                                                                                'label' => false, 
                                                                                 'maxlength' => '1000',
                                                                                 'formnovalidate' => false)); ?>
             </td>
@@ -173,6 +176,16 @@ echo $this->Form->create('Applicant', array('id' => 'Misc_Details', 'url' => Rou
             <td></td>
         </tr>
         <tr>
+            <td class="table_headertxt misc_col1">&nbsp;&nbsp;</td>
+            <td colspan="2" style="width: 55%">&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="table_headertxt misc_col1">&nbsp;&nbsp;</td>
+            <td colspan="2" style="width: 55%">&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
             <td class="table_headertxt misc_col1">Are you willing to accept the minimum initial pay in the grade? If no, state reason(s)</td>
             <td colspan="2">
                 <?php echo $this->Form->input('Applicantext.willg_min_pay', array(
@@ -191,12 +204,17 @@ echo $this->Form->create('Applicant', array('id' => 'Misc_Details', 'url' => Rou
         </tr>
         <tr>
             <td class="min_pay_reason" colspan="3" style="width: 100%">
-                <?php echo $this->Form->input('Applicantext.min_pay_no', array('label' => false, 'maxlength' => '1000')); ?>
+                <?php echo $this->Form->input('Applicantext.min_pay_no', array('type' => 'textarea',  'div' => false, 'style' => 'overflow-y: scroll; height: 60px;', 'label' => false, 'maxlength' => '1000')); ?>
             </td>
         </tr>
         <tr>
+            <td class="table_headertxt misc_col1">&nbsp;&nbsp;</td>
+            <td colspan="2" style="width: 55%">&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
             <td class="table_headertxt misc_col1">If selected how would you like to develop your Department/University and your area of interest (only in 200 words):</td>
-            <td colspan="2" style="width: 55%"><?php echo $this->Form->input('Applicant.develop_department', array('label' => false, 'maxlength' => '1500'));  ?></td>
+            <td colspan="2" style="width: 55%"><?php echo $this->Form->input('Applicant.develop_department', array('type' => 'textarea',  'div' => false, 'style' => 'overflow-y: scroll; height: 60px;', 'label' => false, 'maxlength' => '1500'));  ?></td>
         </tr>
     </table>
     <!--

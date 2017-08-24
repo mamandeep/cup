@@ -100,6 +100,8 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                                                    'Government Aided' => 'Govt. Aided',
                                                    'Private' => 'Private',
                                                    'Other' => 'Other'),
+                                'div' => false,
+                                'style' => 'width: 100%',
                                 'label' => false,
                                 'empty' => ['select' => 'Select']
                             ));
@@ -134,7 +136,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td>
                 <td>
@@ -144,7 +148,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
                 <td>
@@ -154,7 +160,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
                 <td>
@@ -164,7 +172,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
             </tr>
@@ -190,7 +200,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                                                    'Private' => 'Private',
                                                    'Other' => 'Other'),
                                 'label' => false,
-                                'empty' => ['select' => 'Select']
+                                'empty' => ['select' => 'Select'],
+                                'div' => false,
+                                'style' => 'width: 100%'
                             ));
                              ?>
                 </td>
@@ -223,7 +235,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td>
                 <td>
@@ -233,7 +247,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
                 <td>
@@ -243,7 +259,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
                 <td>
@@ -253,7 +271,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
             </tr>
@@ -279,7 +299,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                                                    'Private' => 'Private',
                                                    'Other' => 'Other'),
                                 'label' => false,
-                                'empty' => ['select' => 'Select']
+                                'empty' => ['select' => 'Select'],
+                                'div' => false,
+                                'style' => 'width: 100%'
                             ));
                              ?>
                 </td>
@@ -312,7 +334,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td>
                 <td>
@@ -322,7 +346,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
                 <td>
@@ -332,7 +358,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
                 <td>
@@ -342,7 +370,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
             </tr>
@@ -368,7 +398,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                                                    'Private' => 'Private',
                                                    'Other' => 'Other'),
                                 'label' => false,
-                                'empty' => ['select' => 'Select']
+                                'empty' => ['select' => 'Select'],
+                                'div' => false,
+                                'style' => 'width: 100%'
                             ));
                              ?>
                 </td>
@@ -401,7 +433,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td>
                 <td>
@@ -411,7 +445,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
                 <td>
@@ -421,7 +457,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
                 <td>
@@ -431,7 +469,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
             </tr>
@@ -457,7 +497,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                                                    'Private' => 'Private',
                                                    'Other' => 'Other'),
                                 'label' => false,
-                                'empty' => ['select' => 'Select']
+                                'empty' => ['select' => 'Select'],
+                                'div' => false,
+                                'style' => 'width: 100%'
                             ));
                              ?>
                 </td>
@@ -490,7 +532,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td>
                 <td>
@@ -500,7 +544,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
                 <td>
@@ -510,7 +556,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
                 <td>
@@ -520,7 +568,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
             </tr>
@@ -546,7 +596,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                                                    'Private' => 'Private',
                                                    'Other' => 'Other'),
                                 'label' => false,
-                                'empty' => ['select' => 'Select']
+                                'empty' => ['select' => 'Select'],
+                                'div' => false,
+                                'style' => 'width: 100%'
                             ));
                              ?>
                 </td>
@@ -579,7 +631,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td>
                 <td>
@@ -589,7 +643,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
                 <td>
@@ -599,7 +655,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
                 <td>
@@ -609,7 +667,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
             </tr>
@@ -635,7 +695,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                                                    'Private' => 'Private',
                                                    'Other' => 'Other'),
                                 'label' => false,
-                                'empty' => ['select' => 'Select']
+                                'empty' => ['select' => 'Select'],
+                                'div' => false,
+                                'style' => 'width: 100%'
                             ));
                              ?>
                 </td>
@@ -668,7 +730,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td>
                 <td>
@@ -678,7 +742,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
                 <td>
@@ -688,7 +754,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
                 <td>
@@ -698,7 +766,9 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
                             'No' => 'No'
                         ),
                         'label' => false,
-                        'empty' => ['select' => 'Select']
+                        'empty' => ['select' => 'Select'],
+                        'div' => false,
+                        'style' => 'width: 100%'
                      )); ?>
                 </td> 
             </tr>
@@ -709,28 +779,28 @@ echo $this->Form->create('Experience', array('id' => 'Experience_Details', 'url'
         <tr>
             <td>Total period of experience
             <?php echo $this->Form->input('Applicant.id', array('type' => 'hidden')); ?>
-            <td>Years</td>
-            <td><?php echo $this->Form->input('Applicant.tot_exp_years', array('label' => false, 'maxlength' => '500')); ?></td>
-            <td>Months</td>
-            <td><?php echo $this->Form->input('Applicant.tot_exp_mnths', array('label' => false, 'maxlength' => '500')); ?></td>
-            <td>Days</td>
-            <td><?php echo $this->Form->input('Applicant.tot_exp_days', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td style="text-align: right; padding-left: 10px;">Years</td>
+            <td><?php echo $this->Form->input('Applicant.tot_exp_years', array('div' => false, 'label' => false, 'maxlength' => '10')); ?></td>
+            <td style="text-align: right; padding-left: 10px;">Months</td>
+            <td><?php echo $this->Form->input('Applicant.tot_exp_mnths', array('div' => false, 'label' => false, 'maxlength' => '10')); ?></td>
+            <td style="text-align: right; padding-left: 10px;">Days</td>
+            <td><?php echo $this->Form->input('Applicant.tot_exp_days', array('div' => false, 'label' => false, 'maxlength' => '10')); ?></td>
         </tr>
     </table>
     <br/>
-    <div style="font-family: sans-serif; font-size: 20px; font-weight: bold">Gaps in Experience: If yes, give reason(s) </div>    
+    <div style="font-family: sans-serif; font-size: 20px; font-weight: bold; padding-left: 0px;">Gaps in Experience: If yes, give reason(s) </div>    
     <table>
         <tr>
             <td class="table_headertxt">Reason for Gap in Experience 1</td>
-            <td><?php echo $this->Form->input('Applicant.gaps_in_experience', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.gaps_in_experience', array('type' => 'textarea',  'div' => false, 'style' => 'overflow-y: scroll; height: 60px;', 'label' => false, 'maxlength' => '500')); ?></td>
         </tr>
         <tr>
             <td class="table_headertxt">Reason for Gap in Experience 2</td>
-            <td><?php echo $this->Form->input('Applicant.gaps_in_experience2', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.gaps_in_experience2', array('type' => 'textarea',  'div' => false, 'style' => 'overflow-y: scroll; height: 60px;', 'label' => false, 'maxlength' => '500')); ?></td>
         </tr>
         <tr>
             <td class="table_headertxt">Reason for Gap in Experience 3</td>
-            <td><?php echo $this->Form->input('Applicant.gaps_in_experience3', array('label' => false, 'maxlength' => '500')); ?></td>
+            <td><?php echo $this->Form->input('Applicant.gaps_in_experience3', array('type' => 'textarea',  'div' => false, 'style' => 'overflow-y: scroll; height: 60px;', 'label' => false, 'maxlength' => '500')); ?></td>
         </tr>
     </table>
 </fieldset>
